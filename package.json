@@ -1,0 +1,12 @@
+{
+    "name": "NodeWebserverArchitecture",
+    "version": "0.0.1",
+    "description": "NodeWebserverArchitecture is a common architecure for webservers with NodeJS",
+    "main": "Bootstrap.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified! Configure in package.json\" && exit 1"
+    },
+    "author": "Steffen Wendt",
+    "license": "BSD",
+    "readmeFilename": "README.md"
+}
