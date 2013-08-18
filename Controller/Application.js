@@ -44,6 +44,14 @@ function stopHTTPS() {
     }
 }
 
+function run() {
+    EXPORTOBJECT.emit("startApplication");
+}
+
+function stop() {
+    EXPORTOBJECT.emit("stopApplication");
+}
+
 var EXPORTOBJECT = new require("events").EventEmitter();
 Object.defineProperty(EXPORTOBJECT, "startHTTP", {
     value: startHTTP,
@@ -59,6 +67,14 @@ Object.defineProperty(EXPORTOBJECT, "stopHTTP", {
 });
 Object.defineProperty(EXPORTOBJECT, "stopHTTPS", {
     value: stopHTTPS,
+    writable: false
+});
+Object.defineProperty(EXPORTOBJECT, "run", {
+    value: run,
+    writable: false
+});
+Object.defineProperty(EXPORTOBJECT, "stop", {
+    value: stop,
     writable: false
 });
 

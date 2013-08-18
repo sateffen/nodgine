@@ -10,8 +10,12 @@
 		writable: false
 	});
 	Object.defineProperty(GLOBAL, "$LOGGER", {
-		value	: require("./Controller/Logger.js"),
-		writable: false
-	});
+        value   : require("./Controller/Logger.js"),
+        writable: false
+    });
+	Object.defineProperty(GLOBAL, "$SERVICE", {
+        value   : require("./Controller/Service.js"),
+        writable: false
+    });
 	
 })();
