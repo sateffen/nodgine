@@ -52,7 +52,7 @@ function stop() {
     EXPORTOBJECT.emit("stopApplication");
 }
 
-var EXPORTOBJECT = new require("events").EventEmitter();
+var EXPORTOBJECT = new (require("events").EventEmitter)();
 Object.defineProperty(EXPORTOBJECT, "startHTTP", {
     value: startHTTP,
     writable: false
