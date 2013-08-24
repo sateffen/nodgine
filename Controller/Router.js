@@ -233,5 +233,4 @@ Object.defineProperty(EXPORTOBJECT, "clearRoutes", {
     writable: false
 });
 
-Object.preventExtensions(EXPORTOBJECT);
 module.exports = EXPORTOBJECT;

@@ -38,6 +38,9 @@ function enterLog(state, critical, message) {
     if (toConsole) {
         console.log("[" + state + "](" + getDateString() + ") "+ message);
     }
+    if (critical) {
+        throw new Error("[" + state + "](" + getDateString() + ") "+ message);
+    }
 }
 
 /**
@@ -93,5 +96,4 @@ Object.defineProperty(EXPORTOBJECT, "writeToConsole", {
     writable: false
 });
 
-Object.preventExtensions(EXPORTOBJECT);
 module.exports = EXPORTOBJECT;

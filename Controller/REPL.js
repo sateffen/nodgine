@@ -6,6 +6,14 @@
 var repl        = require("repl"),
     cmdList        = {};
 
+/**
+ * Evaluates the input of to REPL and executes the connected command
+ * 
+ * @param cmd
+ * @param context
+ * @param filename
+ * @param callback
+ */
 function evalREPL(cmd, context, filename, callback) {
     "use strict";
     // prepare command
@@ -27,6 +35,12 @@ function evalREPL(cmd, context, filename, callback) {
     callback(null, "Unknown command");
 }
 
+/**
+ * Adds a command to the list of known commands
+ * 
+ * @param command
+ * @param callback
+ */
 function addCommand(command, callback) {
     "use strict";
     if (typeof command !== "string") {
@@ -39,6 +53,12 @@ function addCommand(command, callback) {
     cmdList[command] = callback;
 }
 
+/**
+ * Returns the function connected to a certain command
+ * 
+ * @param command
+ * @returns function
+ */
 function getCommand(command) {
     "use strict";
     return cmdList[command];
@@ -52,7 +72,7 @@ process.nextTick(function(){
     });
 });
 
-// Create an object to export, which can't be modified
+// Create an object to export
 var EXPORTOBJECT = {};
 Object.defineProperty(EXPORTOBJECT, "addCommand", {
     value: addCommand,
@@ -63,5 +83,4 @@ Object.defineProperty(EXPORTOBJECT, "getCommand", {
     writable: false
 });
 
-Object.preventExtensions(EXPORTOBJECT);
 module.exports = EXPORTOBJECT;

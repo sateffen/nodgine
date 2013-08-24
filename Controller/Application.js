@@ -78,5 +78,4 @@ Object.defineProperty(EXPORTOBJECT, "stop", {
     writable: false
 });
 
-Object.preventExtensions(EXPORTOBJECT);
 module.exports = EXPORTOBJECT;
