@@ -5,6 +5,7 @@ var http    = require("http"),
     server  = {};
 
 function startHTTP(port) {
+    "use strict";
     if (port < 1 && port > 65535) {
         throw "wrong port";
     }
@@ -17,6 +18,7 @@ function startHTTP(port) {
 }
 
 function startHTTPS(key, cert, port) {
+    "use strict";
     if (port < 1 && port > 65535) {
         throw "wrong port";
     }
@@ -33,22 +35,26 @@ function startHTTPS(key, cert, port) {
 }
 
 function stopHTTP() {
+    "use strict";
     if (server.http) {
         server.http.close();
     }
 }
 
 function stopHTTPS() {
+    "use strict";
     if (server.https) {
         server.https.close();
     }
 }
 
 function run() {
+    "use strict";
     EXPORTOBJECT.emit("startApplication");
 }
 
 function stop() {
+    "use strict";
     EXPORTOBJECT.emit("stopApplication");
 }
 
