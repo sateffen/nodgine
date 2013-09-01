@@ -50,18 +50,19 @@ Tells the application to emit the "stopApplication" event, so every listener kno
 
 # Example Application
 As example we will setup a http server, that listens at port 8888 and answers to every request with the current time.
-`// load architecture \n`
-`require("NodeWebserverArchitecture"); \n`
-`// setup route \n`
-`$ROUTE.addRoute("/*", function(request, response, arguments){ \n`
-`	response.writeHead(200); \n`
-`	response.end((new Date).toString()); \n`
-`}); \n`
-` \n`
-`// start http server \n`
-`$APPLICATION.startHTTP(8888); \n`
-`// start application \n`
-`$APPLICATION.run(); \n`
+```
+// load architecture
+require("NodeWebserverArchitecture");
+// setup route
+$ROUTE.addRoute("/*", function(request, response, arguments){
+response.writeHead(200);
+response.end((new Date).toString());});
+
+// start http server
+$APPLICATION.startHTTP(8888);
+// start application
+$APPLICATION.run();
+```
 
 Now you can start this with your node, and call the adress localhost:8888 from your webbrowser. You can add every path to it, every path will present the same result in this example.
 
