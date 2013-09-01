@@ -50,7 +50,7 @@ Tells the application to emit the "stopApplication" event, so every listener kno
 
 # Example Application
 As example we will setup a http server, that listens at port 8888 and answers to every request with the current time.
-```
+```js
 // load architecture
 require("NodeWebserverArchitecture");
 // setup route
