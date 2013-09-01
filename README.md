@@ -55,8 +55,9 @@ As example we will setup a http server, that listens at port 8888 and answers to
 require("NodeWebserverArchitecture");
 // setup route
 $ROUTE.addRoute("/*", function(request, response, arguments){
-response.writeHead(200);
-response.end((new Date).toString());});
+	response.writeHead(200);
+	response.end((new Date).toString());
+});
 
 // start http server
 $APPLICATION.startHTTP(8888);
