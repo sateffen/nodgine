@@ -6,7 +6,7 @@ var http    = require("http"),
 
 function startHTTP(port) {
     "use strict";
-    if (port < 1 && port > 65535) {
+    if (port < 1 || port > 65535) {
         throw "wrong port";
     }
     
@@ -19,7 +19,7 @@ function startHTTP(port) {
 
 function startHTTPS(key, cert, port) {
     "use strict";
-    if (port < 1 && port > 65535) {
+    if (port < 1 || port > 65535) {
         throw "wrong port";
     }
     
