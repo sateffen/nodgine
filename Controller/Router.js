@@ -122,7 +122,7 @@ function getRoute(path) {
 function setEncoding(encoding) {
     "use strict";
     // TODO: test whether encoding is right
-    requestEncoding = encoding;
+    requestEncoding = encoding || "utf-8";
 }
 
 /**
@@ -130,7 +130,7 @@ function setEncoding(encoding) {
  * 
  * @returns string
  */
-function getEncoding(encoding) {
+function getEncoding() {
     "use strict";
     return requestEncoding;
 }
