@@ -6,6 +6,37 @@ var routes              = [],
     defaultController   = null;
 
 /**
+ * 
+ * */
+function ObjectToCallbackWrapper(callbackObject, request, response, args) {
+    try {
+        switch(request.method.toLowerCase()) {
+        case "get":
+            callbackObject.doGet(request,response, args);
+            break;
+        case "post":
+            callbackObject.doPost(request,response, args);
+            break;
+        case "put":
+            callbackObject.doPut(request,response, args);
+            break;
+        case "delete":
+            callbackObject.doDelete(request,response, args);
+            break;
+        }
+    }
+    catch (e) {
+        if (typeof defaultController == "function") {
+            defaultController(request, response, args);
+        }
+        else {
+            response.writeHead(404);
+            response.end();
+        }
+    }
+}
+
+/**
  * Deletes all routes
  */
 function clearRoutes() {
@@ -76,7 +107,7 @@ function pathToRoute(path, sensitive) {
  * for the request
  * 
  * @param path                string
- * @param callback            function
+ * @param callback            function or object
  * @param caseSenesetive    bool | optional
  * @param strict           bool | optional      (gibt an, ob der Path 100% genau die form haben muss,
  *                                                  oder dannach auch was kommen kann und das auch gefetched wird)
@@ -87,13 +118,20 @@ function addRoute(path, callback, caseSensetive) {
     if (typeof path !== "string") {
         throw "$ROUTER.addRoute first param needs to be a string, got " + (typeof path);
     }
-    if (typeof callback !== "function") {
+    if (typeof callback !== "function" && typeof callback !== "object") {
         throw "$ROUTER.addRoute second param needs to be a function, got " + (typeof path);
     }
     path = (path[0] === "/") ? path : "/" + path;
 
     var tmp = pathToRoute(path, caseSensetive);
-    tmp.callback = callback;
+    
+    if (typeof callback == "object") {
+        tmp.callbackData = callback;
+        tmp.callback = ObjectToCallbackWrapper.bind(null, tmp.callbackData);
+    }
+    else {
+        tmp.callback = callback;
+    }
     routes.push(tmp);
 }
 
@@ -179,6 +217,7 @@ function route(request, response) {
                 for (var y=0; y<routes[x].keys.length;y++) {
                     args[routes[x].keys[y].name] = tmp[y+1];
                 }
+
                 /*jshint -W083 */
                 process.nextTick(function(){
                     routes[x].callback(request, response, args);
@@ -188,7 +227,7 @@ function route(request, response) {
         }
         
         // if no route is defined, call default if exists
-        if (defaultController !== null) {
+        if (typeof defaultController == "function") {
             defaultController(request, response, path);
         }
         else {

@@ -57,7 +57,7 @@ This is the router of the application, that recieves every connection, analyses 
 Routes given request and response pair to a requested path and controller
 ### $ROUTER.addRoute(path, callback, caseSensetive)
 * path `string` the specific path for the router
-* callback `function` the callback that is called when a request fits to given path
+* callback `function` or `object` if the callback is a function, it is called, when the given path fits. If it is an object the request method will be evaluated and routed to the functions of the object. The object should implement at least one if this functions: doGet, doPost, doPut, doDelete
 * caseSensetive `bool` defines, whether the path is case sensetive or not
 ### $ROUTER.getRoute(path)
 * path `string` the path that should be found
@@ -65,6 +65,7 @@ Routes given request and response pair to a requested path and controller
 Returns the callback that is connected to given path, or undefined
 ### $ROUTER.setDefaultRoute(controller)
 * controller `function` the controller, that is called, when no route is found
+
 Sets a specific controller, that will be called, if no route matches
 ### $ROUTER.getDefaultRoute()
 Returns the default controller

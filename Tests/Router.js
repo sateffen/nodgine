@@ -71,29 +71,44 @@ exports.route = function(test) {
         response.writeHead(200);
         response.end(args.id);
     },
+    tObject = {
+            doGet: tFunc1
+    },
     http = require("http"),
     count = 0,
     // does test.done if all tests are done
     done = function() {
                 count++;
-                if(count===4) {
+                if(count == 6) {
                     httpServer.close();
                     test.done();
                     r.clearRoutes();
                 }
             };
-    
     httpServer.listen(1234);
-
     r.addRoute("/testroute", tFunc1);
     r.addRoute("/tataroute/:id", tFunc2);
+    r.addRoute("/testobject", tObject);
     
     // do request to double path
     var options = {
             host: "localhost",
             port: 1234,
-            path: "/testroute"
+            path: "/testroute",
+            method: "GET"
         };
+    http.get(options, function(res) {
+        var data = "";
+        res.on("data", function(chunk){data+=chunk;});
+        res.on("end", function() {
+            test.equal(res.statusCode, 200);
+            test.equal(data, "success");
+            done();
+        });
+    });
+    
+    //do a successful request to object
+    options.path = "/testobject";
     http.get(options, function(res) {
         var data = "";
         res.on("data", function(chunk){data+=chunk;});
@@ -136,6 +151,19 @@ exports.route = function(test) {
     
     // do request to default route
     options.path = "/mugglefugg";
+    http.get(options, function(res) {
+        var data = "";
+        res.on("data", function(chunk){data+=chunk;});
+        res.on("end", function() {
+            test.equal(res.statusCode, 200);
+            test.equal(data, "default");
+            done();
+        });
+    });
+    
+    //do a not successful request to object
+    options.path = "/testobject";
+    options.method = "POST";
     http.get(options, function(res) {
         var data = "";
         res.on("data", function(chunk){data+=chunk;});
