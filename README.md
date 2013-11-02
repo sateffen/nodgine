@@ -8,12 +8,15 @@ This is the logging component. It's a global variable, not rewriteable (may chan
 
 ### $LOGGER.error(message)
 * message `string` The message that should be logged
+
 Logs the error to the logfile or console and throws it as error to interrupt the programm
 ### $LOGGER.warning(message)
 * message `string` The message that should be logged
+
 Logs the warning to the logfile or console, but don't interrupt the programm
 ### $LOGGER.log(message)
 * message `string` The message that should be logged
+
 Logs the message as "log" to the logfile or console, but don't interrupt the programm
 ### $LOGGER.setLogFile(logFile)
 * logFile `string` The logfile is the absolute path to a file that is the logfile
@@ -29,13 +32,16 @@ This component is the "communication center" of all components of your software.
 This function will delete all services in the list and emit the "servicesCleared" event.
 ### $SERVICE.getService(type)
 * type `string` the type of service that is searched for
+
 This function returns an array containing every controller with given type
 ### $SERVICE.getServiceById(id)
 * id `number` id of the certain service, that should be returned
+
 This function returns the controller with given id. If the controller doesn't exist, `null` is returned
 ### $SERVICE.registerService(type, controller)
 * type `string` type of the service
 * controller `function` controller of the service
+
 This function registers a new service with given type and controller
 ### $SERVICE.unregisterService(id)
 * id `number` id of the service, that should be deleted
@@ -47,6 +53,7 @@ This is the router of the application, that recieves every connection, analyses 
 ### $ROUTER.route(request, response)
 * request `request Object` request object of an http request
 * response `response Object` response object of an http request
+
 Routes given request and response pair to a requested path and controller
 ### $ROUTER.addRoute(path, callback, caseSensetive)
 * path `string` the specific path for the router
@@ -54,6 +61,7 @@ Routes given request and response pair to a requested path and controller
 * caseSensetive `bool` defines, whether the path is case sensetive or not
 ### $ROUTER.getRoute(path)
 * path `string` the path that should be found
+
 Returns the callback that is connected to given path, or undefined
 ### $ROUTER.setDefaultRoute(controller)
 * controller `function` the controller, that is called, when no route is found
@@ -72,11 +80,13 @@ This is the application object. Here are events emitted, which affect the whole 
 
 ### $APPLICATION.startHTTP(port)
 * port `number` Defines the port the httpserver should listen at
+
 Starts the http server at given port
 ### $APPLICATION.startHTTPS(key, cert, port)
 * key `string` Defines the absolute path to the key file for https connection
 * cert `string` Defines the absolute path to the certificate file for https connection
 * port `number` Defines the port the httpsserver should listen at
+
 Starts the https server with given key and certificate at given port
 ### $APPLICATION.stopHTTP()
 Stops the http server
