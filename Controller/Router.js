@@ -20,6 +20,9 @@ function ObjectToCallbackWrapper(callbackObject, request, response, args) {
         case "put":
             callbackObject.doPut(request,response, args);
             break;
+        case "head":
+            callbackObject.doHead(request,response, args);
+            break;
         case "delete":
             callbackObject.doDelete(request,response, args);
             break;
@@ -109,8 +112,7 @@ function pathToRoute(path, sensitive) {
  * @param path                string
  * @param callback            function or object
  * @param caseSenesetive    bool | optional
- * @param strict           bool | optional      (gibt an, ob der Path 100% genau die form haben muss,
- *                                                  oder dannach auch was kommen kann und das auch gefetched wird)
+ * 
  */
 function addRoute(path, callback, caseSensetive) {
     "use strict";

@@ -42,7 +42,7 @@ This function returns the controller with given id. If the controller doesn't ex
 * type `string` type of the service
 * controller `function` controller of the service
 
-This function registers a new service with given type and controller
+This function registers a new service with given type and controller and returns the generated service id.
 ### $SERVICE.unregisterService(id)
 * id `number` id of the service, that should be deleted
 This function unregisters the service connected to given id
@@ -57,7 +57,7 @@ This is the router of the application, that recieves every connection, analyses 
 Routes given request and response pair to a requested path and controller
 ### $ROUTER.addRoute(path, callback, caseSensetive)
 * path `string` the specific path for the router
-* callback `function` or `object` if the callback is a function, it is called, when the given path fits. If it is an object the request method will be evaluated and routed to the functions of the object. The object should implement at least one if this functions: doGet, doPost, doPut, doDelete
+* callback `function` or `object` if the callback is a function, it is called, when the given path fits. If it is an object the request method will be evaluated and routed to the functions of the object. The object should implement at least one if this functions: doGet, doPost, doPut, doDelete, doHead
 * caseSensetive `bool` defines, whether the path is case sensetive or not
 ### $ROUTER.getRoute(path)
 * path `string` the path that should be found
