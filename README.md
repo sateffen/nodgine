@@ -101,10 +101,15 @@ Tells the application to emit the "stopApplication" event, so every listener kno
 * path `string` Defines the path which should be searched recursively
 
 Adds a load path, from that javascript objects can be loaded
-### $APPLICATION.create(objectName)
+### $APPLICATION.create(objectName, param)
 * objectName `string` Defines the object name, that should be instanciated
+* param `object` The parameter that is passed through
 
 Creates an instance of the given object name. That object name is from the PSR0
+### $APPLICATION.load(objectName)
+* objectName `string` Defines the object name, that should be instanciated
+
+Returns the prototype of given object name. That object name is from the PSR0
 
 # Example Application
 As example we will setup a http server, that listens at port 8888 and answers to every request with the current time.

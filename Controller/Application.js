@@ -86,9 +86,9 @@ function getAllJSFiles(argBasePath) {
 function addLoadPath(argPath) {
     "use strict";
     var jsFiles = getAllJSFiles(argPath);
-    jsClassNames = jsFiles.map(function(file) {
-        var tmp = file.substr(argPath.length, file.length-3);
-        tmp = tmp.replace("/", "_");
+    var jsClassNames = jsFiles.map(function(file) {
+        var tmp = file.substring(argPath.length, file.length-3);
+        tmp = tmp.replace(/\//g, "_");
         tmp = (tmp[0] == "_") ? tmp.substr(1) : tmp;
         return tmp;
     });
@@ -98,14 +98,18 @@ function addLoadPath(argPath) {
     }
 }
 
-function create(className, param) {
+function load(className) {
     "use strict";
-    param = param || {};
     if (classes[className]) {
-        var Tmp = require(classes[className]);
-        return (new Tmp(param));
+        return require(classes[className]);
     }
     return null;
+}
+
+function create(className, param) {
+    "use strict";
+    var Tmp = load(className);
+    return new Tmp(param);
 }
 
 var EXPORTOBJECT = new (require("events").EventEmitter)();
@@ -139,6 +143,10 @@ Object.defineProperty(EXPORTOBJECT, "addLoadPath", {
 });
 Object.defineProperty(EXPORTOBJECT, "create", {
     value: create,
+    writable: false
+});
+Object.defineProperty(EXPORTOBJECT, "load", {
+    value: load,
     writable: false
 });
 
