@@ -97,6 +97,14 @@ Stops the https server
 Tells the application to emit the "startApplication" event, so every listener knows the application has started
 ### $APPLICATION.stop()
 Tells the application to emit the "stopApplication" event, so every listener knows the application has stopped
+### $APPLICATION.addLoadPath(path)
+* path `string` Defines the path which should be searched recursively
+
+Adds a load path, from that javascript objects can be loaded
+### $APPLICATION.create(objectName)
+* objectName `string` Defines the object name, that should be instanciated
+
+Creates an instance of the given object name. That object name is from the PSR0
 
 # Example Application
 As example we will setup a http server, that listens at port 8888 and answers to every request with the current time.
