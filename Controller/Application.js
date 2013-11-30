@@ -9,7 +9,7 @@ var http    = require("http"),
 function startHTTP(port) {
     "use strict";
     if (port < 1 || port > 65535) {
-        throw "wrong port";
+        throw "startHTTP: port out of range";
     }
     
     if (!server.http) {
@@ -19,10 +19,10 @@ function startHTTP(port) {
     server.http.listen(port);
 }
 
-function startHTTPS(key, cert, port) {
+function startHTTPS(key, cert, port, additionalOptions) {
     "use strict";
     if (port < 1 || port > 65535) {
-        throw "wrong port";
+        throw "startHTTPS: port out of range";
     }
     
     if (!server.https) {
@@ -30,6 +30,9 @@ function startHTTPS(key, cert, port) {
             key: fs.readFileSync(key),
             cert: fs.readFileSync(cert)
         };
+        for (var o in additionalOptions) {
+            options[o] = additionalOptions[o];
+        }
         server.https = https.createServer(options, $ROUTER.route);
     }
     
@@ -85,17 +88,19 @@ function getAllJSFiles(argBasePath) {
 
 function addLoadPath(argPath) {
     "use strict";
+    argPath = path.resolve(argPath);
     var jsFiles = getAllJSFiles(argPath);
     var jsClassNames = jsFiles.map(function(file) {
         var tmp = file.substring(argPath.length, file.length-3);
+        tmp = (tmp[0] == "/") ? tmp.substr(1) : tmp;
         tmp = tmp.replace(/\//g, "_");
-        tmp = (tmp[0] == "_") ? tmp.substr(1) : tmp;
         return tmp;
     });
     
     for (var i=0;i<jsFiles.length;i++) {
         classes[jsClassNames[i]] = jsFiles[i];
     }
+    console.log(classes);
 }
 
 function load(className) {
