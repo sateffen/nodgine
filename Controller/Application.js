@@ -100,7 +100,6 @@ function addLoadPath(argPath) {
     for (var i=0;i<jsFiles.length;i++) {
         classes[jsClassNames[i]] = jsFiles[i];
     }
-    console.log(classes);
 }
 
 function load(className) {
