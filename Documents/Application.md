@@ -1,13 +1,21 @@
 
-#API
-
-## $APPLICATION
+# Description
 This is the application object. Here are events emitted, which affect the whole application, like "startApplication" and "stopApplication". This object holds the current http and https server, if started. Only one of a kind are allowed at the same time.
+
+
+# API
 
 ### $APPLICATION.startHTTP(port)
 * port `number` Defines the port the httpserver should listen at
 
 Starts the http server at given port
+
+#### Example
+	// start application and emit start event
+	$APPLICATION.startHTTP(1234);
+
+This codesnippet starts the application at given port, in this example port 1234.
+
 
 ### $APPLICATION.startHTTPS(key, cert, port)
 * key `string` Defines the absolute path to the key file for https connection

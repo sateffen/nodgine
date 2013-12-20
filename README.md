@@ -3,20 +3,19 @@ This project is a general architecture build for creating RESTful webservices. I
 
 # Example Application
 As example we will setup a http server, that listens at port 8888 and answers to every request with the current time.
-```js
-// load architecture
-require("NodeWebserverArchitecture");
-// setup route
-$ROUTE.addRoute("/*", function(request, response, arguments){
-	response.writeHead(200);
-	response.end((new Date).toString());
-});
 
-// start http server
-$APPLICATION.startHTTP(8888);
-// start application
-$APPLICATION.run();
-```
+	// load architecture
+	require("NodeWebserverArchitecture");
+	// setup route
+	$ROUTE.addRoute("/*", function(request, response, arguments){
+		response.writeHead(200);
+		response.end((new Date).toString());
+	});
+	
+	// start http server
+	$APPLICATION.startHTTP(8888);
+	// start application
+	$APPLICATION.run();
 
 Now you can start this with your node, and call the adress localhost:8888 from your webbrowser. You can add every path to it, every path will present the same result in this example.
 
