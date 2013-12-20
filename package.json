@@ -1,9 +1,18 @@
 {
-    "name": "NodeWebserverArchitecture",
-    "version": "0.0.1",
-    "description": "NodeWebserverArchitecture is a common architecure for webservers with NodeJS",
-    "main": "Bootstrap.js",
-    "author": "Steffen Wendt",
-    "license": "BSD",
-    "readmeFilename": "README.md"
+  "name" : "NodeWebserverArchitecture",
+  "version" : "0.0.1",
+  "description" : "NodeWebserverArchitecture is a common architecure for webservers with NodeJS",
+  "main" : "./Bootstrap.js",
+  "author" : {
+    "name" : "Steffen Wendt",
+    "email" : "sateffen@gmail.com"
+  },
+  "license" : {
+    "type" : "bsd"
+  },
+  "readmeFilename" : "README.md",
+  "keywords" : [ ],
+  "bugs" : {
+    "url" : "https://bitbucket.org/sateffen/nodewebserverarchitecture/issues"
+  }
 }
