@@ -1,7 +1,7 @@
 {
-  "name" : "NodeWebserverArchitecture",
+  "name" : "Nodgine",
   "version" : "0.0.1",
-  "description" : "NodeWebserverArchitecture is a common architecure for webservers with NodeJS",
+  "description" : "Nodgine is a NodeJS engine for simple webserver and RESTful APIs.",
   "main" : "./Bootstrap.js",
   "author" : {
     "name" : "Steffen Wendt",
@@ -13,6 +13,6 @@
   "readmeFilename" : "README.md",
   "keywords" : [ ],
   "bugs" : {
-    "url" : "https://bitbucket.org/sateffen/nodewebserverarchitecture/issues"
+    "url" : "https://bitbucket.org/sateffen/nodgine/issues"
   }
 }
