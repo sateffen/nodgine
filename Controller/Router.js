@@ -111,7 +111,7 @@ function pathToRoute(path, sensitive) {
  * 
  * @param path                string
  * @param callback            function or object
- * @param caseSenesetive    bool | optional
+ * @param caseSensetive    bool | optional
  * 
  */
 function addRoute(path, callback, caseSensetive) {
@@ -127,7 +127,7 @@ function addRoute(path, callback, caseSensetive) {
 
     var tmp = pathToRoute(path, caseSensetive);
     
-    if (typeof callback == "object") {
+    if (typeof callback === "object") {
         tmp.callbackData = callback;
         tmp.callback = ObjectToCallbackWrapper.bind(null, tmp.callbackData);
     }
