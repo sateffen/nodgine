@@ -79,7 +79,7 @@ exports.route = function(test) {
     // does test.done if all tests are done
     done = function() {
                 count++;
-                if(count == 6) {
+                if(count === 6) {
                     httpServer.close();
                     test.done();
                     r.clearRoutes();

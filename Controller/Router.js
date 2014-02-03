@@ -5,9 +5,6 @@ var routes              = [],
     requestEncoding     = "utf-8",
     defaultController   = null;
 
-/**
- * 
- * */
 function ObjectToCallbackWrapper(callbackObject, request, response, args) {
     try {
         switch(request.method.toLowerCase()) {
@@ -29,7 +26,7 @@ function ObjectToCallbackWrapper(callbackObject, request, response, args) {
         }
     }
     catch (e) {
-        if (typeof defaultController == "function") {
+        if (typeof defaultController === "function") {
             defaultController(request, response, args);
         }
         else {
@@ -229,7 +226,7 @@ function route(request, response) {
         }
         
         // if no route is defined, call default if exists
-        if (typeof defaultController == "function") {
+        if (typeof defaultController === "function") {
             defaultController(request, response, path);
         }
         else {

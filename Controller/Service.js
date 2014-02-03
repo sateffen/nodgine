@@ -26,7 +26,7 @@ function getService(type) {
     type = type.toLowerCase();
     var returnArray = [];
     for (var i in registeredServices) {
-        if (registeredServices[i] && registeredServices[i].type == type) {
+        if (registeredServices[i] && registeredServices[i].type === type) {
             returnArray.push(registeredServices[i]);
         }
     }

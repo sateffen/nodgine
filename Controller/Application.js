@@ -70,10 +70,10 @@ function getAllJSFiles(argBasePath) {
         files = null;
     files = fs.readdirSync(argBasePath);
     dirList = files.filter(function(file) {
-        return fs.statSync(path.join(argBasePath, file)).isDirectory() && file[0] != ".";
+        return fs.statSync(path.join(argBasePath, file)).isDirectory() && file[0] !== ".";
     });
     returnFiles = files.filter(function(file) {
-        return fs.statSync(path.join(argBasePath, file)).isFile() && file.substr(-3) == ".js";
+        return fs.statSync(path.join(argBasePath, file)).isFile() && file.substr(-3) === ".js";
     });
     returnFiles = returnFiles.map(function(file){
         return path.join(argBasePath, file);
@@ -92,7 +92,7 @@ function addLoadPath(argPath) {
     var jsFiles = getAllJSFiles(argPath);
     var jsClassNames = jsFiles.map(function(file) {
         var tmp = file.substring(argPath.length, file.length-3);
-        tmp = (tmp[0] == "/") ? tmp.substr(1) : tmp;
+        tmp = (tmp[0] === "/") ? tmp.substr(1) : tmp;
         tmp = tmp.replace(/\//g, "_");
         return tmp;
     });
