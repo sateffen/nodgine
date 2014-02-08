@@ -49,6 +49,7 @@ function enterLog(state, critical, message) {
  * @param filename  string
  */
 function setLogFile(filename) {
+    "use strict";
     logFile = filename;
 }
 
@@ -58,6 +59,7 @@ function setLogFile(filename) {
  * @param b bool
  */
 function writeToFile(b) {
+    "use strict";
     toFile = (b) ? true : false;
 }
 
@@ -67,6 +69,7 @@ function writeToFile(b) {
  * @param b bool
  */
 function writeToConsole(b) {
+    "use strict";
     toConsole = (b) ? true : false;
 }
 

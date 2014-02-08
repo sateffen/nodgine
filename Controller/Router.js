@@ -6,6 +6,7 @@ var routes              = [],
     defaultController   = null;
 
 function ObjectToCallbackWrapper(callbackObject, request, response, args) {
+    "use strict";
     try {
         switch(request.method.toLowerCase()) {
         case "get":
@@ -202,26 +203,29 @@ function route(request, response) {
         request.cookie  = {};
 
         // analyse cookies
-        var cookies = (request.headers.cookies) ? request.headers.cookie.split(';') : [];
+        var cookies = (request.headers.cookie) ? request.headers.cookie.split(';') : [];
         for (x in cookies) {
-            tmp = cookies[x].split("=");
-            request.cookie[tmp[0]] = tmp[1];
+            if (typeof cookies[x] === 'string') {
+                tmp = cookies[x].split("=");
+                request.cookie[tmp[0]] = tmp[1];
+            }
         }
         
         // find matching route
         for (x in routes) {
-            tmp = path.match(routes[x].regex);
-            if (tmp !== null) {
-                var args = {};
-                for (var y=0; y<routes[x].keys.length;y++) {
-                    args[routes[x].keys[y].name] = tmp[y+1];
-                }
+            if (typeof routes[x] === 'object') {
+                tmp = path.match(routes[x].regex);
+                if (tmp !== null) {
+                    var args = {};
+                    for (var y=0; y<routes[x].keys.length;y++) {
+                        args[routes[x].keys[y].name] = tmp[y+1];
+                    }
 
-                /*jshint -W083 */
-                process.nextTick(function(){
-                    routes[x].callback(request, response, args);
-                });
-                return;
+                    process.nextTick(function(){
+                        routes[x].callback(request, response, args);
+                    });
+                    return;
+                }
             }
         }
         

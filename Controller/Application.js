@@ -3,6 +3,7 @@ var http    = require("http"),
     https   = require("https"),
     fs      = require("fs"),
     path    = require("path"),
+    nodgine = require("../Bootstrap.js"),
     server  = {},
     classes = {};
 
@@ -13,7 +14,7 @@ function startHTTP(port) {
     }
     
     if (!server.http) {
-        server.http = http.createServer($ROUTER.route);
+        server.http = http.createServer(nodgine.$ROUTER.route);
     }
     
     server.http.listen(port);
@@ -31,9 +32,11 @@ function startHTTPS(key, cert, port, additionalOptions) {
             cert: fs.readFileSync(cert)
         };
         for (var o in additionalOptions) {
-            options[o] = additionalOptions[o];
+            if (typeof additionalOptions[o] !== 'function') {
+                options[o] = additionalOptions[o];
+            }
         }
-        server.https = https.createServer(options, $ROUTER.route);
+        server.https = https.createServer(options, nodgine.$ROUTER.route);
     }
     
     server.https.listen(port);
@@ -68,6 +71,7 @@ function getAllJSFiles(argBasePath) {
     var returnFiles = [],
         dirList = null,
         files = null;
+
     files = fs.readdirSync(argBasePath);
     dirList = files.filter(function(file) {
         return fs.statSync(path.join(argBasePath, file)).isDirectory() && file[0] !== ".";
