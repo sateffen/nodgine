@@ -8,7 +8,7 @@
     "email" : "sateffen@gmail.com"
   },
   "license" : {
-    "type" : "bsd"
+    "type" : "MIT"
   },
   "readmeFilename" : "README.md",
   "keywords" : [ ],
