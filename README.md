@@ -8,7 +8,7 @@ Nodgine is a fusion of the words NodeJS and engine: Nod(eJS)(en)gine.
 As example we will setup a http server, that listens at port 8888 and answers to every request with the current time.
 
 	// load architecture
-	require("Nodgine");
+	require("Nodgine").globalize();
 	// setup route
 	$ROUTE.addRoute("/*", function(request, response, arguments){
 		response.writeHead(200);
