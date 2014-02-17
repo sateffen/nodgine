@@ -1,89 +1,145 @@
+/**
+ * This is the Router API for the nodgine module
+ *
+ * @module nodgine
+ * @submodule $ROUTER
+ **/
 
-var routes              = [],
-    url                 = require("url"),
-    querystring         = require("querystring"),
-    requestEncoding     = "utf-8",
-    defaultController   = null;
+/**
+ * The exporting object, which gets revealed
+ *
+ * @type {object}
+ **/
+var EXPORTOBJECT = {},
 
-function ObjectToCallbackWrapper(callbackObject, request, response, args) {
-    "use strict";
+    /**
+     * A list of all routes
+     *
+     * @private
+     * @type {Array}
+     **/
+    routes = [],
+
+    /**
+     * A reference to the url-module
+     *
+     * @private
+     * @type {url}
+     **/
+    url = require('url'),
+
+    /**
+     * A reference to the querystring-module
+     *
+     * @private
+     * @type {querystring}
+     **/
+    querystring = require('querystring'),
+
+    /**
+     * The requestencoding
+     *
+     * @private
+     * @type {string}
+     * @default 'utf-8'
+     **/
+    requestEncoding = 'utf-8',
+
+    /**
+     * A reference to the default function
+     *
+     * @private
+     * @type {function}
+     **/
+    defaultController = null;
+
+
+function ObjectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
+    'use strict';
     try {
-        switch(request.method.toLowerCase()) {
-        case "get":
-            callbackObject.doGet(request,response, args);
+        switch(aRequest.method.toLowerCase()) {
+        case 'get':
+            aCallbackObject.doGet(aRequest, aResponse, aArgs);
             break;
-        case "post":
-            callbackObject.doPost(request,response, args);
+        case 'post':
+            aCallbackObject.doPost(aRequest, aResponse, aArgs);
             break;
-        case "put":
-            callbackObject.doPut(request,response, args);
+        case 'put':
+            aCallbackObject.doPut(aRequest, aResponse, aArgs);
             break;
-        case "head":
-            callbackObject.doHead(request,response, args);
+        case 'head':
+            aCallbackObject.doHead(aRequest, aResponse, aArgs);
             break;
-        case "delete":
-            callbackObject.doDelete(request,response, args);
+        case 'delete':
+            aCallbackObject.doDelete(aRequest, aResponse, aArgs);
             break;
         }
     }
     catch (e) {
-        if (typeof defaultController === "function") {
-            defaultController(request, response, args);
+        if (typeof defaultController === 'function') {
+            defaultController(aRequest, aResponse, aArgs);
         }
         else {
-            response.writeHead(404);
-            response.end();
+            aResponse.writeHead(404);
+            aResponse.end();
         }
     }
 }
 
 /**
  * Deletes all routes
+ *
+ * @chainable
+ * @return {object} The instance itself
  */
 function clearRoutes() {
-    "use strict";
+    'use strict';
     routes = [];
+    return EXPORTOBJECT;
 }
-
 
 /**
  * Sets the default route controller for all not routeable requests
- * 
- * @param controller function
+ *
+ * @chainable
+ * @param {function} aController
+ * @return {object} The instance itself
  */
-function setDefaultRoute(controller) {
-    "use strict";
-    if (typeof controller === "function") {
-        defaultController = controller;
+function setDefaultRoute(aController) {
+    'use strict';
+    if (typeof aController === 'function') {
+        defaultController = aController;
     }
     else {
-        throw "$ROUTER.setDefaultRoute first param needs to be a function as controller, got " + (typeof controller);
+        throw '$ROUTER.setDefaultRoute first param needs to be a function as controller, got ' + (typeof aController);
     }
+    return EXPORTOBJECT;
 }
 
 /**
  * Returns the default route controller
  * 
- * @returns function || null
+ * @return {function || null}
  */
 function getDefaultRoute() {
-    "use strict";
+    'use strict';
     return defaultController;
 }
 
 /**
  * This function generates a route object from given path
- * 
- * @param path            string
- * @param sensitive       bool
- * @returns object
+ *
+ * @private
+ * @param {string} aPath
+ * @param {boolean} aSensetive
+ * @return {object}
  * 
  * inspired by expressjs (https://github.com/visionmedia/express/blob/master/lib/utils.js) pathRegexp
  */
-function pathToRoute(path, sensitive) {
-    "use strict";
-    var tmpObj = {path: path, keys: []};
-    path = path
+function pathToRoute(aPath, aSensetive) {
+    'use strict';
+    var tmpObj = {path: aPath, keys: []};
+    aPath = aPath
         .concat('/?')
         .replace(/\/\(/g, '(?:/')
         .replace(/(\/)?(\.)?:(\w+)(?:(\(.*?\)))?(\?)?(\*)?/g, function(_, slash, format, key, capture, optional, star){
@@ -99,7 +155,7 @@ function pathToRoute(path, sensitive) {
         })
         .replace(/([\/.])/g, '\\$1')
         .replace(/\*/g, '(.*)');
-    tmpObj.regex = new RegExp('^' + path + '$', sensitive ? '' : 'i');
+    tmpObj.regex = new RegExp('^' + aPath + '$', aSensetive ? '' : 'i');
     return tmpObj;
 }
 
@@ -107,60 +163,63 @@ function pathToRoute(path, sensitive) {
  * Adds a route to the router with controller as first url param, action as second url param and callback as handle
  * for the request
  * 
- * @param path                string
- * @param callback            function or object
- * @param caseSensetive    bool | optional
+ * @param aPath                string
+ * @param aCallback            function or object
+ * @param aCaseSensetive    bool | optional
  * 
  */
-function addRoute(path, callback, caseSensetive) {
-    "use strict";
-    caseSensetive = caseSensetive || false;
-    if (typeof path !== "string") {
-        throw "$ROUTER.addRoute first param needs to be a string, got " + (typeof path);
+function addRoute(aPath, aCallback, aCaseSensetive) {
+    'use strict';
+    aCaseSensetive = aCaseSensetive || false;
+    if (typeof aPath !== 'string') {
+        throw '$ROUTER.addRoute first param needs to be a string, got ' + (typeof aPath);
     }
-    if (typeof callback !== "function" && typeof callback !== "object") {
-        throw "$ROUTER.addRoute second param needs to be a function, got " + (typeof path);
+    if (typeof aCallback !== 'function' && typeof aCallback !== 'object') {
+        throw '$ROUTER.addRoute second param needs to be a function, got ' + (typeof aPath);
     }
-    path = (path[0] === "/") ? path : "/" + path;
+    aPath = (aPath[0] === '/') ? aPath : '/' + aPath;
 
-    var tmp = pathToRoute(path, caseSensetive);
+    var tmp = pathToRoute(aPath, aCaseSensetive);
     
-    if (typeof callback === "object") {
-        tmp.callbackData = callback;
+    if (typeof aCallback === 'object') {
+        tmp.callbackData = aCallback;
         tmp.callback = ObjectToCallbackWrapper.bind(null, tmp.callbackData);
     }
     else {
-        tmp.callback = callback;
+        tmp.callback = aCallback;
     }
     routes.push(tmp);
+    return EXPORTOBJECT;
 }
 
 /**
- * Returns the controller connected to a certain route. If the route wasn't defined it returns "undefined"
+ * Returns the controller connected to a certain route. If the route wasn't defined it returns 'undefined'
  * 
- * @param path    string
- * @returns object || undefined
+ * @param aPath    string
+ * @returns object || null
  */
-function getRoute(path) {
-    "use strict";
-    if (typeof path !== "string") {throw "no string"; }
-    path = (path[0] === "/") ? path : "/" + path;
+function getRoute(aPath) {
+    'use strict';
+    if (typeof aPath !== 'string') {throw 'no string'; }
+    aPath = (aPath[0] === '/') ? aPath : '/' + aPath;
     for (var x in routes) {
-        if (path.match(routes[x].regex) !== null) {
+        if (aPath.match(routes[x].regex) !== null) {
             return routes[x];
         }
     }
+    return null;
 }
 
 /**
  * Set the encoding for the request
  * 
- * @param encoding string
+ * @param aEncoding string
  */
-function setEncoding(encoding) {
-    "use strict";
+function setEncoding(aEncoding) {
+    'use strict';
     // TODO: test whether encoding is right
-    requestEncoding = encoding || "utf-8";
+    requestEncoding = aEncoding || 'utf-8';
+    return EXPORTOBJECT;
 }
 
 /**
@@ -169,7 +228,7 @@ function setEncoding(encoding) {
  * @returns string
  */
 function getEncoding() {
-    "use strict";
+    'use strict';
     return requestEncoding;
 }
 
@@ -178,36 +237,35 @@ function getEncoding() {
  * This function is the routers core function. It gets the request from http or https server, and
  * routes it to the controller
  * 
- * @param request Object
- * @param response Object
+ * @param aRequest Object
+ * @param aResponse Object
  */
-function route(request, response) {
-    "use strict";
-    var postData = "";
+function route(aRequest, aResponse) {
+    'use strict';
+    var postData = '';
     
-    request.setEncoding(requestEncoding);
+    aRequest.setEncoding(requestEncoding);
     
-    request.on("data", function(chunk) {
+    aRequest.on('data', function(chunk) {
         postData += chunk;
     });
     
-    request.on("end", function() {
-        var urlParsed   = url.parse(request.url, true),
+    aRequest.on('end', function() {
+        var urlParsed   = url.parse(aRequest.url, true),
             path        = urlParsed.pathname,
-            tmp         = null,
-            x           = null;
+            tmp, x;
 
         // set GPC
-        request.get     = urlParsed.query;
-        request.post    = querystring.parse(postData);
-        request.cookie  = {};
+        aRequest.get     = urlParsed.query;
+        aRequest.post    = querystring.parse(postData);
+        aRequest.cookie  = {};
 
         // analyse cookies
-        var cookies = (request.headers.cookie) ? request.headers.cookie.split(';') : [];
+        var cookies = (aRequest.headers.cookie) ? aRequest.headers.cookie.split(';') : [];
         for (x in cookies) {
             if (typeof cookies[x] === 'string') {
-                tmp = cookies[x].split("=");
-                request.cookie[tmp[0]] = tmp[1];
+                tmp = cookies[x].split('=');
+                aRequest.cookie[tmp[0]] = tmp[1];
             }
         }
         
@@ -217,60 +275,58 @@ function route(request, response) {
                 tmp = path.match(routes[x].regex);
                 if (tmp !== null) {
                     var args = {};
-                    for (var y=0; y<routes[x].keys.length;y++) {
+                    for (var y = 0; y < routes[x].keys.length; y++) {
                         args[routes[x].keys[y].name] = tmp[y+1];
                     }
 
-                    process.nextTick(function(){
-                        routes[x].callback(request, response, args);
-                    });
+                    process.nextTick(function(aX, aArgs) {
+                        routes[aX].callback(aRequest, aResponse, aArgs);
+                    }.bind(null, x, args));
                     return;
                 }
             }
         }
         
         // if no route is defined, call default if exists
-        if (typeof defaultController === "function") {
-            defaultController(request, response, path);
+        if (typeof defaultController === 'function') {
+            defaultController(aRequest, aResponse, path);
         }
         else {
-            response.writeHead(404);
-            response.end();
+            aResponse.writeHead(404);
+            aResponse.end();
         }
     });
 }
 
-// Create an object, that can be exported to the whole application, but cannot be modified
-var EXPORTOBJECT = {};
-Object.defineProperty(EXPORTOBJECT, "route", {
+Object.defineProperty(EXPORTOBJECT, 'route', {
     value: route,
     writable: false
 });
-Object.defineProperty(EXPORTOBJECT, "addRoute", {
+Object.defineProperty(EXPORTOBJECT, 'addRoute', {
     value: addRoute,
     writable: false
 });
-Object.defineProperty(EXPORTOBJECT, "getRoute", {
+Object.defineProperty(EXPORTOBJECT, 'getRoute', {
     value: getRoute,
     writable: false
 });
-Object.defineProperty(EXPORTOBJECT, "setDefaultRoute", {
+Object.defineProperty(EXPORTOBJECT, 'setDefaultRoute', {
     value: setDefaultRoute,
     writable: false
 });
-Object.defineProperty(EXPORTOBJECT, "getDefaultRoute", {
+Object.defineProperty(EXPORTOBJECT, 'getDefaultRoute', {
     value: getDefaultRoute,
     writable: false
 });
-Object.defineProperty(EXPORTOBJECT, "setEncoding", {
+Object.defineProperty(EXPORTOBJECT, 'setEncoding', {
     value: setEncoding,
     writable: false
 });
-Object.defineProperty(EXPORTOBJECT, "getEncoding", {
+Object.defineProperty(EXPORTOBJECT, 'getEncoding', {
     value: getEncoding,
     writable: false
 });
-Object.defineProperty(EXPORTOBJECT, "clearRoutes", {
+Object.defineProperty(EXPORTOBJECT, 'clearRoutes', {
     value: clearRoutes,
     writable: false
 });

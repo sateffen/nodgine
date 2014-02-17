@@ -1,5 +1,6 @@
 # Description
-This project is a general architecture build for creating RESTful webservices. It contains all nessecary components for a fast webserver.
+This project is a general architecture build for creating RESTful webservices. It contains all nessecary components for
+a fast webserver.
 
 ## The Name
 Nodgine is a fusion of the words NodeJS and engine: Nod(eJS)(en)gine.
@@ -20,7 +21,8 @@ As example we will setup a http server, that listens at port 8888 and answers to
 	// start application
 	$APPLICATION.run();
 
-Now you can start this with your node, and call the adress localhost:8888 from your webbrowser. You can add every path to it, every path will present the same result in this example.
+Now you can start this with your node, and call the adress localhost:8888 from your webbrowser. You can add every path
+to it, every path will present the same result in this example.
 
 # Developing
 

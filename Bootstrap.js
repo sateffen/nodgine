@@ -1,4 +1,21 @@
+/**
+ * This is the bootstrap for the nodgine module
+ *
+ * @module nodgine
+ **/
 
+/**
+ * The exporting object, which gets revealed
+ *
+ * @type {object}
+ **/
+var EXPORTOBJECT = {};
+
+/**
+ * This function makes the APIs of this framework global
+ *
+ * @method globalize
+ **/
 function globalize() {
     "use strict";
     Object.defineProperty(GLOBAL, "$APPLICATION", {
@@ -19,7 +36,7 @@ function globalize() {
     });
 }
 
-var EXPORTOBJECT = {};
+//region revealing object
 Object.defineProperty(EXPORTOBJECT, "$APPLICATION", {
     value   : require("./Controller/Application.js"),
     writable: false
@@ -40,5 +57,6 @@ Object.defineProperty(EXPORTOBJECT, "$SERVICE", {
     value   : globalize,
     writable: false
 });
+//endregion
 
 module.exports = EXPORTOBJECT;

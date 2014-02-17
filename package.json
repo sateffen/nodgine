@@ -1,18 +1,21 @@
 {
-  "name" : "Nodgine",
-  "version" : "0.0.1",
-  "description" : "Nodgine is a NodeJS engine for simple webserver and RESTful APIs.",
-  "main" : "./Bootstrap.js",
-  "author" : {
-    "name" : "Steffen Wendt",
-    "email" : "sateffen@gmail.com"
-  },
-  "license" : {
-    "type" : "MIT"
-  },
-  "readmeFilename" : "README.md",
-  "keywords" : [ ],
-  "bugs" : {
-    "url" : "https://bitbucket.org/sateffen/nodgine/issues"
-  }
+    "name" : "Nodgine",
+    "version" : "0.0.1",
+    "description" : "Nodgine is a NodeJS engine for simple webserver and RESTful APIs.",
+    "main" : "./Bootstrap.js",
+    "author" : {
+        "name" : "Steffen Wendt",
+        "email" : "sateffen@gmail.com"
+    },
+    "license" : {
+        "type" : "MIT"
+    },
+    "readmeFilename" : "README.md",
+    "keywords" : [ ],
+    "bugs" : {
+        "url" : "https://bitbucket.org/sateffen/nodgine/issues"
+    },
+    "devDependencies": {
+        "nodeunit": "~0.8.4"
+    }
 }

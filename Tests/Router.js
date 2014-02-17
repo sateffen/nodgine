@@ -2,7 +2,6 @@
  * Unittest for the router
  */
 
-
 var r = require("../Controller/Router.js"),
     httpServer = require("http").createServer(r.route);
 
@@ -35,7 +34,7 @@ exports.setDefaultRoute = function(test) {
 };
 
 exports.getRoute = function(test) {
-    var tFunc = function(){return;};
+    var tFunc = function(){};
     r.addRoute("/testGetRoute", tFunc);
     test.equal(r.getRoute("/tttt"), undefined);
     test.equal(r.getRoute("/testGetRoute").callback, tFunc);
@@ -44,8 +43,8 @@ exports.getRoute = function(test) {
 };
 
 exports.addRoute = function(test) {
-    r.addRoute("/testAddRoute", function(){return;});
-    r.addRoute("/testAddRoute2", function(){return;});
+    r.addRoute("/testAddRoute", function(){});
+    r.addRoute("/testAddRoute2", function(){});
     test.ok(r.getRoute("testAddRoute"));
     test.ok(r.getRoute("testAddRoute2"));
     test.done();
@@ -53,8 +52,8 @@ exports.addRoute = function(test) {
 };
 
 exports.clearRoutes = function(test) {
-    r.addRoute("/testclearRoutes", function(){return;});
-    r.addRoute("/testclearRoutes2", function(){return;});
+    r.addRoute("/testclearRoutes", function(){});
+    r.addRoute("/testclearRoutes2", function(){});
     r.clearRoutes();
     test.ok(!r.getRoute("/testclearRoutes"));
     test.ok(!r.getRoute("/testclearRoutes2"));

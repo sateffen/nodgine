@@ -1,43 +1,46 @@
 
-var s = require("../Controller/Service.js");
+var nodgineService = require("../Bootstrap.js").$SERVICE;
 
 exports.registerService = function(test) {
-    var id1 = s.registerService("test", function(){return;}),
-        id2 = s.registerService("test2", function(){return;});
+    "use strict";
+    var id1 = nodgineService.registerService("test", function(){}),
+        id2 = nodgineService.registerService("test2", function(){});
     
-    test.ok(s.getServiceById(id1));
-    test.ok(s.getServiceById(id2));
+    test.ok(nodgineService.getServiceById(id1));
+    test.ok(nodgineService.getServiceById(id2));
     
-    s.clearServices();
+    nodgineService.clearServices();
     test.done();
 };
 
 exports.unregisterService = function(test) {
-    var id1 = s.registerService("test", function(){return;}),
-        id2 = s.registerService("test2", function(){return;});
+    "use strict";
+    var id1 = nodgineService.registerService("test", function(){}),
+        id2 = nodgineService.registerService("test2", function(){});
     
-    test.ok(s.getServiceById(id1));
-    test.ok(s.getServiceById(id2));
+    test.ok(nodgineService.getServiceById(id1));
+    test.ok(nodgineService.getServiceById(id2));
     
-    s.unregisterService(id1);
-    s.unregisterService(id2);
+    nodgineService.unregisterService(id1);
+    nodgineService.unregisterService(id2);
     
-    test.equal(s.getServiceById(id1), null);
-    test.equal(s.getServiceById(id2), null);
+    test.equal(nodgineService.getServiceById(id1), null);
+    test.equal(nodgineService.getServiceById(id2), null);
     
-    s.clearServices();
+    nodgineService.clearServices();
     test.done();
 };
 
 exports.getService = function(test) {
-    s.registerService("test", function(){return;});
-    s.registerService("test2", function(){return;});
-    s.registerService("test2", function(){return;});
+    "use strict";
+    nodgineService.registerService("test", function(){});
+    nodgineService.registerService("test2", function(){});
+    nodgineService.registerService("test2", function(){});
     
-    test.equal(s.getService("notDefined").length, 0);
-    test.equal(s.getService("test").length, 1);
-    test.equal(s.getService("test2").length, 2);
+    test.equal(nodgineService.getService("notDefined").length, 0);
+    test.equal(nodgineService.getService("test").length, 1);
+    test.equal(nodgineService.getService("test2").length, 2);
     
-    s.clearServices();
+    nodgineService.clearServices();
     test.done();
 };
