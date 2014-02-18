@@ -3,6 +3,8 @@
  *
  * @module nodgine
  * @submodule $LOGGER
+ * @class $LOGGER
+ * @static
  **/
 
 /**
@@ -92,6 +94,7 @@ function enterLog(aState, aCritical, aMessage) {
  * With this function you can set the log file
  *
  * @chainable
+ * @method setLogFile
  * @param {string} aFilename
  * @return {object} The instance itself
  */
@@ -105,6 +108,7 @@ function setLogFile(aFilename) {
  * with this function you can set writing to file on or off
  *
  * @chainable
+ * @method writeToFile
  * @param {boolean} aOption
  * @return {object} The instance itself
  */
@@ -118,6 +122,7 @@ function writeToFile(aOption) {
  * with this function you can set writing to console on or off
  *
  * @chainable
+ * @method writeToConsole
  * @param {boolean} aOption
  * @return {object} The instance itself
  */
@@ -127,17 +132,40 @@ function writeToConsole(aOption) {
     return EXPORTOBJECT;
 }
 
+/**
+ * This is the bind function, bind to enterLog
+ *
+ * @method error
+ * @param {string} aMessage The message for the log
+ */
+var error = enterLog.bind(null, 'ERROR', true);
+
+/**
+ * This is the bind function, bind to enterLog
+ *
+ * @method warning
+ * @param {string} aMessage The message for the log
+ */
+var warning = enterLog.bind(null, 'WARNING', false);
+
+/**
+ * This is the bind function, bind to enterLog
+ *
+ * @method log
+ * @param {string} aMessage The message for the log
+ */
+var log = enterLog.bind(null, 'LOG', false);
 
 Object.defineProperty(EXPORTOBJECT, 'error', {
-    value: enterLog.bind(null, 'ERROR', true),
+    value: error,
     writable: false
 });
 Object.defineProperty(EXPORTOBJECT, 'warning', {
-    value: enterLog.bind(null, 'WARNING', false),
+    value: warning,
     writable: false
 });
 Object.defineProperty(EXPORTOBJECT, 'log', {
-    value: enterLog.bind(null, 'LOG', false),
+    value: log,
     writable: false
 });
 Object.defineProperty(EXPORTOBJECT, 'setLogFile', {

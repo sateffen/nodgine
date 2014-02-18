@@ -3,6 +3,8 @@
  *
  * @module nodgine
  * @submodule $APPLICATION
+ * @class $APPLICATION
+ * @static
  **/
 
 /**

@@ -1,8 +1,11 @@
 /**
+ * @TODO: Rework all comments for YUIDOC
  * This is the Router API for the nodgine module
  *
  * @module nodgine
  * @submodule $ROUTER
+ * @class $ROUTER
+ * @static
  **/
 
 /**
@@ -90,6 +93,7 @@ function ObjectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
  * Deletes all routes
  *
  * @chainable
+ * @method clearRoutes
  * @return {object} The instance itself
  */
 function clearRoutes() {
@@ -102,6 +106,7 @@ function clearRoutes() {
  * Sets the default route controller for all not routeable requests
  *
  * @chainable
+ * @method setDefaultRoute
  * @param {function} aController
  * @return {object} The instance itself
  */
@@ -118,7 +123,8 @@ function setDefaultRoute(aController) {
 
 /**
  * Returns the default route controller
- * 
+ *
+ * @method getDefaultRoute
  * @return {function || null}
  */
 function getDefaultRoute() {
@@ -162,7 +168,8 @@ function pathToRoute(aPath, aSensetive) {
 /**
  * Adds a route to the router with controller as first url param, action as second url param and callback as handle
  * for the request
- * 
+ *
+ * @method addRoute
  * @param aPath                string
  * @param aCallback            function or object
  * @param aCaseSensetive    bool | optional
@@ -194,7 +201,8 @@ function addRoute(aPath, aCallback, aCaseSensetive) {
 
 /**
  * Returns the controller connected to a certain route. If the route wasn't defined it returns 'undefined'
- * 
+ *
+ * @method getRoute
  * @param aPath    string
  * @returns object || null
  */
@@ -212,7 +220,8 @@ function getRoute(aPath) {
 
 /**
  * Set the encoding for the request
- * 
+ *
+ * @method setEncoding
  * @param aEncoding string
  */
 function setEncoding(aEncoding) {
@@ -224,7 +233,8 @@ function setEncoding(aEncoding) {
 
 /**
  * Returns the current encoding for requests
- * 
+ *
+ * @method getEncoding
  * @returns string
  */
 function getEncoding() {
@@ -236,7 +246,8 @@ function getEncoding() {
 /**
  * This function is the routers core function. It gets the request from http or https server, and
  * routes it to the controller
- * 
+ *
+ * @method route
  * @param aRequest Object
  * @param aResponse Object
  */

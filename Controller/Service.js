@@ -3,6 +3,8 @@
  *
  * @module nodgine
  * @submodule $SERVICE
+ * @class $SERVICE
+ * @static
  **/
 
 /**
@@ -24,6 +26,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
  * deletes all registered services
  *
  * @chainable
+ * @method clearServices
  * @event servicesCleared []
  * @return {object} The instance itself
  */
@@ -36,7 +39,8 @@ function clearServices() {
 
 /**
  * Returns all services with the given type in an array
- * 
+ *
+ * @method getService
  * @param {string} aType
  * @return {Array}
  */
@@ -58,7 +62,8 @@ function getService(aType) {
 
 /**
  * Returns the service connected to given id
- * 
+ *
+ * @method getServiceById
  * @param {number} aId
  * @returns {function || null}
  */
@@ -72,7 +77,8 @@ function getServiceById(aId) {
 
 /**
  * Registers given controller as new service from given type, returns the generated id
- * 
+ *
+ * @method registerService
  * @event serviceRegistered [string, number]
  * @param {string} aType
  * @param {function} aController
@@ -101,7 +107,8 @@ function registerService(aType, aController) {
 
 /**
  * Unregisters the service connected to given id
- * 
+ *
+ * @method unregisterService
  * @event serviceUnregistered [string, number]
  * @param {number} aId
  * @return {object} This instance itself
