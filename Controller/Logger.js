@@ -19,15 +19,39 @@ var EXPORTOBJECT = {},
      * @type {fs}
      **/
     fs = require('fs'),
+
+    /**
+     * The name of logfile, where to save all logs
+     *
+     * @private
+     * @type {string}
+     * @default 'Log.txt'
+     **/
     logFile = 'Log.txt',
+
+    /**
+     * Flag, whether logs should be written to the logfile
+     *
+     * @private
+     * @type {boolean}
+     * @default false
+     **/
     toFile = false,
+
+    /**
+     * Flag, whether logs should be written to console
+     *
+     * @private
+     * @type {boolean}
+     * @default boolean
+     **/
     toConsole = true;
 
 /**
- * This function generates a readable timestamp for the log
+ * This function generates a readable timestamp of current time for the log
  *
  * @private
- * @returns {string} readable timestamp
+ * @returns {string} readable timestamp of current time
  */
 function getDateString() {
     'use strict';
@@ -45,7 +69,7 @@ function getDateString() {
  *
  * @private
  * @param {string} aState State of given error
- * @param {boolean} aCritical Is critical or not
+ * @param {boolean} aCritical Is critical or not. If it's critical, an error will be thrown
  * @param {string} aMessage The message for the log
  */
 function enterLog(aState, aCritical, aMessage) {
