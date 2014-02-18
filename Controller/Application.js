@@ -52,7 +52,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * @private
      * @type {nodgine}
      **/
-    nodgine = require('../Bootstrap.js'),
+    $ROUTER = require('./Router.js'),
 
     /**
      * A container, that holds all servers
@@ -83,9 +83,9 @@ function startHTTP(aPort) {
     if (aPort < 1 || aPort > 65535) {
         throw 'startHTTP: port out of range';
     }
-    
+
     if (!server.http) {
-        server.http = http.createServer(nodgine.$ROUTER.route);
+        server.http = http.createServer($ROUTER.route);
     }
     
     server.http.listen(aPort);
@@ -118,7 +118,7 @@ function startHTTPS(aKey, aCert, aPort, aOptions) {
             options[aName] = aOptions[aName];
         });
 
-        server.https = https.createServer(options, nodgine.$ROUTER.route);
+        server.https = https.createServer(options, $ROUTER.route);
     }
     
     server.https.listen(aPort);

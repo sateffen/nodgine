@@ -11,7 +11,7 @@ As example we will setup a http server, that listens at port 8888 and answers to
 	// load architecture
 	require('Nodgine').globalize();
 	// setup route
-	$ROUTE.addRoute('/*', function(request, response, arguments){
+	$ROUTER.addRoute('/*', function(request, response, arguments){
 		response.writeHead(200);
 		response.end((new Date).toString());
 	});
@@ -19,7 +19,7 @@ As example we will setup a http server, that listens at port 8888 and answers to
 	// start http server
 	$APPLICATION.startHTTP(8888);
 	// start application
-	$APPLICATION.run();
+	$APPLICATION.runApplication();
 
 Now you can start this with your node, and call the adress localhost:8888 from your webbrowser. You can add every path
 to it, every path will present the same result in this example.

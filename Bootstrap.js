@@ -53,7 +53,7 @@ Object.defineProperty(EXPORTOBJECT, "$SERVICE", {
     value   : require("./Controller/Service.js"),
     writable: false
 });
-Object.defineProperty(EXPORTOBJECT, "$SERVICE", {
+Object.defineProperty(EXPORTOBJECT, "globalize", {
     value   : globalize,
     writable: false
 });
