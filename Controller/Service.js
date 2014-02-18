@@ -23,11 +23,13 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
     registeredServices = [];
 
 /**
+ * @event servicesCleared
+ **/
+/**
  * deletes all registered services
  *
  * @chainable
  * @method clearServices
- * @event servicesCleared []
  * @return {object} The instance itself
  */
 function clearServices() {
@@ -76,10 +78,14 @@ function getServiceById(aId) {
 }
 
 /**
+ * @event serviceRegistered
+ * @param {string} serviceType the type of the new serice
+ * @param {number} serviceId the id of the new serice
+ **/
+/**
  * Registers given controller as new service from given type, returns the generated id
  *
  * @method registerService
- * @event serviceRegistered [string, number]
  * @param {string} aType
  * @param {function} aController
  * @return {number}
@@ -106,10 +112,14 @@ function registerService(aType, aController) {
 }
 
 /**
+ * @event serviceUnregistered
+ * @param {string} serviceType the type of the new serice
+ * @param {number} serviceId the id of the new serice
+ **/
+/**
  * Unregisters the service connected to given id
  *
  * @method unregisterService
- * @event serviceUnregistered [string, number]
  * @param {number} aId
  * @return {object} This instance itself
  */
