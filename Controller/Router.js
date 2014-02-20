@@ -266,12 +266,25 @@ function route(aRequest, aResponse) {
             path        = urlParsed.pathname,
             tmp, x;
 
-        // set GPC
-        aRequest.get     = urlParsed.query;
-        aRequest.post    = querystring.parse(postData);
-        aRequest.cookie  = {};
+        // region set GPC
+        // parse post
+        if (aRequest.headers['content-type'] && aRequest.headers['content-type'].toLowerCase() === 'application/json') {
+            try {
+                aRequest.post = JSON.parse(postData);
+            }
+            catch(e) {
+                aRequest.post = {};
+            }
+        }
+        else {
+            aRequest.post = querystring.parse(postData);
+        }
 
-        // analyse cookies
+        // parse get
+        aRequest.get = urlParsed.query;
+
+        // parse cookies
+        aRequest.cookie = {};
         var cookies = (aRequest.headers.cookie) ? aRequest.headers.cookie.split(';') : [];
         for (x in cookies) {
             if (typeof cookies[x] === 'string') {
@@ -279,6 +292,7 @@ function route(aRequest, aResponse) {
                 aRequest.cookie[tmp[0]] = tmp[1];
             }
         }
+        // endregion
         
         // find matching route
         for (x in routes) {
