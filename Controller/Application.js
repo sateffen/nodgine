@@ -50,7 +50,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * A reference to the nodgine-module
      *
      * @private
-     * @type {nodgine}
+     * @type {$ROUTER}
      **/
     $ROUTER = require('./Router.js'),
 
@@ -200,7 +200,7 @@ function getAllJSFiles(aBasePath) {
     returnFiles = returnFiles.map(function(file){
         return path.join(aBasePath, file);
     });
-    
+
     while (dirList.length > 0) {
         returnFiles = returnFiles.concat(getAllJSFiles(path.join(aBasePath, dirList.shift())));
     }
@@ -222,11 +222,13 @@ function addLoadPath(aPath) {
     var jsFiles = getAllJSFiles(aPath);
     var jsClassNames = jsFiles.map(function(file) {
         var tmp = file.substring(aPath.length, file.length-3);
-        tmp = (tmp[0] === '/') ? tmp.substr(1) : tmp;
-        tmp = tmp.replace(/\//g, '_');
+        tmp = (tmp[0] === path.sep) ? tmp.substr(path.sep.length) : tmp;
+        var regex = (path.sep === '\\') ? new RegExp('\\\\', 'g'): new RegExp(path.sep, 'g');
+        tmp = tmp.replace(regex, '_');
+        console.log(path.sep);
         return tmp;
     });
-    
+
     for (var i=0;i<jsFiles.length;i++) {
         classes[jsClassNames[i]] = jsFiles[i];
     }
