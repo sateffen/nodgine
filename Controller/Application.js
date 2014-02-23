@@ -20,7 +20,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * @private
      * @type {http}
      **/
-    http = require('http'),
+    mHttp = require('http'),
 
     /**
      * A reference to the https-module
@@ -28,7 +28,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * @private
      * @type {https}
      **/
-    https = require('https'),
+    mHttps = require('https'),
 
     /**
      * A reference to the fs-module
@@ -36,7 +36,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * @private
      * @type {fs}
      **/
-    fs = require('fs'),
+    mFs = require('fs'),
 
     /**
      * A reference to the path-module
@@ -44,7 +44,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * @private
      * @type {path}
      **/
-    path = require('path'),
+    mPath = require('path'),
 
     /**
      * A reference to the nodgine-module
@@ -60,7 +60,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * @private
      * @type {object}
      **/
-    server = {http: null, https: null},
+    mServer = {http: null, https: null},
 
     /**
      * A container, that holds all known javascript classes with there files
@@ -68,7 +68,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * @private
      * @type {object}
      **/
-    classes = {};
+    mClasses = {};
 
 /**
  * Starts an HTTP server at given port
@@ -84,11 +84,11 @@ function startHTTP(aPort) {
         throw 'startHTTP: port out of range';
     }
 
-    if (!server.http) {
-        server.http = http.createServer($ROUTER.route);
+    if (!mServer.http) {
+        mServer.http = mHttp.createServer($ROUTER.route);
     }
     
-    server.http.listen(aPort);
+    mServer.http.listen(aPort);
     return EXPORTOBJECT;
 }
 
@@ -109,19 +109,19 @@ function startHTTPS(aKey, aCert, aPort, aOptions) {
         throw 'startHTTPS: port out of range';
     }
     
-    if (!server.https) {
+    if (!mServer.https) {
         var options = {
-            key: fs.readFileSync(aKey),
-            cert: fs.readFileSync(aCert)
+            key: mFs.readFileSync(aKey),
+            cert: mFs.readFileSync(aCert)
         };
         Object.getOwnPropertyNames(aOptions).forEach(function(aName) {
             options[aName] = aOptions[aName];
         });
 
-        server.https = https.createServer(options, $ROUTER.route);
+        mServer.https = mHttps.createServer(options, $ROUTER.route);
     }
     
-    server.https.listen(aPort);
+    mServer.https.listen(aPort);
     return EXPORTOBJECT;
 }
 
@@ -134,8 +134,8 @@ function startHTTPS(aKey, aCert, aPort, aOptions) {
  **/
 function stopHTTP() {
     'use strict';
-    if (server.http) {
-        server.http.close();
+    if (mServer.http) {
+        mServer.http.close();
     }
     return EXPORTOBJECT;
 }
@@ -149,8 +149,8 @@ function stopHTTP() {
  **/
 function stopHTTPS() {
     'use strict';
-    if (server.https) {
-        server.https.close();
+    if (mServer.https) {
+        mServer.https.close();
     }
     return EXPORTOBJECT;
 }
@@ -190,19 +190,19 @@ function stopApplication() {
  **/
 function getAllJSFiles(aBasePath) {
     'use strict';
-    var files = fs.readdirSync(aBasePath);
+    var files = mFs.readdirSync(aBasePath);
     var dirList = files.filter(function(file) {
-        return fs.statSync(path.join(aBasePath, file)).isDirectory() && file[0] !== '.';
+        return mFs.statSync(mPath.join(aBasePath, file)).isDirectory() && file[0] !== '.';
     });
     var returnFiles = files.filter(function(file) {
-        return fs.statSync(path.join(aBasePath, file)).isFile() && file.substr(-3) === '.js';
+        return mFs.statSync(mPath.join(aBasePath, file)).isFile() && file.substr(-3) === '.js';
     });
     returnFiles = returnFiles.map(function(file){
-        return path.join(aBasePath, file);
+        return mPath.join(aBasePath, file);
     });
 
     while (dirList.length > 0) {
-        returnFiles = returnFiles.concat(getAllJSFiles(path.join(aBasePath, dirList.shift())));
+        returnFiles = returnFiles.concat(getAllJSFiles(mPath.join(aBasePath, dirList.shift())));
     }
     
     return returnFiles;
@@ -218,19 +218,18 @@ function getAllJSFiles(aBasePath) {
  **/
 function addLoadPath(aPath) {
     'use strict';
-    aPath = path.resolve(aPath);
+    aPath = mPath.resolve(aPath);
     var jsFiles = getAllJSFiles(aPath);
     var jsClassNames = jsFiles.map(function(file) {
         var tmp = file.substring(aPath.length, file.length-3);
-        tmp = (tmp[0] === path.sep) ? tmp.substr(path.sep.length) : tmp;
-        var regex = (path.sep === '\\') ? new RegExp('\\\\', 'g'): new RegExp(path.sep, 'g');
+        tmp = (tmp[0] === mPath.sep) ? tmp.substr(mPath.sep.length) : tmp;
+        var regex = (mPath.sep === '\\') ? new RegExp('\\\\', 'g'): new RegExp(mPath.sep, 'g');
         tmp = tmp.replace(regex, '_');
-        console.log(path.sep);
         return tmp;
     });
 
     for (var i=0;i<jsFiles.length;i++) {
-        classes[jsClassNames[i]] = jsFiles[i];
+        mClasses[jsClassNames[i]] = jsFiles[i];
     }
     return EXPORTOBJECT;
 }
@@ -245,8 +244,8 @@ function addLoadPath(aPath) {
  **/
 function load(aClassName) {
     'use strict';
-    if (classes[aClassName]) {
-        return require(classes[aClassName]);
+    if (mClasses[aClassName]) {
+        return require(mClasses[aClassName]);
     }
     return null;
 }

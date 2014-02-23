@@ -18,9 +18,9 @@ var EXPORTOBJECT = {},
      * A reference to the fs-module
      *
      * @private
-     * @type {fs}
+     * @type {mFs}
      **/
-    fs = require('fs'),
+    mFs = require('fs'),
 
     /**
      * The name of logfile, where to save all logs
@@ -29,7 +29,7 @@ var EXPORTOBJECT = {},
      * @type {string}
      * @default 'Log.txt'
      **/
-    logFile = 'Log.txt',
+    mLogFile = 'Log.txt',
 
     /**
      * Flag, whether logs should be written to the logfile
@@ -38,7 +38,7 @@ var EXPORTOBJECT = {},
      * @type {boolean}
      * @default false
      **/
-    toFile = false,
+    mToFile = false,
 
     /**
      * Flag, whether logs should be written to console
@@ -47,13 +47,13 @@ var EXPORTOBJECT = {},
      * @type {boolean}
      * @default boolean
      **/
-    toConsole = true;
+    mToConsole = true;
 
 /**
  * This function generates a readable timestamp of current time for the log
  *
  * @private
- * @returns {string} readable timestamp of current time
+ * @return {string} readable timestamp of current time
  */
 function getDateString() {
     'use strict';
@@ -70,6 +70,7 @@ function getDateString() {
  * This is the general function which is connected to all incoming errors to work with them
  *
  * @private
+ * @chainable
  * @param {string} aState State of given error
  * @param {boolean} aCritical Is critical or not. If it's critical, an error will be thrown
  * @param {string} aMessage The message for the log
@@ -79,15 +80,17 @@ function enterLog(aState, aCritical, aMessage) {
     if (typeof aMessage!== 'string') {
         throw 'Logger needs a string as param, got ' + (typeof aMessage);
     }
-    if (toFile) {
-        fs.appendFileSync(logFile, '[' + aState + '](' + getDateString() + ') '+ aMessage + '\n', {encoding: 'utf-8'});
+    if (mToFile) {
+        mFs.appendFileSync(mLogFile, '[' + aState + '](' + getDateString() + ') '+ aMessage + '\n', {encoding: 'utf-8'});
     }
-    if (toConsole) {
+    if (mToConsole) {
         console.log('[' + aState + '](' + getDateString() + ') '+ aMessage);
     }
     if (aCritical) {
         throw new Error('[' + aState + '](' + getDateString() + ') '+ aMessage);
     }
+
+    return EXPORTOBJECT;
 }
 
 /**
@@ -95,12 +98,13 @@ function enterLog(aState, aCritical, aMessage) {
  *
  * @chainable
  * @method setLogFile
- * @param {string} aFilename
+ * @param {string} aFilename The file, in which logentrys should be written, if writeToFile(true) is set. This path
+ * should be absolute
  * @return {object} The instance itself
  */
 function setLogFile(aFilename) {
     'use strict';
-    logFile = aFilename;
+    mLogFile = aFilename;
     return EXPORTOBJECT;
 }
 
@@ -109,12 +113,12 @@ function setLogFile(aFilename) {
  *
  * @chainable
  * @method writeToFile
- * @param {boolean} aOption
+ * @param {boolean} aOption Whether or not logentrys should be written to a file
  * @return {object} The instance itself
  */
 function writeToFile(aOption) {
     'use strict';
-    toFile = !!(aOption);
+    mToFile = !!(aOption);
     return EXPORTOBJECT;
 }
 
@@ -123,18 +127,19 @@ function writeToFile(aOption) {
  *
  * @chainable
  * @method writeToConsole
- * @param {boolean} aOption
+ * @param {boolean} aOption whether or not logentrys should be written to the console
  * @return {object} The instance itself
  */
 function writeToConsole(aOption) {
     'use strict';
-    toConsole = !!(aOption);
+    mToConsole = !!(aOption);
     return EXPORTOBJECT;
 }
 
 /**
  * This is the bind function, bind to enterLog
  *
+ * @chainable
  * @method error
  * @param {string} aMessage The message for the log
  */
@@ -143,6 +148,7 @@ var error = enterLog.bind(null, 'ERROR', true);
 /**
  * This is the bind function, bind to enterLog
  *
+ * @chainable
  * @method warning
  * @param {string} aMessage The message for the log
  */
@@ -151,6 +157,7 @@ var warning = enterLog.bind(null, 'WARNING', false);
 /**
  * This is the bind function, bind to enterLog
  *
+ * @chainable
  * @method log
  * @param {string} aMessage The message for the log
  */

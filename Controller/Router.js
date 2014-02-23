@@ -21,7 +21,7 @@ var EXPORTOBJECT = {},
      * @private
      * @type {Array}
      **/
-    routes = [],
+    mRoutes = [],
 
     /**
      * A reference to the url-module
@@ -29,7 +29,7 @@ var EXPORTOBJECT = {},
      * @private
      * @type {url}
      **/
-    url = require('url'),
+    mUrl = require('url'),
 
     /**
      * A reference to the querystring-module
@@ -37,7 +37,7 @@ var EXPORTOBJECT = {},
      * @private
      * @type {querystring}
      **/
-    querystring = require('querystring'),
+    mQuerystring = require('querystring'),
 
     /**
      * The requestencoding
@@ -46,7 +46,7 @@ var EXPORTOBJECT = {},
      * @type {string}
      * @default 'utf-8'
      **/
-    requestEncoding = 'utf-8',
+    mRequestEncoding = 'utf-8',
 
     /**
      * A reference to the default function
@@ -54,10 +54,18 @@ var EXPORTOBJECT = {},
      * @private
      * @type {function}
      **/
-    defaultController = null;
+    mDefaultController = null;
 
-
-function ObjectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
+/**
+ * Wrappes an object to a callable function
+ *
+ * @private
+ * @param {object} aCallbackObject The object, which should be wrapped
+ * @param {request} aRequest An nodejs request-object
+ * @param {response} aResponse An nodejs response object
+ * @param {object} aArgs Arguments, given by called url
+ **/
+function objectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
     'use strict';
     try {
         switch(aRequest.method.toLowerCase()) {
@@ -79,8 +87,8 @@ function ObjectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
         }
     }
     catch (e) {
-        if (typeof defaultController === 'function') {
-            defaultController(aRequest, aResponse, aArgs);
+        if (typeof mDefaultController === 'function') {
+            mDefaultController(aRequest, aResponse, aArgs);
         }
         else {
             aResponse.writeHead(404);
@@ -98,7 +106,7 @@ function ObjectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
  */
 function clearRoutes() {
     'use strict';
-    routes = [];
+    mRoutes = [];
     return EXPORTOBJECT;
 }
 
@@ -113,7 +121,7 @@ function clearRoutes() {
 function setDefaultRoute(aController) {
     'use strict';
     if (typeof aController === 'function') {
-        defaultController = aController;
+        mDefaultController = aController;
     }
     else {
         throw '$ROUTER.setDefaultRoute first param needs to be a function as controller, got ' + (typeof aController);
@@ -125,11 +133,11 @@ function setDefaultRoute(aController) {
  * Returns the default route controller
  *
  * @method getDefaultRoute
- * @return {function || null}
+ * @return {function | null}
  */
 function getDefaultRoute() {
     'use strict';
-    return defaultController;
+    return mDefaultController;
 }
 
 /**
@@ -137,7 +145,7 @@ function getDefaultRoute() {
  *
  * @private
  * @param {string} aPath
- * @param {boolean} aSensetive
+ * @param {bool} aSensetive
  * @return {object}
  * 
  * inspired by expressjs (https://github.com/visionmedia/express/blob/master/lib/utils.js) pathRegexp
@@ -170,9 +178,9 @@ function pathToRoute(aPath, aSensetive) {
  * for the request
  *
  * @method addRoute
- * @param aPath                string
- * @param aCallback            function or object
- * @param aCaseSensetive    bool | optional
+ * @param {string} aPath
+ * @param {function | object} aCallback
+ * @param {bool} aCaseSensetive Optional, false by default
  * 
  */
 function addRoute(aPath, aCallback, aCaseSensetive) {
@@ -190,12 +198,12 @@ function addRoute(aPath, aCallback, aCaseSensetive) {
     
     if (typeof aCallback === 'object') {
         tmp.callbackData = aCallback;
-        tmp.callback = ObjectToCallbackWrapper.bind(null, tmp.callbackData);
+        tmp.callback = objectToCallbackWrapper.bind(null, tmp.callbackData);
     }
     else {
         tmp.callback = aCallback;
     }
-    routes.push(tmp);
+    mRoutes.push(tmp);
     return EXPORTOBJECT;
 }
 
@@ -203,16 +211,16 @@ function addRoute(aPath, aCallback, aCaseSensetive) {
  * Returns the controller connected to a certain route. If the route wasn't defined it returns 'undefined'
  *
  * @method getRoute
- * @param aPath    string
- * @returns object || null
+ * @param {string} aPath
+ * @return {object | null}
  */
 function getRoute(aPath) {
     'use strict';
     if (typeof aPath !== 'string') {throw 'no string'; }
     aPath = (aPath[0] === '/') ? aPath : '/' + aPath;
-    for (var x in routes) {
-        if (aPath.match(routes[x].regex) !== null) {
-            return routes[x];
+    for (var x in mRoutes) {
+        if (aPath.match(mRoutes[x].regex) !== null) {
+            return mRoutes[x];
         }
     }
     return null;
@@ -222,12 +230,12 @@ function getRoute(aPath) {
  * Set the encoding for the request
  *
  * @method setEncoding
- * @param aEncoding string
+ * @param {string} aEncoding
  */
 function setEncoding(aEncoding) {
     'use strict';
     // TODO: test whether encoding is right
-    requestEncoding = aEncoding || 'utf-8';
+    mRequestEncoding = aEncoding || 'utf-8';
     return EXPORTOBJECT;
 }
 
@@ -235,34 +243,34 @@ function setEncoding(aEncoding) {
  * Returns the current encoding for requests
  *
  * @method getEncoding
- * @returns string
+ * @return {string}
  */
 function getEncoding() {
     'use strict';
-    return requestEncoding;
+    return mRequestEncoding;
 }
 
 
 /**
- * This function is the routers core function. It gets the request from http or https server, and
- * routes it to the controller
+ * This function is the routers core function. It gets the request from http or https server, and routes it to the
+ * controller
  *
  * @method route
- * @param aRequest Object
- * @param aResponse Object
+ * @param {request} aRequest An nodejs request
+ * @param {response} aResponse An nodejs response
  */
 function route(aRequest, aResponse) {
     'use strict';
     var postData = '';
     
-    aRequest.setEncoding(requestEncoding);
+    aRequest.setEncoding(mRequestEncoding);
     
     aRequest.on('data', function(chunk) {
         postData += chunk;
     });
     
     aRequest.on('end', function() {
-        var urlParsed   = url.parse(aRequest.url, true),
+        var urlParsed   = mUrl.parse(aRequest.url, true),
             path        = urlParsed.pathname,
             tmp, x;
 
@@ -277,7 +285,7 @@ function route(aRequest, aResponse) {
             }
         }
         else {
-            aRequest.post = querystring.parse(postData);
+            aRequest.post = mQuerystring.parse(postData);
         }
 
         // parse get
@@ -295,17 +303,17 @@ function route(aRequest, aResponse) {
         // endregion
         
         // find matching route
-        for (x in routes) {
-            if (typeof routes[x] === 'object') {
-                tmp = path.match(routes[x].regex);
+        for (x in mRoutes) {
+            if (typeof mRoutes[x] === 'object') {
+                tmp = path.match(mRoutes[x].regex);
                 if (tmp !== null) {
                     var args = {};
-                    for (var y = 0; y < routes[x].keys.length; y++) {
-                        args[routes[x].keys[y].name] = tmp[y+1];
+                    for (var y = 0; y < mRoutes[x].keys.length; y++) {
+                        args[mRoutes[x].keys[y].name] = tmp[y+1];
                     }
 
                     process.nextTick(function(aX, aArgs) {
-                        routes[aX].callback(aRequest, aResponse, aArgs);
+                        mRoutes[aX].callback(aRequest, aResponse, aArgs);
                     }.bind(null, x, args));
                     return;
                 }
@@ -313,8 +321,8 @@ function route(aRequest, aResponse) {
         }
         
         // if no route is defined, call default if exists
-        if (typeof defaultController === 'function') {
-            defaultController(aRequest, aResponse, path);
+        if (typeof mDefaultController === 'function') {
+            mDefaultController(aRequest, aResponse, path);
         }
         else {
             aResponse.writeHead(404);

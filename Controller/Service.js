@@ -20,7 +20,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * @private
      * @type {Array}
      **/
-    registeredServices = [];
+    mRegisteredServices = [];
 
 /**
  * @event servicesCleared
@@ -34,7 +34,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
  */
 function clearServices() {
     'use strict';
-    registeredServices = [];
+    mRegisteredServices = [];
     EXPORTOBJECT.emit('servicesCleared');
     return EXPORTOBJECT;
 }
@@ -53,9 +53,9 @@ function getService(aType) {
     }
     aType = aType.toLowerCase();
     var returnArray = [];
-    for (var i in registeredServices) {
-        if (registeredServices[i] && registeredServices[i].type === aType) {
-            returnArray.push(registeredServices[i]);
+    for (var i in mRegisteredServices) {
+        if (mRegisteredServices[i] && mRegisteredServices[i].type === aType) {
+            returnArray.push(mRegisteredServices[i]);
         }
     }
     
@@ -71,8 +71,8 @@ function getService(aType) {
  */
 function getServiceById(aId) {
     'use strict';
-    if (typeof aId === 'number' && registeredServices && registeredServices[aId]) {
-        return registeredServices[aId];
+    if (typeof aId === 'number' && mRegisteredServices && mRegisteredServices[aId]) {
+        return mRegisteredServices[aId];
     }
     return null;
 }
@@ -92,20 +92,20 @@ function getServiceById(aId) {
  */
 function registerService(aType, aController) {
     'use strict';
-    // TODO: verify type and controller
-    var id = registeredServices.push({})-1;
-    Object.defineProperty(registeredServices[id], 'type', {
-        value: aType.toLowerCase(),
-        writable: false
-    });
-    Object.defineProperty(registeredServices[id], 'controller', {
-        value: aController,
-        writable: false
-    });
-    Object.defineProperty(registeredServices[id], 'id', {
-        value: id,
-        writable: false
-    });
+    // verify input
+    if (typeof aType !== 'string') {
+        throw 'Need string';
+    }
+    else if (typeof aController !== 'function' && typeof aController !== 'object') {
+        throw 'Need function or object';
+    }
+
+    var id = mRegisteredServices.push(null)-1;
+    mRegisteredServices[id] = {
+        id: id,
+        type: aType.toLowerCase(),
+        controller: aController
+    };
     
     EXPORTOBJECT.emit('serviceRegistered', aType, id);
     return id;
@@ -117,17 +117,17 @@ function registerService(aType, aController) {
  * @param {number} serviceId the id of the new serice
  **/
 /**
- * Unregisters the service connected to given id
+ * Unregisters the service with given id
  *
  * @method unregisterService
- * @param {number} aId
+ * @param {number} aId ID of service, that should be unregistered
  * @return {object} This instance itself
  */
 function unregisterService(aId) {
     'use strict';
-    if (typeof aId === 'number' && registeredServices && registeredServices[aId]) {
-        EXPORTOBJECT.emit('serviceUnregistered', registeredServices[aId].type, aId);
-        registeredServices[aId] = null;
+    if (typeof aId === 'number' && mRegisteredServices && mRegisteredServices[aId]) {
+        EXPORTOBJECT.emit('serviceUnregistered', mRegisteredServices[aId].type, aId);
+        mRegisteredServices[aId] = null;
     }
     return EXPORTOBJECT;
 }
