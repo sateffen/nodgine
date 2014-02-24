@@ -64,7 +64,9 @@
             "modules": {
                 "nodgine": 1
             },
-            "classes": {},
+            "classes": {
+                "nodgine": 1
+            },
             "fors": {},
             "namespaces": {}
         }
@@ -82,14 +84,17 @@
                 "$APPLICATION": 1,
                 "$LOGGER": 1,
                 "$ROUTER": 1,
-                "$SERVICE": 1
+                "$SERVICE": 1,
+                "nodgine": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "nodgine\\Controller\\Service.js",
+            "file": "nodgine\\Bootstrap.js",
             "line": 1,
-            "description": "This is the bootstrap for the nodgine module"
+            "description": "This is the bootstrap for the nodgine module",
+            "itemtype": "main",
+            "static": 1
         },
         "$APPLICATION": {
             "name": "$APPLICATION",
@@ -216,6 +221,24 @@
             "file": "nodgine\\Controller\\Service.js",
             "line": 1,
             "description": "This is the Service API for the nodgine module"
+        },
+        "nodgine": {
+            "name": "nodgine",
+            "shortname": "nodgine",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "nodgine",
+            "namespace": "",
+            "file": "nodgine\\Bootstrap.js",
+            "line": 1,
+            "description": "This is the bootstrap for the nodgine module",
+            "mainName": "",
+            "tag": "main",
+            "itemtype": "main",
+            "_main": true
         }
     },
     "classitems": [
@@ -1161,31 +1184,71 @@
             "file": "nodgine\\Tests\\Logger.js",
             "line": 1,
             "description": "Unittest for the logger",
-            "class": "",
+            "class": "nodgine",
             "module": "nodgine"
         },
         {
             "file": "nodgine\\Tests\\Router.js",
             "line": 1,
             "description": "Unittest for the router",
-            "class": "",
+            "class": "nodgine",
             "module": "nodgine"
         },
         {
             "file": "nodgine\\Bootstrap.js",
-            "line": 7,
+            "line": 10,
             "description": "The exporting object, which gets revealed",
             "type": "{object}",
-            "class": "",
+            "class": "nodgine",
             "module": "nodgine"
         },
         {
             "file": "nodgine\\Bootstrap.js",
-            "line": 14,
+            "line": 17,
             "description": "This function makes the APIs of this framework global",
             "itemtype": "method",
             "name": "globalize",
-            "class": "",
+            "class": "nodgine",
+            "module": "nodgine"
+        },
+        {
+            "file": "nodgine\\Bootstrap.js",
+            "line": 43,
+            "description": "An instance of $APPLICATION",
+            "itemtype": "property",
+            "name": "$APPLICATION",
+            "type": "{$APPLICATION}",
+            "class": "nodgine",
+            "module": "nodgine"
+        },
+        {
+            "file": "nodgine\\Bootstrap.js",
+            "line": 54,
+            "description": "An instance of $ROUTER",
+            "itemtype": "property",
+            "name": "$ROUTER",
+            "type": "{$ROUTER}",
+            "class": "nodgine",
+            "module": "nodgine"
+        },
+        {
+            "file": "nodgine\\Bootstrap.js",
+            "line": 65,
+            "description": "An instance of $LOGGER",
+            "itemtype": "property",
+            "name": "$LOGGER",
+            "type": "{$LOGGER}",
+            "class": "nodgine",
+            "module": "nodgine"
+        },
+        {
+            "file": "nodgine\\Bootstrap.js",
+            "line": 76,
+            "description": "An instance of $SERVICE",
+            "itemtype": "property",
+            "name": "$SERVICE",
+            "type": "{$SERVICE}",
+            "class": "nodgine",
             "module": "nodgine"
         }
     ],
@@ -1308,7 +1371,7 @@
         },
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
-            "line": " nodgine\\Bootstrap.js:7"
+            "line": " nodgine\\Bootstrap.js:10"
         }
     ]
 }

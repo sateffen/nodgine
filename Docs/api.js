@@ -4,7 +4,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "$APPLICATION",
         "$LOGGER",
         "$ROUTER",
-        "$SERVICE"
+        "$SERVICE",
+        "nodgine"
     ],
     "modules": [
         "$APPLICATION",
