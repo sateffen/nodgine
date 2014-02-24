@@ -43,8 +43,9 @@ function clearServices() {
  * Returns all services with the given type in an array
  *
  * @method getService
- * @param {string} aType
- * @return {Array}
+ * @param {string} aType Name of the searched type
+ * @return {Array} An array containing all matched services as object. The object looks like:
+ *      {type: string, controller: function|object, id: number}
  */
 function getService(aType) {
     'use strict';
@@ -67,7 +68,7 @@ function getService(aType) {
  *
  * @method getServiceById
  * @param {number} aId
- * @returns {function || null}
+ * @returns {function | null}
  */
 function getServiceById(aId) {
     'use strict';

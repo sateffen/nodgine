@@ -1,5 +1,4 @@
 /**
- * @TODO: Rework all comments for YUIDOC
  * This is the Router API for the nodgine module
  *
  * @module nodgine
