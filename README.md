@@ -32,6 +32,9 @@ to it, every path will present the same result in this example.
 
 # Developing
 
+## Documentation
+In this project the documentation is created automaticaly. To do so I'm using YUIDoc.
+
 ## Testing
 For tests I'm using [nodeunit](https://github.com/caolan/nodeunit). To run all tests run
 > nodeunit Tests/
