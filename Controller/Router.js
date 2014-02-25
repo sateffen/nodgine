@@ -275,7 +275,7 @@ function route(aRequest, aResponse) {
 
         // region set GPC
         // parse post
-        if (aRequest.headers['content-type'] && aRequest.headers['content-type'].toLowerCase() === 'application/json') {
+        if (aRequest.headers['content-type'] && aRequest.headers['content-type'].toLowerCase().indexOf('application/json') > -1) {
             try {
                 aRequest.post = JSON.parse(postData);
             }
