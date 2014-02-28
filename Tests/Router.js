@@ -2,69 +2,76 @@
  * Unittest for the router
  */
 
-var r = require("../Controller/Router.js"),
-    httpServer = require("http").createServer(r.route);
+var nodgineRouter = require('../Bootstrap.js').$ROUTER,
+    httpServer = require('http').createServer(nodgineRouter.route);
 
 exports.getEncoding = function(test) {
-    test.equal(r.getEncoding(), "utf-8");
+    'use strict';
+    test.equal(nodgineRouter.getEncoding(), 'utf-8');
     test.done();
 };
 
 exports.setEncoding = function(test) {
-    r.setEncoding("ASCII");
-    test.equal(r.getEncoding(), "ASCII");
-    r.setEncoding("utf-8");
-    test.equal(r.getEncoding(), "utf-8");
+    'use strict';
+    nodgineRouter.setEncoding('ASCII');
+    test.equal(nodgineRouter.getEncoding(), 'ASCII');
+    nodgineRouter.setEncoding('utf-8');
+    test.equal(nodgineRouter.getEncoding(), 'utf-8');
     test.done();
 };
 
 exports.getDefaultRoute = function(test) {
-    test.equal(r.getDefaultRoute(), null);
+    'use strict';
+    test.equal(nodgineRouter.getDefaultRoute(), null);
     test.done();
 };
 
 exports.setDefaultRoute = function(test) {
+    'use strict';
     var tFunc1 = function(){return 0;},
         tFunc2 = function(){return 1;};
-    r.setDefaultRoute(tFunc1);
-    test.equal(r.getDefaultRoute(), tFunc1);
-    r.setDefaultRoute(tFunc2);
-    test.equal(r.getDefaultRoute(), tFunc2);
+    nodgineRouter.setDefaultRoute(tFunc1);
+    test.equal(nodgineRouter.getDefaultRoute(), tFunc1);
+    nodgineRouter.setDefaultRoute(tFunc2);
+    test.equal(nodgineRouter.getDefaultRoute(), tFunc2);
     test.done();
 };
 
 exports.getRoute = function(test) {
+    'use strict';
     var tFunc = function(){};
-    r.addRoute("/testGetRoute", tFunc);
-    test.equal(r.getRoute("/tttt"), undefined);
-    test.equal(r.getRoute("/testGetRoute").callback, tFunc);
+    nodgineRouter.addRoute('/testGetRoute', tFunc);
+    test.equal(nodgineRouter.getRoute('/tttt'), undefined);
+    test.equal(nodgineRouter.getRoute('/testGetRoute').callback, tFunc);
     test.done();
-    r.clearRoutes();
+    nodgineRouter.clearRoutes();
 };
 
 exports.addRoute = function(test) {
-    r.addRoute("/testAddRoute", function(){});
-    r.addRoute("/testAddRoute2", function(){});
-    test.ok(r.getRoute("testAddRoute"));
-    test.ok(r.getRoute("testAddRoute2"));
+    'use strict';
+    nodgineRouter.addRoute('/testAddRoute', function(){});
+    nodgineRouter.addRoute('/testAddRoute2', function(){});
+    test.ok(nodgineRouter.getRoute('testAddRoute'));
+    test.ok(nodgineRouter.getRoute('testAddRoute2'));
     test.done();
-    r.clearRoutes();
+    nodgineRouter.clearRoutes();
 };
 
 exports.clearRoutes = function(test) {
-    r.addRoute("/testclearRoutes", function(){});
-    r.addRoute("/testclearRoutes2", function(){});
-    r.clearRoutes();
-    test.ok(!r.getRoute("/testclearRoutes"));
-    test.ok(!r.getRoute("/testclearRoutes2"));
+    'use strict';
+    nodgineRouter.addRoute('/testclearRoutes', function(){});
+    nodgineRouter.addRoute('/testclearRoutes2', function(){});
+    nodgineRouter.clearRoutes();
+    test.ok(!nodgineRouter.getRoute('/testclearRoutes'));
+    test.ok(!nodgineRouter.getRoute('/testclearRoutes2'));
     test.done();
 };
 
 exports.route = function(test) {
-    var tFunc1 = function(request, response, args) {
-        arg = args;
+    'use strict';
+    var tFunc1 = function(request, response) {
         response.writeHead(200);
-        response.end("success");
+        response.end('success');
     },
     tFunc2 = function(request, response, args) {
         response.writeHead(200);
@@ -73,7 +80,7 @@ exports.route = function(test) {
     tObject = {
             doGet: tFunc1
     },
-    http = require("http"),
+    http = require('http'),
     count = 0,
     // does test.done if all tests are done
     done = function() {
@@ -81,94 +88,93 @@ exports.route = function(test) {
                 if(count === 6) {
                     httpServer.close();
                     test.done();
-                    r.clearRoutes();
+                    nodgineRouter.clearRoutes();
                 }
             };
     httpServer.listen(1234);
-    r.addRoute("/testroute", tFunc1);
-    r.addRoute("/tataroute/:id", tFunc2);
-    r.addRoute("/testobject", tObject);
+    nodgineRouter.addRoute('/testroute', tFunc1);
+    nodgineRouter.addRoute('/tataroute/:id', tFunc2);
+    nodgineRouter.addRoute('/testobject', tObject);
     
     // do request to double path
     var options = {
-            host: "localhost",
+            host: 'localhost',
             port: 1234,
-            path: "/testroute",
-            method: "GET"
+            path: '/testroute',
+            method: 'GET'
         };
     http.get(options, function(res) {
-        var data = "";
-        res.on("data", function(chunk){data+=chunk;});
-        res.on("end", function() {
+        var data = '';
+        res.on('data', function(chunk){data+=chunk;});
+        res.on('end', function() {
             test.equal(res.statusCode, 200);
-            test.equal(data, "success");
+            test.equal(data, 'success');
             done();
         });
     });
     
     //do a successful request to object
-    options.path = "/testobject";
+    options.path = '/testobject';
     http.get(options, function(res) {
-        var data = "";
-        res.on("data", function(chunk){data+=chunk;});
-        res.on("end", function() {
+        var data = '';
+        res.on('data', function(chunk){data+=chunk;});
+        res.on('end', function() {
             test.equal(res.statusCode, 200);
-            test.equal(data, "success");
+            test.equal(data, 'success');
             done();
         });
     });
     
     // do request to single path
-    options.path = "/tataroute/test";
+    options.path = '/tataroute/test';
     http.get(options, function(res) {
-        var data = "";
-        res.on("data", function(chunk){data+=chunk;});
-        res.on("end", function() {
+        var data = '';
+        res.on('data', function(chunk){data+=chunk;});
+        res.on('end', function() {
             test.equal(res.statusCode, 200);
-            test.equal(data, "test");
+            test.equal(data, 'test');
             done();
         });
     });
     
-    r.setDefaultRoute(function(request,response, args) {
-        arg = args;
+    nodgineRouter.setDefaultRoute(function(request,response) {
         response.writeHead(200);
-        response.end("default");
+        response.end('default');
     });
     
     // do request to default route
-    options.path = "/";
+    options.path = '/';
     http.get(options, function(res) {
-        var data = "";
-        res.on("data", function(chunk){data+=chunk;});
-        res.on("end", function() {
+        var data = '';
+        res.on('data', function(chunk){data+=chunk;});
+        res.on('end', function() {
             test.equal(res.statusCode, 200);
-            test.equal(data, "default");
+            test.equal(data, 'default');
             done();
         });
     });
     
     // do request to default route
-    options.path = "/mugglefugg";
+    options.path = '/mugglefugg';
     http.get(options, function(res) {
-        var data = "";
-        res.on("data", function(chunk){data+=chunk;});
-        res.on("end", function() {
+        var data = '';
+        res.on('data', function(chunk){data+=chunk;});
+        res.on('end', function() {
             test.equal(res.statusCode, 200);
-            test.equal(data, "default");
+            test.equal(data, 'default');
             done();
         });
     });
     
     //do a not successful request to object
-    options.path = "/testobject";
-    options.method = "POST";
+    options.path = '/testobject';
+    options.method = 'POST';
     http.get(options, function(res) {
-        var data = "";
-        res.on("data", function(chunk){data+=chunk;});
-        res.on("end", function() {
+        var data = '';
+        res.on('data', function(chunk){data+=chunk;});
+        res.on('end', function() {
             test.equal(res.statusCode, 200);
-            test.equal(data, "default");
+            test.equal(data, 'default');
             done();
         });
     });

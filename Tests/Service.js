@@ -1,10 +1,10 @@
 
-var nodgineService = require("../Bootstrap.js").$SERVICE;
+var nodgineService = require('../Bootstrap.js').$SERVICE;
 
 exports.registerService = function(test) {
-    "use strict";
-    var id1 = nodgineService.registerService("test", function(){}),
-        id2 = nodgineService.registerService("test2", function(){});
+    'use strict';
+    var id1 = nodgineService.registerService('test', function(){}),
+        id2 = nodgineService.registerService('test2', function(){});
     
     test.ok(nodgineService.getServiceById(id1));
     test.ok(nodgineService.getServiceById(id2));
@@ -14,9 +14,9 @@ exports.registerService = function(test) {
 };
 
 exports.unregisterService = function(test) {
-    "use strict";
-    var id1 = nodgineService.registerService("test", function(){}),
-        id2 = nodgineService.registerService("test2", function(){});
+    'use strict';
+    var id1 = nodgineService.registerService('test', function(){}),
+        id2 = nodgineService.registerService('test2', function(){});
     
     test.ok(nodgineService.getServiceById(id1));
     test.ok(nodgineService.getServiceById(id2));
@@ -32,14 +32,14 @@ exports.unregisterService = function(test) {
 };
 
 exports.getService = function(test) {
-    "use strict";
-    nodgineService.registerService("test", function(){});
-    nodgineService.registerService("test2", function(){});
-    nodgineService.registerService("test2", function(){});
+    'use strict';
+    nodgineService.registerService('test', function(){});
+    nodgineService.registerService('test2', function(){});
+    nodgineService.registerService('test2', function(){});
     
-    test.equal(nodgineService.getService("notDefined").length, 0);
-    test.equal(nodgineService.getService("test").length, 1);
-    test.equal(nodgineService.getService("test2").length, 2);
+    test.equal(nodgineService.getService('notDefined').length, 0);
+    test.equal(nodgineService.getService('test').length, 1);
+    test.equal(nodgineService.getService('test2').length, 2);
     
     nodgineService.clearServices();
     test.done();
