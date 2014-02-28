@@ -81,7 +81,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
 function startHTTP(aPort) {
     'use strict';
     if (aPort < 1 || aPort > 65535) {
-        throw 'startHTTP: port out of range';
+        throw '$APPLICATION.startHTTP: First param aPort out of range. Port has to be between 1 and 65535, got ' + aPort;
     }
 
     if (!mServer.http) {
@@ -106,7 +106,7 @@ function startHTTP(aPort) {
 function startHTTPS(aKey, aCert, aPort, aOptions) {
     'use strict';
     if (aPort < 1 || aPort > 65535) {
-        throw 'startHTTPS: port out of range';
+        throw '$APPLICATION.startHTTPS: Third param aPort out of range. Port has to be between 1 and 65535, got' + aPort;
     }
     
     if (!mServer.https) {

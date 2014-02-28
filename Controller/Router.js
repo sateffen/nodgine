@@ -123,7 +123,7 @@ function setDefaultRoute(aController) {
         mDefaultController = aController;
     }
     else {
-        throw '$ROUTER.setDefaultRoute first param needs to be a function as controller, got ' + (typeof aController);
+        throw '$ROUTER.setDefaultRoute: First param aController needs to be a function as controller, got ' + (typeof aController);
     }
     return EXPORTOBJECT;
 }
@@ -144,7 +144,7 @@ function getDefaultRoute() {
  *
  * @private
  * @param {string} aPath
- * @param {bool} aSensetive
+ * @param {boolean} aSensetive
  * @return {object}
  * 
  * inspired by expressjs (https://github.com/visionmedia/express/blob/master/lib/utils.js) pathRegexp
@@ -179,17 +179,17 @@ function pathToRoute(aPath, aSensetive) {
  * @method addRoute
  * @param {string} aPath
  * @param {function | object} aCallback
- * @param {bool} aCaseSensetive Optional, false by default
+ * @param {boolean} aCaseSensetive Optional, false by default
  * 
  */
 function addRoute(aPath, aCallback, aCaseSensetive) {
     'use strict';
     aCaseSensetive = aCaseSensetive || false;
     if (typeof aPath !== 'string') {
-        throw '$ROUTER.addRoute first param needs to be a string, got ' + (typeof aPath);
+        throw '$ROUTER.addRoute: First param aPath needs to be a string, got ' + (typeof aPath);
     }
     if (typeof aCallback !== 'function' && typeof aCallback !== 'object') {
-        throw '$ROUTER.addRoute second param needs to be a function, got ' + (typeof aPath);
+        throw '$ROUTER.addRoute: Second param aCallback needs to be a function, got ' + (typeof aCallback);
     }
     aPath = (aPath[0] === '/') ? aPath : '/' + aPath;
 
@@ -215,7 +215,9 @@ function addRoute(aPath, aCallback, aCaseSensetive) {
  */
 function getRoute(aPath) {
     'use strict';
-    if (typeof aPath !== 'string') {throw 'no string'; }
+    if (typeof aPath !== 'string') {
+        throw '$ROUTER.getRoute: First param aPath needs to be a string, got ' + (typeof aPath);
+    }
     aPath = (aPath[0] === '/') ? aPath : '/' + aPath;
     for (var x in mRoutes) {
         if (aPath.match(mRoutes[x].regex) !== null) {

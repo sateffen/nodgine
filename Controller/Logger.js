@@ -78,7 +78,7 @@ function getDateString() {
 function enterLog(aState, aCritical, aMessage) {
     'use strict';
     if (typeof aMessage!== 'string') {
-        throw 'Logger needs a string as param, got ' + (typeof aMessage);
+        throw '$LOGGER: First param needs to be a string, got ' + (typeof aMessage);
     }
     if (mToFile) {
         mFs.appendFileSync(mLogFile, '[' + aState + '](' + getDateString() + ') '+ aMessage + '\n', {encoding: 'utf-8'});

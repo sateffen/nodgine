@@ -50,7 +50,7 @@ function clearServices() {
 function getService(aType) {
     'use strict';
     if (typeof aType !== 'string') {
-        throw 'i need a string';
+        throw '$SERVICE.getService: First param aType needs to be a string, got ' + (typeof aType);
     }
     aType = aType.toLowerCase();
     var returnArray = [];
@@ -95,10 +95,10 @@ function registerService(aType, aController) {
     'use strict';
     // verify input
     if (typeof aType !== 'string') {
-        throw 'Need string';
+        throw '$SERVICE.registerService: First param aType needs to be a string, got ' + (typeof aType);
     }
     else if (typeof aController !== 'function' && typeof aController !== 'object') {
-        throw 'Need function or object';
+        throw '$SERVICE.registerService: Second param aController needs to be a function or object, got ' + (typeof aController);
     }
 
     var id = mRegisteredServices.push(null)-1;
