@@ -39,7 +39,7 @@ function mGlobalize() {
 
 //region revealing object
 
-Object.defineProperties(GLOBAL, {
+Object.defineProperties(EXPORTOBJECT, {
 
     /**
      * An instance of $APPLICATION
