@@ -55,7 +55,7 @@ var EXPORTOBJECT = {},
  * @private
  * @return {string} readable timestamp of current time
  */
-function getDateString() {
+function mGetDateString() {
     'use strict';
     var d = new Date();
     return d.getDate() + '.' +
@@ -75,19 +75,19 @@ function getDateString() {
  * @param {boolean} aCritical Is critical or not. If it's critical, an error will be thrown
  * @param {string} aMessage The message for the log
  */
-function enterLog(aState, aCritical, aMessage) {
+function mEnterLog(aState, aCritical, aMessage) {
     'use strict';
     if (typeof aMessage!== 'string') {
         throw '$LOGGER: First param needs to be a string, got ' + (typeof aMessage);
     }
     if (mToFile) {
-        mFs.appendFileSync(mLogFile, '[' + aState + '](' + getDateString() + ') '+ aMessage + '\n', {encoding: 'utf-8'});
+        mFs.appendFileSync(mLogFile, '[' + aState + '](' + mGetDateString() + ') '+ aMessage + '\n', {encoding: 'utf-8'});
     }
     if (mToConsole) {
-        console.log('[' + aState + '](' + getDateString() + ') '+ aMessage);
+        console.log('[' + aState + '](' + mGetDateString() + ') '+ aMessage);
     }
     if (aCritical) {
-        throw new Error('[' + aState + '](' + getDateString() + ') '+ aMessage);
+        throw new Error('[' + aState + '](' + mGetDateString() + ') '+ aMessage);
     }
 
     return EXPORTOBJECT;
@@ -102,7 +102,7 @@ function enterLog(aState, aCritical, aMessage) {
  * should be absolute
  * @return {object} The instance itself
  */
-function setLogFile(aFilename) {
+function mSetLogFile(aFilename) {
     'use strict';
     mLogFile = aFilename;
     return EXPORTOBJECT;
@@ -116,7 +116,7 @@ function setLogFile(aFilename) {
  * @param {boolean} aOption Whether or not logentrys should be written to a file
  * @return {object} The instance itself
  */
-function writeToFile(aOption) {
+function mWriteToFile(aOption) {
     'use strict';
     mToFile = !!(aOption);
     return EXPORTOBJECT;
@@ -130,7 +130,7 @@ function writeToFile(aOption) {
  * @param {boolean} aOption whether or not logentrys should be written to the console
  * @return {object} The instance itself
  */
-function writeToConsole(aOption) {
+function mWriteToConsole(aOption) {
     'use strict';
     mToConsole = !!(aOption);
     return EXPORTOBJECT;
@@ -143,7 +143,7 @@ function writeToConsole(aOption) {
  * @method error
  * @param {string} aMessage The message for the log
  */
-var error = enterLog.bind(null, 'ERROR', true);
+var mError = mEnterLog.bind(null, 'ERROR', true);
 
 /**
  * This is the bind function, bind to enterLog
@@ -152,7 +152,7 @@ var error = enterLog.bind(null, 'ERROR', true);
  * @method warning
  * @param {string} aMessage The message for the log
  */
-var warning = enterLog.bind(null, 'WARNING', false);
+var mWarning = mEnterLog.bind(null, 'WARNING', false);
 
 /**
  * This is the bind function, bind to enterLog
@@ -161,31 +161,28 @@ var warning = enterLog.bind(null, 'WARNING', false);
  * @method log
  * @param {string} aMessage The message for the log
  */
-var log = enterLog.bind(null, 'LOG', false);
+var mLog = mEnterLog.bind(null, 'LOG', false);
 
-Object.defineProperty(EXPORTOBJECT, 'error', {
-    value: error,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'warning', {
-    value: warning,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'log', {
-    value: log,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'setLogFile', {
-    value: setLogFile,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'writeToFile', {
-    value: writeToFile,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'writeToConsole', {
-    value: writeToConsole,
-    writable: false
+// extend EXPORTOBJECT with all properties to reveal
+Object.defineProperties(EXPORTOBJECT, {
+    'error': {
+        value: mError
+    },
+    'warning': {
+        value: mWarning
+    },
+    'log': {
+        value: mLog
+    },
+    'setLogFile': {
+        value: mSetLogFile
+    },
+    'writeToFile': {
+        value: mWriteToFile
+    },
+    'writeToConsole': {
+        value: mWriteToConsole
+    }
 });
 
 module.exports = EXPORTOBJECT;

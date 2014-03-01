@@ -78,7 +78,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
  * @param {number} aPort Port for HTTP-Server
  * @return {object} the instance itself
  **/
-function startHTTP(aPort) {
+function mStartHTTP(aPort) {
     'use strict';
     if (aPort < 1 || aPort > 65535) {
         throw '$APPLICATION.startHTTP: First param aPort out of range. Port has to be between 1 and 65535, got ' + aPort;
@@ -103,7 +103,7 @@ function startHTTP(aPort) {
  * @param {object} aOptions additional options for the HTTPS-Server
  * @return {object} the instance itself
  **/
-function startHTTPS(aKey, aCert, aPort, aOptions) {
+function mStartHTTPS(aKey, aCert, aPort, aOptions) {
     'use strict';
     if (aPort < 1 || aPort > 65535) {
         throw '$APPLICATION.startHTTPS: Third param aPort out of range. Port has to be between 1 and 65535, got' + aPort;
@@ -132,7 +132,7 @@ function startHTTPS(aKey, aCert, aPort, aOptions) {
  * @chainable
  * @return {object} the instance itself
  **/
-function stopHTTP() {
+function mStopHTTP() {
     'use strict';
     if (mServer.http) {
         mServer.http.close();
@@ -147,7 +147,7 @@ function stopHTTP() {
  * @chainable
  * @return {object} the instance itself
  **/
-function stopHTTPS() {
+function mStopHTTPS() {
     'use strict';
     if (mServer.https) {
         mServer.https.close();
@@ -162,7 +162,7 @@ function stopHTTPS() {
  * @chainable
  * @return {object} the instance itself
  **/
-function runApplication() {
+function mRunApplication() {
     'use strict';
     EXPORTOBJECT.emit('startApplication');
     return EXPORTOBJECT;
@@ -175,7 +175,7 @@ function runApplication() {
  * @chainable
  * @return {object} the instance itself
  **/
-function stopApplication() {
+function mStopApplication() {
     'use strict';
     EXPORTOBJECT.emit('stopApplication');
     return EXPORTOBJECT;
@@ -188,7 +188,7 @@ function stopApplication() {
  * @param {string} aBasePath Path in which the javascript files should be searched for
  * @return {Array} a multi-dimensional array with all paths to all found javascript files
  **/
-function getAllJSFiles(aBasePath) {
+function mGetAllJSFiles(aBasePath) {
     'use strict';
     var files = mFs.readdirSync(aBasePath);
     var dirList = files.filter(function(file) {
@@ -202,7 +202,7 @@ function getAllJSFiles(aBasePath) {
     });
 
     while (dirList.length > 0) {
-        returnFiles = returnFiles.concat(getAllJSFiles(mPath.join(aBasePath, dirList.shift())));
+        returnFiles = returnFiles.concat(mGetAllJSFiles(mPath.join(aBasePath, dirList.shift())));
     }
     
     return returnFiles;
@@ -216,10 +216,10 @@ function getAllJSFiles(aBasePath) {
  * @param {string} aPath Path, where to search for new javascript classes
  * @return {object} the instance itself
  **/
-function addLoadPath(aPath) {
+function mAddLoadPath(aPath) {
     'use strict';
     aPath = mPath.resolve(aPath);
-    var jsFiles = getAllJSFiles(aPath);
+    var jsFiles = mGetAllJSFiles(aPath);
     var jsClassNames = jsFiles.map(function(file) {
         var tmp = file.substring(aPath.length, file.length-3);
         tmp = (tmp[0] === mPath.sep) ? tmp.substr(mPath.sep.length) : tmp;
@@ -242,7 +242,7 @@ function addLoadPath(aPath) {
  * @param {string} aClassName The classname, for which the function should search
  * @return {function || null} The searched class or null
  **/
-function load(aClassName) {
+function mLoad(aClassName) {
     'use strict';
     if (mClasses[aClassName]) {
         return require(mClasses[aClassName]);
@@ -250,39 +250,32 @@ function load(aClassName) {
     return null;
 }
 
-//region revealing object
-Object.defineProperty(EXPORTOBJECT, 'startHTTP', {
-    value: startHTTP,
-    writable: false
+// extend EXPORTOBJECT with all properties to reveal
+Object.defineProperties(EXPORTOBJECT, {
+    'startHTTP': {
+        value: mStartHTTP
+    },
+    'startHTTPS': {
+        value: mStartHTTPS
+    },
+    'stopHTTP': {
+        value: mStopHTTP
+    },
+    'stopHTTPS': {
+        value: mStopHTTPS
+    },
+    'runApplication': {
+        value: mRunApplication
+    },
+    'stopApplication': {
+        value: mStopApplication
+    },
+    'addLoadPath': {
+        value: mAddLoadPath
+    },
+    'load': {
+        value: mLoad
+    }
 });
-Object.defineProperty(EXPORTOBJECT, 'startHTTPS', {
-    value: startHTTPS,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'stopHTTP', {
-    value: stopHTTP,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'stopHTTPS', {
-    value: stopHTTPS,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'runApplication', {
-    value: runApplication,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'stopApplication', {
-    value: stopApplication,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'addLoadPath', {
-    value: addLoadPath,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'load', {
-    value: load,
-    writable: false
-});
-//endregion
 
 module.exports = EXPORTOBJECT;

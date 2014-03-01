@@ -64,7 +64,7 @@ var EXPORTOBJECT = {},
  * @param {response} aResponse An nodejs response object
  * @param {object} aArgs Arguments, given by called url
  **/
-function objectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
+function mObjectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
     'use strict';
     try {
         switch(aRequest.method.toLowerCase()) {
@@ -103,7 +103,7 @@ function objectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
  * @method clearRoutes
  * @return {object} The instance itself
  */
-function clearRoutes() {
+function mClearRoutes() {
     'use strict';
     mRoutes = [];
     return EXPORTOBJECT;
@@ -117,7 +117,7 @@ function clearRoutes() {
  * @param {function} aController
  * @return {object} The instance itself
  */
-function setDefaultRoute(aController) {
+function mSetDefaultRoute(aController) {
     'use strict';
     if (typeof aController === 'function') {
         mDefaultController = aController;
@@ -134,7 +134,7 @@ function setDefaultRoute(aController) {
  * @method getDefaultRoute
  * @return {function | null}
  */
-function getDefaultRoute() {
+function mGetDefaultRoute() {
     'use strict';
     return mDefaultController;
 }
@@ -149,7 +149,7 @@ function getDefaultRoute() {
  * 
  * inspired by expressjs (https://github.com/visionmedia/express/blob/master/lib/utils.js) pathRegexp
  */
-function pathToRoute(aPath, aSensetive) {
+function mPathToRoute(aPath, aSensetive) {
     'use strict';
     var tmpObj = {path: aPath, keys: []};
     aPath = aPath
@@ -182,7 +182,7 @@ function pathToRoute(aPath, aSensetive) {
  * @param {boolean} aCaseSensetive Optional, false by default
  * 
  */
-function addRoute(aPath, aCallback, aCaseSensetive) {
+function mAddRoute(aPath, aCallback, aCaseSensetive) {
     'use strict';
     aCaseSensetive = aCaseSensetive || false;
     if (typeof aPath !== 'string') {
@@ -193,11 +193,11 @@ function addRoute(aPath, aCallback, aCaseSensetive) {
     }
     aPath = (aPath[0] === '/') ? aPath : '/' + aPath;
 
-    var tmp = pathToRoute(aPath, aCaseSensetive);
+    var tmp = mPathToRoute(aPath, aCaseSensetive);
     
     if (typeof aCallback === 'object') {
         tmp.callbackData = aCallback;
-        tmp.callback = objectToCallbackWrapper.bind(null, tmp.callbackData);
+        tmp.callback = mObjectToCallbackWrapper.bind(null, tmp.callbackData);
     }
     else {
         tmp.callback = aCallback;
@@ -213,7 +213,7 @@ function addRoute(aPath, aCallback, aCaseSensetive) {
  * @param {string} aPath
  * @return {object | null}
  */
-function getRoute(aPath) {
+function mGetRoute(aPath) {
     'use strict';
     if (typeof aPath !== 'string') {
         throw '$ROUTER.getRoute: First param aPath needs to be a string, got ' + (typeof aPath);
@@ -233,7 +233,7 @@ function getRoute(aPath) {
  * @method setEncoding
  * @param {string} aEncoding
  */
-function setEncoding(aEncoding) {
+function mSetEncoding(aEncoding) {
     'use strict';
     // TODO: test whether encoding is right
     mRequestEncoding = aEncoding || 'utf-8';
@@ -246,7 +246,7 @@ function setEncoding(aEncoding) {
  * @method getEncoding
  * @return {string}
  */
-function getEncoding() {
+function mGetEncoding() {
     'use strict';
     return mRequestEncoding;
 }
@@ -260,7 +260,7 @@ function getEncoding() {
  * @param {request} aRequest An nodejs request
  * @param {response} aResponse An nodejs response
  */
-function route(aRequest, aResponse) {
+function mRoute(aRequest, aResponse) {
     'use strict';
     var postData = '';
     
@@ -332,37 +332,32 @@ function route(aRequest, aResponse) {
     });
 }
 
-Object.defineProperty(EXPORTOBJECT, 'route', {
-    value: route,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'addRoute', {
-    value: addRoute,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'getRoute', {
-    value: getRoute,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'setDefaultRoute', {
-    value: setDefaultRoute,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'getDefaultRoute', {
-    value: getDefaultRoute,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'setEncoding', {
-    value: setEncoding,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'getEncoding', {
-    value: getEncoding,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'clearRoutes', {
-    value: clearRoutes,
-    writable: false
+// extend EXPORTOBJECT with all properties to reveal
+Object.defineProperties(EXPORTOBJECT, {
+    'route': {
+        value: mRoute
+    },
+    'addRoute': {
+        value: mAddRoute
+    },
+    'getRoute': {
+        value: mGetRoute
+    },
+    'setDefaultRoute': {
+        value: mSetDefaultRoute
+    },
+    'getDefaultRoute': {
+        value: mGetDefaultRoute
+    },
+    'setEncoding': {
+        value: mSetEncoding
+    },
+    'getEncoding': {
+        value: mGetEncoding
+    },
+    'clearRoutes': {
+        value: mClearRoutes
+    }
 });
 
 module.exports = EXPORTOBJECT;

@@ -19,76 +19,72 @@ var EXPORTOBJECT = {};
  *
  * @method globalize
  **/
-function globalize() {
+function mGlobalize() {
     'use strict';
-    Object.defineProperty(GLOBAL, '$APPLICATION', {
-        value   : require('./Controller/Application.js'),
-        writable: false
-    });
-    Object.defineProperty(GLOBAL, '$ROUTER', {
-        value   : require('./Controller/Router.js'),
-        writable: false
-    });
-    Object.defineProperty(GLOBAL, '$LOGGER', {
-        value   : require('./Controller/Logger.js'),
-        writable: false
-    });
-    Object.defineProperty(GLOBAL, '$SERVICE', {
-        value   : require('./Controller/Service.js'),
-        writable: false
+    Object.defineProperties(GLOBAL, {
+        '$APPLICATION': {
+            value   : require('./Controller/Application.js')
+        },
+        '$ROUTER': {
+            value   : require('./Controller/Router.js')
+        },
+        '$LOGGER': {
+            value   : require('./Controller/Logger.js')
+        },
+        '$SERVICE': {
+            value   : require('./Controller/Service.js')
+        }
     });
 }
 
 //region revealing object
-/**
- * An instance of $APPLICATION
- *
- * @property $APPLICATION
- * @type {$APPLICATION}
- **/
-Object.defineProperty(EXPORTOBJECT, '$APPLICATION', {
-    value   : require('./Controller/Application.js'),
-    writable: false
-});
 
-/**
- * An instance of $ROUTER
- *
- * @property $ROUTER
- * @type {$ROUTER}
- **/
-Object.defineProperty(EXPORTOBJECT, '$ROUTER', {
-    value   : require('./Controller/Router.js'),
-    writable: false
-});
+Object.defineProperties(GLOBAL, {
 
-/**
- * An instance of $LOGGER
- *
- * @property $LOGGER
- * @type {$LOGGER}
- **/
-Object.defineProperty(EXPORTOBJECT, '$LOGGER', {
-    value   : require('./Controller/Logger.js'),
-    writable: false
-});
+    /**
+     * An instance of $APPLICATION
+     *
+     * @property $APPLICATION
+     * @type {$APPLICATION}
+     **/
+    '$APPLICATION': {
+        value   : require('./Controller/Application.js')
+    },
 
-/**
- * An instance of $SERVICE
- *
- * @property $SERVICE
- * @type {$SERVICE}
- **/
-Object.defineProperty(EXPORTOBJECT, '$SERVICE', {
-    value   : require('./Controller/Service.js'),
-    writable: false
-});
+    /**
+     * An instance of $ROUTER
+     *
+     * @property $ROUTER
+     * @type {$ROUTER}
+     **/
+    '$ROUTER': {
+        value   : require('./Controller/Router.js')
+    },
 
-// define all other things
-Object.defineProperty(EXPORTOBJECT, 'globalize', {
-    value   : globalize,
-    writable: false
+    /**
+     * An instance of $LOGGER
+     *
+     * @property $LOGGER
+     * @type {$LOGGER}
+     **/
+    '$LOGGER': {
+        value   : require('./Controller/Logger.js')
+    },
+
+    /**
+     * An instance of $SERVICE
+     *
+     * @property $SERVICE
+     * @type {$SERVICE}
+     **/
+    '$SERVICE': {
+        value   : require('./Controller/Service.js')
+    },
+
+    // define the rest
+    'globalize': {
+        value   : mGlobalize
+    }
 });
-//endregion
 
 module.exports = EXPORTOBJECT;

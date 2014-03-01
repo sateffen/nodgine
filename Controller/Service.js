@@ -32,7 +32,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
  * @method clearServices
  * @return {object} The instance itself
  */
-function clearServices() {
+function mClearServices() {
     'use strict';
     mRegisteredServices = [];
     EXPORTOBJECT.emit('servicesCleared');
@@ -47,7 +47,7 @@ function clearServices() {
  * @return {Array} An array containing all matched services as object. The object looks like:
  *      {type: string, controller: function|object, id: number}
  */
-function getService(aType) {
+function mGetService(aType) {
     'use strict';
     if (typeof aType !== 'string') {
         throw '$SERVICE.getService: First param aType needs to be a string, got ' + (typeof aType);
@@ -70,7 +70,7 @@ function getService(aType) {
  * @param {number} aId
  * @returns {function | null}
  */
-function getServiceById(aId) {
+function mGetServiceById(aId) {
     'use strict';
     if (typeof aId === 'number' && mRegisteredServices && mRegisteredServices[aId]) {
         return mRegisteredServices[aId];
@@ -91,7 +91,7 @@ function getServiceById(aId) {
  * @param {function} aController
  * @return {number}
  */
-function registerService(aType, aController) {
+function mRegisterService(aType, aController) {
     'use strict';
     // verify input
     if (typeof aType !== 'string') {
@@ -124,7 +124,7 @@ function registerService(aType, aController) {
  * @param {number} aId ID of service, that should be unregistered
  * @return {object} This instance itself
  */
-function unregisterService(aId) {
+function mUnregisterService(aId) {
     'use strict';
     if (typeof aId === 'number' && mRegisteredServices && mRegisteredServices[aId]) {
         EXPORTOBJECT.emit('serviceUnregistered', mRegisteredServices[aId].type, aId);
@@ -133,25 +133,23 @@ function unregisterService(aId) {
     return EXPORTOBJECT;
 }
 
-Object.defineProperty(EXPORTOBJECT, 'getService', {
-    value: getService,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'getServiceById', {
-    value: getServiceById,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'registerService', {
-    value: registerService,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'unregisterService', {
-    value: unregisterService,
-    writable: false
-});
-Object.defineProperty(EXPORTOBJECT, 'clearServices', {
-    value: clearServices,
-    writable: false
+// extend EXPORTOBJECT with all properties to reveal
+Object.defineProperties(EXPORTOBJECT, {
+    'getService': {
+        value: mGetService
+    },
+    'getServiceById': {
+        value: mGetServiceById
+    },
+    'registerService': {
+        value: mRegisterService
+    },
+    'unregisterService': {
+        value: mUnregisterService
+    },
+    'clearServices': {
+        value: mClearServices
+    }
 });
 
 module.exports = EXPORTOBJECT;
