@@ -10,6 +10,8 @@ exports.writeToConsole = function(test) {
     'use strict';
     var data = [],
         tmpLogFunc = console.log;
+
+    // mock up console.log function
     console.log = function(obj) {
         data.push(obj);
     };
@@ -19,11 +21,12 @@ exports.writeToConsole = function(test) {
     nodgineLogger.log('hallo1');
     nodgineLogger.writeToConsole(true);
     nodgineLogger.log('hallo2');
-    
+
+    // revert mock up
     console.log = tmpLogFunc;
     
     test.equal(data.length, 1);
-    test.notEqual(data[0].match(/hallo2/), null);
+    test.ok(data[0].match(/hallo2/));
     test.done();
 };
 
