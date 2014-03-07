@@ -52,3 +52,13 @@ exports.getService = function(test) {
     nodgineService.clearServices();
     test.done();
 };
+
+exports.clearServices = function(test) {
+    nodgineService.registerService('test', function(){});
+    nodgineService.once('servicesCleared', function() {
+        test.equal(nodgineService.getService('test').length, 0);
+        test.done();
+    });
+    test.equal(nodgineService.getService('test').length, 1);
+    nodgineService.clearServices();
+};
