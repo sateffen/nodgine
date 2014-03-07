@@ -51,8 +51,8 @@ exports.addRoute = function(test) {
     'use strict';
     nodgineRouter.addRoute('/testAddRoute', function(){});
     nodgineRouter.addRoute('/testAddRoute2', function(){});
-    test.ok(nodgineRouter.getRoute('testAddRoute'));
-    test.ok(nodgineRouter.getRoute('testAddRoute2'));
+    test.ok(nodgineRouter.getRoute('/testAddRoute'));
+    test.ok(nodgineRouter.getRoute('/testAddRoute2'));
     test.done();
     nodgineRouter.clearRoutes();
 };

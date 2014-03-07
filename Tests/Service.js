@@ -3,6 +3,10 @@ var nodgineService = require('../Bootstrap.js').$SERVICE;
 
 exports.registerService = function(test) {
     'use strict';
+    nodgineService.once('serviceRegistered', function(type) {
+        test.ok(type === 'test');
+    });
+
     var id1 = nodgineService.registerService('test', function(){}),
         id2 = nodgineService.registerService('test2', function(){});
     
@@ -20,7 +24,11 @@ exports.unregisterService = function(test) {
     
     test.ok(nodgineService.getServiceById(id1));
     test.ok(nodgineService.getServiceById(id2));
-    
+
+    nodgineService.once('serviceUnregistered', function(type) {
+        test.ok(type === 'test');
+    });
+
     nodgineService.unregisterService(id1);
     nodgineService.unregisterService(id2);
     
