@@ -7,16 +7,28 @@ var nodgineRouter = require('../Bootstrap.js').$ROUTER,
 
 exports.getEncoding = function(test) {
     'use strict';
-    test.equal(nodgineRouter.getEncoding(), 'utf-8');
+    test.equal(nodgineRouter.getEncoding(), 'utf8');
     test.done();
 };
 
 exports.setEncoding = function(test) {
     'use strict';
-    nodgineRouter.setEncoding('ASCII');
-    test.equal(nodgineRouter.getEncoding(), 'ASCII');
-    nodgineRouter.setEncoding('utf-8');
-    test.equal(nodgineRouter.getEncoding(), 'utf-8');
+
+    nodgineRouter.setEncoding('ascii');
+    test.equal(nodgineRouter.getEncoding(), 'ascii');
+    nodgineRouter.setEncoding('undefined', false);
+    test.equal(nodgineRouter.getEncoding(), 'undefined');
+    nodgineRouter.setEncoding('utf8');
+    test.equal(nodgineRouter.getEncoding(), 'utf8');
+
+    try {
+        nodgineRouter.setEncoding('undefined');
+        test.ok(false, 'setEncoding(\'undefined\') should throw an error.');
+    }
+    catch (e) {
+        test.ok(true, e);
+    }
+
     test.done();
 };
 
