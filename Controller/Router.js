@@ -242,7 +242,7 @@ function mSetEncoding(aEncoding, aCheckEncoding) {
     }
 
     var possibleEncodings = ['utf8', 'ascii', 'binary', 'hex', 'base64', 'utf16le', 'ucs2'];
-    if (aCheckEncoding && possibleEncodings.indexOf(aEncoding.toLowerCase()) > -1) {
+    if (aCheckEncoding && possibleEncodings.indexOf(aEncoding.toLowerCase()) === -1) {
         throw '$ROUTER.setEncoding: Unknown encoding: ' + aEncoding;
     }
     mRequestEncoding = aEncoding;
