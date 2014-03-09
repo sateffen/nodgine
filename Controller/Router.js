@@ -43,9 +43,9 @@ var EXPORTOBJECT = {},
      *
      * @private
      * @type {string}
-     * @default 'utf-8'
+     * @default 'utf8'
      **/
-    mRequestEncoding = 'utf-8',
+    mRequestEncoding = 'utf8',
 
     /**
      * A reference to the default function
@@ -228,15 +228,24 @@ function mGetRoute(aPath) {
 }
 
 /**
- * Set the encoding for the request
+ * Set the encoding for the request. If aCheckEncoding is set, the encoding gets validated. Valid encodings are
+ * utf8, ascii, binary, hex, base64, utf16le and ucs2
  *
  * @method setEncoding
- * @param {string} aEncoding
+ * @param {string} aEncoding The encoding string
+ * @param {boolean} aCheckEncoding Whether to check, if encoding is ok or not
  */
-function mSetEncoding(aEncoding) {
+function mSetEncoding(aEncoding, aCheckEncoding) {
     'use strict';
-    // TODO: test whether encoding is right
-    mRequestEncoding = aEncoding || 'utf-8';
+    if (typeof aCheckEncoding !== 'boolean') {
+        aCheckEncoding = aCheckEncoding || true;
+    }
+
+    var possibleEncodings = ['utf8', 'ascii', 'binary', 'hex', 'base64', 'utf16le', 'ucs2'];
+    if (aCheckEncoding && possibleEncodings.indexOf(aEncoding.toLowerCase()) > -1) {
+        throw '$ROUTER.setEncoding: Unknown encoding: ' + aEncoding;
+    }
+    mRequestEncoding = aEncoding;
     return EXPORTOBJECT;
 }
 
