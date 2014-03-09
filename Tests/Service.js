@@ -5,6 +5,7 @@ exports.registerService = function(test) {
     'use strict';
     nodgineService.once('serviceRegistered', function(type) {
         test.ok(type === 'test');
+        test.done();
     });
 
     var id1 = nodgineService.registerService('test', function(){}),
@@ -14,7 +15,6 @@ exports.registerService = function(test) {
     test.ok(nodgineService.getServiceById(id2));
     
     nodgineService.clearServices();
-    test.done();
 };
 
 exports.unregisterService = function(test) {
@@ -27,6 +27,7 @@ exports.unregisterService = function(test) {
 
     nodgineService.once('serviceUnregistered', function(type) {
         test.ok(type === 'test');
+        test.done();
     });
 
     nodgineService.unregisterService(id1);
@@ -36,7 +37,6 @@ exports.unregisterService = function(test) {
     test.equal(nodgineService.getServiceById(id2), null);
     
     nodgineService.clearServices();
-    test.done();
 };
 
 exports.getService = function(test) {
