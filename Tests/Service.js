@@ -54,6 +54,7 @@ exports.getService = function(test) {
 };
 
 exports.clearServices = function(test) {
+    'use strict';
     nodgineService.registerService('test', function(){});
     nodgineService.once('servicesCleared', function() {
         test.equal(nodgineService.getService('test').length, 0);
