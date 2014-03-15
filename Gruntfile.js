@@ -5,11 +5,13 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         copy: {
-            main: {
+            dist: {
                 files: [
                     {expand: true, src: ['Controller/*'], dest: 'dist/', filter: 'isFile'},
                     {expand: true, src: ['package.json'], dest: 'dist/'},
-                    {expand: true, src: ['bootstrap.js'], dest: 'dist/'}
+                    {expand: true, src: ['bootstrap.js'], dest: 'dist/'},
+                    {expand: true, src: ['LICENSE'], dest: 'dist/'},
+                    {expand: true, src: ['README.md'], dest: 'dist/'}
                 ]
             }
         },
@@ -39,7 +41,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
 
-    grunt.registerTask('default', ['nodeunit:all', 'clean:dist', 'copy:main']);
-    grunt.registerTask('doc', ['clean:dist', 'copy:main', 'yuidoc']);
+    grunt.registerTask('default', ['nodeunit:all', 'clean:dist', 'copy:dist']);
+    grunt.registerTask('doc', ['clean:dist', 'copy:dist', 'yuidoc']);
     grunt.registerTask('test', ['nodeunit']);
 };
