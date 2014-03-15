@@ -39,4 +39,5 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['nodeunit:all', 'clean:dist', 'copy:main']);
     grunt.registerTask('doc', ['yuidoc']);
+    grunt.registerTask('test', ['nodeunit']);
 };
