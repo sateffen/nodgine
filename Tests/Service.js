@@ -39,15 +39,15 @@ exports.unregisterService = function(test) {
     nodgineService.clearServices();
 };
 
-exports.getService = function(test) {
+exports.getServicesByType = function(test) {
     'use strict';
     nodgineService.registerService('test', function(){});
     nodgineService.registerService('test2', function(){});
     nodgineService.registerService('test2', function(){});
     
-    test.equal(nodgineService.getService('notDefined').length, 0);
-    test.equal(nodgineService.getService('test').length, 1);
-    test.equal(nodgineService.getService('test2').length, 2);
+    test.equal(nodgineService.getServicesByType('notDefined').length, 0);
+    test.equal(nodgineService.getServicesByType('test').length, 1);
+    test.equal(nodgineService.getServicesByType('test2').length, 2);
     
     nodgineService.clearServices();
     test.done();
@@ -57,9 +57,9 @@ exports.clearServices = function(test) {
     'use strict';
     nodgineService.registerService('test', function(){});
     nodgineService.once('servicesCleared', function() {
-        test.equal(nodgineService.getService('test').length, 0);
+        test.equal(nodgineService.getServicesByType('test').length, 0);
         test.done();
     });
-    test.equal(nodgineService.getService('test').length, 1);
+    test.equal(nodgineService.getServicesByType('test').length, 1);
     nodgineService.clearServices();
 };

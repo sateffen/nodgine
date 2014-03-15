@@ -42,15 +42,15 @@ function mClearServices() {
 /**
  * Returns all services with the given type in an array
  *
- * @method getService
+ * @method getServicesByType
  * @param {string} aType Name of the searched type
  * @return {Array} An array containing all matched services as object. The object looks like:
  *      {type: string, controller: function|object, id: number}
  */
-function mGetService(aType) {
+function mGetServicesByType(aType) {
     'use strict';
     if (typeof aType !== 'string') {
-        throw '$SERVICE.getService: First param aType needs to be a string, got ' + (typeof aType);
+        throw '$SERVICE.getServicesByType: First param aType needs to be a string, got ' + (typeof aType);
     }
     aType = aType.toLowerCase();
     var returnArray = [];
@@ -64,16 +64,16 @@ function mGetService(aType) {
 }
 
 /**
- * Returns the service connected to given id
+ * Returns the service-controller connected to given id
  *
  * @method getServiceById
  * @param {number} aId
- * @returns {function | null}
+ * @returns {function | object | null}
  */
 function mGetServiceById(aId) {
     'use strict';
     if (typeof aId === 'number' && mRegisteredServices && mRegisteredServices[aId]) {
-        return mRegisteredServices[aId];
+        return mRegisteredServices[aId].controller;
     }
     return null;
 }
@@ -135,8 +135,8 @@ function mUnregisterService(aId) {
 
 // extend EXPORTOBJECT with all properties to reveal
 Object.defineProperties(EXPORTOBJECT, {
-    'getService': {
-        value: mGetService
+    "getServicesByType": {
+        value: mGetServicesByType
     },
     'getServiceById': {
         value: mGetServiceById

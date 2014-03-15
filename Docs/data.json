@@ -1112,7 +1112,7 @@
             "line": 42,
             "description": "Returns all services with the given type in an array",
             "itemtype": "method",
-            "name": "getService",
+            "name": "getServicesByType",
             "params": [
                 {
                     "name": "aType",
@@ -1131,7 +1131,7 @@
         {
             "file": "Controller\\Service.js",
             "line": 66,
-            "description": "Returns the service connected to given id",
+            "description": "Returns the service-controller connected to given id",
             "itemtype": "method",
             "name": "getServiceById",
             "params": [
@@ -1143,7 +1143,7 @@
             ],
             "return": {
                 "description": "",
-                "type": "Function | null"
+                "type": "Function | object | null"
             },
             "class": "$SERVICE",
             "module": "nodgine",
