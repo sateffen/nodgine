@@ -4,14 +4,24 @@
     "description" : "Nodgine is a NodeJS engine for simple webserver and RESTful APIs.",
     "main" : "./Bootstrap.js",
     "author" : {
-        "name" : "Steffen Wendt",
+        "name" : "sateffen",
         "email" : "sateffen@gmail.com"
     },
     "license" : {
         "type" : "MIT"
     },
     "readmeFilename" : "README.md",
-    "keywords" : [ ],
+    "keywords" : [
+        "rest",
+        "restful",
+        "webserver",
+        "router",
+        "api"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sateffen/nodgine.git"
+    },
     "bugs" : {
         "url" : "https://github.com/sateffen/nodgine/issues"
     },
