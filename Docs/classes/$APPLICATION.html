@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>$APPLICATION</title>
+    <title>$APPLICATION - Nodgine</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="../assets/css/logo.png" title=""></h1>
+                <h1><img src="../assets/css/logo.png" title="Nodgine"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: </em>
+            <em>API Docs for: 0.0.1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -108,7 +108,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/nodgine_Controller_Application.js.html#l1"><code>nodgine\Controller\Application.js:1</code></a>
+            Defined in: <a href="../files/dist_Controller_Application.js.html#l1"><code>dist\Controller\Application.js:1</code></a>
         </div>
     
 
@@ -161,7 +161,28 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_addLoadPath">addLoadPath</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_load">load</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_load">load</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_runApplication">runApplication</a>
 
                                 
                                 
@@ -182,6 +203,20 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_startHTTP">startHTTP</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_startHTTPS">startHTTPS</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_startHTTPS">startHTTPS</a>
 
                                 
@@ -196,7 +231,28 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_stopApplication">stopApplication</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_stopHTTP">stopHTTP</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_stopHTTP">stopHTTP</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_stopHTTPS">stopHTTPS</a>
 
                                 
                                 
@@ -273,7 +329,116 @@
             
         
         
-        <a href="../files/nodgine_Controller_Application.js.html#l211"><code>nodgine\Controller\Application.js:211</code></a>
+        <a href="../files/dist_Controller_Application.js.html#l211"><code>dist\Controller\Application.js:211</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Adds a loadpath for the load method, where to search for new classes</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">aPath</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Path, where to search for new javascript classes</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>the instance itself</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_addLoadPath" class="method item">
+    <h3 class="name"><code>addLoadPath</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>aPath</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/Controller_Application.js.html#l211"><code>Controller\Application.js:211</code></a>
         
         </p>
 
@@ -382,7 +547,116 @@
             
         
         
-        <a href="../files/nodgine_Controller_Application.js.html#l237"><code>nodgine\Controller\Application.js:237</code></a>
+        <a href="../files/dist_Controller_Application.js.html#l237"><code>dist\Controller\Application.js:237</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Searches in all known pathes for specified class file and returns it</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">aClassName</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The classname, for which the function should search</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Function |  | null</span>:
+                    
+                    <p>The searched class or null</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_load" class="method item">
+    <h3 class="name"><code>load</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>aClassName</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Function |  | null</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/Controller_Application.js.html#l237"><code>Controller\Application.js:237</code></a>
         
         </p>
 
@@ -481,7 +755,82 @@
             
         
         
-        <a href="../files/nodgine_Controller_Application.js.html#l158"><code>nodgine\Controller\Application.js:158</code></a>
+        <a href="../files/dist_Controller_Application.js.html#l158"><code>dist\Controller\Application.js:158</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Emit a start event to the application</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>the instance itself</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_runApplication" class="method item">
+    <h3 class="name"><code>runApplication</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/Controller_Application.js.html#l158"><code>Controller\Application.js:158</code></a>
         
         </p>
 
@@ -566,7 +915,116 @@
             
         
         
-        <a href="../files/nodgine_Controller_Application.js.html#l73"><code>nodgine\Controller\Application.js:73</code></a>
+        <a href="../files/Controller_Application.js.html#l73"><code>Controller\Application.js:73</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Starts an HTTP server at given port</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">aPort</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Port for HTTP-Server</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>the instance itself</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_startHTTP" class="method item">
+    <h3 class="name"><code>startHTTP</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>aPort</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/dist_Controller_Application.js.html#l73"><code>dist\Controller\Application.js:73</code></a>
         
         </p>
 
@@ -693,7 +1151,182 @@
             
         
         
-        <a href="../files/nodgine_Controller_Application.js.html#l95"><code>nodgine\Controller\Application.js:95</code></a>
+        <a href="../files/Controller_Application.js.html#l95"><code>Controller\Application.js:95</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Starts an HTTPS server at given port with given options</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">aKey</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Path to a key-file</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">aCert</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Path to a cert-file</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">aPort</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Port for HTTP-Server</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">aOptions</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>additional options for the HTTPS-Server</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>the instance itself</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_startHTTPS" class="method item">
+    <h3 class="name"><code>startHTTPS</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>aKey</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>aCert</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>aPort</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>aOptions</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/dist_Controller_Application.js.html#l95"><code>dist\Controller\Application.js:95</code></a>
         
         </p>
 
@@ -840,7 +1473,82 @@
             
         
         
-        <a href="../files/nodgine_Controller_Application.js.html#l171"><code>nodgine\Controller\Application.js:171</code></a>
+        <a href="../files/Controller_Application.js.html#l171"><code>Controller\Application.js:171</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Emit a stop event to the application</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>the instance itself</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_stopApplication" class="method item">
+    <h3 class="name"><code>stopApplication</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/dist_Controller_Application.js.html#l171"><code>dist\Controller\Application.js:171</code></a>
         
         </p>
 
@@ -915,7 +1623,82 @@
             
         
         
-        <a href="../files/nodgine_Controller_Application.js.html#l128"><code>nodgine\Controller\Application.js:128</code></a>
+        <a href="../files/dist_Controller_Application.js.html#l128"><code>dist\Controller\Application.js:128</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Stops the HTTP-Server, if any is started</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>the instance itself</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_stopHTTP" class="method item">
+    <h3 class="name"><code>stopHTTP</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/Controller_Application.js.html#l128"><code>Controller\Application.js:128</code></a>
         
         </p>
 
@@ -990,7 +1773,82 @@
             
         
         
-        <a href="../files/nodgine_Controller_Application.js.html#l143"><code>nodgine\Controller\Application.js:143</code></a>
+        <a href="../files/dist_Controller_Application.js.html#l143"><code>dist\Controller\Application.js:143</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Stops the HTTPS-Server, if any is started</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>the instance itself</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_stopHTTPS" class="method item">
+    <h3 class="name"><code>stopHTTPS</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/Controller_Application.js.html#l143"><code>Controller\Application.js:143</code></a>
         
         </p>
 

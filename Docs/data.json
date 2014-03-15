@@ -1,66 +1,119 @@
 {
-    "project": {},
+    "project": {
+        "name": "Nodgine",
+        "description": "Nodgine is a NodeJS engine for simple webserver and RESTful APIs.",
+        "version": "0.0.1"
+    },
     "files": {
-        "nodgine\\Controller\\Application.js": {
-            "name": "nodgine\\Controller\\Application.js",
+        "Controller\\Application.js": {
+            "name": "Controller\\Application.js",
             "modules": {
                 "$APPLICATION": 1
             },
-            "classes": {
-                "$APPLICATION": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "nodgine\\Controller\\Logger.js": {
-            "name": "nodgine\\Controller\\Logger.js",
+        "Controller\\Logger.js": {
+            "name": "Controller\\Logger.js",
             "modules": {
                 "$LOGGER": 1
             },
-            "classes": {
-                "$LOGGER": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "nodgine\\Controller\\Router.js": {
-            "name": "nodgine\\Controller\\Router.js",
+        "Controller\\Router.js": {
+            "name": "Controller\\Router.js",
             "modules": {
                 "$ROUTER": 1
             },
-            "classes": {
-                "$ROUTER": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "nodgine\\Controller\\Service.js": {
-            "name": "nodgine\\Controller\\Service.js",
+        "Controller\\Service.js": {
+            "name": "Controller\\Service.js",
             "modules": {
                 "$SERVICE": 1
             },
-            "classes": {
-                "$SERVICE": 1
-            },
+            "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "nodgine\\Tests\\Logger.js": {
-            "name": "nodgine\\Tests\\Logger.js",
+        "Tests\\ApplicationTest\\TestObject.js": {
+            "name": "Tests\\ApplicationTest\\TestObject.js",
             "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "nodgine\\Tests\\Router.js": {
-            "name": "nodgine\\Tests\\Router.js",
+        "Tests\\Application.js": {
+            "name": "Tests\\Application.js",
             "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {}
         },
-        "nodgine\\Bootstrap.js": {
-            "name": "nodgine\\Bootstrap.js",
+        "Tests\\Logger.js": {
+            "name": "Tests\\Logger.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "Tests\\Router.js": {
+            "name": "Tests\\Router.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "dist\\Controller\\Application.js": {
+            "name": "dist\\Controller\\Application.js",
+            "modules": {},
+            "classes": {
+                "$APPLICATION": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "dist\\Controller\\Logger.js": {
+            "name": "dist\\Controller\\Logger.js",
+            "modules": {},
+            "classes": {
+                "$LOGGER": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "dist\\Controller\\Router.js": {
+            "name": "dist\\Controller\\Router.js",
+            "modules": {},
+            "classes": {
+                "$ROUTER": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "dist\\Controller\\Service.js": {
+            "name": "dist\\Controller\\Service.js",
+            "modules": {},
+            "classes": {
+                "$SERVICE": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "dist\\bootstrap.js": {
+            "name": "dist\\bootstrap.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "Bootstrap.js": {
+            "name": "Bootstrap.js",
             "modules": {
                 "nodgine": 1
             },
@@ -90,7 +143,7 @@
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "nodgine\\Bootstrap.js",
+            "file": "Bootstrap.js",
             "line": 1,
             "description": "This is the bootstrap for the nodgine module",
             "itemtype": "main",
@@ -107,7 +160,7 @@
             "namespaces": {},
             "module": "nodgine",
             "namespace": "",
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "dist\\Controller\\Application.js",
             "line": 1,
             "description": "This is the Application API for the nodgine module",
             "static": 1
@@ -123,7 +176,7 @@
             "namespaces": {},
             "module": "nodgine",
             "namespace": "",
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "dist\\Controller\\Logger.js",
             "line": 1,
             "description": "This is the Logger API for the nodgine module",
             "static": 1
@@ -139,7 +192,7 @@
             "namespaces": {},
             "module": "nodgine",
             "namespace": "",
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "dist\\Controller\\Router.js",
             "line": 1,
             "description": "This is the Router API for the nodgine module",
             "static": 1
@@ -155,7 +208,7 @@
             "namespaces": {},
             "module": "nodgine",
             "namespace": "",
-            "file": "nodgine\\Controller\\Service.js",
+            "file": "dist\\Controller\\Service.js",
             "line": 1,
             "description": "This is the Service API for the nodgine module",
             "static": 1
@@ -173,7 +226,7 @@
             "module": "nodgine",
             "submodule": "$APPLICATION",
             "namespace": "",
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "dist\\Controller\\Application.js",
             "line": 1,
             "description": "This is the Application API for the nodgine module"
         },
@@ -188,7 +241,7 @@
             "module": "nodgine",
             "submodule": "$LOGGER",
             "namespace": "",
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "dist\\Controller\\Logger.js",
             "line": 1,
             "description": "This is the Logger API for the nodgine module"
         },
@@ -203,7 +256,7 @@
             "module": "nodgine",
             "submodule": "$ROUTER",
             "namespace": "",
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "dist\\Controller\\Router.js",
             "line": 1,
             "description": "This is the Router API for the nodgine module"
         },
@@ -218,7 +271,7 @@
             "module": "nodgine",
             "submodule": "$SERVICE",
             "namespace": "",
-            "file": "nodgine\\Controller\\Service.js",
+            "file": "dist\\Controller\\Service.js",
             "line": 1,
             "description": "This is the Service API for the nodgine module"
         },
@@ -232,7 +285,7 @@
             "extension_for": [],
             "module": "nodgine",
             "namespace": "",
-            "file": "nodgine\\Bootstrap.js",
+            "file": "Bootstrap.js",
             "line": 1,
             "description": "This is the bootstrap for the nodgine module",
             "mainName": "",
@@ -243,7 +296,7 @@
     },
     "classitems": [
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 10,
             "description": "The exporting object, which gets revealed",
             "type": "{object}",
@@ -252,7 +305,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 17,
             "description": "A reference to the http-module",
             "access": "private",
@@ -263,7 +316,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 25,
             "description": "A reference to the https-module",
             "access": "private",
@@ -274,7 +327,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 33,
             "description": "A reference to the fs-module",
             "access": "private",
@@ -285,7 +338,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 41,
             "description": "A reference to the path-module",
             "access": "private",
@@ -296,7 +349,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 49,
             "description": "A reference to the nodgine-module",
             "access": "private",
@@ -307,7 +360,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 57,
             "description": "A container, that holds all servers",
             "access": "private",
@@ -318,7 +371,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 65,
             "description": "A container, that holds all known javascript classes with there files",
             "access": "private",
@@ -329,7 +382,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 73,
             "description": "Starts an HTTP server at given port",
             "itemtype": "method",
@@ -351,7 +404,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 95,
             "description": "Starts an HTTPS server at given port with given options",
             "itemtype": "method",
@@ -388,7 +441,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 128,
             "description": "Stops the HTTP-Server, if any is started",
             "itemtype": "method",
@@ -403,7 +456,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 143,
             "description": "Stops the HTTPS-Server, if any is started",
             "itemtype": "method",
@@ -418,7 +471,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 158,
             "description": "Emit a start event to the application",
             "itemtype": "method",
@@ -433,7 +486,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 171,
             "description": "Emit a stop event to the application",
             "itemtype": "method",
@@ -448,7 +501,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 184,
             "description": "Emit a start event to the application",
             "access": "private",
@@ -469,7 +522,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 211,
             "description": "Adds a loadpath for the load method, where to search for new classes",
             "chainable": 1,
@@ -491,7 +544,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Application.js",
+            "file": "Controller\\Application.js",
             "line": 237,
             "description": "Searches in all known pathes for specified class file and returns it",
             "chainable": 1,
@@ -513,7 +566,7 @@
             "submodule": "$APPLICATION"
         },
         {
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "Controller\\Logger.js",
             "line": 10,
             "description": "The exporting object, which gets revealed",
             "type": "{object}",
@@ -522,7 +575,7 @@
             "submodule": "$LOGGER"
         },
         {
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "Controller\\Logger.js",
             "line": 17,
             "description": "A reference to the fs-module",
             "access": "private",
@@ -533,7 +586,7 @@
             "submodule": "$LOGGER"
         },
         {
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "Controller\\Logger.js",
             "line": 25,
             "description": "The name of logfile, where to save all logs",
             "access": "private",
@@ -545,7 +598,7 @@
             "submodule": "$LOGGER"
         },
         {
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "Controller\\Logger.js",
             "line": 34,
             "description": "Flag, whether logs should be written to the logfile",
             "access": "private",
@@ -557,7 +610,7 @@
             "submodule": "$LOGGER"
         },
         {
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "Controller\\Logger.js",
             "line": 43,
             "description": "Flag, whether logs should be written to console",
             "access": "private",
@@ -569,7 +622,7 @@
             "submodule": "$LOGGER"
         },
         {
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "Controller\\Logger.js",
             "line": 52,
             "description": "This function generates a readable timestamp of current time for the log",
             "access": "private",
@@ -583,7 +636,7 @@
             "submodule": "$LOGGER"
         },
         {
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "Controller\\Logger.js",
             "line": 69,
             "description": "This is the general function which is connected to all incoming errors to work with them",
             "access": "private",
@@ -611,7 +664,7 @@
             "submodule": "$LOGGER"
         },
         {
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "Controller\\Logger.js",
             "line": 96,
             "description": "With this function you can set the log file",
             "chainable": 1,
@@ -633,7 +686,7 @@
             "submodule": "$LOGGER"
         },
         {
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "Controller\\Logger.js",
             "line": 111,
             "description": "with this function you can set writing to file on or off",
             "chainable": 1,
@@ -655,7 +708,7 @@
             "submodule": "$LOGGER"
         },
         {
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "Controller\\Logger.js",
             "line": 125,
             "description": "with this function you can set writing to console on or off",
             "chainable": 1,
@@ -677,7 +730,7 @@
             "submodule": "$LOGGER"
         },
         {
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "Controller\\Logger.js",
             "line": 139,
             "description": "This is the bind function, bind to enterLog",
             "chainable": 1,
@@ -695,7 +748,7 @@
             "submodule": "$LOGGER"
         },
         {
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "Controller\\Logger.js",
             "line": 148,
             "description": "This is the bind function, bind to enterLog",
             "chainable": 1,
@@ -713,7 +766,7 @@
             "submodule": "$LOGGER"
         },
         {
-            "file": "nodgine\\Controller\\Logger.js",
+            "file": "Controller\\Logger.js",
             "line": 157,
             "description": "This is the bind function, bind to enterLog",
             "chainable": 1,
@@ -731,7 +784,7 @@
             "submodule": "$LOGGER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "Controller\\Router.js",
             "line": 10,
             "description": "The exporting object, which gets revealed",
             "type": "{object}",
@@ -740,7 +793,7 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "Controller\\Router.js",
             "line": 17,
             "description": "A list of all routes",
             "access": "private",
@@ -751,7 +804,7 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "Controller\\Router.js",
             "line": 25,
             "description": "A reference to the url-module",
             "access": "private",
@@ -762,7 +815,7 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "Controller\\Router.js",
             "line": 33,
             "description": "A reference to the querystring-module",
             "access": "private",
@@ -773,19 +826,19 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "Controller\\Router.js",
             "line": 41,
             "description": "The requestencoding",
             "access": "private",
             "tagname": "",
             "type": "{string}",
-            "default": "'utf-8'",
+            "default": "'utf8'",
             "class": "$ROUTER",
             "module": "nodgine",
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "Controller\\Router.js",
             "line": 50,
             "description": "A reference to the default function",
             "access": "private",
@@ -796,7 +849,7 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "Controller\\Router.js",
             "line": 58,
             "description": "Wrappes an object to a callable function",
             "access": "private",
@@ -828,7 +881,7 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "Controller\\Router.js",
             "line": 99,
             "description": "Deletes all routes",
             "chainable": 1,
@@ -843,7 +896,7 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "Controller\\Router.js",
             "line": 112,
             "description": "Sets the default route controller for all not routeable requests",
             "chainable": 1,
@@ -865,7 +918,7 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "Controller\\Router.js",
             "line": 131,
             "description": "Returns the default route controller",
             "itemtype": "method",
@@ -879,7 +932,7 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "Controller\\Router.js",
             "line": 142,
             "description": "This function generates a route object from given path",
             "access": "private",
@@ -893,7 +946,7 @@
                 {
                     "name": "aSensetive",
                     "description": "",
-                    "type": "Bool"
+                    "type": "Boolean"
                 }
             ],
             "return": {
@@ -905,7 +958,7 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "Controller\\Router.js",
             "line": 175,
             "description": "Adds a route to the router with controller as first url param, action as second url param and callback as handle\nfor the request",
             "itemtype": "method",
@@ -924,7 +977,7 @@
                 {
                     "name": "aCaseSensetive",
                     "description": "Optional, false by default",
-                    "type": "Bool"
+                    "type": "Boolean"
                 }
             ],
             "class": "$ROUTER",
@@ -932,7 +985,7 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
+            "file": "Controller\\Router.js",
             "line": 209,
             "description": "Returns the controller connected to a certain route. If the route wasn't defined it returns 'undefined'",
             "itemtype": "method",
@@ -953,16 +1006,21 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
-            "line": 228,
-            "description": "Set the encoding for the request",
+            "file": "Controller\\Router.js",
+            "line": 230,
+            "description": "Set the encoding for the request. If aCheckEncoding is set, the encoding gets validated. Valid encodings are\nutf8, ascii, binary, hex, base64, utf16le and ucs2",
             "itemtype": "method",
             "name": "setEncoding",
             "params": [
                 {
                     "name": "aEncoding",
-                    "description": "",
+                    "description": "The encoding string",
                     "type": "String"
+                },
+                {
+                    "name": "aCheckEncoding",
+                    "description": "Whether to check, if encoding is ok or not",
+                    "type": "Boolean"
                 }
             ],
             "class": "$ROUTER",
@@ -970,8 +1028,8 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
-            "line": 241,
+            "file": "Controller\\Router.js",
+            "line": 252,
             "description": "Returns the current encoding for requests",
             "itemtype": "method",
             "name": "getEncoding",
@@ -984,8 +1042,8 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Router.js",
-            "line": 253,
+            "file": "Controller\\Router.js",
+            "line": 264,
             "description": "This function is the routers core function. It gets the request from http or https server, and routes it to the\ncontroller",
             "itemtype": "method",
             "name": "route",
@@ -1006,7 +1064,7 @@
             "submodule": "$ROUTER"
         },
         {
-            "file": "nodgine\\Controller\\Service.js",
+            "file": "Controller\\Service.js",
             "line": 10,
             "description": "The exporting object, which gets revealed",
             "type": "{object}",
@@ -1015,7 +1073,7 @@
             "submodule": "$SERVICE"
         },
         {
-            "file": "nodgine\\Controller\\Service.js",
+            "file": "Controller\\Service.js",
             "line": 17,
             "description": "A list of all registered services",
             "access": "private",
@@ -1026,7 +1084,7 @@
             "submodule": "$SERVICE"
         },
         {
-            "file": "nodgine\\Controller\\Service.js",
+            "file": "Controller\\Service.js",
             "line": 25,
             "itemtype": "event",
             "name": "servicesCleared",
@@ -1035,7 +1093,7 @@
             "submodule": "$SERVICE"
         },
         {
-            "file": "nodgine\\Controller\\Service.js",
+            "file": "Controller\\Service.js",
             "line": 28,
             "description": "deletes all registered services",
             "chainable": 1,
@@ -1050,7 +1108,7 @@
             "submodule": "$SERVICE"
         },
         {
-            "file": "nodgine\\Controller\\Service.js",
+            "file": "Controller\\Service.js",
             "line": 42,
             "description": "Returns all services with the given type in an array",
             "itemtype": "method",
@@ -1071,7 +1129,7 @@
             "submodule": "$SERVICE"
         },
         {
-            "file": "nodgine\\Controller\\Service.js",
+            "file": "Controller\\Service.js",
             "line": 66,
             "description": "Returns the service connected to given id",
             "itemtype": "method",
@@ -1092,7 +1150,7 @@
             "submodule": "$SERVICE"
         },
         {
-            "file": "nodgine\\Controller\\Service.js",
+            "file": "Controller\\Service.js",
             "line": 81,
             "itemtype": "event",
             "name": "serviceRegistered",
@@ -1113,7 +1171,7 @@
             "submodule": "$SERVICE"
         },
         {
-            "file": "nodgine\\Controller\\Service.js",
+            "file": "Controller\\Service.js",
             "line": 86,
             "description": "Registers given controller as new service from given type, returns the generated id",
             "itemtype": "method",
@@ -1139,7 +1197,7 @@
             "submodule": "$SERVICE"
         },
         {
-            "file": "nodgine\\Controller\\Service.js",
+            "file": "Controller\\Service.js",
             "line": 115,
             "itemtype": "event",
             "name": "serviceUnregistered",
@@ -1160,7 +1218,7 @@
             "submodule": "$SERVICE"
         },
         {
-            "file": "nodgine\\Controller\\Service.js",
+            "file": "Controller\\Service.js",
             "line": 120,
             "description": "Unregisters the service with given id",
             "itemtype": "method",
@@ -1181,21 +1239,1018 @@
             "submodule": "$SERVICE"
         },
         {
-            "file": "nodgine\\Tests\\Logger.js",
+            "file": "Tests\\ApplicationTest\\TestObject.js",
             "line": 1,
-            "description": "Unittest for the logger",
-            "class": "nodgine",
+            "description": "Exports a simple function, that can be loaded with require or $APPLICATION.load from test",
+            "class": "$APPLICATION",
             "module": "nodgine"
         },
         {
-            "file": "nodgine\\Tests\\Router.js",
+            "file": "Tests\\Application.js",
+            "line": 1,
+            "description": "Unittest for the application object\n\nThis tests only the load function and it's mechanisms, cause the other functions are trivial and hopefuly not buggy or to change",
+            "class": "$APPLICATION",
+            "module": "nodgine"
+        },
+        {
+            "file": "Tests\\Application.js",
+            "line": 7,
+            "description": "Reference to the path object",
+            "access": "private",
+            "tagname": "",
+            "type": "{path}",
+            "class": "$APPLICATION",
+            "module": "nodgine"
+        },
+        {
+            "file": "Tests\\Logger.js",
+            "line": 1,
+            "description": "Unittest for the logger object",
+            "class": "$APPLICATION",
+            "module": "nodgine"
+        },
+        {
+            "file": "Tests\\Logger.js",
+            "line": 5,
+            "description": "Reference to the logger object",
+            "access": "private",
+            "tagname": "",
+            "type": "{$LOGGER}",
+            "class": "$APPLICATION",
+            "module": "nodgine"
+        },
+        {
+            "file": "Tests\\Logger.js",
+            "line": 12,
+            "description": "Reference to the fs object",
+            "access": "private",
+            "tagname": "",
+            "type": "{fs}",
+            "class": "$APPLICATION",
+            "module": "nodgine"
+        },
+        {
+            "file": "Tests\\Logger.js",
+            "line": 19,
+            "description": "Reference to the path object",
+            "access": "private",
+            "tagname": "",
+            "type": "{mPath}",
+            "class": "$APPLICATION",
+            "module": "nodgine"
+        },
+        {
+            "file": "Tests\\Router.js",
             "line": 1,
             "description": "Unittest for the router",
-            "class": "nodgine",
+            "class": "$APPLICATION",
             "module": "nodgine"
         },
         {
-            "file": "nodgine\\Bootstrap.js",
+            "file": "dist\\Controller\\Application.js",
+            "line": 10,
+            "description": "The exporting object, which gets revealed",
+            "type": "{object}",
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 17,
+            "description": "A reference to the http-module",
+            "access": "private",
+            "tagname": "",
+            "type": "{http}",
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 25,
+            "description": "A reference to the https-module",
+            "access": "private",
+            "tagname": "",
+            "type": "{https}",
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 33,
+            "description": "A reference to the fs-module",
+            "access": "private",
+            "tagname": "",
+            "type": "{fs}",
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 41,
+            "description": "A reference to the path-module",
+            "access": "private",
+            "tagname": "",
+            "type": "{path}",
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 49,
+            "description": "A reference to the nodgine-module",
+            "access": "private",
+            "tagname": "",
+            "type": "{$ROUTER}",
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 57,
+            "description": "A container, that holds all servers",
+            "access": "private",
+            "tagname": "",
+            "type": "{object}",
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 65,
+            "description": "A container, that holds all known javascript classes with there files",
+            "access": "private",
+            "tagname": "",
+            "type": "{object}",
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 73,
+            "description": "Starts an HTTP server at given port",
+            "itemtype": "method",
+            "name": "startHTTP",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "aPort",
+                    "description": "Port for HTTP-Server",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "the instance itself",
+                "type": "Object"
+            },
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 95,
+            "description": "Starts an HTTPS server at given port with given options",
+            "itemtype": "method",
+            "name": "startHTTPS",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "aKey",
+                    "description": "Path to a key-file",
+                    "type": "String"
+                },
+                {
+                    "name": "aCert",
+                    "description": "Path to a cert-file",
+                    "type": "String"
+                },
+                {
+                    "name": "aPort",
+                    "description": "Port for HTTP-Server",
+                    "type": "Number"
+                },
+                {
+                    "name": "aOptions",
+                    "description": "additional options for the HTTPS-Server",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "the instance itself",
+                "type": "Object"
+            },
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 128,
+            "description": "Stops the HTTP-Server, if any is started",
+            "itemtype": "method",
+            "name": "stopHTTP",
+            "chainable": 1,
+            "return": {
+                "description": "the instance itself",
+                "type": "Object"
+            },
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 143,
+            "description": "Stops the HTTPS-Server, if any is started",
+            "itemtype": "method",
+            "name": "stopHTTPS",
+            "chainable": 1,
+            "return": {
+                "description": "the instance itself",
+                "type": "Object"
+            },
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 158,
+            "description": "Emit a start event to the application",
+            "itemtype": "method",
+            "name": "runApplication",
+            "chainable": 1,
+            "return": {
+                "description": "the instance itself",
+                "type": "Object"
+            },
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 171,
+            "description": "Emit a stop event to the application",
+            "itemtype": "method",
+            "name": "stopApplication",
+            "chainable": 1,
+            "return": {
+                "description": "the instance itself",
+                "type": "Object"
+            },
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 184,
+            "description": "Emit a start event to the application",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "aBasePath",
+                    "description": "Path in which the javascript files should be searched for",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "a multi-dimensional array with all paths to all found javascript files",
+                "type": "Array"
+            },
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 211,
+            "description": "Adds a loadpath for the load method, where to search for new classes",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "addLoadPath",
+            "params": [
+                {
+                    "name": "aPath",
+                    "description": "Path, where to search for new javascript classes",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "the instance itself",
+                "type": "Object"
+            },
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 237,
+            "description": "Searches in all known pathes for specified class file and returns it",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "load",
+            "params": [
+                {
+                    "name": "aClassName",
+                    "description": "The classname, for which the function should search",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The searched class or null",
+                "type": "Function || null"
+            },
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 10,
+            "description": "The exporting object, which gets revealed",
+            "type": "{object}",
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 17,
+            "description": "A reference to the fs-module",
+            "access": "private",
+            "tagname": "",
+            "type": "{mFs}",
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 25,
+            "description": "The name of logfile, where to save all logs",
+            "access": "private",
+            "tagname": "",
+            "type": "{string}",
+            "default": "'Log.txt'",
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 34,
+            "description": "Flag, whether logs should be written to the logfile",
+            "access": "private",
+            "tagname": "",
+            "type": "{boolean}",
+            "default": "false",
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 43,
+            "description": "Flag, whether logs should be written to console",
+            "access": "private",
+            "tagname": "",
+            "type": "{boolean}",
+            "default": "boolean",
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 52,
+            "description": "This function generates a readable timestamp of current time for the log",
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "readable timestamp of current time",
+                "type": "String"
+            },
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 69,
+            "description": "This is the general function which is connected to all incoming errors to work with them",
+            "access": "private",
+            "tagname": "",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "aState",
+                    "description": "State of given error",
+                    "type": "String"
+                },
+                {
+                    "name": "aCritical",
+                    "description": "Is critical or not. If it's critical, an error will be thrown",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "aMessage",
+                    "description": "The message for the log",
+                    "type": "String"
+                }
+            ],
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 96,
+            "description": "With this function you can set the log file",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "setLogFile",
+            "params": [
+                {
+                    "name": "aFilename",
+                    "description": "The file, in which logentrys should be written, if writeToFile(true) is set. This path\nshould be absolute",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The instance itself",
+                "type": "Object"
+            },
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 111,
+            "description": "with this function you can set writing to file on or off",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "writeToFile",
+            "params": [
+                {
+                    "name": "aOption",
+                    "description": "Whether or not logentrys should be written to a file",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "The instance itself",
+                "type": "Object"
+            },
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 125,
+            "description": "with this function you can set writing to console on or off",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "writeToConsole",
+            "params": [
+                {
+                    "name": "aOption",
+                    "description": "whether or not logentrys should be written to the console",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "The instance itself",
+                "type": "Object"
+            },
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 139,
+            "description": "This is the bind function, bind to enterLog",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "error",
+            "params": [
+                {
+                    "name": "aMessage",
+                    "description": "The message for the log",
+                    "type": "String"
+                }
+            ],
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 148,
+            "description": "This is the bind function, bind to enterLog",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "warning",
+            "params": [
+                {
+                    "name": "aMessage",
+                    "description": "The message for the log",
+                    "type": "String"
+                }
+            ],
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 157,
+            "description": "This is the bind function, bind to enterLog",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "log",
+            "params": [
+                {
+                    "name": "aMessage",
+                    "description": "The message for the log",
+                    "type": "String"
+                }
+            ],
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 10,
+            "description": "The exporting object, which gets revealed",
+            "type": "{object}",
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 17,
+            "description": "A list of all routes",
+            "access": "private",
+            "tagname": "",
+            "type": "{Array}",
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 25,
+            "description": "A reference to the url-module",
+            "access": "private",
+            "tagname": "",
+            "type": "{url}",
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 33,
+            "description": "A reference to the querystring-module",
+            "access": "private",
+            "tagname": "",
+            "type": "{querystring}",
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 41,
+            "description": "The requestencoding",
+            "access": "private",
+            "tagname": "",
+            "type": "{string}",
+            "default": "'utf8'",
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 50,
+            "description": "A reference to the default function",
+            "access": "private",
+            "tagname": "",
+            "type": "{function}",
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 58,
+            "description": "Wrappes an object to a callable function",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "aCallbackObject",
+                    "description": "The object, which should be wrapped",
+                    "type": "Object"
+                },
+                {
+                    "name": "aRequest",
+                    "description": "An nodejs request-object",
+                    "type": "Request"
+                },
+                {
+                    "name": "aResponse",
+                    "description": "An nodejs response object",
+                    "type": "Response"
+                },
+                {
+                    "name": "aArgs",
+                    "description": "Arguments, given by called url",
+                    "type": "Object"
+                }
+            ],
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 99,
+            "description": "Deletes all routes",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "clearRoutes",
+            "return": {
+                "description": "The instance itself",
+                "type": "Object"
+            },
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 112,
+            "description": "Sets the default route controller for all not routeable requests",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "setDefaultRoute",
+            "params": [
+                {
+                    "name": "aController",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "The instance itself",
+                "type": "Object"
+            },
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 131,
+            "description": "Returns the default route controller",
+            "itemtype": "method",
+            "name": "getDefaultRoute",
+            "return": {
+                "description": "",
+                "type": "Function | null"
+            },
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 142,
+            "description": "This function generates a route object from given path",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "aPath",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "aSensetive",
+                    "description": "",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "\n\ninspired by expressjs (https://github.com/visionmedia/express/blob/master/lib/utils.js) pathRegexp",
+                "type": "Object"
+            },
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 175,
+            "description": "Adds a route to the router with controller as first url param, action as second url param and callback as handle\nfor the request",
+            "itemtype": "method",
+            "name": "addRoute",
+            "params": [
+                {
+                    "name": "aPath",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "aCallback",
+                    "description": "",
+                    "type": "Function | object"
+                },
+                {
+                    "name": "aCaseSensetive",
+                    "description": "Optional, false by default",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 209,
+            "description": "Returns the controller connected to a certain route. If the route wasn't defined it returns 'undefined'",
+            "itemtype": "method",
+            "name": "getRoute",
+            "params": [
+                {
+                    "name": "aPath",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object | null"
+            },
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 230,
+            "description": "Set the encoding for the request. If aCheckEncoding is set, the encoding gets validated. Valid encodings are\nutf8, ascii, binary, hex, base64, utf16le and ucs2",
+            "itemtype": "method",
+            "name": "setEncoding",
+            "params": [
+                {
+                    "name": "aEncoding",
+                    "description": "The encoding string",
+                    "type": "String"
+                },
+                {
+                    "name": "aCheckEncoding",
+                    "description": "Whether to check, if encoding is ok or not",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 252,
+            "description": "Returns the current encoding for requests",
+            "itemtype": "method",
+            "name": "getEncoding",
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 264,
+            "description": "This function is the routers core function. It gets the request from http or https server, and routes it to the\ncontroller",
+            "itemtype": "method",
+            "name": "route",
+            "params": [
+                {
+                    "name": "aRequest",
+                    "description": "An nodejs request",
+                    "type": "Request"
+                },
+                {
+                    "name": "aResponse",
+                    "description": "An nodejs response",
+                    "type": "Response"
+                }
+            ],
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Service.js",
+            "line": 10,
+            "description": "The exporting object, which gets revealed",
+            "type": "{object}",
+            "class": "$SERVICE",
+            "module": "nodgine",
+            "submodule": "$SERVICE"
+        },
+        {
+            "file": "dist\\Controller\\Service.js",
+            "line": 17,
+            "description": "A list of all registered services",
+            "access": "private",
+            "tagname": "",
+            "type": "{Array}",
+            "class": "$SERVICE",
+            "module": "nodgine",
+            "submodule": "$SERVICE"
+        },
+        {
+            "file": "dist\\Controller\\Service.js",
+            "line": 25,
+            "itemtype": "event",
+            "name": "servicesCleared",
+            "class": "$SERVICE",
+            "module": "nodgine",
+            "submodule": "$SERVICE"
+        },
+        {
+            "file": "dist\\Controller\\Service.js",
+            "line": 28,
+            "description": "deletes all registered services",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "clearServices",
+            "return": {
+                "description": "The instance itself",
+                "type": "Object"
+            },
+            "class": "$SERVICE",
+            "module": "nodgine",
+            "submodule": "$SERVICE"
+        },
+        {
+            "file": "dist\\Controller\\Service.js",
+            "line": 42,
+            "description": "Returns all services with the given type in an array",
+            "itemtype": "method",
+            "name": "getService",
+            "params": [
+                {
+                    "name": "aType",
+                    "description": "Name of the searched type",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "An array containing all matched services as object. The object looks like:\n     {type: string, controller: function|object, id: number}",
+                "type": "Array"
+            },
+            "class": "$SERVICE",
+            "module": "nodgine",
+            "submodule": "$SERVICE"
+        },
+        {
+            "file": "dist\\Controller\\Service.js",
+            "line": 66,
+            "description": "Returns the service connected to given id",
+            "itemtype": "method",
+            "name": "getServiceById",
+            "params": [
+                {
+                    "name": "aId",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function | null"
+            },
+            "class": "$SERVICE",
+            "module": "nodgine",
+            "submodule": "$SERVICE"
+        },
+        {
+            "file": "dist\\Controller\\Service.js",
+            "line": 81,
+            "itemtype": "event",
+            "name": "serviceRegistered",
+            "params": [
+                {
+                    "name": "serviceType",
+                    "description": "the type of the new serice",
+                    "type": "String"
+                },
+                {
+                    "name": "serviceId",
+                    "description": "the id of the new serice",
+                    "type": "Number"
+                }
+            ],
+            "class": "$SERVICE",
+            "module": "nodgine",
+            "submodule": "$SERVICE"
+        },
+        {
+            "file": "dist\\Controller\\Service.js",
+            "line": 86,
+            "description": "Registers given controller as new service from given type, returns the generated id",
+            "itemtype": "method",
+            "name": "registerService",
+            "params": [
+                {
+                    "name": "aType",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "aController",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "$SERVICE",
+            "module": "nodgine",
+            "submodule": "$SERVICE"
+        },
+        {
+            "file": "dist\\Controller\\Service.js",
+            "line": 115,
+            "itemtype": "event",
+            "name": "serviceUnregistered",
+            "params": [
+                {
+                    "name": "serviceType",
+                    "description": "the type of the new serice",
+                    "type": "String"
+                },
+                {
+                    "name": "serviceId",
+                    "description": "the id of the new serice",
+                    "type": "Number"
+                }
+            ],
+            "class": "$SERVICE",
+            "module": "nodgine",
+            "submodule": "$SERVICE"
+        },
+        {
+            "file": "dist\\Controller\\Service.js",
+            "line": 120,
+            "description": "Unregisters the service with given id",
+            "itemtype": "method",
+            "name": "unregisterService",
+            "params": [
+                {
+                    "name": "aId",
+                    "description": "ID of service, that should be unregistered",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "This instance itself",
+                "type": "Object"
+            },
+            "class": "$SERVICE",
+            "module": "nodgine",
+            "submodule": "$SERVICE"
+        },
+        {
+            "file": "dist\\bootstrap.js",
             "line": 10,
             "description": "The exporting object, which gets revealed",
             "type": "{object}",
@@ -1203,7 +2258,7 @@
             "module": "nodgine"
         },
         {
-            "file": "nodgine\\Bootstrap.js",
+            "file": "dist\\bootstrap.js",
             "line": 17,
             "description": "This function makes the APIs of this framework global",
             "itemtype": "method",
@@ -1212,8 +2267,8 @@
             "module": "nodgine"
         },
         {
-            "file": "nodgine\\Bootstrap.js",
-            "line": 43,
+            "file": "dist\\bootstrap.js",
+            "line": 44,
             "description": "An instance of $APPLICATION",
             "itemtype": "property",
             "name": "$APPLICATION",
@@ -1222,7 +2277,7 @@
             "module": "nodgine"
         },
         {
-            "file": "nodgine\\Bootstrap.js",
+            "file": "dist\\bootstrap.js",
             "line": 54,
             "description": "An instance of $ROUTER",
             "itemtype": "property",
@@ -1232,8 +2287,8 @@
             "module": "nodgine"
         },
         {
-            "file": "nodgine\\Bootstrap.js",
-            "line": 65,
+            "file": "dist\\bootstrap.js",
+            "line": 64,
             "description": "An instance of $LOGGER",
             "itemtype": "property",
             "name": "$LOGGER",
@@ -1242,8 +2297,65 @@
             "module": "nodgine"
         },
         {
-            "file": "nodgine\\Bootstrap.js",
-            "line": 76,
+            "file": "dist\\bootstrap.js",
+            "line": 74,
+            "description": "An instance of $SERVICE",
+            "itemtype": "property",
+            "name": "$SERVICE",
+            "type": "{$SERVICE}",
+            "class": "nodgine",
+            "module": "nodgine"
+        },
+        {
+            "file": "Bootstrap.js",
+            "line": 10,
+            "description": "The exporting object, which gets revealed",
+            "type": "{object}",
+            "class": "nodgine",
+            "module": "nodgine"
+        },
+        {
+            "file": "Bootstrap.js",
+            "line": 17,
+            "description": "This function makes the APIs of this framework global",
+            "itemtype": "method",
+            "name": "globalize",
+            "class": "nodgine",
+            "module": "nodgine"
+        },
+        {
+            "file": "Bootstrap.js",
+            "line": 44,
+            "description": "An instance of $APPLICATION",
+            "itemtype": "property",
+            "name": "$APPLICATION",
+            "type": "{$APPLICATION}",
+            "class": "nodgine",
+            "module": "nodgine"
+        },
+        {
+            "file": "Bootstrap.js",
+            "line": 54,
+            "description": "An instance of $ROUTER",
+            "itemtype": "property",
+            "name": "$ROUTER",
+            "type": "{$ROUTER}",
+            "class": "nodgine",
+            "module": "nodgine"
+        },
+        {
+            "file": "Bootstrap.js",
+            "line": 64,
+            "description": "An instance of $LOGGER",
+            "itemtype": "property",
+            "name": "$LOGGER",
+            "type": "{$LOGGER}",
+            "class": "nodgine",
+            "module": "nodgine"
+        },
+        {
+            "file": "Bootstrap.js",
+            "line": 74,
             "description": "An instance of $SERVICE",
             "itemtype": "property",
             "name": "$SERVICE",
@@ -1255,123 +2367,259 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " nodgine\\Controller\\Service.js:66"
+            "line": " Controller\\Service.js:66"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " dist\\Controller\\Service.js:66"
         },
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
-            "line": " nodgine\\Controller\\Application.js:10"
+            "line": " Controller\\Application.js:10"
         },
         {
             "message": "Missing item type\nA reference to the http-module",
-            "line": " nodgine\\Controller\\Application.js:17"
+            "line": " Controller\\Application.js:17"
         },
         {
             "message": "Missing item type\nA reference to the https-module",
-            "line": " nodgine\\Controller\\Application.js:25"
+            "line": " Controller\\Application.js:25"
         },
         {
             "message": "Missing item type\nA reference to the fs-module",
-            "line": " nodgine\\Controller\\Application.js:33"
+            "line": " Controller\\Application.js:33"
         },
         {
             "message": "Missing item type\nA reference to the path-module",
-            "line": " nodgine\\Controller\\Application.js:41"
+            "line": " Controller\\Application.js:41"
         },
         {
             "message": "Missing item type\nA reference to the nodgine-module",
-            "line": " nodgine\\Controller\\Application.js:49"
+            "line": " Controller\\Application.js:49"
         },
         {
             "message": "Missing item type\nA container, that holds all servers",
-            "line": " nodgine\\Controller\\Application.js:57"
+            "line": " Controller\\Application.js:57"
         },
         {
             "message": "Missing item type\nA container, that holds all known javascript classes with there files",
-            "line": " nodgine\\Controller\\Application.js:65"
+            "line": " Controller\\Application.js:65"
         },
         {
             "message": "Missing item type\nEmit a start event to the application",
-            "line": " nodgine\\Controller\\Application.js:184"
+            "line": " Controller\\Application.js:184"
         },
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
-            "line": " nodgine\\Controller\\Logger.js:10"
+            "line": " Controller\\Logger.js:10"
         },
         {
             "message": "Missing item type\nA reference to the fs-module",
-            "line": " nodgine\\Controller\\Logger.js:17"
+            "line": " Controller\\Logger.js:17"
         },
         {
             "message": "Missing item type\nThe name of logfile, where to save all logs",
-            "line": " nodgine\\Controller\\Logger.js:25"
+            "line": " Controller\\Logger.js:25"
         },
         {
             "message": "Missing item type\nFlag, whether logs should be written to the logfile",
-            "line": " nodgine\\Controller\\Logger.js:34"
+            "line": " Controller\\Logger.js:34"
         },
         {
             "message": "Missing item type\nFlag, whether logs should be written to console",
-            "line": " nodgine\\Controller\\Logger.js:43"
+            "line": " Controller\\Logger.js:43"
         },
         {
             "message": "Missing item type\nThis function generates a readable timestamp of current time for the log",
-            "line": " nodgine\\Controller\\Logger.js:52"
+            "line": " Controller\\Logger.js:52"
         },
         {
             "message": "Missing item type\nThis is the general function which is connected to all incoming errors to work with them",
-            "line": " nodgine\\Controller\\Logger.js:69"
+            "line": " Controller\\Logger.js:69"
         },
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
-            "line": " nodgine\\Controller\\Router.js:10"
+            "line": " Controller\\Router.js:10"
         },
         {
             "message": "Missing item type\nA list of all routes",
-            "line": " nodgine\\Controller\\Router.js:17"
+            "line": " Controller\\Router.js:17"
         },
         {
             "message": "Missing item type\nA reference to the url-module",
-            "line": " nodgine\\Controller\\Router.js:25"
+            "line": " Controller\\Router.js:25"
         },
         {
             "message": "Missing item type\nA reference to the querystring-module",
-            "line": " nodgine\\Controller\\Router.js:33"
+            "line": " Controller\\Router.js:33"
         },
         {
             "message": "Missing item type\nThe requestencoding",
-            "line": " nodgine\\Controller\\Router.js:41"
+            "line": " Controller\\Router.js:41"
         },
         {
             "message": "Missing item type\nA reference to the default function",
-            "line": " nodgine\\Controller\\Router.js:50"
+            "line": " Controller\\Router.js:50"
         },
         {
             "message": "Missing item type\nWrappes an object to a callable function",
-            "line": " nodgine\\Controller\\Router.js:58"
+            "line": " Controller\\Router.js:58"
         },
         {
             "message": "Missing item type\nThis function generates a route object from given path",
-            "line": " nodgine\\Controller\\Router.js:142"
+            "line": " Controller\\Router.js:142"
         },
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
-            "line": " nodgine\\Controller\\Service.js:10"
+            "line": " Controller\\Service.js:10"
         },
         {
             "message": "Missing item type\nA list of all registered services",
-            "line": " nodgine\\Controller\\Service.js:17"
+            "line": " Controller\\Service.js:17"
         },
         {
-            "message": "Missing item type\nUnittest for the logger",
-            "line": " nodgine\\Tests\\Logger.js:1"
+            "message": "Missing item type\nExports a simple function, that can be loaded with require or $APPLICATION.load from test",
+            "line": " Tests\\ApplicationTest\\TestObject.js:1"
+        },
+        {
+            "message": "Missing item type\nUnittest for the application object\n\nThis tests only the load function and it's mechanisms, cause the other functions are trivial and hopefuly not buggy or to change",
+            "line": " Tests\\Application.js:1"
+        },
+        {
+            "message": "Missing item type\nReference to the path object",
+            "line": " Tests\\Application.js:7"
+        },
+        {
+            "message": "Missing item type\nUnittest for the logger object",
+            "line": " Tests\\Logger.js:1"
+        },
+        {
+            "message": "Missing item type\nReference to the logger object",
+            "line": " Tests\\Logger.js:5"
+        },
+        {
+            "message": "Missing item type\nReference to the fs object",
+            "line": " Tests\\Logger.js:12"
+        },
+        {
+            "message": "Missing item type\nReference to the path object",
+            "line": " Tests\\Logger.js:19"
         },
         {
             "message": "Missing item type\nUnittest for the router",
-            "line": " nodgine\\Tests\\Router.js:1"
+            "line": " Tests\\Router.js:1"
         },
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
-            "line": " nodgine\\Bootstrap.js:10"
+            "line": " dist\\Controller\\Application.js:10"
+        },
+        {
+            "message": "Missing item type\nA reference to the http-module",
+            "line": " dist\\Controller\\Application.js:17"
+        },
+        {
+            "message": "Missing item type\nA reference to the https-module",
+            "line": " dist\\Controller\\Application.js:25"
+        },
+        {
+            "message": "Missing item type\nA reference to the fs-module",
+            "line": " dist\\Controller\\Application.js:33"
+        },
+        {
+            "message": "Missing item type\nA reference to the path-module",
+            "line": " dist\\Controller\\Application.js:41"
+        },
+        {
+            "message": "Missing item type\nA reference to the nodgine-module",
+            "line": " dist\\Controller\\Application.js:49"
+        },
+        {
+            "message": "Missing item type\nA container, that holds all servers",
+            "line": " dist\\Controller\\Application.js:57"
+        },
+        {
+            "message": "Missing item type\nA container, that holds all known javascript classes with there files",
+            "line": " dist\\Controller\\Application.js:65"
+        },
+        {
+            "message": "Missing item type\nEmit a start event to the application",
+            "line": " dist\\Controller\\Application.js:184"
+        },
+        {
+            "message": "Missing item type\nThe exporting object, which gets revealed",
+            "line": " dist\\Controller\\Logger.js:10"
+        },
+        {
+            "message": "Missing item type\nA reference to the fs-module",
+            "line": " dist\\Controller\\Logger.js:17"
+        },
+        {
+            "message": "Missing item type\nThe name of logfile, where to save all logs",
+            "line": " dist\\Controller\\Logger.js:25"
+        },
+        {
+            "message": "Missing item type\nFlag, whether logs should be written to the logfile",
+            "line": " dist\\Controller\\Logger.js:34"
+        },
+        {
+            "message": "Missing item type\nFlag, whether logs should be written to console",
+            "line": " dist\\Controller\\Logger.js:43"
+        },
+        {
+            "message": "Missing item type\nThis function generates a readable timestamp of current time for the log",
+            "line": " dist\\Controller\\Logger.js:52"
+        },
+        {
+            "message": "Missing item type\nThis is the general function which is connected to all incoming errors to work with them",
+            "line": " dist\\Controller\\Logger.js:69"
+        },
+        {
+            "message": "Missing item type\nThe exporting object, which gets revealed",
+            "line": " dist\\Controller\\Router.js:10"
+        },
+        {
+            "message": "Missing item type\nA list of all routes",
+            "line": " dist\\Controller\\Router.js:17"
+        },
+        {
+            "message": "Missing item type\nA reference to the url-module",
+            "line": " dist\\Controller\\Router.js:25"
+        },
+        {
+            "message": "Missing item type\nA reference to the querystring-module",
+            "line": " dist\\Controller\\Router.js:33"
+        },
+        {
+            "message": "Missing item type\nThe requestencoding",
+            "line": " dist\\Controller\\Router.js:41"
+        },
+        {
+            "message": "Missing item type\nA reference to the default function",
+            "line": " dist\\Controller\\Router.js:50"
+        },
+        {
+            "message": "Missing item type\nWrappes an object to a callable function",
+            "line": " dist\\Controller\\Router.js:58"
+        },
+        {
+            "message": "Missing item type\nThis function generates a route object from given path",
+            "line": " dist\\Controller\\Router.js:142"
+        },
+        {
+            "message": "Missing item type\nThe exporting object, which gets revealed",
+            "line": " dist\\Controller\\Service.js:10"
+        },
+        {
+            "message": "Missing item type\nA list of all registered services",
+            "line": " dist\\Controller\\Service.js:17"
+        },
+        {
+            "message": "Missing item type\nThe exporting object, which gets revealed",
+            "line": " dist\\bootstrap.js:10"
+        },
+        {
+            "message": "Missing item type\nThe exporting object, which gets revealed",
+            "line": " Bootstrap.js:10"
         }
     ]
 }

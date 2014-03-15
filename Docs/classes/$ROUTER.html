@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>$ROUTER</title>
+    <title>$ROUTER - Nodgine</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -15,11 +15,11 @@
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
             
-                <h1><img src="../assets/css/logo.png" title=""></h1>
+                <h1><img src="../assets/css/logo.png" title="Nodgine"></h1>
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: </em>
+            <em>API Docs for: 0.0.1</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -108,7 +108,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/nodgine_Controller_Router.js.html#l1"><code>nodgine\Controller\Router.js:1</code></a>
+            Defined in: <a href="../files/dist_Controller_Router.js.html#l1"><code>dist\Controller\Router.js:1</code></a>
         </div>
     
 
@@ -161,7 +161,28 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_addRoute">addRoute</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_clearRoutes">clearRoutes</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_clearRoutes">clearRoutes</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getDefaultRoute">getDefaultRoute</a>
 
                                 
                                 
@@ -182,6 +203,20 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_getEncoding">getEncoding</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getRoute">getRoute</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_getRoute">getRoute</a>
 
                                 
@@ -196,7 +231,28 @@
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_route">route</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_setDefaultRoute">setDefaultRoute</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_setDefaultRoute">setDefaultRoute</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_setEncoding">setEncoding</a>
 
                                 
                                 
@@ -279,7 +335,7 @@
             
         
         
-        <a href="../files/nodgine_Controller_Router.js.html#l175"><code>nodgine\Controller\Router.js:175</code></a>
+        <a href="../files/dist_Controller_Router.js.html#l175"><code>dist\Controller\Router.js:175</code></a>
         
         </p>
 
@@ -334,7 +390,139 @@ for the request</p>
                 <li class="param">
                     
                         <code class="param-name">aCaseSensetive</code>
-                        <span class="type">Bool</span>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Optional, false by default</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_addRoute" class="method item">
+    <h3 class="name"><code>addRoute</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>aPath</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>aCallback</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>aCaseSensetive</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/Controller_Router.js.html#l175"><code>Controller\Router.js:175</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Adds a route to the router with controller as first url param, action as second url param and callback as handle
+for the request</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">aPath</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">aCallback</code>
+                        <span class="type">Function | object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">aCaseSensetive</code>
+                        <span class="type">Boolean</span>
                     
 
                     
@@ -395,7 +583,82 @@ for the request</p>
             
         
         
-        <a href="../files/nodgine_Controller_Router.js.html#l99"><code>nodgine\Controller\Router.js:99</code></a>
+        <a href="../files/dist_Controller_Router.js.html#l99"><code>dist\Controller\Router.js:99</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Deletes all routes</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>The instance itself</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_clearRoutes" class="method item">
+    <h3 class="name"><code>clearRoutes</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/Controller_Router.js.html#l99"><code>Controller\Router.js:99</code></a>
         
         </p>
 
@@ -468,7 +731,78 @@ for the request</p>
             
         
         
-        <a href="../files/nodgine_Controller_Router.js.html#l131"><code>nodgine\Controller\Router.js:131</code></a>
+        <a href="../files/dist_Controller_Router.js.html#l131"><code>dist\Controller\Router.js:131</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the default route controller</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Function | null</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getDefaultRoute" class="method item">
+    <h3 class="name"><code>getDefaultRoute</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Function | null</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/Controller_Router.js.html#l131"><code>Controller\Router.js:131</code></a>
         
         </p>
 
@@ -539,7 +873,78 @@ for the request</p>
             
         
         
-        <a href="../files/nodgine_Controller_Router.js.html#l241"><code>nodgine\Controller\Router.js:241</code></a>
+        <a href="../files/Controller_Router.js.html#l252"><code>Controller\Router.js:252</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the current encoding for requests</p>
+
+    </div>
+
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getEncoding" class="method item">
+    <h3 class="name"><code>getEncoding</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/dist_Controller_Router.js.html#l252"><code>dist\Controller\Router.js:252</code></a>
         
         </p>
 
@@ -620,7 +1025,111 @@ for the request</p>
             
         
         
-        <a href="../files/nodgine_Controller_Router.js.html#l209"><code>nodgine\Controller\Router.js:209</code></a>
+        <a href="../files/dist_Controller_Router.js.html#l209"><code>dist\Controller\Router.js:209</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Returns the controller connected to a certain route. If the route wasn&#39;t defined it returns &#39;undefined&#39;</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">aPath</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object | null</span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getRoute" class="method item">
+    <h3 class="name"><code>getRoute</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>aPath</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object | null</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/Controller_Router.js.html#l209"><code>Controller\Router.js:209</code></a>
         
         </p>
 
@@ -726,7 +1235,119 @@ for the request</p>
             
         
         
-        <a href="../files/nodgine_Controller_Router.js.html#l253"><code>nodgine\Controller\Router.js:253</code></a>
+        <a href="../files/Controller_Router.js.html#l264"><code>Controller\Router.js:264</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>This function is the routers core function. It gets the request from http or https server, and routes it to the
+controller</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">aRequest</code>
+                        <span class="type">Request</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>An nodejs request</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">aResponse</code>
+                        <span class="type">Response</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>An nodejs response</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_route" class="method item">
+    <h3 class="name"><code>route</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>aRequest</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>aResponse</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/dist_Controller_Router.js.html#l264"><code>dist\Controller\Router.js:264</code></a>
         
         </p>
 
@@ -838,7 +1459,115 @@ controller</p>
             
         
         
-        <a href="../files/nodgine_Controller_Router.js.html#l112"><code>nodgine\Controller\Router.js:112</code></a>
+        <a href="../files/dist_Controller_Router.js.html#l112"><code>dist\Controller\Router.js:112</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the default route controller for all not routeable requests</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">aController</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Object</span>:
+                    
+                    <p>The instance itself</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_setDefaultRoute" class="method item">
+    <h3 class="name"><code>setDefaultRoute</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>aController</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <span class="flag chainable">chainable</span>
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/Controller_Router.js.html#l112"><code>Controller\Router.js:112</code></a>
         
         </p>
 
@@ -911,6 +1640,12 @@ controller</p>
                     
                 </li>
             
+                <li class="arg">
+                    
+                        <code>aCheckEncoding</code>
+                    
+                </li>
+            
             </ul><span class="paren">)</span>
         </div>
     
@@ -940,7 +1675,7 @@ controller</p>
             
         
         
-        <a href="../files/nodgine_Controller_Router.js.html#l228"><code>nodgine\Controller\Router.js:228</code></a>
+        <a href="../files/Controller_Router.js.html#l230"><code>Controller\Router.js:230</code></a>
         
         </p>
 
@@ -951,7 +1686,8 @@ controller</p>
     </div>
 
     <div class="description">
-        <p>Set the encoding for the request</p>
+        <p>Set the encoding for the request. If aCheckEncoding is set, the encoding gets validated. Valid encodings are
+utf8, ascii, binary, hex, base64, utf16le and ucs2</p>
 
     </div>
 
@@ -970,7 +1706,136 @@ controller</p>
                     
 
                     <div class="param-description">
-                         
+                        <p>The encoding string</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">aCheckEncoding</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Whether to check, if encoding is ok or not</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_setEncoding" class="method item">
+    <h3 class="name"><code>setEncoding</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>aEncoding</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>aCheckEncoding</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/dist_Controller_Router.js.html#l230"><code>dist\Controller\Router.js:230</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Set the encoding for the request. If aCheckEncoding is set, the encoding gets validated. Valid encodings are
+utf8, ascii, binary, hex, base64, utf16le and ucs2</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">aEncoding</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The encoding string</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">aCheckEncoding</code>
+                        <span class="type">Boolean</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>Whether to check, if encoding is ok or not</p>
+
                     </div>
 
                     
