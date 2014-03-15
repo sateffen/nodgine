@@ -25,7 +25,9 @@ module.exports = function(grunt) {
                 description: '<%= pkg.description %>',
                 version: '<%= pkg.version %>',
                 options: {
-                    paths: '.',
+                    paths: [
+                        "dist"
+                    ],
                     outdir: 'Docs/'
                 }
             }
@@ -38,6 +40,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-yuidoc');
 
     grunt.registerTask('default', ['nodeunit:all', 'clean:dist', 'copy:main']);
-    grunt.registerTask('doc', ['yuidoc']);
+    grunt.registerTask('doc', ['clean:dist', 'copy:main', 'yuidoc']);
     grunt.registerTask('test', ['nodeunit']);
 };
