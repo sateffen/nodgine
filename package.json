@@ -13,9 +13,14 @@
     "readmeFilename" : "README.md",
     "keywords" : [ ],
     "bugs" : {
-        "url" : "https://github.com/sateffen/nodgine/issues?state=open"
+        "url" : "https://github.com/sateffen/nodgine/issues"
     },
     "devDependencies": {
-        "nodeunit": "~0.8.4"
+        "grunt": "~0.4.0",
+        "grunt-contrib-copy": "~0.5.0",
+        "grunt-contrib-clean": "~0.5.0",
+        "grunt-contrib-nodeunit": "~0.3.0",
+        "grunt-contrib-yuidoc": "~0.5.0",
+        "nodeunit": "~0.8.0"
     }
 }
