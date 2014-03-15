@@ -17,12 +17,12 @@ var mPath = require('path');
 */
 module.exports.load = function(test) {
     'use strict';
-    var a = require('../Bootstrap.js').$APPLICATION,
+    var $APPLICATION = require('../Bootstrap.js').$APPLICATION,
         path = mPath.resolve('./Tests/ApplicationTest/');
-    a.addLoadPath(path);
+    $APPLICATION.addLoadPath(path);
 
     // test whether the loaded object and the directly required object is the same
-    test.equal(a.load('TestObject'), require('./ApplicationTest/TestObject.js'), '$APPLICATION.load: ' +
+    test.equal($APPLICATION.load('TestObject'), require('./ApplicationTest/TestObject.js'), '$APPLICATION.load: ' +
         'Required and loaded object should be the same');
     test.done();
 };
