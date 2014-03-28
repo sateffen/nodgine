@@ -2,12 +2,6 @@
 This project is a general architecture build for creating RESTful webservices. It contains all nessecary components for
 a fast webserver.
 
-## Warning
-This project is under heavy development. As long as version 0.1 isn't released, I'll work at master branch. The API might
-change, so don't rely on it, but I try to have it consistent.
-
-If you think there is a bug or you've got some ideas for making this project better, just open a issue-report.
-
 ## The Name
 Nodgine is a fusion of the words NodeJS and engine: Nod(eJS)(en)gine.
 
