@@ -1,6 +1,6 @@
 {
     "name" : "Nodgine",
-    "version" : "0.0.1",
+    "version" : "0.1",
     "description" : "Nodgine is a NodeJS engine for simple webserver and RESTful APIs.",
     "main" : "./Bootstrap.js",
     "author" : {
