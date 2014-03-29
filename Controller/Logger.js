@@ -57,7 +57,9 @@ var EXPORTOBJECT = {},
  */
 function mGetDateString() {
     'use strict';
+    // generate a current date
     var d = new Date();
+    // return a date string, looking like (dd.mm.yyy HH:MM:SS)
     return d.getDate() + '.' +
         (d.getMonth()+1) + '.' +
         d.getFullYear() + ' ' +
@@ -77,15 +79,19 @@ function mGetDateString() {
  */
 function mEnterLog(aState, aCritical, aMessage) {
     'use strict';
+    // logger is only able to log down strings
     if (typeof aMessage!== 'string') {
         throw '$LOGGER: First param needs to be a string, got ' + (typeof aMessage);
     }
+    // if it should be written to the file, append it
     if (mToFile) {
         mFs.appendFileSync(mLogFile, '[' + aState + '](' + mGetDateString() + ') '+ aMessage + '\n', {encoding: 'utf-8'});
     }
+    // if it should be written to the console, do it
     if (mToConsole) {
         console.log('[' + aState + '](' + mGetDateString() + ') '+ aMessage);
     }
+    // if it's critical, throw an error
     if (aCritical) {
         throw new Error('[' + aState + '](' + mGetDateString() + ') '+ aMessage);
     }

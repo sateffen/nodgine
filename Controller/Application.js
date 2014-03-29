@@ -105,11 +105,14 @@ function mStartHTTP(aPort) {
  **/
 function mStartHTTPS(aKey, aCert, aPort, aOptions) {
     'use strict';
+    // check port
     if (aPort < 1 || aPort > 65535) {
         throw '$APPLICATION.startHTTPS: Third param aPort out of range. Port has to be between 1 and 65535, got' + aPort;
     }
-    
+
+    // if no https server is started
     if (!mServer.https) {
+        // prepare options
         var options = {
             key: mFs.readFileSync(aKey),
             cert: mFs.readFileSync(aCert)
@@ -190,21 +193,28 @@ function mStopApplication() {
  **/
 function mGetAllJSFiles(aBasePath) {
     'use strict';
+    // first, read the basedir
     var files = mFs.readdirSync(aBasePath);
+    // than filter the basedir for directorys
     var dirList = files.filter(function(file) {
         return mFs.statSync(mPath.join(aBasePath, file)).isDirectory() && file[0] !== '.';
     });
+    // now filter the basedir for js files
     var returnFiles = files.filter(function(file) {
         return mFs.statSync(mPath.join(aBasePath, file)).isFile() && file.substr(-3) === '.js';
     });
+    // now map the returnfiles to their absolute paths
     returnFiles = returnFiles.map(function(file){
         return mPath.join(aBasePath, file);
     });
 
+    // for every dir, search in the dir and concat it to the return files
+    // this way all files will get found recursivly
     while (dirList.length > 0) {
         returnFiles = returnFiles.concat(mGetAllJSFiles(mPath.join(aBasePath, dirList.shift())));
     }
-    
+
+    // return the filelist
     return returnFiles;
 }
 
@@ -218,19 +228,31 @@ function mGetAllJSFiles(aBasePath) {
  **/
 function mAddLoadPath(aPath) {
     'use strict';
+    // first of all: resolve the path to an absolute path
     aPath = mPath.resolve(aPath);
+    // search for all JS files in this path, recursivly
     var jsFiles = mGetAllJSFiles(aPath);
+    // mark all found files in the map
     var jsClassNames = jsFiles.map(function(file) {
+        // get the sub filepath without file extension
+        // example: aPath = /test, file = /test/foo/bar.js, result: /foo/bar
         var tmp = file.substring(aPath.length, file.length-3);
+        // cleanup trailing slash
         tmp = (tmp[0] === mPath.sep) ? tmp.substr(mPath.sep.length) : tmp;
+        // generate a regex for the path seperator
         var regex = (mPath.sep === '\\') ? new RegExp('\\\\', 'g'): new RegExp(mPath.sep, 'g');
+        // replace every pathseperator with an _, so foo/bar will get foo_bar and direct to /test/foo/bar.js
         tmp = tmp.replace(regex, '_');
+        // return the new filename
         return tmp;
     });
 
+    // cause the map and files are an equal array, with every entry, simply with recalculated values, map them together
+    // to a real classmap
     for (var i=0;i<jsFiles.length;i++) {
         mClasses[jsClassNames[i]] = jsFiles[i];
     }
+    // and finally, make it chainable
     return EXPORTOBJECT;
 }
 
@@ -240,13 +262,16 @@ function mAddLoadPath(aPath) {
  * @chainable
  * @method load
  * @param {string} aClassName The classname, for which the function should search
- * @return {function || null} The searched class or null
+ * @return {function | null} The searched class or null
  **/
 function mLoad(aClassName) {
     'use strict';
+    // if class exists
     if (mClasses[aClassName]) {
+        // it's required
         return require(mClasses[aClassName]);
     }
+    // otherwise it's not
     return null;
 }
 

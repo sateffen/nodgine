@@ -104,6 +104,7 @@ function mObjectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
  */
 function mClearRoutes() {
     'use strict';
+    // delete routes
     mRoutes = [];
     return EXPORTOBJECT;
 }
@@ -150,7 +151,9 @@ function mGetDefaultRoute() {
  */
 function mPathToRoute(aPath, aSensetive) {
     'use strict';
+    // allocate some memory for the return object
     var tmpObj = {path: aPath, keys: []};
+    // do some magic
     aPath = aPath
         .concat('/?')
         .replace(/\/\(/g, '(?:/')
@@ -167,7 +170,9 @@ function mPathToRoute(aPath, aSensetive) {
         })
         .replace(/([\/.])/g, '\\$1')
         .replace(/\*/g, '(.*)');
+    // convert the magic to a regexp
     tmpObj.regex = new RegExp('^' + aPath + '$', aSensetive ? '' : 'i');
+    // return an object
     return tmpObj;
 }
 
@@ -183,7 +188,8 @@ function mPathToRoute(aPath, aSensetive) {
  */
 function mAddRoute(aPath, aCallback, aCaseSensetive) {
     'use strict';
-    aCaseSensetive = aCaseSensetive || false;
+    // preprocess arguments
+    aCaseSensetive = !!aCaseSensetive;
     if (typeof aPath !== 'string') {
         throw '$ROUTER.addRoute: First param aPath needs to be a string, got ' + (typeof aPath);
     }
@@ -192,16 +198,21 @@ function mAddRoute(aPath, aCallback, aCaseSensetive) {
     }
     aPath = (aPath[0] === '/') ? aPath : '/' + aPath;
 
+    // let some magic happen and save it
     var tmp = mPathToRoute(aPath, aCaseSensetive);
-    
+
+    // if the callback is an object, wrap it
     if (typeof aCallback === 'object') {
         tmp.callbackData = aCallback;
         tmp.callback = mObjectToCallbackWrapper.bind(null, tmp.callbackData);
     }
+    // else it's a function, nothing to wrap
     else {
         tmp.callback = aCallback;
     }
+    // push the route
     mRoutes.push(tmp);
+    // make it chainable
     return EXPORTOBJECT;
 }
 
@@ -214,15 +225,19 @@ function mAddRoute(aPath, aCallback, aCaseSensetive) {
  */
 function mGetRoute(aPath) {
     'use strict';
+    // preprocess arguments
     if (typeof aPath !== 'string') {
         throw '$ROUTER.getRoute: First param aPath needs to be a string, got ' + (typeof aPath);
     }
     aPath = (aPath[0] === '/') ? aPath : '/' + aPath;
+
+    // go for every known route and check whether it's the searched one
     for (var x in mRoutes) {
         if (aPath.match(mRoutes[x].regex) !== null) {
             return mRoutes[x];
         }
     }
+    // found null results
     return null;
 }
 
@@ -236,15 +251,20 @@ function mGetRoute(aPath) {
  */
 function mSetEncoding(aEncoding, aCheckEncoding) {
     'use strict';
+    // preprocess arguments
     if (typeof aCheckEncoding !== 'boolean') {
         aCheckEncoding = aCheckEncoding || true;
     }
 
+    // define some encodings, that are Ok
     var possibleEncodings = ['utf8', 'ascii', 'binary', 'hex', 'base64', 'utf16le', 'ucs2'];
+    // check encoding
     if (aCheckEncoding && possibleEncodings.indexOf(aEncoding.toLowerCase()) === -1) {
         throw '$ROUTER.setEncoding: Unknown encoding: ' + aEncoding;
     }
+    // set encoding
     mRequestEncoding = aEncoding;
+    // love encod... make it chainable!
     return EXPORTOBJECT;
 }
 
@@ -270,14 +290,18 @@ function mGetEncoding() {
  */
 function mRoute(aRequest, aResponse) {
     'use strict';
+    // setup some memory
     var postData = '';
-    
+
+    // set the request encoding
     aRequest.setEncoding(mRequestEncoding);
-    
+
+    // save every chunk of data, that the request has
     aRequest.on('data', function(chunk) {
         postData += chunk;
     });
-    
+
+    // request finished, now process it
     aRequest.on('end', function() {
         var urlParsed   = mUrl.parse(aRequest.url, true),
             path        = urlParsed.pathname,
@@ -285,26 +309,32 @@ function mRoute(aRequest, aResponse) {
 
         // region set GPC
         // parse post
+        // here the content-type is searched with indexOf, cause firefox sends an encoding in this header sometimes
         if (aRequest.headers['content-type'] && aRequest.headers['content-type'].toLowerCase().indexOf('application/json') > -1) {
+            // try to parse it, baby
             try {
                 aRequest.post = JSON.parse(postData);
             }
+            // nope, the parser didn't like it
             catch(e) {
                 aRequest.post = {};
             }
         }
+        // not an application/json, so simply parse it like normal
         else {
             aRequest.post = mQuerystring.parse(postData);
         }
 
-        // parse get
+        // parse get, or better: it's allready parsed
         aRequest.get = urlParsed.query;
 
         // parse cookies
         aRequest.cookie = {};
+        // receive cookies from headers
         var cookies = (aRequest.headers.cookie) ? aRequest.headers.cookie.split(';') : [];
+        // now: do the cookie dance
         for (x in cookies) {
-            if (typeof cookies[x] === 'string') {
+            if (cookies.hasOwnProperty(x) && typeof cookies[x] === 'string') {
                 tmp = cookies[x].split('=');
                 aRequest.cookie[tmp[0]] = tmp[1];
             }
@@ -313,26 +343,34 @@ function mRoute(aRequest, aResponse) {
         
         // find matching route
         for (x in mRoutes) {
-            if (typeof mRoutes[x] === 'object') {
+            if (mRoutes.hasOwnProperty(x) && typeof mRoutes[x] === 'object') {
+                // check if it's the right route and store the result (for arguments)
                 tmp = path.match(mRoutes[x].regex);
+                // if tmp is null, this wasn't the right one
                 if (tmp !== null) {
+                    // allocate some memory
                     var args = {};
+                    // play some memory
                     for (var y = 0; y < mRoutes[x].keys.length; y++) {
                         args[mRoutes[x].keys[y].name] = tmp[y+1];
                     }
 
+                    // tell grandmother that memory sucks and go away
                     process.nextTick(function(aX, aArgs) {
+                        // call back the callback
                         mRoutes[aX].callback(aRequest, aResponse, aArgs);
                     }.bind(null, x, args));
+                    // found what I was searching for, so return
                     return;
                 }
             }
         }
         
-        // if no route is defined, call default if exists
+        // if no route is defined, call default one
         if (typeof mDefaultController === 'function') {
             mDefaultController(aRequest, aResponse, path);
         }
+        // but there is no default one, so send 404
         else {
             aResponse.writeHead(404);
             aResponse.end();

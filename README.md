@@ -1,14 +1,14 @@
-# Description
+# Description #
 This project is a general architecture build for creating RESTful webservices. It contains all nessecary components for
 a fast webserver.
 
-## The Name
+## The Name ##
 Nodgine is a fusion of the words NodeJS and engine: Nod(eJS)(en)gine.
 
-# Example Application
-As example we will setup a http server, that listens at port 8888 and answers to every request with the current time.
+# Example Application #
+the server.js file:
 
-	// load architecture
+	// load nodgine
 	require('Nodgine').globalize();
 	// setup route
 	$ROUTER.addRoute('/*', function(request, response, arguments){
@@ -21,14 +21,23 @@ As example we will setup a http server, that listens at port 8888 and answers to
 	// start application
 	$APPLICATION.runApplication();
 
-Now you can start this with your node, and call the adress localhost:8888 from your webbrowser. You can add every path
-to it, every path will present the same result in this example.
+Now you can start this with nodejs, and call navigate your browser to http://localhost:8888. In this example every URI will
+get answered with the current time.
 
-# Developing
+# Developing #
 
-## Documentation
+## Documentation #
 In this project the documentation is created automaticaly. To do so I'm using YUIDoc.
 
-## Testing
-For tests I'm using [nodeunit](https://github.com/caolan/nodeunit). To run all tests run
+## Testing ##
+For tests I'm using [nodeunit](https://github.com/caolan/nodeunit). To run all tests use
 > nodeunit Tests/
+
+Otherwise you can use grunt. You can simply use the default task, to build the project, or use
+> grunt test
+
+to run the tests only.
+
+## Building ##
+To build this project you'll need grunt. If it's installed, you can simply run the default grunt task of this project.
+Then the project is build to the "dist" directory.

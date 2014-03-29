@@ -49,17 +49,21 @@ function mClearServices() {
  */
 function mGetServicesByType(aType) {
     'use strict';
+    // preprocess argument
     if (typeof aType !== 'string') {
         throw '$SERVICE.getServicesByType: First param aType needs to be a string, got ' + (typeof aType);
     }
     aType = aType.toLowerCase();
+    // allocate some memory
     var returnArray = [];
+    // search for every entry with given type
     for (var i in mRegisteredServices) {
-        if (mRegisteredServices[i] && mRegisteredServices[i].type === aType) {
+        if (mRegisteredServices.hasOwnProperty(i) && mRegisteredServices[i].type === aType) {
             returnArray.push(mRegisteredServices[i]);
         }
     }
-    
+
+    // return the list
     return returnArray;
 }
 
@@ -72,7 +76,7 @@ function mGetServicesByType(aType) {
  */
 function mGetServiceById(aId) {
     'use strict';
-    if (typeof aId === 'number' && mRegisteredServices && mRegisteredServices[aId]) {
+    if (typeof aId === 'number' && mRegisteredServices[aId]) {
         return mRegisteredServices[aId].controller;
     }
     return null;
@@ -101,14 +105,17 @@ function mRegisterService(aType, aController) {
         throw '$SERVICE.registerService: Second param aController needs to be a function or object, got ' + (typeof aController);
     }
 
+    // register service
     var id = mRegisteredServices.push(null)-1;
     mRegisteredServices[id] = {
         id: id,
         type: aType.toLowerCase(),
         controller: aController
     };
-    
+
+    // emit the event
     EXPORTOBJECT.emit('serviceRegistered', aType, id);
+    // return the id for this service
     return id;
 }
 
@@ -126,8 +133,9 @@ function mRegisterService(aType, aController) {
  */
 function mUnregisterService(aId) {
     'use strict';
-    if (typeof aId === 'number' && mRegisteredServices && mRegisteredServices[aId]) {
+    if (typeof aId === 'number' && mRegisteredServices[aId]) {
         EXPORTOBJECT.emit('serviceUnregistered', mRegisteredServices[aId].type, aId);
+        // set the service to null, so the id can be used by another service, and the memory will get freed
         mRegisteredServices[aId] = null;
     }
     return EXPORTOBJECT;
