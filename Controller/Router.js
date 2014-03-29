@@ -48,7 +48,7 @@ var EXPORTOBJECT = {},
     mRequestEncoding = 'utf8',
 
     /**
-     * A reference to the default function
+     * A reference to the default controller
      *
      * @private
      * @type {function}
@@ -66,33 +66,32 @@ var EXPORTOBJECT = {},
  **/
 function mObjectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
     'use strict';
-    try {
-        switch(aRequest.method.toLowerCase()) {
-        case 'get':
-            aCallbackObject.doGet(aRequest, aResponse, aArgs);
-            break;
-        case 'post':
-            aCallbackObject.doPost(aRequest, aResponse, aArgs);
-            break;
-        case 'put':
-            aCallbackObject.doPut(aRequest, aResponse, aArgs);
-            break;
-        case 'head':
-            aCallbackObject.doHead(aRequest, aResponse, aArgs);
-            break;
-        case 'delete':
-            aCallbackObject.doDelete(aRequest, aResponse, aArgs);
-            break;
+    // if the service method is available, call it
+    if (typeof aCallbackObject.service === 'function') {
+        aCallbackObject.service(aRequest, aResponse, aArgs);
+        return;
+    }
+    // the service method is not available, so delegate the method to it's function
+    else {
+        // make the method to lowercase
+        var method = aRequest.method.toLowerCase();
+        // capitalize the method, so get goes Get, or post goes Post
+        method = method.charAt(0).toUpperCase() + method.slice(1);
+        // check whether method handler exists, like doGet or doPost. If yes, call it
+        if (typeof aCallbackObject['do' + method] === 'function') {
+            aCallbackObject['do' + method](aRequest, aResponse, aArgs);
+            return;
         }
     }
-    catch (e) {
-        if (typeof mDefaultController === 'function') {
-            mDefaultController(aRequest, aResponse, aArgs);
-        }
-        else {
-            aResponse.writeHead(404);
-            aResponse.end();
-        }
+
+    // the callback object wasn't able to answer the request, now the defaultcontroller has to do the job
+    if (typeof mDefaultController === 'function') {
+        mDefaultController(aRequest, aResponse, aArgs);
+    }
+    // but there is no default controller, so simply send 404
+    else {
+        aResponse.writeHead(404);
+        aResponse.end();
     }
 }
 
