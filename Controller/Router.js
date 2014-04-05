@@ -23,6 +23,22 @@ var EXPORTOBJECT = {},
     mRoutes = [],
 
     /**
+     * A list of all preprocessors
+     *
+     * @private
+     * @type {Array}
+     **/
+    mPreProcessors = [],
+
+    /**
+     * A list of all postprocessors
+     *
+     * @private
+     * @type {Array}
+     **/
+    mPostProcessors = [],
+
+    /**
      * A reference to the url-module
      *
      * @private
@@ -53,7 +69,23 @@ var EXPORTOBJECT = {},
      * @private
      * @type {function}
      **/
-    mDefaultController = null;
+    mDefaultController = null,
+
+    /**
+     * A reference to the request object
+     *
+     * @private
+     * @type {function}
+     **/
+    mRequestObject = require('./Classes/Request.js'),
+
+    /**
+     * A reference to the response object
+     *
+     * @private
+     * @type {function}
+     **/
+    mResponseObject = require('./Classes/Response.js');
 
 /**
  * Wrappes an object to a callable function
@@ -181,10 +213,11 @@ function mPathToRoute(aPath, aSensetive) {
  * for the request
  *
  * @method addRoute
+ * @chainable
  * @param {string} aPath
  * @param {function | object} aCallback
  * @param {boolean} aCaseSensetive Optional, false by default
- * 
+ * @return {object} The instance itself
  */
 function mAddRoute(aPath, aCallback, aCaseSensetive) {
     'use strict';
@@ -213,6 +246,42 @@ function mAddRoute(aPath, aCallback, aCaseSensetive) {
     // push the route
     mRoutes.push(tmp);
     // make it chainable
+    return EXPORTOBJECT;
+}
+
+/**
+ * Adds a preprocessor to each request
+ *
+ * @method addPreProcessor
+ * @chainable
+ * @param {function} aPreProcessor
+ * @return {object} The instance itself
+ **/
+function mAddPreProcessor(aPreProcessor) {
+    'use strict';
+    if (typeof aPreProcessor !== 'function') {
+        throw '$ROUTER.addPreProcessor: First param aPreProcessor needs to be a function, got ' + (typeof aPreProcessor);
+    }
+
+    mPreProcessors.push(aPreProcessor);
+    return EXPORTOBJECT;
+}
+
+/**
+ * Adds a postprocessor to each request
+ *
+ * @method addPostProcessor
+ * @chainable
+ * @param {function} aPostProcessor
+ * @return {object} The instance itself
+ **/
+function mAddPostProcessor(aPostProcessor) {
+    'use strict';
+    if (typeof aPostProcessor !== 'function') {
+        throw '$ROUTER.addPreProcessor: First param aPreProcessor needs to be a function, got ' + (typeof aPostProcessor);
+    }
+
+    mPostProcessors.push(aPostProcessor);
     return EXPORTOBJECT;
 }
 
@@ -268,6 +337,7 @@ function mSetEncoding(aEncoding, aCheckEncoding) {
     return EXPORTOBJECT;
 }
 
+
 /**
  * Returns the current encoding for requests
  *
@@ -277,6 +347,56 @@ function mSetEncoding(aEncoding, aCheckEncoding) {
 function mGetEncoding() {
     'use strict';
     return mRequestEncoding;
+}
+
+
+//TODO: comment
+function mExecutePreProcessors(aRequest, aResponse, aArgs, aCallback) {
+    'use strict';
+    var counter = 0;
+
+    function callback(stop) {
+        if (stop) {
+            return;
+        }
+        else {
+            if (counter < mPreProcessors.length) {
+                process.nextTick(function(c) {
+                    mPreProcessors[c](aRequest, aResponse, aArgs, callback);
+                }.bind(null, counter));
+                counter++;
+            }
+            else {
+                process.nextTick(function() {
+                    aCallback(aRequest, aResponse, aArgs);
+                });
+            }
+        }
+    }
+
+    callback();
+}
+
+//TODO: comment
+function mExecutePostProcessors(aRequest, aResponse, aArgs, aCallback) {
+    'use strict';
+    var counter = 0;
+
+    function callback() {
+        if (counter < mPostProcessors.length) {
+            process.nextTick(function(c) {
+                mPostProcessors[c](aRequest, aResponse, aArgs, callback);
+            }.bind(null, counter));
+            counter++;
+        }
+        else {
+            process.nextTick(function() {
+                aResponse.nodgineResponseEnd();
+            });
+        }
+    }
+
+    callback();
 }
 
 
@@ -340,7 +460,7 @@ function mRoute(aRequest, aResponse) {
             }
         }
         // endregion
-        
+
         // find matching route
         for (x in mRoutes) {
             if (mRoutes.hasOwnProperty(x) && typeof mRoutes[x] === 'object') {
@@ -349,17 +469,20 @@ function mRoute(aRequest, aResponse) {
                 // if tmp is null, this wasn't the right one
                 if (tmp !== null) {
                     // allocate some memory
-                    var args = {};
+                    var args = {},
+                        request = new mRequestObject(aRequest),
+                        response = new mResponseObject(aResponse);
                     // play some memory
                     for (var y = 0; y < mRoutes[x].keys.length; y++) {
                         args[mRoutes[x].keys[y].name] = tmp[y+1];
                     }
 
                     // tell grandmother that memory sucks and go away
-                    process.nextTick(function(aX, aArgs) {
-                        // call back the callback
-                        mRoutes[aX].callback(aRequest, aResponse, aArgs);
-                    }.bind(null, x, args));
+                    mExecutePreProcessors(request, response, args, mRoutes[x].callback);
+                    response.registerPostProcessorCallback(function() {
+                        mExecutePostProcessors(request, response, args);
+                    });
+
                     // found what I was searching for, so return
                     return;
                 }
@@ -400,6 +523,12 @@ Object.defineProperties(EXPORTOBJECT, {
     },
     'getEncoding': {
         value: mGetEncoding
+    },
+    'addPreProcessor': {
+        value: mAddPreProcessor
+    },
+    'addPostProcessor': {
+        value: mAddPostProcessor
     },
     'clearRoutes': {
         value: mClearRoutes
