@@ -357,7 +357,9 @@ function mExecutePreProcessors(aRequest, aResponse, aArgs, aCallback) {
 
     function callback(stop) {
         if (stop) {
-            return;
+            // if stop was called, the preprocessor has filtered out the request
+            // if this is true, the response should be written to the client
+            aResponse.nodgineEnd();
         }
         else {
             if (counter < mPreProcessors.length) {
@@ -391,7 +393,7 @@ function mExecutePostProcessors(aRequest, aResponse, aArgs, aCallback) {
         }
         else {
             process.nextTick(function() {
-                aResponse.nodgineResponseEnd();
+                aResponse.nodgineEnd();
             });
         }
     }
@@ -479,7 +481,7 @@ function mRoute(aRequest, aResponse) {
 
                     // tell grandmother that memory sucks and go away
                     mExecutePreProcessors(request, response, args, mRoutes[x].callback);
-                    response.registerPostProcessorCallback(function() {
+                    response.registerResponseEndCallback(function() {
                         mExecutePostProcessors(request, response, args);
                     });
 
