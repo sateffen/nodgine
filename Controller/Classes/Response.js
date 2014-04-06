@@ -58,12 +58,13 @@ module.exports = function(aResponse) {
         mWroteData.push({data: aData, encoding: aEncoding});
     };
 
-    aResponse.registerResponseEndCallback = function(callback) {
+    aResponse.nodgineResponseEndCallback = function(callback) {
         mPostProcessorCallback = callback;
     };
 
-    aResponse.end = function(data, encoding) {
-        aResponse.write(data, encoding);
+    aResponse.end = function(aData, aEncoding) {
+        aResponse.write(aData, aEncoding);
+
         process.nextTick(function() {
             mPostProcessorCallback();
         });

@@ -350,25 +350,41 @@ function mGetEncoding() {
 }
 
 
-//TODO: comment
+/**
+ * Executes all preprocessors on given request and response
+ *
+ * @private
+ * @param {request} aRequest
+ * @param {response} aResponse
+ * @param {object} aArgs
+ * @param {function} aCallback
+ **/
 function mExecutePreProcessors(aRequest, aResponse, aArgs, aCallback) {
     'use strict';
+    // setup a counter, how many callbacks have been called
     var counter = 0;
 
+    // the actual execution callback
     function callback(stop) {
+        // if the callback was given an truish stop param, the request has been finished
         if (stop) {
-            // if stop was called, the preprocessor has filtered out the request
-            // if this is true, the response should be written to the client
+            // so make the response end the request
             aResponse.nodgineEnd();
         }
+        // the callback was called without finishing the request
         else {
+            // if there are some preprocessors left over, do them
             if (counter < mPreProcessors.length) {
+                // do the next preprocessor async
                 process.nextTick(function(c) {
                     mPreProcessors[c](aRequest, aResponse, aArgs, callback);
                 }.bind(null, counter));
+                // next preprocessor has been started, so count up the counter
                 counter++;
             }
+            // no preprocessor left
             else {
+                // call the callback, the actual requesthandler
                 process.nextTick(function() {
                     aCallback(aRequest, aResponse, aArgs);
                 });
@@ -376,28 +392,44 @@ function mExecutePreProcessors(aRequest, aResponse, aArgs, aCallback) {
         }
     }
 
+    // execute the first callback
     callback();
 }
 
-//TODO: comment
+
+/**
+ * Executes all postprocessors on given request and response
+ *
+ * @private
+ * @param {request} aRequest
+ * @param {response} aResponse
+ * @param {object} aArgs
+ * @param {function} aCallback
+ **/
 function mExecutePostProcessors(aRequest, aResponse, aArgs, aCallback) {
     'use strict';
+    // setup a postprocessor counter
     var counter = 0;
 
+    // this is the actual post processor executer
     function callback() {
+        // if there are some postprocessors left, execute them
         if (counter < mPostProcessors.length) {
+            // execute the postprocessor async
             process.nextTick(function(c) {
                 mPostProcessors[c](aRequest, aResponse, aArgs, callback);
             }.bind(null, counter));
+            // next postprocessor has been started, so count up the counter
             counter++;
         }
+        // no postprocessors left
         else {
-            process.nextTick(function() {
-                aResponse.nodgineEnd();
-            });
+            // finish the request
+            aResponse.nodgineEnd();
         }
     }
 
+    // execute the first postprocessor
     callback();
 }
 
@@ -481,7 +513,7 @@ function mRoute(aRequest, aResponse) {
 
                     // tell grandmother that memory sucks and go away
                     mExecutePreProcessors(request, response, args, mRoutes[x].callback);
-                    response.registerResponseEndCallback(function() {
+                    response.nodgineResponseEndCallback(function() {
                         mExecutePostProcessors(request, response, args);
                     });
 
