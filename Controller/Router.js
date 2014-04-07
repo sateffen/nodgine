@@ -495,6 +495,12 @@ function mRoute(aRequest, aResponse) {
         }
         // endregion
 
+        // generate request and response object
+        var request = new mRequestObject(aRequest),
+            args = {},
+            response = new mResponseObject(aResponse),
+            routeToExecute = null;
+
         // find matching route
         for (x in mRoutes) {
             if (mRoutes.hasOwnProperty(x) && typeof mRoutes[x] === 'object') {
@@ -502,36 +508,37 @@ function mRoute(aRequest, aResponse) {
                 tmp = path.match(mRoutes[x].regex);
                 // if tmp is null, this wasn't the right one
                 if (tmp !== null) {
-                    // allocate some memory
-                    var args = {},
-                        request = new mRequestObject(aRequest),
-                        response = new mResponseObject(aResponse);
                     // play some memory
                     for (var y = 0; y < mRoutes[x].keys.length; y++) {
                         args[mRoutes[x].keys[y].name] = tmp[y+1];
                     }
 
-                    // tell grandmother that memory sucks and go away
-                    mExecutePreProcessors(request, response, args, mRoutes[x].callback);
-                    response.nodgineResponseEndCallback(function() {
-                        mExecutePostProcessors(request, response, args);
-                    });
+                    // found route, set route
+                    routeToExecute = mRoutes[x].callback;
 
                     // found what I was searching for, so return
-                    return;
+                    break;
                 }
             }
         }
         
-        // if no route is defined, call default one
-        if (typeof mDefaultController === 'function') {
-            mDefaultController(aRequest, aResponse, path);
+        // if no route is found
+        if (routeToExecute === null) {
+            // if defaultcontroller is set
+            routeToExecute = (typeof mDefaultController === 'function') ?
+                // set defaultcontroller
+                mDefaultController :
+                // else define a defaultcontroller
+                function () {
+                    aResponse.writeHead(404);
+                    aResponse.end();
+                };
         }
-        // but there is no default one, so send 404
-        else {
-            aResponse.writeHead(404);
-            aResponse.end();
-        }
+
+        mExecutePreProcessors(request, response, args, routeToExecute);
+        response.nodgineResponseEndCallback(function() {
+            mExecutePostProcessors(request, response, args);
+        });
     });
 }
 

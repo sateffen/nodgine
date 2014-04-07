@@ -3,7 +3,6 @@ module.exports = function(aResponse) {
     'use strict';
 
     // TODO: Comment
-    // TODO: Rewrite the API at points like write
 
     var mPostProcessorCallback,
         mWroteData = [],
