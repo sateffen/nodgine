@@ -77,7 +77,7 @@ var EXPORTOBJECT = {},
      * @private
      * @type {function}
      **/
-    mRequestObject = require('./Classes/Request.js'),
+    mRequestObject = require('./../Libs/Nodgine/Router/Request.js'),
 
     /**
      * A reference to the response object
@@ -85,7 +85,7 @@ var EXPORTOBJECT = {},
      * @private
      * @type {function}
      **/
-    mResponseObject = require('./Classes/Response.js');
+    mResponseObject = require('./../Libs/Nodgine/Router/Response.js');
 
 /**
  * Wrappes an object to a callable function
@@ -404,9 +404,8 @@ function mExecutePreProcessors(aRequest, aResponse, aArgs, aCallback) {
  * @param {request} aRequest
  * @param {response} aResponse
  * @param {object} aArgs
- * @param {function} aCallback
  **/
-function mExecutePostProcessors(aRequest, aResponse, aArgs, aCallback) {
+function mExecutePostProcessors(aRequest, aResponse, aArgs) {
     'use strict';
     // setup a postprocessor counter
     var counter = 0;
@@ -457,42 +456,14 @@ function mRoute(aRequest, aResponse) {
 
     // request finished, now process it
     aRequest.on('end', function() {
-        var urlParsed   = mUrl.parse(aRequest.url, true),
+        var urlParsed   = mUrl.parse(aRequest.url),
             path        = urlParsed.pathname,
             tmp, x;
 
         // region set GPC
-        // parse post
-        // here the content-type is searched with indexOf, cause firefox sends an encoding in this header sometimes
-        if (aRequest.headers['content-type'] && aRequest.headers['content-type'].toLowerCase().indexOf('application/json') > -1) {
-            // try to parse it, baby
-            try {
-                aRequest.post = JSON.parse(postData);
-            }
-            // nope, the parser didn't like it
-            catch(e) {
-                aRequest.post = {};
-            }
-        }
-        // not an application/json, so simply parse it like normal
-        else {
-            aRequest.post = mQuerystring.parse(postData);
-        }
-
-        // parse get, or better: it's allready parsed
-        aRequest.get = urlParsed.query;
-
-        // parse cookies
-        aRequest.cookie = {};
-        // receive cookies from headers
-        var cookies = (aRequest.headers.cookie) ? aRequest.headers.cookie.split(';') : [];
-        // now: do the cookie dance
-        for (x in cookies) {
-            if (cookies.hasOwnProperty(x) && typeof cookies[x] === 'string') {
-                tmp = cookies[x].split('=');
-                aRequest.cookie[tmp[0]] = tmp[1];
-            }
-        }
+        aRequest.post = postData;
+        aRequest.get = urlParsed.search ;
+        aRequest.cookie = aRequest.headers.cookie;
         // endregion
 
         // generate request and response object

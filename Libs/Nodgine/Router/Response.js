@@ -13,6 +13,14 @@ module.exports = function(aResponse) {
     aResponse.nodgineResponseWriteHead = aResponse.writeHead;
     aResponse.nodgineResponseWriteContinue = aResponse.writeContinue;
 
+    aResponse.nodgineGetWroteData = function() {
+        return mWroteData;
+    };
+
+    aResponse.nodgineResetWroteData = function() {
+        mWroteData = [];
+    };
+
     aResponse.nodgineEnd = function() {
         aResponse.nodgineResponseWriteHead(
             aResponse.statusCode,
@@ -20,7 +28,7 @@ module.exports = function(aResponse) {
             aResponse._headers
         );
         for (var i = 0; i < mWroteData.length; i++) {
-            aResponse.nodgineResponseWrite(mWroteData[i].data, mWroteData[i].encoding);
+            aResponse.nodgineResponseWrite(mWroteData[i].data + '', mWroteData[i].encoding);
         }
 
         aResponse.nodgineResponseEnd();

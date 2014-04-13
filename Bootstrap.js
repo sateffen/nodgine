@@ -12,7 +12,9 @@
  *
  * @type {object}
  **/
-var EXPORTOBJECT = {};
+var EXPORTOBJECT = {},
+
+    mPath = require('path');
 
 /**
  * This function makes the APIs of this framework global
@@ -36,6 +38,8 @@ function mGlobalize() {
         }
     });
 }
+
+require('./Controller/Application.js').addLoadPath(mPath.join(__dirname, 'Libs'));
 
 //region revealing object
 
