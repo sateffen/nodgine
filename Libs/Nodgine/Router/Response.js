@@ -1,14 +1,17 @@
 
+var mStream = require('stream');
+
 module.exports = function(aResponse) {
     'use strict';
 
     // TODO: Comment
 
     var mPostProcessorCallback,
-        mWroteData = [],
+        mWroteData = new Buffer(0),
         mReasonPhrase = '';
 
     aResponse.nodgineResponseEnd = aResponse.end;
+    aResponse.nodgineResponsePipe = aResponse.pipe;
     aResponse.nodgineResponseWrite = aResponse.write;
     aResponse.nodgineResponseWriteHead = aResponse.writeHead;
     aResponse.nodgineResponseWriteContinue = aResponse.writeContinue;
@@ -18,20 +21,40 @@ module.exports = function(aResponse) {
     };
 
     aResponse.nodgineResetWroteData = function() {
-        mWroteData = [];
+        mWroteData = new Buffer(0);
     };
 
     aResponse.nodgineEnd = function() {
         aResponse.nodgineResponseWriteHead(
             aResponse.statusCode,
-            mReasonPhrase,
-            aResponse._headers
+            mReasonPhrase
         );
-        for (var i = 0; i < mWroteData.length; i++) {
-            aResponse.nodgineResponseWrite(mWroteData[i].data + '', mWroteData[i].encoding);
-        }
 
-        aResponse.nodgineResponseEnd();
+        aResponse.nodgineResponseEnd(mWroteData);
+    };
+
+    aResponse.pipe = function(aReadableStream, aCallback) {
+        var tmp = [];
+
+        if (aReadableStream instanceof mStream.Readable) {
+            aReadableStream.on('data', function(data) {
+                tmp.push(data);
+            });
+
+            aReadableStream.on('end', function() {
+                var concatTmp = Buffer.concat(tmp);
+                if (typeof aCallback === 'function') {
+                    aResponse.write(concatTmp);
+                    aCallback();
+                }
+                else {
+                    aResponse.end(concatTmp);
+                }
+            });
+        }
+        else {
+            throw 'Response.pipe: First param needs to be a readable stream.';
+        }
     };
 
     aResponse.writeHead = function(aStatuscode, aReasonPhrase, aHeaders) {
@@ -62,7 +85,19 @@ module.exports = function(aResponse) {
     };
 
     aResponse.write = function(aData, aEncoding) {
-        mWroteData.push({data: aData, encoding: aEncoding});
+        //mWroteData.push({data: aData, encoding: aEncoding});
+        var tmp;
+        if (typeof aData === 'string') {
+            tmp = new Buffer(aData, aEncoding);
+        }
+        else if (aData instanceof Buffer) {
+            tmp = aData;
+        }
+        else {
+            throw 'Response.write needs a string or buffer as first argument.';
+        }
+
+        mWroteData = Buffer.concat([mWroteData, tmp]);
     };
 
     aResponse.nodgineResponseEndCallback = function(callback) {
