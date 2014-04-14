@@ -47,14 +47,6 @@ var EXPORTOBJECT = {},
     mUrl = require('url'),
 
     /**
-     * A reference to the querystring-module
-     *
-     * @private
-     * @type {querystring}
-     **/
-    mQuerystring = require('querystring'),
-
-    /**
      * The requestencoding
      *
      * @private
@@ -77,7 +69,7 @@ var EXPORTOBJECT = {},
      * @private
      * @type {function}
      **/
-    mRequestObject = require('./../Libs/Nodgine/Router/Request.js'),
+    mRequestObject = require('./../Lib/Nodgine/Router/Request.js'),
 
     /**
      * A reference to the response object
@@ -85,7 +77,15 @@ var EXPORTOBJECT = {},
      * @private
      * @type {function}
      **/
-    mResponseObject = require('./../Libs/Nodgine/Router/Response.js');
+    mResponseObject = require('./../Lib/Nodgine/Router/Response.js'),
+
+    /**
+     * A reference to the optimization interval object
+     *
+     * @private
+     * @type {Interval}
+     **/
+    mOptimizeIntervalReference = 0;
 
 /**
  * Wrappes an object to a callable function
@@ -184,7 +184,7 @@ function mGetDefaultRoute() {
 function mPathToRoute(aPath, aSensetive) {
     'use strict';
     // allocate some memory for the return object
-    var tmpObj = {path: aPath, keys: []};
+    var tmpObj = {path: aPath, keys: [], requestCounter: 0};
     // do some magic
     aPath = aPath
         .concat('/?')
@@ -484,6 +484,9 @@ function mRoute(aRequest, aResponse) {
                         args[mRoutes[x].keys[y].name] = tmp[y+1];
                     }
 
+                    // increment request counter
+                    mRoutes[x].requestCounter++;
+
                     // found route, set route
                     routeToExecute = mRoutes[x].callback;
 
@@ -511,6 +514,59 @@ function mRoute(aRequest, aResponse) {
             mExecutePostProcessors(request, response, args);
         });
     });
+}
+
+/**
+ * Sorting the route objects descending
+ *
+ * @private
+ * @param {Route-Object} aFirst
+ * @param {Route-Object} aSecond
+ * @returns {Number}
+ **/
+function mSortRoutes(aFirst, aSecond) {
+    'use strict';
+    // sort descend
+    return aSecond.requestCounter - aFirst.requestCounter;
+}
+
+/**
+ * Opimizes the mRoutes array
+ *
+ * @private
+ **/
+function mOptimizeRoutes() {
+    'use strict';
+
+    // sort descending
+    mRoutes.sort(mSortRoutes);
+
+    // reset all requestcounter
+    for (var i = 0; i < mRoutes.length; i++) {
+        mRoutes[i].requestCounter = 0;
+    }
+}
+
+/**
+ * Sets or unsets an optimization interval (0 = unset, larger than 0 the time in milliseconds between the executions)
+ *
+ * @method setOptimizeInterval
+ * @param {Number} aIntervalTime
+ * @return {Object}
+ **/
+function mSetOptimizeInterval(aIntervalTime) {
+    'use strict';
+
+    // reset current interval
+    clearInterval(mOptimizeIntervalReference);
+
+    // if intervaltime is larger than 0, it should be set
+    if (aIntervalTime > 0) {
+        // set new interval
+        mOptimizeIntervalReference = setInterval(mOptimizeRoutes, aIntervalTime);
+    }
+
+    return EXPORTOBJECT;
 }
 
 // extend EXPORTOBJECT with all properties to reveal
@@ -544,6 +600,9 @@ Object.defineProperties(EXPORTOBJECT, {
     },
     'clearRoutes': {
         value: mClearRoutes
+    },
+    'setOptimizeInterval': {
+        value: mSetOptimizeInterval
     }
 });
 

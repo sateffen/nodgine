@@ -37,7 +37,7 @@ function mGlobalize() {
     });
 }
 
-require('./Controller/Application.js').addLoadPath(__dirname + '/Libs');
+require('./Controller/Application.js').addLoadPath(__dirname + '/Lib');
 
 //region revealing object
 
