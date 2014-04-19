@@ -21,7 +21,7 @@ the server.js file:
 	// start application
 	$APPLICATION.runApplication();
 
-Now you can start this with nodejs, and call navigate your browser to http://localhost:8888. In this example every URI will
+Now you can start this with nodejs, and navigate your browser to http://localhost:8888. In this example every URI will
 get answered with the current time.
 
 # Developing #
