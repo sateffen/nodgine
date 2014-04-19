@@ -551,7 +551,7 @@ function mOptimizeRoutes() {
  * Sets or unsets an optimization interval (0 = unset, larger than 0 the time in milliseconds between the executions)
  *
  * @method setOptimizeInterval
- * @param {Number} aIntervalTime
+ * @param {Number} aIntervalTime Time between optimizings in milliseconds
  * @return {Object}
  **/
 function mSetOptimizeInterval(aIntervalTime) {
