@@ -20,7 +20,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * @private
      * @type {Array}
      **/
-    mRegisteredServices = [];
+    mRegisteredServices = {};
 
 /**
  * @event servicesCleared
@@ -34,7 +34,7 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
  */
 function mClearServices() {
     'use strict';
-    mRegisteredServices = [];
+    mRegisteredServices = {};
     EXPORTOBJECT.emit('servicesCleared');
     return EXPORTOBJECT;
 }
@@ -72,51 +72,57 @@ function mGetServicesByType(aType) {
  *
  * @method getServiceById
  * @param {number} aId
- * @returns {function | object | null}
+ * @returns {function | object | undefined}
  */
 function mGetServiceById(aId) {
     'use strict';
-    if (typeof aId === 'number' && mRegisteredServices[aId]) {
+    if (typeof aId === 'string' && mRegisteredServices[aId]) {
         return mRegisteredServices[aId].controller;
     }
-    return null;
+    return undefined;
 }
 
 /**
  * @event serviceRegistered
  * @param {string} serviceType the type of the new serice
- * @param {number} serviceId the id of the new serice
+ * @param {string} serviceId the id of the new serice
  **/
 /**
  * Registers given controller as new service from given type, returns the generated id
  *
  * @method registerService
+ * @param {string} aId
  * @param {string} aType
  * @param {function} aController
- * @return {number}
+ * @return {object} The instance itself
  */
-function mRegisterService(aType, aController) {
+function mRegisterService(aId, aType, aController) {
     'use strict';
     // verify input
+    if (typeof aId !== 'string') {
+        throw '$SERVICE.registerService: First param aId needs to be a string, got ' + (typeof aId);
+    }
     if (typeof aType !== 'string') {
-        throw '$SERVICE.registerService: First param aType needs to be a string, got ' + (typeof aType);
+        throw '$SERVICE.registerService: Second param aType needs to be a string, got ' + (typeof aType);
     }
     else if (typeof aController !== 'function' && typeof aController !== 'object') {
-        throw '$SERVICE.registerService: Second param aController needs to be a function or object, got ' + (typeof aController);
+        throw '$SERVICE.registerService: Third param aController needs to be a function or object, got ' + (typeof aController);
+    }
+    if (mRegisteredServices[aId]) {
+        throw '$SERVICE.registerService: Service with id ' + aId + ' does allready exist';
     }
 
     // register service
-    var id = mRegisteredServices.push(null)-1;
-    mRegisteredServices[id] = {
-        id: id,
+    mRegisteredServices[aId] = {
+        id: aId,
         type: aType.toLowerCase(),
         controller: aController
     };
 
     // emit the event
-    EXPORTOBJECT.emit('serviceRegistered', aType, id);
+    EXPORTOBJECT.emit('serviceRegistered', aType, aId);
     // return the id for this service
-    return id;
+    return EXPORTOBJECT;
 }
 
 /**
@@ -133,10 +139,10 @@ function mRegisterService(aType, aController) {
  */
 function mUnregisterService(aId) {
     'use strict';
-    if (typeof aId === 'number' && mRegisteredServices[aId]) {
+    if (typeof aId === 'string' && mRegisteredServices[aId]) {
         EXPORTOBJECT.emit('serviceUnregistered', mRegisteredServices[aId].type, aId);
         // set the service to null, so the id can be used by another service, and the memory will get freed
-        mRegisteredServices[aId] = null;
+        delete mRegisteredServices[aId];
     }
     return EXPORTOBJECT;
 }

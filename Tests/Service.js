@@ -16,18 +16,19 @@ var nodgineService = require('../Bootstrap.js').$SERVICE;
 exports.registerService = function(test) {
     'use strict';
     // register to get the serviceRegistered event once
-    nodgineService.once('serviceRegistered', function(type) {
-        test.ok(type === 'test', 'The type propagated by the serviceRegistered event should be \'test\', got ' + type);
+    nodgineService.once('serviceRegistered', function(type, id) {
+        test.ok(type === 'testtype', 'The type propagated by the serviceRegistered event should be \'testtype\', got ' + type);
+        test.ok(id === 'testid', 'The type propagated by the serviceRegistered event should be \'testid\', got ' + id);
         test.done();
     });
 
-    // register zwei services
-    var id1 = nodgineService.registerService('test', function(){}),
-        id2 = nodgineService.registerService('test2', function(){});
+    // register two services
+    var id1 = nodgineService.registerService('testid', 'testtype', function(){}),
+        id2 = nodgineService.registerService('testid2', 'testtype2', function(){});
 
     // check, whether services are set
-    test.ok(nodgineService.getServiceById(id1), 'The service with the first id should be found');
-    test.ok(nodgineService.getServiceById(id2), 'The service with the second id should be found');
+    test.ok(nodgineService.getServiceById('testid'), 'The service with the first id should be found');
+    test.ok(nodgineService.getServiceById('testid2'), 'The service with the second id should be found');
 
     // cleanup all services
     nodgineService.clearServices();
@@ -39,26 +40,27 @@ exports.registerService = function(test) {
 exports.unregisterService = function(test) {
     'use strict';
     // register two services for the test
-    var id1 = nodgineService.registerService('test', function(){}),
-        id2 = nodgineService.registerService('test2', function(){});
+    var id1 = nodgineService.registerService('testid', 'testtype', function(){}),
+        id2 = nodgineService.registerService('testid2', 'testtype2', function(){});
 
     //
-    test.ok(nodgineService.getServiceById(id1), 'The service with the first id should be found');
-    test.ok(nodgineService.getServiceById(id2), 'The service with the second id should be found');
+    test.ok(nodgineService.getServiceById('testid'), 'The service with the first id should be found');
+    test.ok(nodgineService.getServiceById('testid2'), 'The service with the second id should be found');
 
     // register once for the serviceUnregistered event
-    nodgineService.once('serviceUnregistered', function(type) {
-        test.ok(type === 'test', 'The type propagated by the serviceUnregistered event should be \'test\', got ' + type);
+    nodgineService.once('serviceUnregistered', function(type, id) {
+        test.ok(type === 'testtype', 'The type propagated by the serviceUnregistered event should be \'test\', got ' + type);
+        test.ok(id === 'testid', 'The type propagated by the serviceUnregistered event should be \'test\', got ' + type);
         test.done();
     });
 
     // unregister both services
-    nodgineService.unregisterService(id1);
-    nodgineService.unregisterService(id2);
+    nodgineService.unregisterService('testid');
+    nodgineService.unregisterService('testid2');
 
     // check whether both unregistered services are null, like expected
-    test.equal(nodgineService.getServiceById(id1), null, 'The service with the first id shouldn\' be found');
-    test.equal(nodgineService.getServiceById(id2), null, 'The service with the second id shouldn\' be found');
+    test.equal(nodgineService.getServiceById('testid'), null, 'The service with the first id shouldn\' be found');
+    test.equal(nodgineService.getServiceById('testid2'), null, 'The service with the second id shouldn\' be found');
 
     // cleanup all services
     nodgineService.clearServices();
@@ -70,9 +72,9 @@ exports.unregisterService = function(test) {
 exports.getServicesByType = function(test) {
     'use strict';
     // setup some test services
-    nodgineService.registerService('test', function(){});
-    nodgineService.registerService('test2', function(){});
-    nodgineService.registerService('test2', function(){});
+    nodgineService.registerService('testid', 'test', function(){});
+    nodgineService.registerService('testid2', 'test2', function(){});
+    nodgineService.registerService('testid3','test2', function(){});
 
     // test the length of arrays returned by the function
     test.equal(nodgineService.getServicesByType('notDefined').length, 0);
