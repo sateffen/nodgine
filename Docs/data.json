@@ -1,8 +1,8 @@
 {
     "project": {
-        "name": "Nodgine",
+        "name": "nodgine",
         "description": "Nodgine is a NodeJS engine for simple webserver and RESTful APIs.",
-        "version": "0.0.1"
+        "version": "0.1.1"
     },
     "files": {
         "dist\\Controller\\Application.js": {
@@ -379,7 +379,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 128,
+            "line": 131,
             "description": "Stops the HTTP-Server, if any is started",
             "itemtype": "method",
             "name": "stopHTTP",
@@ -394,7 +394,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 143,
+            "line": 146,
             "description": "Stops the HTTPS-Server, if any is started",
             "itemtype": "method",
             "name": "stopHTTPS",
@@ -409,7 +409,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 158,
+            "line": 161,
             "description": "Emit a start event to the application",
             "itemtype": "method",
             "name": "runApplication",
@@ -424,7 +424,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 171,
+            "line": 174,
             "description": "Emit a stop event to the application",
             "itemtype": "method",
             "name": "stopApplication",
@@ -439,7 +439,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 184,
+            "line": 187,
             "description": "Emit a start event to the application",
             "access": "private",
             "tagname": "",
@@ -460,7 +460,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 211,
+            "line": 221,
             "description": "Adds a loadpath for the load method, where to search for new classes",
             "chainable": 1,
             "itemtype": "method",
@@ -482,7 +482,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 237,
+            "line": 259,
             "description": "Searches in all known pathes for specified class file and returns it",
             "chainable": 1,
             "itemtype": "method",
@@ -496,7 +496,7 @@
             ],
             "return": {
                 "description": "The searched class or null",
-                "type": "Function || null"
+                "type": "Function | null"
             },
             "class": "$APPLICATION",
             "module": "nodgine",
@@ -574,7 +574,7 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 69,
+            "line": 71,
             "description": "This is the general function which is connected to all incoming errors to work with them",
             "access": "private",
             "tagname": "",
@@ -602,7 +602,7 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 96,
+            "line": 102,
             "description": "With this function you can set the log file",
             "chainable": 1,
             "itemtype": "method",
@@ -624,7 +624,7 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 111,
+            "line": 117,
             "description": "with this function you can set writing to file on or off",
             "chainable": 1,
             "itemtype": "method",
@@ -646,7 +646,7 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 125,
+            "line": 131,
             "description": "with this function you can set writing to console on or off",
             "chainable": 1,
             "itemtype": "method",
@@ -668,7 +668,7 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 139,
+            "line": 145,
             "description": "This is the bind function, bind to enterLog",
             "chainable": 1,
             "itemtype": "method",
@@ -686,7 +686,7 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 148,
+            "line": 154,
             "description": "This is the bind function, bind to enterLog",
             "chainable": 1,
             "itemtype": "method",
@@ -704,7 +704,7 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 157,
+            "line": 163,
             "description": "This is the bind function, bind to enterLog",
             "chainable": 1,
             "itemtype": "method",
@@ -743,6 +743,28 @@
         {
             "file": "dist\\Controller\\Router.js",
             "line": 25,
+            "description": "A list of all preprocessors",
+            "access": "private",
+            "tagname": "",
+            "type": "{Array}",
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 33,
+            "description": "A list of all postprocessors",
+            "access": "private",
+            "tagname": "",
+            "type": "{Array}",
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 41,
             "description": "A reference to the url-module",
             "access": "private",
             "tagname": "",
@@ -753,18 +775,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 33,
-            "description": "A reference to the querystring-module",
-            "access": "private",
-            "tagname": "",
-            "type": "{querystring}",
-            "class": "$ROUTER",
-            "module": "nodgine",
-            "submodule": "$ROUTER"
-        },
-        {
-            "file": "dist\\Controller\\Router.js",
-            "line": 41,
+            "line": 49,
             "description": "The requestencoding",
             "access": "private",
             "tagname": "",
@@ -776,8 +787,8 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 50,
-            "description": "A reference to the default function",
+            "line": 58,
+            "description": "A reference to the default controller",
             "access": "private",
             "tagname": "",
             "type": "{function}",
@@ -787,7 +798,40 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 58,
+            "line": 66,
+            "description": "A reference to the request object",
+            "access": "private",
+            "tagname": "",
+            "type": "{function}",
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 74,
+            "description": "A reference to the response object",
+            "access": "private",
+            "tagname": "",
+            "type": "{function}",
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 82,
+            "description": "A reference to the optimization interval object",
+            "access": "private",
+            "tagname": "",
+            "type": "{Interval}",
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 90,
             "description": "Wrappes an object to a callable function",
             "access": "private",
             "tagname": "",
@@ -819,7 +863,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 99,
+            "line": 130,
             "description": "Deletes all routes",
             "chainable": 1,
             "itemtype": "method",
@@ -834,7 +878,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 112,
+            "line": 144,
             "description": "Sets the default route controller for all not routeable requests",
             "chainable": 1,
             "itemtype": "method",
@@ -856,7 +900,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 131,
+            "line": 163,
             "description": "Returns the default route controller",
             "itemtype": "method",
             "name": "getDefaultRoute",
@@ -870,7 +914,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 142,
+            "line": 174,
             "description": "This function generates a route object from given path",
             "access": "private",
             "tagname": "",
@@ -896,10 +940,11 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 175,
+            "line": 211,
             "description": "Adds a route to the router with controller as first url param, action as second url param and callback as handle\nfor the request",
             "itemtype": "method",
             "name": "addRoute",
+            "chainable": 1,
             "params": [
                 {
                     "name": "aPath",
@@ -917,13 +962,61 @@
                     "type": "Boolean"
                 }
             ],
+            "return": {
+                "description": "The instance itself",
+                "type": "Object"
+            },
             "class": "$ROUTER",
             "module": "nodgine",
             "submodule": "$ROUTER"
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 209,
+            "line": 252,
+            "description": "Adds a preprocessor to each request",
+            "itemtype": "method",
+            "name": "addPreProcessor",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "aPreProcessor",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "The instance itself",
+                "type": "Object"
+            },
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 270,
+            "description": "Adds a postprocessor to each request",
+            "itemtype": "method",
+            "name": "addPostProcessor",
+            "chainable": 1,
+            "params": [
+                {
+                    "name": "aPostProcessor",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "The instance itself",
+                "type": "Object"
+            },
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 288,
             "description": "Returns the controller connected to a certain route. If the route wasn't defined it returns 'undefined'",
             "itemtype": "method",
             "name": "getRoute",
@@ -944,7 +1037,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 230,
+            "line": 313,
             "description": "Set the encoding for the request. If aCheckEncoding is set, the encoding gets validated. Valid encodings are\nutf8, ascii, binary, hex, base64, utf16le and ucs2",
             "itemtype": "method",
             "name": "setEncoding",
@@ -966,7 +1059,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 252,
+            "line": 341,
             "description": "Returns the current encoding for requests",
             "itemtype": "method",
             "name": "getEncoding",
@@ -980,7 +1073,66 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 264,
+            "line": 353,
+            "description": "Executes all preprocessors on given request and response",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "aRequest",
+                    "description": "",
+                    "type": "Request"
+                },
+                {
+                    "name": "aResponse",
+                    "description": "",
+                    "type": "Response"
+                },
+                {
+                    "name": "aArgs",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "aCallback",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 400,
+            "description": "Executes all postprocessors on given request and response",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "aRequest",
+                    "description": "",
+                    "type": "Request"
+                },
+                {
+                    "name": "aResponse",
+                    "description": "",
+                    "type": "Response"
+                },
+                {
+                    "name": "aArgs",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 436,
             "description": "This function is the routers core function. It gets the request from http or https server, and routes it to the\ncontroller",
             "itemtype": "method",
             "name": "route",
@@ -996,6 +1148,63 @@
                     "type": "Response"
                 }
             ],
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 519,
+            "description": "Sorting the route objects descending",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "aFirst",
+                    "description": "",
+                    "type": "Route-Object"
+                },
+                {
+                    "name": "aSecond",
+                    "description": "",
+                    "type": "Route-Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 533,
+            "description": "Opimizes the mRoutes array",
+            "access": "private",
+            "tagname": "",
+            "class": "$ROUTER",
+            "module": "nodgine",
+            "submodule": "$ROUTER"
+        },
+        {
+            "file": "dist\\Controller\\Router.js",
+            "line": 550,
+            "description": "Sets or unsets an optimization interval (0 = unset, larger than 0 the time in milliseconds between the executions)",
+            "itemtype": "method",
+            "name": "setOptimizeInterval",
+            "params": [
+                {
+                    "name": "aIntervalTime",
+                    "description": "Time between optimizings in milliseconds",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
             "class": "$ROUTER",
             "module": "nodgine",
             "submodule": "$ROUTER"
@@ -1067,7 +1276,7 @@
         },
         {
             "file": "dist\\Controller\\Service.js",
-            "line": 66,
+            "line": 70,
             "description": "Returns the service-controller connected to given id",
             "itemtype": "method",
             "name": "getServiceById",
@@ -1080,7 +1289,7 @@
             ],
             "return": {
                 "description": "",
-                "type": "Function | object | null"
+                "type": "Function | object | undefined"
             },
             "class": "$SERVICE",
             "module": "nodgine",
@@ -1088,7 +1297,7 @@
         },
         {
             "file": "dist\\Controller\\Service.js",
-            "line": 81,
+            "line": 85,
             "itemtype": "event",
             "name": "serviceRegistered",
             "params": [
@@ -1100,7 +1309,7 @@
                 {
                     "name": "serviceId",
                     "description": "the id of the new serice",
-                    "type": "Number"
+                    "type": "String"
                 }
             ],
             "class": "$SERVICE",
@@ -1109,11 +1318,16 @@
         },
         {
             "file": "dist\\Controller\\Service.js",
-            "line": 86,
+            "line": 90,
             "description": "Registers given controller as new service from given type, returns the generated id",
             "itemtype": "method",
             "name": "registerService",
             "params": [
+                {
+                    "name": "aId",
+                    "description": "",
+                    "type": "String"
+                },
                 {
                     "name": "aType",
                     "description": "",
@@ -1126,8 +1340,8 @@
                 }
             ],
             "return": {
-                "description": "",
-                "type": "Number"
+                "description": "The instance itself",
+                "type": "Object"
             },
             "class": "$SERVICE",
             "module": "nodgine",
@@ -1135,7 +1349,7 @@
         },
         {
             "file": "dist\\Controller\\Service.js",
-            "line": 115,
+            "line": 128,
             "itemtype": "event",
             "name": "serviceUnregistered",
             "params": [
@@ -1156,7 +1370,7 @@
         },
         {
             "file": "dist\\Controller\\Service.js",
-            "line": 120,
+            "line": 133,
             "description": "Unregisters the service with given id",
             "itemtype": "method",
             "name": "unregisterService",
@@ -1194,7 +1408,7 @@
         },
         {
             "file": "dist\\bootstrap.js",
-            "line": 44,
+            "line": 46,
             "description": "An instance of $APPLICATION",
             "itemtype": "property",
             "name": "$APPLICATION",
@@ -1204,7 +1418,7 @@
         },
         {
             "file": "dist\\bootstrap.js",
-            "line": 54,
+            "line": 56,
             "description": "An instance of $ROUTER",
             "itemtype": "property",
             "name": "$ROUTER",
@@ -1214,7 +1428,7 @@
         },
         {
             "file": "dist\\bootstrap.js",
-            "line": 64,
+            "line": 66,
             "description": "An instance of $LOGGER",
             "itemtype": "property",
             "name": "$LOGGER",
@@ -1224,7 +1438,7 @@
         },
         {
             "file": "dist\\bootstrap.js",
-            "line": 74,
+            "line": 76,
             "description": "An instance of $SERVICE",
             "itemtype": "property",
             "name": "$SERVICE",
@@ -1236,7 +1450,11 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " dist\\Controller\\Service.js:66"
+            "line": " dist\\Controller\\Router.js:519"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " dist\\Controller\\Service.js:70"
         },
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
@@ -1272,7 +1490,7 @@
         },
         {
             "message": "Missing item type\nEmit a start event to the application",
-            "line": " dist\\Controller\\Application.js:184"
+            "line": " dist\\Controller\\Application.js:187"
         },
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
@@ -1300,7 +1518,7 @@
         },
         {
             "message": "Missing item type\nThis is the general function which is connected to all incoming errors to work with them",
-            "line": " dist\\Controller\\Logger.js:69"
+            "line": " dist\\Controller\\Logger.js:71"
         },
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
@@ -1311,28 +1529,60 @@
             "line": " dist\\Controller\\Router.js:17"
         },
         {
-            "message": "Missing item type\nA reference to the url-module",
+            "message": "Missing item type\nA list of all preprocessors",
             "line": " dist\\Controller\\Router.js:25"
         },
         {
-            "message": "Missing item type\nA reference to the querystring-module",
+            "message": "Missing item type\nA list of all postprocessors",
             "line": " dist\\Controller\\Router.js:33"
         },
         {
-            "message": "Missing item type\nThe requestencoding",
+            "message": "Missing item type\nA reference to the url-module",
             "line": " dist\\Controller\\Router.js:41"
         },
         {
-            "message": "Missing item type\nA reference to the default function",
-            "line": " dist\\Controller\\Router.js:50"
+            "message": "Missing item type\nThe requestencoding",
+            "line": " dist\\Controller\\Router.js:49"
         },
         {
-            "message": "Missing item type\nWrappes an object to a callable function",
+            "message": "Missing item type\nA reference to the default controller",
             "line": " dist\\Controller\\Router.js:58"
         },
         {
+            "message": "Missing item type\nA reference to the request object",
+            "line": " dist\\Controller\\Router.js:66"
+        },
+        {
+            "message": "Missing item type\nA reference to the response object",
+            "line": " dist\\Controller\\Router.js:74"
+        },
+        {
+            "message": "Missing item type\nA reference to the optimization interval object",
+            "line": " dist\\Controller\\Router.js:82"
+        },
+        {
+            "message": "Missing item type\nWrappes an object to a callable function",
+            "line": " dist\\Controller\\Router.js:90"
+        },
+        {
             "message": "Missing item type\nThis function generates a route object from given path",
-            "line": " dist\\Controller\\Router.js:142"
+            "line": " dist\\Controller\\Router.js:174"
+        },
+        {
+            "message": "Missing item type\nExecutes all preprocessors on given request and response",
+            "line": " dist\\Controller\\Router.js:353"
+        },
+        {
+            "message": "Missing item type\nExecutes all postprocessors on given request and response",
+            "line": " dist\\Controller\\Router.js:400"
+        },
+        {
+            "message": "Missing item type\nSorting the route objects descending",
+            "line": " dist\\Controller\\Router.js:519"
+        },
+        {
+            "message": "Missing item type\nOpimizes the mRoutes array",
+            "line": " dist\\Controller\\Router.js:533"
         },
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
