@@ -18,9 +18,16 @@ var EXPORTOBJECT = {},
      * A reference to the fs-module
      *
      * @private
-     * @type {mFs}
+     * @type {path}
      **/
-    mFs = require('fs');
+    mFs = require('fs'),
+    /**
+     * A reference to the path-module
+     *
+     * @private
+     * @type {fs}
+     **/
+    mPath = require('path');
 
 /**
  * This function makes the APIs of this framework global
@@ -69,38 +76,42 @@ function mLoadFromFile(aFile) {
         }
 
         // evaluate file
-        var basepath = (fileContent.basepath && typeof fileContent.basepath === 'string') ? fileContent.basepath : '',
+        var basepath = (fileContent.basepath && typeof fileContent.basepath === 'string') ? mPath.normalize(fileContent.basepath) : '',
             $ROUTER  = require('./Controller/Router.js'),
             $SERVICE = require('./Controller/Service.js'),
             $APPLICATION = require('./Controller/Application.js');
 
         if (fileContent.loadpaths && Array.isArray(fileContent.loadpaths)) {
             fileContent.loadpaths.forEach(function (path) {
-                $APPLICATION.addLoadPath(path);
+                $APPLICATION.addLoadPath(mPath.join(basepath, path));
             });
         }
 
         if (fileContent.routes && Array.isArray(fileContent.routes)) {
             fileContent.routes.forEach(function (route) {
-                $ROUTER.addRoute(route.route, route.controller, !!route.caseSensetive);
+                var controller = require(mPath.join(basepath, route.controller));
+                $ROUTER.addRoute(route.route, controller, !!route.caseSensetive);
             });
         }
 
         if (fileContent.preprocessors && Array.isArray(fileContent.preprocessors)) {
             fileContent.preprocessors.forEach(function (processor) {
-                $ROUTER.addPreProcessor(processor.controller);
+                var controller = require(mPath.join(basepath, processor.controller));
+                $ROUTER.addPreProcessor(controller);
             });
         }
 
         if (fileContent.postprocessors && Array.isArray(fileContent.postprocessors)) {
             fileContent.postprocessors.forEach(function (processor) {
-                $ROUTER.addPreProcessor(processor.controller);
+                var controller = require(mPath.join(basepath, processor.controller));
+                $ROUTER.addPreProcessor(controller);
             });
         }
 
         if (fileContent.services && Array.isArray(fileContent.services)) {
             fileContent.services.forEach(function (service) {
-                $SERVICE.registerService(service.id, service.type, service.controller);
+                var controller = require(mPath.join(basepath, service.controller));
+                $SERVICE.registerService(service.id, service.type, controller);
             });
         }
 
@@ -109,7 +120,11 @@ function mLoadFromFile(aFile) {
         }
 
         if (fileContent.https && fileContent.https.port && fileContent.https.key && fileContent.https.cert){
-            $APPLICATION.startHTTPS(fileContent.https.key, fileContent.https.cert, fileContent.https.port, fileContent.https.options);
+            $APPLICATION.startHTTPS(
+                mPath.join(basepath, fileContent.https.key),
+                mPath.join(basepath, fileContent.https.cert),
+                fileContent.https.port,
+                fileContent.https.options);
         }
     }
     else {
