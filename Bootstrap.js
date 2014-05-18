@@ -12,7 +12,15 @@
  *
  * @type {object}
  **/
-var EXPORTOBJECT = {};
+var EXPORTOBJECT = {},
+
+    /**
+     * A reference to the fs-module
+     *
+     * @private
+     * @type {mFs}
+     **/
+    mFs = require('fs');
 
 /**
  * This function makes the APIs of this framework global
@@ -35,6 +43,78 @@ function mGlobalize() {
             value   : require('./Controller/Service.js')
         }
     });
+}
+
+/**
+ * This function loads given json-file and parses and evalutates it
+ *
+ * @method loadFromFile
+ * @param {string} aFile Path to file that should be evaluated
+ **/
+function mLoadFromFile(aFile) {
+    'use strict';
+    if (typeof aFile !== 'string') {
+        throw 'Nodgine.loadFromFile: First param needs to be string, got ' + typeof aFile;
+    }
+
+    // check if file is actually usable
+    if (mFs.existsSync(aFile) && mFs.statSync(aFile).isFile()) {
+        // read and parse file
+        var fileContent = mFs.readFileSync(aFile);
+        try {
+            fileContent = JSON.parse(fileContent);
+        }
+        catch(e) {
+            throw 'Nodgine.loadFromFile: Can\'t parse JSON from file ' + aFile + '. Please check, if it\'s valid JSON.';
+        }
+
+        // evaluate file
+        var basepath = (fileContent.basepath && typeof fileContent.basepath === 'string') ? fileContent.basepath : '',
+            $ROUTER  = require('./Controller/Router.js'),
+            $SERVICE = require('./Controller/Service.js'),
+            $APPLICATION = require('./Controller/Application.js');
+
+        if (fileContent.loadpaths && Array.isArray(fileContent.loadpaths)) {
+            fileContent.loadpaths.forEach(function (path) {
+                $APPLICATION.addLoadPath(path);
+            });
+        }
+
+        if (fileContent.routes && Array.isArray(fileContent.routes)) {
+            fileContent.routes.forEach(function (route) {
+                $ROUTER.addRoute(route.route, route.controller, !!route.caseSensetive);
+            });
+        }
+
+        if (fileContent.preprocessors && Array.isArray(fileContent.preprocessors)) {
+            fileContent.preprocessors.forEach(function (processor) {
+                $ROUTER.addPreProcessor(processor.controller);
+            });
+        }
+
+        if (fileContent.postprocessors && Array.isArray(fileContent.postprocessors)) {
+            fileContent.postprocessors.forEach(function (processor) {
+                $ROUTER.addPreProcessor(processor.controller);
+            });
+        }
+
+        if (fileContent.services && Array.isArray(fileContent.services)) {
+            fileContent.services.forEach(function (service) {
+                $SERVICE.registerService(service.id, service.type, service.controller);
+            });
+        }
+
+        if (fileContent.http && fileContent.http.port){
+            $APPLICATION.startHTTP(fileContent.http.port);
+        }
+
+        if (fileContent.https && fileContent.https.port && fileContent.https.key && fileContent.https.cert){
+            $APPLICATION.startHTTPS(fileContent.https.key, fileContent.https.cert, fileContent.https.port, fileContent.https.options);
+        }
+    }
+    else {
+        throw 'Nodgine.loadFromFile: Can\'t read file ' + aFile;
+    }
 }
 
 require('./Controller/Application.js').addLoadPath(__dirname + '/Lib');
@@ -86,6 +166,9 @@ Object.defineProperties(EXPORTOBJECT, {
     // define the rest
     'globalize': {
         value   : mGlobalize
+    },
+    'loadFromFile': {
+        value   : mLoadFromFile
     }
 });
 
