@@ -931,7 +931,7 @@
                 }
             ],
             "return": {
-                "description": "\n\ninspired by expressjs (https://github.com/visionmedia/express/blob/master/lib/utils.js) pathRegexp",
+                "description": "inspired by expressjs (https://github.com/visionmedia/express/blob/master/lib/utils.js) pathRegexp",
                 "type": "Object"
             },
             "class": "$ROUTER",
@@ -1400,6 +1400,26 @@
         {
             "file": "dist\\bootstrap.js",
             "line": 17,
+            "description": "A reference to the fs-module",
+            "access": "private",
+            "tagname": "",
+            "type": "{path}",
+            "class": "nodgine",
+            "module": "nodgine"
+        },
+        {
+            "file": "dist\\bootstrap.js",
+            "line": 24,
+            "description": "A reference to the path-module",
+            "access": "private",
+            "tagname": "",
+            "type": "{fs}",
+            "class": "nodgine",
+            "module": "nodgine"
+        },
+        {
+            "file": "dist\\bootstrap.js",
+            "line": 32,
             "description": "This function makes the APIs of this framework global",
             "itemtype": "method",
             "name": "globalize",
@@ -1408,7 +1428,23 @@
         },
         {
             "file": "dist\\bootstrap.js",
-            "line": 46,
+            "line": 55,
+            "description": "This function loads given json-file and parses and evalutates it",
+            "itemtype": "method",
+            "name": "loadFromFile",
+            "params": [
+                {
+                    "name": "aFile",
+                    "description": "Path to file that should be evaluated",
+                    "type": "String"
+                }
+            ],
+            "class": "nodgine",
+            "module": "nodgine"
+        },
+        {
+            "file": "dist\\bootstrap.js",
+            "line": 141,
             "description": "An instance of $APPLICATION",
             "itemtype": "property",
             "name": "$APPLICATION",
@@ -1418,7 +1454,7 @@
         },
         {
             "file": "dist\\bootstrap.js",
-            "line": 56,
+            "line": 151,
             "description": "An instance of $ROUTER",
             "itemtype": "property",
             "name": "$ROUTER",
@@ -1428,7 +1464,7 @@
         },
         {
             "file": "dist\\bootstrap.js",
-            "line": 66,
+            "line": 161,
             "description": "An instance of $LOGGER",
             "itemtype": "property",
             "name": "$LOGGER",
@@ -1438,7 +1474,7 @@
         },
         {
             "file": "dist\\bootstrap.js",
-            "line": 76,
+            "line": 171,
             "description": "An instance of $SERVICE",
             "itemtype": "property",
             "name": "$SERVICE",
@@ -1595,6 +1631,14 @@
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
             "line": " dist\\bootstrap.js:10"
+        },
+        {
+            "message": "Missing item type\nA reference to the fs-module",
+            "line": " dist\\bootstrap.js:17"
+        },
+        {
+            "message": "Missing item type\nA reference to the path-module",
+            "line": " dist\\bootstrap.js:24"
         }
     ]
 }
