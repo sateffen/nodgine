@@ -1,0 +1,19 @@
+{
+    "basepath": "C:/Users/Steffen/Documents/WebstormProjects/nodgine/Tests/NodgineTest",
+    "routes": [
+        {
+            "route": "/testroute",
+            "controller": "./TestRouteController.js"
+        }
+    ],
+    "services": [
+        {
+            "id": "testId",
+            "type": "testType",
+            "controller": "./TestService.js"
+        }
+    ],
+    "http": {
+        "port": 1235
+    }
+}
