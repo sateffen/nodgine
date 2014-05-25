@@ -72,7 +72,7 @@ function mLoadFromFile(aFile) {
             fileContent = JSON.parse(fileContent);
         }
         catch(e) {
-            throw 'Nodgine.loadFromFile: Can\'t parse JSON from file ' + aFile + '. Please check, if it\'s valid JSON.';
+            throw 'Nodgine.loadFromFile: Can\'t parse JSON from file ' + aFile + '. Please check, if it\'s valid JSON.' + e.getMessage;
         }
 
         // evaluate file
