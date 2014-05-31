@@ -96,15 +96,15 @@ function mLoadFromFile(aFile) {
 
         if (fileContent.preprocessors && Array.isArray(fileContent.preprocessors)) {
             fileContent.preprocessors.forEach(function (processor) {
-                var controller = require(mPath.join(basepath, processor.controller));
+                var controller = require(mPath.join(basepath, processor));
                 $ROUTER.addPreProcessor(controller);
             });
         }
 
         if (fileContent.postprocessors && Array.isArray(fileContent.postprocessors)) {
             fileContent.postprocessors.forEach(function (processor) {
-                var controller = require(mPath.join(basepath, processor.controller));
-                $ROUTER.addPreProcessor(controller);
+                var controller = require(mPath.join(basepath, processor));
+                $ROUTER.addPostProcessor(controller);
             });
         }
 
