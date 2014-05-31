@@ -29,7 +29,7 @@ exports.loadFromFile = function(test) {
         options = {
             host: 'localhost',
             port: 1235,
-            path: '/testroute',
+            path: '/nodginetestroute',
             method: 'GET'
         };
 
@@ -40,8 +40,8 @@ exports.loadFromFile = function(test) {
         var data = '';
         res.on('data', function(chunk){data+=chunk;});
         res.on('end', function() {
-            test.equal(res.statusCode, 200);
-            test.equal(data, 'success');
+            test.equal(res.statusCode, 200, 'Statuscode should be 200');
+            test.equal(data, 'presuccesspost', 'Answer should be presuccesspost, a combination of preprocessor, route-controller and postprocessor');
             test.done();
         });
     });
