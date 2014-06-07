@@ -1,7 +1,7 @@
 {
     "name" : "nodgine",
-    "version" : "0.1.1",
-    "description" : "Nodgine is a NodeJS engine for simple webserver and RESTful APIs.",
+    "version" : "0.2.0",
+    "description" : "The nodgine is a small framework for creating fast webservices. The main focuses are speed and easiness.",
     "main" : "./Bootstrap.js",
     "author" : {
         "name" : "sateffen",
@@ -15,6 +15,7 @@
         "rest",
         "restful",
         "webserver",
+        "webservice",
         "router",
         "api"
     ],
