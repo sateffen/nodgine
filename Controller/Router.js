@@ -190,7 +190,7 @@ function mPathToRoute(aPath, aSensetive) {
         .concat('/?')
         .replace(/\/\(/g, '(?:/')
         .replace(/(\/)?(\.)?:(\w+)(?:(\(.*?\)))?(\?)?(\*)?/g, function(_, slash, format, key, capture, optional, star){
-            tmpObj.keys.push({ name: key, optional: !! optional });
+            tmpObj.keys.push({name: key, optional: !!optional});
             slash = slash || '';
             return '' +
                 (optional ? '' : slash) +
@@ -201,7 +201,10 @@ function mPathToRoute(aPath, aSensetive) {
                 (star ? '(/*)?' : '');
         })
         .replace(/([\/.])/g, '\\$1')
-        .replace(/\*/g, '(.*)');
+        .replace(/\*/g, function(_, star) {
+            tmpObj.keys.push({name: '*', optional: true});
+            return '(.*)';
+        });
     // convert the magic to a regexp
     tmpObj.regex = new RegExp('^' + aPath + '$', aSensetive ? '' : 'i');
     // return an object
