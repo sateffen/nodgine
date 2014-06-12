@@ -201,7 +201,7 @@ function mPathToRoute(aPath, aSensetive) {
                 (star ? '(/*)?' : '');
         })
         .replace(/([\/.])/g, '\\$1')
-        .replace(/\*/g, function(_, star) {
+        .replace(/\*/g, function() {
             tmpObj.keys.push({name: '*', optional: true});
             return '(.*)';
         });
