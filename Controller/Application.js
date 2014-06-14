@@ -257,7 +257,7 @@ function mAddLoadPath(aPath) {
 }
 
 /**
- * Searches in all known pathes for specified class file and returns it
+ * Searches in all known paths for specified class file and returns it
  *
  * @chainable
  * @method load
@@ -273,6 +273,30 @@ function mLoad(aClassName) {
     }
     // otherwise it's not
     return null;
+}
+
+/**
+ * Returns the http server object for direct interaction, for example if you want to pass it through to a websocket library
+ *
+ * @method getHttpServer
+ * @return {httpServer | null}
+ **/
+
+function mGetHttpServer() {
+    'use strict';
+    return mServer.http;
+}
+
+/**
+ * Returns the https server object for direct interaction, for example if you want to pass it through to a websocket library
+ *
+ * @method getHttpsServer
+ * @return {httpsServer | null}
+ **/
+
+function mGetHttpsServer() {
+    'use strict';
+    return mServer.https;
 }
 
 // extend EXPORTOBJECT with all properties to reveal
@@ -300,6 +324,12 @@ Object.defineProperties(EXPORTOBJECT, {
     },
     'load': {
         value: mLoad
+    },
+    'getHttpServer': {
+        value: mGetHttpServer
+    },
+    'getHttpsServer': {
+        value: mGetHttpsServer
     }
 });
 
