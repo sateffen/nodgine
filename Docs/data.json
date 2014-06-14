@@ -1,8 +1,8 @@
 {
     "project": {
         "name": "nodgine",
-        "description": "Nodgine is a NodeJS engine for simple webserver and RESTful APIs.",
-        "version": "0.1.1"
+        "description": "The nodgine is a small framework for creating fast webservices. The main focuses are speed and easiness.",
+        "version": "0.2.0"
     },
     "files": {
         "dist\\Controller\\Application.js": {
@@ -483,7 +483,7 @@
         {
             "file": "dist\\Controller\\Application.js",
             "line": 259,
-            "description": "Searches in all known pathes for specified class file and returns it",
+            "description": "Searches in all known paths for specified class file and returns it",
             "chainable": 1,
             "itemtype": "method",
             "name": "load",
@@ -497,6 +497,34 @@
             "return": {
                 "description": "The searched class or null",
                 "type": "Function | null"
+            },
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 278,
+            "description": "Returns the http server object for direct interaction, for example if you want to pass it through to a websocket library",
+            "itemtype": "method",
+            "name": "getHttpServer",
+            "return": {
+                "description": "",
+                "type": "HttpServer | null"
+            },
+            "class": "$APPLICATION",
+            "module": "nodgine",
+            "submodule": "$APPLICATION"
+        },
+        {
+            "file": "dist\\Controller\\Application.js",
+            "line": 290,
+            "description": "Returns the https server object for direct interaction, for example if you want to pass it through to a websocket library",
+            "itemtype": "method",
+            "name": "getHttpsServer",
+            "return": {
+                "description": "",
+                "type": "HttpsServer | null"
             },
             "class": "$APPLICATION",
             "module": "nodgine",
@@ -940,7 +968,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 211,
+            "line": 214,
             "description": "Adds a route to the router with controller as first url param, action as second url param and callback as handle\nfor the request",
             "itemtype": "method",
             "name": "addRoute",
@@ -972,7 +1000,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 252,
+            "line": 255,
             "description": "Adds a preprocessor to each request",
             "itemtype": "method",
             "name": "addPreProcessor",
@@ -994,7 +1022,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 270,
+            "line": 273,
             "description": "Adds a postprocessor to each request",
             "itemtype": "method",
             "name": "addPostProcessor",
@@ -1016,7 +1044,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 288,
+            "line": 291,
             "description": "Returns the controller connected to a certain route. If the route wasn't defined it returns 'undefined'",
             "itemtype": "method",
             "name": "getRoute",
@@ -1037,7 +1065,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 313,
+            "line": 316,
             "description": "Set the encoding for the request. If aCheckEncoding is set, the encoding gets validated. Valid encodings are\nutf8, ascii, binary, hex, base64, utf16le and ucs2",
             "itemtype": "method",
             "name": "setEncoding",
@@ -1059,7 +1087,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 341,
+            "line": 344,
             "description": "Returns the current encoding for requests",
             "itemtype": "method",
             "name": "getEncoding",
@@ -1073,7 +1101,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 353,
+            "line": 356,
             "description": "Executes all preprocessors on given request and response",
             "access": "private",
             "tagname": "",
@@ -1105,7 +1133,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 400,
+            "line": 403,
             "description": "Executes all postprocessors on given request and response",
             "access": "private",
             "tagname": "",
@@ -1132,7 +1160,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 436,
+            "line": 439,
             "description": "This function is the routers core function. It gets the request from http or https server, and routes it to the\ncontroller",
             "itemtype": "method",
             "name": "route",
@@ -1154,7 +1182,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 519,
+            "line": 522,
             "description": "Sorting the route objects descending",
             "access": "private",
             "tagname": "",
@@ -1180,7 +1208,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 533,
+            "line": 536,
             "description": "Opimizes the mRoutes array",
             "access": "private",
             "tagname": "",
@@ -1190,7 +1218,7 @@
         },
         {
             "file": "dist\\Controller\\Router.js",
-            "line": 550,
+            "line": 553,
             "description": "Sets or unsets an optimization interval (0 = unset, larger than 0 the time in milliseconds between the executions)",
             "itemtype": "method",
             "name": "setOptimizeInterval",
@@ -1486,7 +1514,7 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " dist\\Controller\\Router.js:519"
+            "line": " dist\\Controller\\Router.js:522"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -1606,19 +1634,19 @@
         },
         {
             "message": "Missing item type\nExecutes all preprocessors on given request and response",
-            "line": " dist\\Controller\\Router.js:353"
+            "line": " dist\\Controller\\Router.js:356"
         },
         {
             "message": "Missing item type\nExecutes all postprocessors on given request and response",
-            "line": " dist\\Controller\\Router.js:400"
+            "line": " dist\\Controller\\Router.js:403"
         },
         {
             "message": "Missing item type\nSorting the route objects descending",
-            "line": " dist\\Controller\\Router.js:519"
+            "line": " dist\\Controller\\Router.js:522"
         },
         {
             "message": "Missing item type\nOpimizes the mRoutes array",
-            "line": " dist\\Controller\\Router.js:533"
+            "line": " dist\\Controller\\Router.js:536"
         },
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
