@@ -79,11 +79,6 @@ module.exports = function(aResponse) {
         }
     };
 
-    aResponse.writeContiunue = function() {
-        // TODO: Make it supported
-        throw 'Response.writeContinue: This function is not supported by the nodgine';
-    };
-
     aResponse.write = function(aData, aEncoding) {
         //mWroteData.push({data: aData, encoding: aEncoding});
         var tmp;
@@ -105,7 +100,9 @@ module.exports = function(aResponse) {
     };
 
     aResponse.end = function(aData, aEncoding) {
-        aResponse.write(aData, aEncoding);
+        if (aData) {
+            aResponse.write(aData, aEncoding);
+        }
 
         process.nextTick(function() {
             mPostProcessorCallback();
