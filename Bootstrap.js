@@ -76,7 +76,9 @@ function mLoadFromFile(aFile) {
         }
 
         // evaluate file
-        var basePath = (fileContent.basepath && typeof fileContent.basepath === 'string') ? mPath.normalize(fileContent.basepath) : '',
+        var basePath = (fileContent.basepath && typeof fileContent.basepath === 'string') ?
+                mPath.resolve(mPath.dirname(aFile), mPath.normalize(fileContent.basepath)) :
+                mPath.dirname(aFile),
             $ROUTER  = require('./Controller/Router.js'),
             $SERVICE = require('./Controller/Service.js'),
             $APPLICATION = require('./Controller/Application.js');

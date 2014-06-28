@@ -1,5 +1,5 @@
 {
-    "basepath": "C:/Users/Steffen/Documents/WebstormProjects/nodgine/Tests/NodgineTest",
+    "basepath": "./",
     "routes": [
         {
             "route": "/nodginetestroute",
