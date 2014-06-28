@@ -172,22 +172,28 @@ var mLog = mEnterLog.bind(null, 'LOG', false);
 // extend EXPORTOBJECT with all properties to reveal
 Object.defineProperties(EXPORTOBJECT, {
     'error': {
-        value: mError
+        value: mError,
+        enumerable: true
     },
     'warning': {
-        value: mWarning
+        value: mWarning,
+        enumerable: true
     },
     'log': {
-        value: mLog
+        value: mLog,
+        enumerable: true
     },
     'setLogFile': {
-        value: mSetLogFile
+        value: mSetLogFile,
+        enumerable: true
     },
     'writeToFile': {
-        value: mWriteToFile
+        value: mWriteToFile,
+        enumerable: true
     },
     'writeToConsole': {
-        value: mWriteToConsole
+        value: mWriteToConsole,
+        enumerable: true
     }
 });
 

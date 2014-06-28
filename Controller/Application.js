@@ -302,34 +302,44 @@ function mGetHttpsServer() {
 // extend EXPORTOBJECT with all properties to reveal
 Object.defineProperties(EXPORTOBJECT, {
     'startHTTP': {
-        value: mStartHTTP
+        value: mStartHTTP,
+        enumerable: true
     },
     'startHTTPS': {
-        value: mStartHTTPS
+        value: mStartHTTPS,
+        enumerable: true
     },
     'stopHTTP': {
-        value: mStopHTTP
+        value: mStopHTTP,
+        enumerable: true
     },
     'stopHTTPS': {
-        value: mStopHTTPS
+        value: mStopHTTPS,
+        enumerable: true
     },
     'runApplication': {
-        value: mRunApplication
+        value: mRunApplication,
+        enumerable: true
     },
     'stopApplication': {
-        value: mStopApplication
+        value: mStopApplication,
+        enumerable: true
     },
     'addLoadPath': {
-        value: mAddLoadPath
+        value: mAddLoadPath,
+        enumerable: true
     },
     'load': {
-        value: mLoad
+        value: mLoad,
+        enumerable: true
     },
     'getHttpServer': {
-        value: mGetHttpServer
+        value: mGetHttpServer,
+        enumerable: true
     },
     'getHttpsServer': {
-        value: mGetHttpsServer
+        value: mGetHttpsServer,
+        enumerable: true
     }
 });
 

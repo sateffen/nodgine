@@ -575,37 +575,48 @@ function mSetOptimizeInterval(aIntervalTime) {
 // extend EXPORTOBJECT with all properties to reveal
 Object.defineProperties(EXPORTOBJECT, {
     'route': {
-        value: mRoute
+        value: mRoute,
+        enumerable: true
     },
     'addRoute': {
-        value: mAddRoute
+        value: mAddRoute,
+        enumerable: true
     },
     'getRoute': {
-        value: mGetRoute
+        value: mGetRoute,
+        enumerable: true
     },
     'setDefaultRoute': {
-        value: mSetDefaultRoute
+        value: mSetDefaultRoute,
+        enumerable: true
     },
     'getDefaultRoute': {
-        value: mGetDefaultRoute
+        value: mGetDefaultRoute,
+        enumerable: true
     },
     'setEncoding': {
-        value: mSetEncoding
+        value: mSetEncoding,
+        enumerable: true
     },
     'getEncoding': {
-        value: mGetEncoding
+        value: mGetEncoding,
+        enumerable: true
     },
     'addPreProcessor': {
-        value: mAddPreProcessor
+        value: mAddPreProcessor,
+        enumerable: true
     },
     'addPostProcessor': {
-        value: mAddPostProcessor
+        value: mAddPostProcessor,
+        enumerable: true
     },
     'clearRoutes': {
-        value: mClearRoutes
+        value: mClearRoutes,
+        enumerable: true
     },
     'setOptimizeInterval': {
-        value: mSetOptimizeInterval
+        value: mSetOptimizeInterval,
+        enumerable: true
     }
 });
 

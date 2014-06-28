@@ -147,7 +147,8 @@ Object.defineProperties(EXPORTOBJECT, {
      * @type {$APPLICATION}
      **/
     '$APPLICATION': {
-        value   : require('./Controller/Application.js')
+        value   : require('./Controller/Application.js'),
+        enumerable: true
     },
 
     /**
@@ -157,7 +158,8 @@ Object.defineProperties(EXPORTOBJECT, {
      * @type {$ROUTER}
      **/
     '$ROUTER': {
-        value   : require('./Controller/Router.js')
+        value   : require('./Controller/Router.js'),
+        enumerable: true
     },
 
     /**
@@ -167,7 +169,8 @@ Object.defineProperties(EXPORTOBJECT, {
      * @type {$LOGGER}
      **/
     '$LOGGER': {
-        value   : require('./Controller/Logger.js')
+        value   : require('./Controller/Logger.js'),
+        enumerable: true
     },
 
     /**
@@ -177,15 +180,18 @@ Object.defineProperties(EXPORTOBJECT, {
      * @type {$SERVICE}
      **/
     '$SERVICE': {
-        value   : require('./Controller/Service.js')
+        value   : require('./Controller/Service.js'),
+        enumerable: true
     },
 
     // define the rest
     'globalize': {
-        value   : mGlobalize
+        value   : mGlobalize,
+        enumerable: true
     },
     'loadFromFile': {
-        value   : mLoadFromFile
+        value   : mLoadFromFile,
+        enumerable: true
     }
 });
 

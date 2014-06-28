@@ -150,19 +150,24 @@ function mUnregisterService(aId) {
 // extend EXPORTOBJECT with all properties to reveal
 Object.defineProperties(EXPORTOBJECT, {
     'getServicesByType': {
-        value: mGetServicesByType
+        value: mGetServicesByType,
+        enumerable: true
     },
     'getServiceById': {
-        value: mGetServiceById
+        value: mGetServiceById,
+        enumerable: true
     },
     'registerService': {
-        value: mRegisterService
+        value: mRegisterService,
+        enumerable: true
     },
     'unregisterService': {
-        value: mUnregisterService
+        value: mUnregisterService,
+        enumerable: true
     },
     'clearServices': {
-        value: mClearServices
+        value: mClearServices,
+        enumerable: true
     }
 });
 
