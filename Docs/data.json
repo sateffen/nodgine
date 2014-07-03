@@ -2,7 +2,7 @@
     "project": {
         "name": "nodgine",
         "description": "The nodgine is a small framework for creating fast webservices. The main focuses are speed and easiness.",
-        "version": "0.2.0"
+        "version": "0.2.1"
     },
     "files": {
         "dist\\Controller\\Application.js": {
@@ -327,9 +327,9 @@
             "chainable": 1,
             "params": [
                 {
-                    "name": "aPort",
-                    "description": "Port for HTTP-Server",
-                    "type": "Number"
+                    "name": "aInterface",
+                    "description": "Port or hostname:port for HTTP-Server",
+                    "type": "Number|string"
                 }
             ],
             "return": {
@@ -342,7 +342,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 95,
+            "line": 110,
             "description": "Starts an HTTPS server at given port with given options",
             "itemtype": "method",
             "name": "startHTTPS",
@@ -359,9 +359,9 @@
                     "type": "String"
                 },
                 {
-                    "name": "aPort",
-                    "description": "Port for HTTP-Server",
-                    "type": "Number"
+                    "name": "aInterface",
+                    "description": "Port or hostname:port for HTTP-Server",
+                    "type": "Number|string"
                 },
                 {
                     "name": "aOptions",
@@ -379,7 +379,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 131,
+            "line": 161,
             "description": "Stops the HTTP-Server, if any is started",
             "itemtype": "method",
             "name": "stopHTTP",
@@ -394,7 +394,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 146,
+            "line": 176,
             "description": "Stops the HTTPS-Server, if any is started",
             "itemtype": "method",
             "name": "stopHTTPS",
@@ -409,7 +409,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 161,
+            "line": 191,
             "description": "Emit a start event to the application",
             "itemtype": "method",
             "name": "runApplication",
@@ -424,7 +424,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 174,
+            "line": 204,
             "description": "Emit a stop event to the application",
             "itemtype": "method",
             "name": "stopApplication",
@@ -439,7 +439,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 187,
+            "line": 217,
             "description": "Emit a start event to the application",
             "access": "private",
             "tagname": "",
@@ -460,7 +460,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 221,
+            "line": 251,
             "description": "Adds a loadpath for the load method, where to search for new classes",
             "chainable": 1,
             "itemtype": "method",
@@ -482,7 +482,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 259,
+            "line": 289,
             "description": "Searches in all known paths for specified class file and returns it",
             "chainable": 1,
             "itemtype": "method",
@@ -504,7 +504,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 278,
+            "line": 308,
             "description": "Returns the http server object for direct interaction, for example if you want to pass it through to a websocket library",
             "itemtype": "method",
             "name": "getHttpServer",
@@ -518,7 +518,7 @@
         },
         {
             "file": "dist\\Controller\\Application.js",
-            "line": 290,
+            "line": 320,
             "description": "Returns the https server object for direct interaction, for example if you want to pass it through to a websocket library",
             "itemtype": "method",
             "name": "getHttpsServer",
@@ -1472,7 +1472,7 @@
         },
         {
             "file": "dist\\bootstrap.js",
-            "line": 141,
+            "line": 143,
             "description": "An instance of $APPLICATION",
             "itemtype": "property",
             "name": "$APPLICATION",
@@ -1482,7 +1482,7 @@
         },
         {
             "file": "dist\\bootstrap.js",
-            "line": 151,
+            "line": 154,
             "description": "An instance of $ROUTER",
             "itemtype": "property",
             "name": "$ROUTER",
@@ -1492,7 +1492,7 @@
         },
         {
             "file": "dist\\bootstrap.js",
-            "line": 161,
+            "line": 165,
             "description": "An instance of $LOGGER",
             "itemtype": "property",
             "name": "$LOGGER",
@@ -1502,7 +1502,7 @@
         },
         {
             "file": "dist\\bootstrap.js",
-            "line": 171,
+            "line": 176,
             "description": "An instance of $SERVICE",
             "itemtype": "property",
             "name": "$SERVICE",
@@ -1554,7 +1554,7 @@
         },
         {
             "message": "Missing item type\nEmit a start event to the application",
-            "line": " dist\\Controller\\Application.js:187"
+            "line": " dist\\Controller\\Application.js:217"
         },
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
