@@ -75,20 +75,35 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
  *
  * @method startHTTP
  * @chainable
- * @param {number} aPort Port for HTTP-Server
+ * @param {number|string} aInterface Port or hostname:port for HTTP-Server
  * @return {object} the instance itself
  **/
-function mStartHTTP(aPort) {
+function mStartHTTP(aInterface) {
     'use strict';
-    if (aPort < 1 || aPort > 65535) {
-        throw '$APPLICATION.startHTTP: First param aPort out of range. Port has to be between 1 and 65535, got ' + aPort;
+    var port, hostname;
+    if (typeof aInterface === 'number') {
+        port = aInterface
+    }
+    else if (typeof aInterface === 'string') {
+        var parts = aInterface.split(':');
+        if (parts.length === 2) {
+            hostname = parts[0];
+            port = parseInt(parts[1], 10);
+        }
+        else if (parts.length === 1) {
+            port = parseInt(parts[0], 10);
+        }
+    }
+
+    if (port < 1 || port > 65535) {
+        throw '$APPLICATION.startHTTP: First param aInterface has a port out of range. Port has to be between 1 and 65535, got' + port;
     }
 
     if (!mServer.http) {
         mServer.http = mHttp.createServer($ROUTER.route);
     }
     
-    mServer.http.listen(aPort);
+    mServer.http.listen(port, hostname);
     return EXPORTOBJECT;
 }
 
@@ -99,15 +114,30 @@ function mStartHTTP(aPort) {
  * @chainable
  * @param {string} aKey Path to a key-file
  * @param {string} aCert Path to a cert-file
- * @param {number} aPort Port for HTTP-Server
+ * @param {number|string} aInterface Port or hostname:port for HTTP-Server
  * @param {object} aOptions additional options for the HTTPS-Server
  * @return {object} the instance itself
  **/
-function mStartHTTPS(aKey, aCert, aPort, aOptions) {
+function mStartHTTPS(aKey, aCert, aInterface, aOptions) {
     'use strict';
     // check port
-    if (aPort < 1 || aPort > 65535) {
-        throw '$APPLICATION.startHTTPS: Third param aPort out of range. Port has to be between 1 and 65535, got' + aPort;
+    var port, hostname;
+    if (typeof aInterface === 'number') {
+        port = aInterface
+    }
+    else if (typeof aInterface === 'string') {
+        var parts = aInterface.split(':');
+        if (parts.length === 2) {
+            hostname = parts[0];
+            port = parseInt(parts[1], 10);
+        }
+        else if (parts.length === 1) {
+            port = parseInt(parts[0], 10);
+        }
+    }
+
+    if (port < 1 || port > 65535) {
+        throw '$APPLICATION.startHTTPS: Third param aInterface has a port out of range. Port has to be between 1 and 65535, got' + port;
     }
 
     // if no https server is started
@@ -124,7 +154,7 @@ function mStartHTTPS(aKey, aCert, aPort, aOptions) {
         mServer.https = mHttps.createServer(options, $ROUTER.route);
     }
     
-    mServer.https.listen(aPort);
+    mServer.https.listen(port, hostname);
     return EXPORTOBJECT;
 }
 
