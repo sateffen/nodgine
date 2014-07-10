@@ -30,7 +30,8 @@ module.exports = function(aResponse) {
             mReasonPhrase
         );
 
-        aResponse.nodgineResponseEnd(mWroteData);
+        aResponse.nodgineResponseWrite(mWroteData);
+        aResponse.nodgineResponseEnd();
     };
 
     aResponse.pipe = function(aReadableStream, aCallback) {
