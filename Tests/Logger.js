@@ -81,7 +81,8 @@ exports.writeToFile = function(test) {
         // try to read the file syncronious
         try {
             // read the file content
-            var fileContent = mFs.readFileSync(filePath, {encoding: 'utf-8'});
+            var encoding = (process.versions.uv === '0.8') ? 'utf8' : {encoding: 'utf8'};
+            var fileContent = mFs.readFileSync(filePath, encoding);
             test.equal(fileContent.match(/hallo1/), null, 'The logfile shouldn\'t contain "hallo1", cause for the time this was deacitivated');
             test.notEqual(fileContent.match(/hallo2/), null, 'The logfile should contain "hallo2"');
         }

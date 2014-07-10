@@ -85,7 +85,8 @@ function mEnterLog(aState, aCritical, aMessage) {
     }
     // if it should be written to the file, append it
     if (mToFile) {
-        mFs.appendFileSync(mLogFile, '[' + aState + '](' + mGetDateString() + ') '+ aMessage + '\n', {encoding: 'utf-8'});
+        var encoding = (process.versions.uv === '0.8') ? 'utf8' : {encoding: 'utf8'};
+        mFs.appendFileSync(mLogFile, '[' + aState + '](' + mGetDateString() + ') '+ aMessage + '\n', encoding);
     }
     // if it should be written to the console, do it
     if (mToConsole) {
