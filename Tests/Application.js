@@ -22,7 +22,7 @@ module.exports.load = function(test) {
     $APPLICATION.addLoadPath(path);
 
     // test whether the loaded object and the directly required object is the same
-    test.equal($APPLICATION.load('TestObject'), require('./ApplicationTest/TestObject.js'), '$APPLICATION.load: ' +
+    test.equal($APPLICATION.load('TestObject')(), require('./ApplicationTest/TestObject.js')(), '$APPLICATION.load: ' +
         'Required and loaded object should be the same');
     test.done();
 };

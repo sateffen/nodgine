@@ -1,7 +1,6 @@
 /**
  * Exports a simple function, that can be loaded with require or $APPLICATION.load from test
  **/
-module.exports = function() {
-    'use strict';
-    this.myFunc = function(){};
-};
+module.exports = function () {
+    return 'I am a unique test string, woaaaa';
+}
