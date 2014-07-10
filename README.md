@@ -37,15 +37,15 @@ I'm using [nodeunit](https://github.com/caolan/nodeunit).  There is a simple gru
 
 ## Example application ##
 
-	// load nodgine
+	// load the nodgine
 	require('nodgine').globalize();
-	// setup route
+	// setup an example route
 	$ROUTER.addRoute('/*', function(request, response, arguments){
 		response.writeHead(200);
 		response.end((new Date).toString());
 	});
 	
-	// start http server
+	// start the http server
 	$APPLICATION.startHTTP(8888);
 	// start application
 	$APPLICATION.runApplication();
