@@ -11,6 +11,30 @@
 var nodgineService = require('../Bootstrap.js').$SERVICE;
 
 /*
+ * Tests the $SERVICE.clearServices function
+ */
+exports.clearServices = function(test) {
+    'use strict';
+
+    // register two services
+    var id1 = nodgineService.registerService('testid', 'testtype', function(){}),
+        id2 = nodgineService.registerService('testid2', 'testtype2', function(){});
+
+    // check, whether services are set
+    test.ok(nodgineService.getServiceById('testid'), 'The service with the first id should be found');
+    test.ok(nodgineService.getServiceById('testid2'), 'The service with the second id should be found');
+
+    // cleanup all services
+    nodgineService.clearServices();
+
+    // check whether the services are gone
+    test.ok(!nodgineService.getServiceById('testid'), 'The service with the first id should not be found');
+    test.ok(!nodgineService.getServiceById('testid2'), 'The service with the second id should not be found');
+
+    test.done();
+};
+
+/*
 * Tests the $SERVICE.registerService function
 */
 exports.registerService = function(test) {
