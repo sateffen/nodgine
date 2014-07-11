@@ -17,8 +17,8 @@ exports.clearServices = function(test) {
     'use strict';
 
     // register two services
-    var id1 = nodgineService.registerService('testid', 'testtype', function(){}),
-        id2 = nodgineService.registerService('testid2', 'testtype2', function(){});
+    nodgineService.registerService('testid', 'testtype', function(){})
+        .registerService('testid2', 'testtype2', function(){});
 
     // check, whether services are set
     test.ok(nodgineService.getServiceById('testid'), 'The service with the first id should be found');
@@ -47,8 +47,8 @@ exports.registerService = function(test) {
     });
 
     // register two services
-    var id1 = nodgineService.registerService('testid', 'testtype', function(){}),
-        id2 = nodgineService.registerService('testid2', 'testtype2', function(){});
+    nodgineService.registerService('testid', 'testtype', function(){})
+        .registerService('testid2', 'testtype2', function(){});
 
     // check, whether services are set
     test.ok(nodgineService.getServiceById('testid'), 'The service with the first id should be found');
@@ -64,8 +64,8 @@ exports.registerService = function(test) {
 exports.unregisterService = function(test) {
     'use strict';
     // register two services for the test
-    var id1 = nodgineService.registerService('testid', 'testtype', function(){}),
-        id2 = nodgineService.registerService('testid2', 'testtype2', function(){});
+    nodgineService.registerService('testid', 'testtype', function(){})
+        .registerService('testid2', 'testtype2', function(){});
 
     //
     test.ok(nodgineService.getServiceById('testid'), 'The service with the first id should be found');
@@ -96,9 +96,9 @@ exports.unregisterService = function(test) {
 exports.getServicesByType = function(test) {
     'use strict';
     // setup some test services
-    nodgineService.registerService('testid', 'test', function(){});
-    nodgineService.registerService('testid2', 'test2', function(){});
-    nodgineService.registerService('testid3','test2', function(){});
+    nodgineService.registerService('testid', 'test', function(){})
+        .registerService('testid2', 'test2', function(){})
+        .registerService('testid3','test2', function(){});
 
     // test the length of arrays returned by the function
     test.equal(nodgineService.getServicesByType('notDefined').length, 0);
