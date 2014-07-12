@@ -109,7 +109,7 @@ function mRegisterService(aId, aType, aController) {
         throw '$SERVICE.registerService: Third param aController needs to be a function or object, got ' + (typeof aController);
     }
     if (mRegisteredServices[aId]) {
-        throw '$SERVICE.registerService: Service with id ' + aId + ' does allready exist';
+        throw '$SERVICE.registerService: Service with id ' + aId + ' does already exist';
     }
 
     // register service
