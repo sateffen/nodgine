@@ -62,15 +62,3 @@ module.exports.stopApplication = function (test) {
 
     $APPLICATION.stopApplication();
 }
-
-module.exports.requireNodgine = function (test) {
-    var nodgine;
-    test.doesNotThrow(function () {
-        nodgine = require('../');
-    }, '$APPLICATION.requireNodgine: Nodgine could not be required');
-
-    test.notEqual(nodgine, undefined, '$APPLICATION.requireNodgine: Nodgine should not be undefined');
-    test.equal(typeof nodgine, 'object', '$APPLICATION.requireNodgine: Nodgine should have type "object", is' + (typeof nodgine));
-
-    test.done();
-}
