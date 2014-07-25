@@ -2,7 +2,7 @@
 module.exports = function(aRequest, aResponse, aArgs, aCallback) {
     'use strict';
 
-    var cookies = (aRequest.headers.cookie) ? aRequest.headers.cookie.split(';') : [],
+    var cookies = (aRequest.cookie) ? aRequest.cookie.split(';') : [],
         tmp = null;
     // now: do the cookie dance
     for (var x in cookies) {
