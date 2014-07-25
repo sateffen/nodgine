@@ -8,7 +8,7 @@
  * @private
  * @type {$LOGGER}
  **/
-var mNodgineLogger = require('../Bootstrap.js').$LOGGER,
+var mNodgineLogger = require('../bootstrap.js').$LOGGER,
     /**
      * Reference to the fs object
      *

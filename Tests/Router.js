@@ -8,7 +8,7 @@
  * @private
  * @type {$ROUTER}
  **/
-var mNodgineRouter = require('../Bootstrap.js').$ROUTER,
+var mNodgineRouter = require('../bootstrap.js').$ROUTER,
 
     /**
      * Simple webserver for the tests

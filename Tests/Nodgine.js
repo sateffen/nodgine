@@ -8,7 +8,7 @@
  * @private
  * @type {Nodgine}
  **/
-var mNodgine = require('../Bootstrap.js'),
+var mNodgine = require('../bootstrap.js'),
     mPath = require('path');
 
 exports.globalize = function(test) {

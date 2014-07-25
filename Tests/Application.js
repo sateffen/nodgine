@@ -11,7 +11,7 @@
  * @type {path}
  **/
 var mPath = require('path'),
-    $APPLICATION = require('../Bootstrap.js').$APPLICATION;
+    $APPLICATION = require('../bootstrap.js').$APPLICATION;
 
 /*
 * This Test checks, whether the $APPLICATION.load() function works properly, in conjunction with the addLoadPath function
