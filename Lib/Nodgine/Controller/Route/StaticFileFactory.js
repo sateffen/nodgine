@@ -2,10 +2,41 @@
 var mPath = require('path'),
     mFs = require('fs');
 
+function mGetContentTypeHeader(aFileName) {
+    var extension = mPath.extname(aFileName);
+
+    switch(extension) {
+        case '.pdf':
+            return {'Content-Type': 'application/pdf'};
+        case '.htm':
+        case '.html':
+            return {'Content-Type': 'text/html'};
+        case '.gif':
+            return {'Content-Type': 'image/gif'};
+        case '.jpeg':
+        case '.jpg':
+            return {'Content-Type': 'image/jpeg'};
+        case '.png':
+            return {'Content-Type': 'image/png'};
+        case '.js':
+            return {'Content-Type': 'text/javascript'};
+        case '.css':
+            return {'Content-Type': 'text/css'};
+        case '.txt':
+            return {'Content-Type': 'text/plain'};
+        case '.csv':
+            return {'Content-Type': 'text/comma-separated-values'};
+        case '.tar':
+            return {'Content-Type': 'application/x-tar'};
+        case '.zip':
+            return {'Content-Type': 'application/zip'};
+    }
+}
 
 function mStaticFileController(aPath, aRequest, aResponse, aArgs) {
     'use strict';
     var stream = mFs.createReadStream(aPath);
+    aResponse.writeHead(200, mGetContentTypeHeader(aPath));
     aResponse.pipe(stream);
 }
 
@@ -23,6 +54,7 @@ function mStaticDirectoryController(aPath, aRequest, aResponse, aArgs) {
                     }
                     else {
                         if (stats.isFile()) {
+                            aResponse.writeHead(200, mGetContentTypeHeader(requestedFile));
                             aResponse.pipe(mFs.createReadStream(requestedFile));
                         }
                         else {
