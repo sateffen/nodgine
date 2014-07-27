@@ -2,7 +2,7 @@
     "project": {
         "name": "nodgine",
         "description": "The nodgine is a small framework for creating fast webservices. The main focuses are speed and easiness.",
-        "version": "0.2.1"
+        "version": "0.2.4"
     },
     "files": {
         "dist\\Controller\\Application.js": {
@@ -589,6 +589,39 @@
         {
             "file": "dist\\Controller\\Logger.js",
             "line": 52,
+            "description": "An enum that contains all log level hardnesses",
+            "access": "private",
+            "tagname": "",
+            "type": "{Object}",
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 66,
+            "description": "The minimum log level to filter log messages",
+            "access": "private",
+            "tagname": "",
+            "type": "{Number}",
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 74,
+            "description": "A reference to the util-module",
+            "access": "private",
+            "tagname": "",
+            "type": "{mUtil}",
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 82,
             "description": "This function generates a readable timestamp of current time for the log",
             "access": "private",
             "tagname": "",
@@ -602,7 +635,7 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 71,
+            "line": 105,
             "description": "This is the general function which is connected to all incoming errors to work with them",
             "access": "private",
             "tagname": "",
@@ -621,7 +654,7 @@
                 {
                     "name": "aMessage",
                     "description": "The message for the log",
-                    "type": "String"
+                    "type": "Any"
                 }
             ],
             "class": "$LOGGER",
@@ -630,7 +663,7 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 102,
+            "line": 150,
             "description": "With this function you can set the log file",
             "chainable": 1,
             "itemtype": "method",
@@ -652,7 +685,7 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 117,
+            "line": 165,
             "description": "with this function you can set writing to file on or off",
             "chainable": 1,
             "itemtype": "method",
@@ -674,7 +707,7 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 131,
+            "line": 179,
             "description": "with this function you can set writing to console on or off",
             "chainable": 1,
             "itemtype": "method",
@@ -696,7 +729,29 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 145,
+            "line": 193,
+            "description": "Sets the minimum log-level",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "setMinimumLogLevel",
+            "params": [
+                {
+                    "name": "aMinLogLevel",
+                    "description": "",
+                    "type": "String|number"
+                }
+            ],
+            "return": {
+                "description": "The instance itself",
+                "type": "Object"
+            },
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 215,
             "description": "This is the bind function, bind to enterLog",
             "chainable": 1,
             "itemtype": "method",
@@ -714,7 +769,7 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 154,
+            "line": 224,
             "description": "This is the bind function, bind to enterLog",
             "chainable": 1,
             "itemtype": "method",
@@ -732,7 +787,25 @@
         },
         {
             "file": "dist\\Controller\\Logger.js",
-            "line": 163,
+            "line": 233,
+            "description": "This is the bind function, bind to enterLog",
+            "chainable": 1,
+            "itemtype": "method",
+            "name": "log",
+            "params": [
+                {
+                    "name": "aMessage",
+                    "description": "The message for the log",
+                    "type": "String"
+                }
+            ],
+            "class": "$LOGGER",
+            "module": "nodgine",
+            "submodule": "$LOGGER"
+        },
+        {
+            "file": "dist\\Controller\\Logger.js",
+            "line": 242,
             "description": "This is the bind function, bind to enterLog",
             "chainable": 1,
             "itemtype": "method",
@@ -1514,6 +1587,10 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
+            "line": " dist\\Controller\\Logger.js:193"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
             "line": " dist\\Controller\\Router.js:522"
         },
         {
@@ -1577,12 +1654,24 @@
             "line": " dist\\Controller\\Logger.js:43"
         },
         {
-            "message": "Missing item type\nThis function generates a readable timestamp of current time for the log",
+            "message": "Missing item type\nAn enum that contains all log level hardnesses",
             "line": " dist\\Controller\\Logger.js:52"
         },
         {
+            "message": "Missing item type\nThe minimum log level to filter log messages",
+            "line": " dist\\Controller\\Logger.js:66"
+        },
+        {
+            "message": "Missing item type\nA reference to the util-module",
+            "line": " dist\\Controller\\Logger.js:74"
+        },
+        {
+            "message": "Missing item type\nThis function generates a readable timestamp of current time for the log",
+            "line": " dist\\Controller\\Logger.js:82"
+        },
+        {
             "message": "Missing item type\nThis is the general function which is connected to all incoming errors to work with them",
-            "line": " dist\\Controller\\Logger.js:71"
+            "line": " dist\\Controller\\Logger.js:105"
         },
         {
             "message": "Missing item type\nThe exporting object, which gets revealed",
