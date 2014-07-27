@@ -47,7 +47,37 @@ var EXPORTOBJECT = {},
      * @type {boolean}
      * @default boolean
      **/
-    mToConsole = true;
+    mToConsole = true,
+
+    /**
+     * An enum that contains all log level hardnesses
+     *
+     * @private
+     * @type {Object}
+     */
+    mLogLevelEnum = {
+        'ALL': 0,
+        'DEBUG': 1,
+        'LOG': 2,
+        'WARNING': 3,
+        'ERROR': 4
+    },
+
+    /**
+     * The minimum log level to filter log messages
+     *
+     * @private
+     * @type {Number}
+     */
+    mMinimumLogLevel = mLogLevelEnum['ALL'],
+
+    /**
+    * A reference to the util-module
+    *
+    * @private
+    * @type {mUtil}
+    **/
+    mUtil = require('util');
 
 /**
  * This function generates a readable timestamp of current time for the log
@@ -68,6 +98,10 @@ function mGetDateString() {
         ((d.getSeconds().toString().length>1) ? d.getSeconds() : '0' + d.getSeconds());
 }
 
+function mGetMessageString(aState, aMessage) {
+    return '[' + aState + '](' + mGetDateString() + ') '+ aMessage;
+}
+
 /**
  * This is the general function which is connected to all incoming errors to work with them
  *
@@ -75,23 +109,36 @@ function mGetDateString() {
  * @chainable
  * @param {string} aState State of given error
  * @param {boolean} aCritical Is critical or not. If it's critical, an error will be thrown
- * @param {string} aMessage The message for the log
+ * @param {any} aMessage The message for the log
  */
 function mEnterLog(aState, aCritical, aMessage) {
     'use strict';
-    // logger is only able to log down strings
-    if (typeof aMessage!== 'string') {
-        throw '$LOGGER: First param needs to be a string, got ' + (typeof aMessage);
+
+    // if loglevel is unknown, or lower than minimum log-level, ignore this message
+    if (!mLogLevelEnum[aState] || mLogLevelEnum[aState] < mMinimumLogLevel) {
+        return;
     }
+
+    // convert message to string, if it's not a string
+    if (typeof aMessage!== 'string') {
+        aMessage = mUtil.inspect(aMessage);
+    }
+
     // if it should be written to the file, append it
     if (mToFile) {
         var encoding = (process.versions.uv === '0.8') ? 'utf8' : {encoding: 'utf8'};
-        mFs.appendFileSync(mLogFile, '[' + aState + '](' + mGetDateString() + ') '+ aMessage + '\n', encoding);
+        mFs.appendFile(mLogFile, mGetMessageString(aState, aMessage) + '\n', encoding, function (error) {
+            if (error) {
+                throw new Error('$LOGGER tried to append file, but got error: ' + error);
+            }
+        });
     }
+
     // if it should be written to the console, do it
     if (mToConsole) {
-        console.log('[' + aState + '](' + mGetDateString() + ') '+ aMessage);
+        console.log(mGetMessageString(aState, aMessage));
     }
+
     // if it's critical, throw an error
     if (aCritical) {
         throw new Error('[' + aState + '](' + mGetDateString() + ') '+ aMessage);
@@ -144,6 +191,28 @@ function mWriteToConsole(aOption) {
 }
 
 /**
+ * Sets the minimum log-level
+ *
+ * @chainable
+ * @method setMinimumLogLevel
+ * @param {string|number} aMinLogLevel
+ * @returns {Object} The instance itself
+ */
+function mSetMinimumLogLevel(aMinLogLevel) {
+    if (typeof aMinLogLevel === 'string') {
+        aMinLogLevel = mLogLevelEnum[aMinLogLevel];
+    }
+
+    for (var x in mLogLevelEnum) {
+        if (mLogLevelEnum.hasOwnProperty(x) && mLogLevelEnum[x] === aMinLogLevel) {
+            mMinimumLogLevel = aMinLogLevel;
+        }
+    }
+
+    return EXPORTOBJECT;
+}
+
+/**
  * This is the bind function, bind to enterLog
  *
  * @chainable
@@ -170,6 +239,15 @@ var mWarning = mEnterLog.bind(null, 'WARNING', false);
  */
 var mLog = mEnterLog.bind(null, 'LOG', false);
 
+/**
+ * This is the bind function, bind to enterLog
+ *
+ * @chainable
+ * @method log
+ * @param {string} aMessage The message for the log
+ */
+var mDebug = mEnterLog.bind(null, 'DEBUG', false);
+
 // extend EXPORTOBJECT with all properties to reveal
 Object.defineProperties(EXPORTOBJECT, {
     'error': {
@@ -184,6 +262,10 @@ Object.defineProperties(EXPORTOBJECT, {
         value: mLog,
         enumerable: true
     },
+    'debug': {
+        value: mDebug,
+        enumerable: true
+    },
     'setLogFile': {
         value: mSetLogFile,
         enumerable: true
@@ -194,6 +276,14 @@ Object.defineProperties(EXPORTOBJECT, {
     },
     'writeToConsole': {
         value: mWriteToConsole,
+        enumerable: true
+    },
+    'logLevelEnum': {
+        value: mLogLevelEnum,
+        enumerable: true
+    },
+    'setMinimumLogLevel': {
+        value: mSetMinimumLogLevel,
         enumerable: true
     }
 });
