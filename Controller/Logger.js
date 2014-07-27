@@ -116,7 +116,7 @@ function mEnterLog(aState, aCritical, aMessage) {
 
     // if loglevel is unknown, or lower than minimum log-level, ignore this message
     if (!mLogLevelEnum[aState] || mLogLevelEnum[aState] < mMinimumLogLevel) {
-        return;
+        return EXPORTOBJECT;
     }
 
     // convert message to string, if it's not a string
