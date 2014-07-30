@@ -154,8 +154,7 @@ function mStartHTTPS(aKey, aCert, aInterface, aOptions) {
 
         mServer.https = mHttps.createServer(options, $ROUTER.route);
     }
-    console.log(port);
-    console.log(hostname);
+    
     mServer.https.listen(port, hostname);
     return EXPORTOBJECT;
 }
