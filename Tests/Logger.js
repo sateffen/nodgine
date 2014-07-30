@@ -149,6 +149,7 @@ exports.setMinimumLogLevel = function (test) {
 
     // revert mock up
     console.log = tmpLogFunc;
+    mNodgineLogger.setMinimumLogLevel(mNodgineLogger.logLevelEnum['ALL']);
 
     test.done();
 };

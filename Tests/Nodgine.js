@@ -37,15 +37,19 @@ exports.loadFromFile = function(test) {
     test.equal($SERVICE.getServicesByType('testType').length, 1, 'There should be one service found by type, cause it was configured');
 
     var originalConsoleLog = console.log;
-    var data = null;
+    var consoleLogData = null;
     console.log = function (message) {
-        data = message;
+        consoleLogData = message;
     }
 
     $LOGGER.log('LOG');
-    test.equal(data, null, 'console.log should not have been called');
+    test.equal(consoleLogData, null, 'console.log should not have been called');
     $LOGGER.warning('WARN');
-    test.ok(data.match(/WARN/), 'The console.log log should contain WARN')
+    test.ok(consoleLogData.match(/WARN/), 'The console.log log should contain WARN');
+
+    console.log = originalConsoleLog;
+    $LOGGER.setMinimumLogLevel($LOGGER.logLevelEnum['ALL']);
+
 
     http.get(options, function(res) {
         var data = '';

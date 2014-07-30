@@ -25,6 +25,6 @@
     "logger": {
         "writeToFile": false,
         "writeToConsole": true,
-        "minimumLogLevel": "E_WARNING"
+        "minimumLogLevel": "WARNING"
     }
 }
