@@ -122,6 +122,7 @@ function mStartHTTPS(aKey, aCert, aInterface, aOptions) {
     'use strict';
     // check port
     var port, hostname;
+    aOptions = aOptions || {};
     if (typeof aInterface === 'number') {
         port = aInterface
     }
@@ -153,7 +154,8 @@ function mStartHTTPS(aKey, aCert, aInterface, aOptions) {
 
         mServer.https = mHttps.createServer(options, $ROUTER.route);
     }
-    
+    console.log(port);
+    console.log(hostname);
     mServer.https.listen(port, hostname);
     return EXPORTOBJECT;
 }
