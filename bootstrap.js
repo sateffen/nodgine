@@ -128,6 +128,24 @@ function mLoadFromFile(aFile) {
                 fileContent.https.port,
                 fileContent.https.options);
         }
+
+        if (fileContent.logger) {
+            if (fileContent.logger.minimumLogLevel !== undefined) {
+                $LOGGER.setMinimumLogLevel(fileContent.logger.minimumLogLevel);
+            }
+
+            if (fileContent.logger.writeToConsole !== undefined) {
+                $LOGGER.writeToConsole(fileContent.logger.writeToConsole);
+            }
+
+            if (fileContent.logger.writeToFile !== undefined) {
+                $LOGGER.writeToFile(fileContent.logger.writeToFile);
+            }
+
+            if (typeof fileContent.logger.logFile === 'string') {
+                $LOGGER.setLogFile(fileContent.logger.logFile);
+            }
+        }
     }
     else {
         throw 'Nodgine.loadFromFile: Can\'t read file ' + aFile;

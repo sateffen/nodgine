@@ -36,6 +36,17 @@ exports.loadFromFile = function(test) {
     test.ok($SERVICE.getServiceById('testId'), 'Service with id "testId" should be found, cause it was configured');
     test.equal($SERVICE.getServicesByType('testType').length, 1, 'There should be one service found by type, cause it was configured');
 
+    var originalConsoleLog = console.log;
+    var data = null;
+    console.log = function (message) {
+        data = message;
+    }
+
+    $LOGGER.log('LOG');
+    test.equal(data, null, 'console.log should not have been called');
+    $LOGGER.warning('WARN');
+    test.ok(data.match(/WARN/), 'The console.log log should contain WARN')
+
     http.get(options, function(res) {
         var data = '';
         res.on('data', function(chunk){data+=chunk;});
