@@ -447,14 +447,11 @@ function mExecutePostProcessors(aRequest, aResponse, aArgs) {
 function mRoute(aRequest, aResponse) {
     'use strict';
     // setup some memory
-    var postData = '';
-
-    // set the request encoding
-    aRequest.setEncoding(mRequestEncoding);
+    var postData = [];
 
     // save every chunk of data, that the request has
     aRequest.on('data', function(chunk) {
-        postData += chunk;
+        postData.push(chunk);
     });
 
     // request finished, now process it
@@ -464,7 +461,8 @@ function mRoute(aRequest, aResponse) {
             tmp, x;
 
         // region set GPC
-        aRequest.post = postData;
+        aRequest.postBuffer = Buffer.concat(postData);
+        aRequest.post = aRequest.postBuffer.toString(mRequestEncoding);
         aRequest.get = urlParsed.search ;
         aRequest.cookie = aRequest.headers.cookie;
         // endregion
