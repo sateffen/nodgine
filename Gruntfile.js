@@ -17,21 +17,18 @@ module.exports = function(grunt) {
             }
         },
         clean: {
-            dist: ['dist/']
+            dist: ['dist/'],
+            doc: ['Docs/']
         },
         nodeunit: {
             all: ['Tests/*.js']
         },
-        yuidoc: {
-            compile: {
-                name: '<%= pkg.name %>',
-                description: '<%= pkg.description %>',
-                version: '<%= pkg.version %>',
+        jsdoc : {
+            dist : {
+                src: ['bootstrap.js', 'Controller/*.js'],
                 options: {
-                    paths: [
-                        "dist"
-                    ],
-                    outdir: 'Docs/'
+                    destination: 'Docs',
+                    private: false
                 }
             }
         }
@@ -40,9 +37,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
-    grunt.loadNpmTasks('grunt-contrib-yuidoc');
+    grunt.loadNpmTasks('grunt-jsdoc');
 
     grunt.registerTask('default', ['nodeunit:all', 'clean:dist', 'copy:dist']);
-    grunt.registerTask('doc', ['clean:dist', 'copy:dist', 'yuidoc']);
+    grunt.registerTask('doc', ['clean:doc', 'jsdoc']);
     grunt.registerTask('test', ['nodeunit']);
 };
