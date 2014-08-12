@@ -218,8 +218,9 @@ function mPathToRoute(aPath, aSensitive) {
         .replace(/([\/.])/g, '\\$1')
         .replace(/\*/g, function() {
             tmpObj.keys.push({name: '*', optional: true});
-            return '(.*)';
-        });
+            return '?(.*)';
+        })
+        .replace(/[\\\/]{2,}/g, '\/');
     // convert the magic to a regexp
     tmpObj.regex = new RegExp('^' + aPath + '$', aSensitive ? '' : 'i');
     // return an object
