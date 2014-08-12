@@ -479,7 +479,7 @@ function mRoute(aRequest, aResponse) {
     // setup some memory
     var postData = [];
 
-    // save every chunk of data, that the request has
+    // save every chunk of data, that the request delivers
     aRequest.on('data', function(chunk) {
         postData.push(chunk);
     });
@@ -491,8 +491,8 @@ function mRoute(aRequest, aResponse) {
             tmp, x;
 
         // region set GPC
-        aRequest.postBuffer = Buffer.concat(postData);
-        aRequest.post = aRequest.postBuffer.toString(mRequestEncoding);
+        aRequest.post = Buffer.concat(postData);
+        aRequest.postString = aRequest.post.toString(mRequestEncoding);
         aRequest.get = urlParsed.search ;
         aRequest.cookie = aRequest.headers.cookie;
         // endregion
