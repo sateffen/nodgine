@@ -14,7 +14,7 @@ var mNodgine = require('../bootstrap.js'),
 /**
  * Define a setup, and clean up before every call
  */
-exports.setUp = function (done) {
+exports.tearDown = function (done) {
     global.$APPLICATION = undefined;
     global.$LOGGER = undefined;
     global.$SERVICE = undefined;
