@@ -2,8 +2,6 @@
 
 'use strict';
 
-require('../').globalize();
-
 var mNodgine = require('../'),
     mArgs = process.argv.slice(2),
     mFs = require('fs'),
