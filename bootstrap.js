@@ -91,6 +91,10 @@ function mLoadFromFile(aFile) {
             $SERVICE = require('./Controller/Service.js'),
             $APPLICATION = require('./Controller/Application.js');
 
+        if (fileContent.globalize) {
+            mGlobalize();
+        }
+
         if (fileContent.loadpaths && Array.isArray(fileContent.loadpaths)) {
             fileContent.loadpaths.forEach(function (path) {
                 $APPLICATION.addLoadPath(mPath.join(basePath, path));

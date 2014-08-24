@@ -11,6 +11,18 @@
 var mNodgine = require('../bootstrap.js'),
     mPath = require('path');
 
+/**
+ * Define a setup, and clean up before every call
+ */
+exports.setUp = function (done) {
+    global.$APPLICATION = undefined;
+    global.$LOGGER = undefined;
+    global.$SERVICE = undefined;
+    global.$ROUTER = undefined;
+
+    done();
+};
+
 exports.globalize = function(test) {
     mNodgine.globalize();
 
@@ -24,6 +36,11 @@ exports.globalize = function(test) {
 
 exports.loadFromFile = function(test) {
     mNodgine.loadFromFile(mPath.join(__dirname, './NodgineTest/TestNodgine.json'));
+
+    test.strictEqual($APPLICATION, mNodgine.$APPLICATION, 'The $APPLICATION object should be global.');
+    test.strictEqual($LOGGER,      mNodgine.$LOGGER,      'The $LOGGER object should be global.');
+    test.strictEqual($ROUTER,      mNodgine.$ROUTER,      'The $ROUTER object should be global.');
+    test.strictEqual($SERVICE,     mNodgine.$SERVICE,     'The $SERIVCE object should be global.');
 
     var http = require('http'),
         options = {
