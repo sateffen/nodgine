@@ -10,6 +10,7 @@ var mNodgine = require('../'),
 if (mArgs[0] && mPath.extname(mArgs[0]) === '.json') {
     if (mFs.existsSync(mArgs[0])) {
         mNodgine.loadFromFile(mPath.resolve(process.cwd(), mArgs[0]));
+        mNodgine.$APPLICATION.runApplication()
         console.log('Load successful');
     }
     else {

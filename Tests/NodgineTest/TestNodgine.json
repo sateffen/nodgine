@@ -1,6 +1,7 @@
 {
     "basepath": "./",
     "globalize": true,
+    "loadpaths": [],
     "routes": [
         {
             "route": "/nodginetestroute",
