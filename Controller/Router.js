@@ -340,6 +340,7 @@ function mGetRoute(aPath) {
  *
  * @method setEncoding
  * @memberof $ROUTER
+ * @deprecated
  * @static
  * @param {string} aEncoding - The encoding string
  * @param {boolean} [aCheckEncoding=true] - Whether to check, if encoding is ok or not
@@ -371,6 +372,7 @@ function mSetEncoding(aEncoding, aCheckEncoding) {
  * @method getEncoding
  * @memberof $ROUTER
  * @static
+ * @deprecated
  * @return {string}
  */
 function mGetEncoding() {
