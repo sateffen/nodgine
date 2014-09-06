@@ -13,10 +13,6 @@ module.exports = function(aRequest, aResponse, aArgs, aCallback) {
             aRequest.post = {};
         }
     }
-    // not an application/json, so simply parse it like normal
-    else {
-        aRequest.post = mQuerystring.parse(aRequest.post);
-    }
 
     aCallback();
 };
