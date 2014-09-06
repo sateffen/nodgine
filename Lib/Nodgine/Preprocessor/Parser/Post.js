@@ -1,5 +1,3 @@
-var mQuerystring = require('querystring');
-
 module.exports = function(aRequest, aResponse, aArgs, aCallback) {
     'use strict';
 
