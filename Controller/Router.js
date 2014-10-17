@@ -8,7 +8,6 @@
  * The exporting object, which gets revealed
  *
  * @private
- * @memberof $ROUTER
  * @type {$ROUTER}
  **/
 var EXPORTOBJECT = {},
@@ -17,7 +16,6 @@ var EXPORTOBJECT = {},
      * A list of all routes
      *
      * @private
-     * @memberof $ROUTER
      * @type {Array}
      **/
     mRoutes = [],
@@ -26,7 +24,6 @@ var EXPORTOBJECT = {},
      * A list of all preprocessors
      *
      * @private
-     * @memberof $ROUTER
      * @type {Array}
      **/
     mPreProcessors = [],
@@ -35,7 +32,6 @@ var EXPORTOBJECT = {},
      * A list of all postprocessors
      *
      * @private
-     * @memberof $ROUTER
      * @type {Array}
      **/
     mPostProcessors = [],
@@ -44,7 +40,6 @@ var EXPORTOBJECT = {},
      * A reference to the url-module
      *
      * @private
-     * @memberof $ROUTER
      * @type {url}
      **/
     mUrl = require('url'),
@@ -53,7 +48,6 @@ var EXPORTOBJECT = {},
      * The request-encoding
      *
      * @private
-     * @memberof $ROUTER
      * @type {string}
      * @default 'utf8'
      **/
@@ -63,7 +57,6 @@ var EXPORTOBJECT = {},
      * A reference to the default controller
      *
      * @private
-     * @memberof $ROUTER
      * @type {null|function}
      **/
     mDefaultController = null,
@@ -72,7 +65,6 @@ var EXPORTOBJECT = {},
      * A reference to the request object
      *
      * @private
-     * @memberof $ROUTER
      * @type {function}
      **/
     mRequestObject = require('./../Lib/Nodgine/Router/Request.js'),
@@ -81,7 +73,6 @@ var EXPORTOBJECT = {},
      * A reference to the response object
      *
      * @private
-     * @memberof $ROUTER
      * @type {function}
      **/
     mResponseObject = require('./../Lib/Nodgine/Router/Response.js'),
@@ -90,7 +81,6 @@ var EXPORTOBJECT = {},
      * A reference to the optimization interval object
      *
      * @private
-     * @memberof $ROUTER
      * @type {Interval}
      **/
     mOptimizeIntervalReference = 0;
@@ -99,7 +89,6 @@ var EXPORTOBJECT = {},
  * Wraps an object to a callable function
  *
  * @private
- * @memberof $ROUTER
  * @param {object} aCallbackObject - The object, which should be wrapped
  * @param {request} aRequest - An nodejs request-object
  * @param {response} aResponse - An nodejs response object
@@ -141,7 +130,6 @@ function mObjectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
  * Deletes all routes
  *
  * @method clearRoutes
- * @memberof $ROUTER
  * @static
  * @return {$ROUTER} The instance itself
  */
@@ -156,7 +144,6 @@ function mClearRoutes() {
  * Sets the default route controller for all not routeable requests
  *
  * @method setDefaultRoute
- * @memberof $ROUTER
  * @static
  * @param {function|object} aController
  * @return {$ROUTER} The instance itself
@@ -176,7 +163,6 @@ function mSetDefaultRoute(aController) {
  * Returns the default route controller
  *
  * @method getDefaultRoute
- * @memberof $ROUTER
  * @static
  * @return {function|null}
  */
@@ -189,7 +175,6 @@ function mGetDefaultRoute() {
  * This function generates a route object from given path
  *
  * @private
- * @memberof $ROUTER
  * @param {string} aPath
  * @param {boolean} aSensitive
  * @return {object}
@@ -232,7 +217,6 @@ function mPathToRoute(aPath, aSensitive) {
  * for the request
  *
  * @method addRoute
- * @memberof $ROUTER
  * @static
  * @param {string} aPath
  * @param {function|object} aCallback
@@ -273,7 +257,6 @@ function mAddRoute(aPath, aCallback, aCaseSensitive) {
  * Adds a preprocessor to each request
  *
  * @method addPreProcessor
- * @memberof $ROUTER
  * @static
  * @param {function} aPreProcessor
  * @return {$ROUTER} The instance itself
@@ -292,7 +275,6 @@ function mAddPreProcessor(aPreProcessor) {
  * Adds a postprocessor to each request
  *
  * @method addPostProcessor
- * @memberof $ROUTER
  * @static
  * @param {function} aPostProcessor
  * @return {$ROUTER} The instance itself
@@ -311,7 +293,6 @@ function mAddPostProcessor(aPostProcessor) {
  * Returns the controller connected to a certain route. If the route wasn't defined it returns 'undefined'
  *
  * @method getRoute
- * @memberof $ROUTER
  * @static
  * @param {string} aPath
  * @return {object|null}
@@ -339,7 +320,6 @@ function mGetRoute(aPath) {
  * utf8, ascii, binary, hex, base64, utf16le and ucs2
  *
  * @method setEncoding
- * @memberof $ROUTER
  * @deprecated
  * @static
  * @param {string} aEncoding - The encoding string
@@ -370,7 +350,6 @@ function mSetEncoding(aEncoding, aCheckEncoding) {
  * Returns the current encoding for requests
  *
  * @method getEncoding
- * @memberof $ROUTER
  * @static
  * @deprecated
  * @return {string}
@@ -385,7 +364,6 @@ function mGetEncoding() {
  * Executes all preprocessors on given request and response
  *
  * @private
- * @memberof $ROUTER
  * @param {request} aRequest
  * @param {response} aResponse
  * @param {object} aArgs
@@ -433,7 +411,6 @@ function mExecutePreProcessors(aRequest, aResponse, aArgs, aCallback) {
  * Executes all postprocessors on given request and response
  *
  * @private
- * @memberof $ROUTER
  * @param {request} aRequest
  * @param {response} aResponse
  * @param {object} aArgs
@@ -471,7 +448,6 @@ function mExecutePostProcessors(aRequest, aResponse, aArgs) {
  * controller
  *
  * @method route
- * @memberof $ROUTER
  * @inner
  * @param {request} aRequest - An nodejs request
  * @param {response} aResponse - An nodejs response
@@ -553,7 +529,6 @@ function mRoute(aRequest, aResponse) {
  * Sorting the route objects descending
  *
  * @private
- * @memberof $ROUTER
  * @param {Route-Object} aFirst
  * @param {Route-Object} aSecond
  * @returns {Number}
@@ -568,7 +543,6 @@ function mSortRoutes(aFirst, aSecond) {
  * Optimizes the mRoutes array
  *
  * @private
- * @memberof $ROUTER
  **/
 function mOptimizeRoutes() {
     'use strict';
@@ -586,7 +560,6 @@ function mOptimizeRoutes() {
  * Sets or unsets an optimization interval (0 = unset, larger than 0 the time in milliseconds between the executions)
  *
  * @method setOptimizeInterval
- * @memberof $ROUTER
  * @static
  * @param {Number} aIntervalTime Time between optimizing in milliseconds
  * @return {$ROUTER} The instance itself

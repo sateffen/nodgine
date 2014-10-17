@@ -8,7 +8,6 @@
  * The exporting object, which gets revealed
  *
  * @private
- * @memberof $LOGGER
  * @type {$LOGGER}
  **/
 var EXPORTOBJECT = {},
@@ -17,7 +16,6 @@ var EXPORTOBJECT = {},
      * A reference to the fs-module
      *
      * @private
-     * @memberof $LOGGER
      * @type {mFs}
      **/
     mFs = require('fs'),
@@ -26,7 +24,6 @@ var EXPORTOBJECT = {},
      * The name of logfile, where to save all logs
      *
      * @private
-     * @memberof $LOGGER
      * @type {string}
      * @default 'Log.txt'
      **/
@@ -36,7 +33,6 @@ var EXPORTOBJECT = {},
      * Flag, whether logs should be written to the logfile
      *
      * @private
-     * @memberof $LOGGER
      * @type {boolean}
      * @default false
      **/
@@ -46,7 +42,6 @@ var EXPORTOBJECT = {},
      * Flag, whether logs should be written to console
      *
      * @private
-     * @memberof $LOGGER
      * @type {boolean}
      * @default true
      **/
@@ -56,7 +51,6 @@ var EXPORTOBJECT = {},
      * An enum that contains all log level hardnesses
      *
      * @private
-     * @memberof $LOGGER
      * @type {Object}
      */
     mLogLevelEnum = {
@@ -71,7 +65,6 @@ var EXPORTOBJECT = {},
      * The minimum log level to filter log messages
      *
      * @private
-     * @memberof $LOGGER
      * @type {Number}
      * @default 0
      */
@@ -81,7 +74,6 @@ var EXPORTOBJECT = {},
     * A reference to the util-module
     *
     * @private
-    * @memberof $LOGGER
     * @type {util}
     **/
     mUtil = require('util');
@@ -90,7 +82,6 @@ var EXPORTOBJECT = {},
  * This function generates a readable timestamp of current time for the log
  *
  * @private
- * @memberof $LOGGER
  * @return {string} readable timestamp of current time
  */
 function mGetDateString() {
@@ -114,11 +105,10 @@ function mGetMessageString(aState, aMessage) {
  * This is the general function which is connected to all incoming errors to work with them
  *
  * @private
- * @memberof $LOGGER
  * @param {string} aState State of given error
  * @param {boolean} aCritical Is critical or not. If it's critical, an error will be thrown
  * @param {any} aMessage The message for the log
- * @return {$SERVICE} The instance itself
+ * @return {$LOGGER} The instance itself
  */
 function mEnterLog(aState, aCritical, aMessage) {
     'use strict';
@@ -160,11 +150,10 @@ function mEnterLog(aState, aCritical, aMessage) {
  * With this function you can set the log file
  *
  * @method setLogFile
- * @memberof $LOGGER
  * @static
  * @param {string} aFilename - The file, in which logentrys should be written, if writeToFile(true) is set. This path
  * should be absolute
- * @return {$SERVICE} The instance itself
+ * @return {$LOGGER} The instance itself
  */
 function mSetLogFile(aFilename) {
     'use strict';
@@ -176,10 +165,9 @@ function mSetLogFile(aFilename) {
  * with this function you can set writing to file on or off
  *
  * @method writeToFile
- * @memberof $LOGGER
  * @static
  * @param {boolean} aOption Whether or not logentrys should be written to a file
- * @return {$SERVICE} The instance itself
+ * @return {$LOGGER} The instance itself
  */
 function mWriteToFile(aOption) {
     'use strict';
@@ -191,10 +179,9 @@ function mWriteToFile(aOption) {
  * with this function you can set writing to console on or off
  *
  * @method writeToConsole
- * @memberof $LOGGER
  * @static
  * @param {boolean} aOption whether or not logentrys should be written to the console
- * @return {$SERVICE} The instance itself
+ * @return {$LOGGER} The instance itself
  */
 function mWriteToConsole(aOption) {
     'use strict';
@@ -206,10 +193,9 @@ function mWriteToConsole(aOption) {
  * Sets the minimum log-level
  *
  * @method setMinimumLogLevel
- * @memberof $LOGGER
  * @static
  * @param {string|number} aMinLogLevel
- * @return {$SERVICE} The instance itself
+ * @return {$LOGGER} The instance itself
  */
 function mSetMinimumLogLevel(aMinLogLevel) {
     if (typeof aMinLogLevel === 'string') {
@@ -229,10 +215,9 @@ function mSetMinimumLogLevel(aMinLogLevel) {
  * This is the bind function, bind to enterLog
  *
  * @method error
- * @memberof $LOGGER
  * @static
  * @param {string} aMessage The message for the log
- * @return {$SERVICE} The instance itself
+ * @return {$LOGGER} The instance itself
  */
 var mError = mEnterLog.bind(null, 'ERROR', true);
 
@@ -240,10 +225,9 @@ var mError = mEnterLog.bind(null, 'ERROR', true);
  * This is the bind function, bind to enterLog
  *
  * @method warning
- * @memberof $LOGGER
  * @static
  * @param {string} aMessage The message for the log
- * @return {$SERVICE} The instance itself
+ * @return {$LOGGER} The instance itself
  */
 var mWarning = mEnterLog.bind(null, 'WARNING', false);
 
@@ -251,10 +235,9 @@ var mWarning = mEnterLog.bind(null, 'WARNING', false);
  * This is the bind function, bind to enterLog
  *
  * @method log
- * @memberof $LOGGER
  * @static
  * @param {string} aMessage The message for the log
- * @return {$SERVICE} The instance itself
+ * @return {$LOGGER} The instance itself
  */
 var mLog = mEnterLog.bind(null, 'LOG', false);
 
@@ -262,10 +245,9 @@ var mLog = mEnterLog.bind(null, 'LOG', false);
  * This is the bind function, bind to enterLog
  *
  * @method debug
- * @memberof $LOGGER
  * @static
  * @param {string} aMessage The message for the log
- * @return {$SERVICE} The instance itself
+ * @return {$LOGGER} The instance itself
  */
 var mDebug = mEnterLog.bind(null, 'DEBUG', false);
 

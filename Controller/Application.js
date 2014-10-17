@@ -8,7 +8,6 @@
  * The exporting object, which gets revealed
  *
  * @private
- * @memberof $APPLICATION
  * @type {object}
  **/
 var EXPORTOBJECT = new (require('events').EventEmitter)(),
@@ -17,7 +16,6 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * A reference to the http-module
      *
      * @private
-     * @memberof $APPLICATION
      * @type {http}
      **/
     mHttp = require('http'),
@@ -26,7 +24,6 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * A reference to the https-module
      *
      * @private
-     * @memberof $APPLICATION
      * @type {https}
      **/
     mHttps = require('https'),
@@ -35,7 +32,6 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * A reference to the fs-module
      *
      * @private
-     * @memberof $APPLICATION
      * @type {fs}
      **/
     mFs = require('fs'),
@@ -44,7 +40,6 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * A reference to the path-module
      *
      * @private
-     * @memberof $APPLICATION
      * @type {path}
      **/
     mPath = require('path'),
@@ -53,7 +48,6 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * A reference to the nodgine-module
      *
      * @private
-     * @memberof $APPLICATION
      * @type {$ROUTER}
      **/
     $ROUTER = require('./Router.js'),
@@ -62,7 +56,6 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * A container, that holds all servers
      *
      * @private
-     * @memberof $APPLICATION
      * @type {object}
      **/
     mServer = {http: null, https: null},
@@ -71,7 +64,6 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
      * A container, that holds all known javascript classes with there files, used by load-path
      *
      * @private
-     * @memberof $APPLICATION
      * @type {object}
      **/
     mClasses = {};
@@ -80,7 +72,6 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
  * Starts an HTTP server at given interface
  *
  * @method startHTTP
- * @memberof $APPLICATION
  * @static
  * @param {number|string} aInterface -  Port or hostname:port for HTTP-Server
  * @return {$APPLICATION} The instance itself
@@ -122,7 +113,6 @@ function mStartHTTP(aInterface) {
  * Starts an HTTPS server at given port with given options
  *
  * @method startHTTPS
- * @memberof $APPLICATION
  * @static
  * @param {string} aKey - Path to a key-file (Hint: Best is an absolute path)
  * @param {string} aCert - Path to a cert-file (Hint: Best is an absolute path)
@@ -175,7 +165,6 @@ function mStartHTTPS(aKey, aCert, aInterface, aOptions) {
  * Stops the HTTP-Server, if any is started
  *
  * @method stopHTTP
- * @memberof $APPLICATION
  * @static
  * @return {$APPLICATION} The instance itself
  **/
@@ -191,7 +180,6 @@ function mStopHTTP() {
  * Stops the HTTPS-Server, if any is started
  *
  * @method stopHTTPS
- * @memberof $APPLICATION
  * @static
  * @return {$APPLICATION} The instance itself
  **/
@@ -207,7 +195,6 @@ function mStopHTTPS() {
  * Emit a start event to the application
  *
  * @method runApplication
- * @memberof $APPLICATION
  * @static
  * @return {$APPLICATION} The instance itself
  **/
@@ -221,7 +208,6 @@ function mRunApplication() {
  * Emit a stop event to the application
  *
  * @method stopApplication
- * @memberof $APPLICATION
  * @static
  * @return {$APPLICATION} The instance itself
  **/
@@ -235,7 +221,6 @@ function mStopApplication() {
  * Emit a start event to the application
  *
  * @private
- * @memberof $APPLICATION
  * @param {string} aBasePath - Path in which the javascript files should be searched for
  * @return {Array} a multi-dimensional array with all paths to all found javascript files
  **/
@@ -270,7 +255,6 @@ function mGetAllJSFiles(aBasePath) {
  * Adds a loadpath for the load method, where to search for new classes
  *
  * @method addLoadPath
- * @memberof $APPLICATION
  * @static
  * @param {string} aPath - Path, where to search for new javascript classes (Hint: Best is an absolute path)
  * @return {$APPLICATION} The instance itself
@@ -309,7 +293,6 @@ function mAddLoadPath(aPath) {
  * Searches in all known paths for specified class file and returns it
  *
  * @method load
- * @memberof $APPLICATION
  * @static
  * @param {string} aClassName - The class-name, for which the function should search
  * @return {function|object|null} The result of the require()
@@ -329,7 +312,6 @@ function mLoad(aClassName) {
  * Returns the http server object for direct interaction, for example if you want to pass it through to a websocket library
  *
  * @method getHttpServer
- * @memberof $APPLICATION
  * @static
  * @return {httpServer|null}
  **/
@@ -342,7 +324,6 @@ function mGetHttpServer() {
  * Returns the https server object for direct interaction, for example if you want to pass it through to a websocket library
  *
  * @method getHttpsServer
- * @memberof $APPLICATION
  * @static
  * @return {httpsServer|null}
  **/

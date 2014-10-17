@@ -8,7 +8,6 @@
  * The exporting object, which gets revealed
  *
  * @private
- * @memberof $SERVICE
  * @type {$SERIVCE}
  * @extends {EventEmitter}
  **/
@@ -24,13 +23,11 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
 
 /**
  * @event servicesCleared
- * @memberof $SERVICE
  */
 /**
  * deletes all registered services
  *
  * @method clearServices
- * @memberof $SERVICE
  * @static
  * @return {$SERVICE} The instance itself
  */
@@ -45,7 +42,6 @@ function mClearServices() {
  * Returns all services with the given type in an array
  *
  * @method getServicesByType
- * @memberof $SERVICE
  * @static
  * @param {string} aType - Name of the searched type
  * @return {Array} An array containing all matched services as object. The object looks like:
@@ -75,7 +71,6 @@ function mGetServicesByType(aType) {
  * Returns the service-controller connected to given id
  *
  * @method getServiceById
- * @memberof $SERVICE
  * @static
  * @param {number} aId
  * @return {function|object|undefined}
@@ -90,7 +85,6 @@ function mGetServiceById(aId) {
 
 /**
  * @event serviceRegistered
- * @memberof $SERVICE
  * @param {string} serviceType the type of the new serice
  * @param {string} serviceId the id of the new serice
  **/
@@ -98,7 +92,6 @@ function mGetServiceById(aId) {
  * Registers given controller as new service from given type, returns the generated id
  *
  * @method registerService
- * @memberof $SERVICE
  * @static
  * @param {string} aId
  * @param {string} aType
@@ -136,7 +129,6 @@ function mRegisterService(aId, aType, aController) {
 
 /**
  * @event serviceUnregistered
- * @memberof $SERVICE
  * @param {string} serviceType the type of the new serice
  * @param {number} serviceId the id of the new serice
  **/
@@ -144,7 +136,6 @@ function mRegisterService(aId, aType, aController) {
  * Unregisters the service with given id
  *
  * @method unregisterService
- * @memberof $SERVICE
  * @static
  * @param {number} aId ID of service, that should be unregistered
  * @return {$SERVICE} This instance itself

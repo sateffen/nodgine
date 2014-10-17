@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>JSDoc: Source: bootstrap.js</title>
-    
+
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
     <!--[if lt IE 9]>
@@ -16,16 +16,16 @@
 <body>
 
 <div id="main">
-    
+
     <h1 class="page-title">Source: bootstrap.js</h1>
-    
+
     
 
 
     
     <section>
         <article>
-            <pre class="prettyprint source"><code>/**
+            <pre class="prettyprint source linenums"><code>/**
  * This is the bootstrap for the nodgine module
  *
  * @module Nodgine
@@ -35,7 +35,6 @@
  * The exporting object, which gets revealed
  *
  * @private
- * @memberof module:Nodgine
  * @type {Nodgine}
  **/
 var EXPORTOBJECT = {},
@@ -44,7 +43,6 @@ var EXPORTOBJECT = {},
      * A reference to the fs-module
      *
      * @private
-     * @memberof module:Nodgine
      * @type {fs}
      **/
     mFs = require('fs'),
@@ -52,7 +50,6 @@ var EXPORTOBJECT = {},
      * A reference to the path-module
      *
      * @private
-     * @memberof module:Nodgine
      * @type {path}
      **/
     mPath = require('path');
@@ -62,7 +59,6 @@ var EXPORTOBJECT = {},
  * just like this in your code
  *
  * @method globalize
- * @memberof module:Nodgine
  * @static
  * @return {undefined} Nothing
  **/
@@ -88,7 +84,6 @@ function mGlobalize() {
  * This function loads given json-file, parses and evaluates it
  *
  * @method loadFromFile
- * @memberof module:Nodgine
  * @static
  * @param {string} aFile - Path to file that should be evaluated
  * @return {undefined} Nothing
@@ -100,7 +95,7 @@ function mLoadFromFile(aFile) {
     }
 
     // check if file is actually usable
-    if (mFs.existsSync(aFile) && mFs.statSync(aFile).isFile()) {
+    if (mFs.existsSync(aFile) &amp;&amp; mFs.statSync(aFile).isFile()) {
         // read and parse file
         var fileContent = mFs.readFileSync(aFile);
         try {
@@ -111,7 +106,7 @@ function mLoadFromFile(aFile) {
         }
 
         // evaluate file
-        var basePath = (fileContent.basepath && typeof fileContent.basepath === 'string') ?
+        var basePath = (fileContent.basepath &amp;&amp; typeof fileContent.basepath === 'string') ?
                 mPath.resolve(mPath.dirname(aFile), mPath.normalize(fileContent.basepath)) :
                 mPath.dirname(aFile),
             $ROUTER  = require('./Controller/Router.js'),
@@ -122,45 +117,45 @@ function mLoadFromFile(aFile) {
             mGlobalize();
         }
 
-        if (fileContent.loadpaths && Array.isArray(fileContent.loadpaths)) {
+        if (fileContent.loadpaths &amp;&amp; Array.isArray(fileContent.loadpaths)) {
             fileContent.loadpaths.forEach(function (path) {
                 $APPLICATION.addLoadPath(mPath.join(basePath, path));
             });
         }
 
-        if (fileContent.routes && Array.isArray(fileContent.routes)) {
+        if (fileContent.routes &amp;&amp; Array.isArray(fileContent.routes)) {
             fileContent.routes.forEach(function (route) {
                 var controller = require(mPath.join(basePath, route.controller));
                 $ROUTER.addRoute(route.route, controller, !!route.caseSensetive);
             });
         }
 
-        if (fileContent.preprocessors && Array.isArray(fileContent.preprocessors)) {
+        if (fileContent.preprocessors &amp;&amp; Array.isArray(fileContent.preprocessors)) {
             fileContent.preprocessors.forEach(function (processor) {
                 var controller = require(mPath.join(basePath, processor));
                 $ROUTER.addPreProcessor(controller);
             });
         }
 
-        if (fileContent.postprocessors && Array.isArray(fileContent.postprocessors)) {
+        if (fileContent.postprocessors &amp;&amp; Array.isArray(fileContent.postprocessors)) {
             fileContent.postprocessors.forEach(function (processor) {
                 var controller = require(mPath.join(basePath, processor));
                 $ROUTER.addPostProcessor(controller);
             });
         }
 
-        if (fileContent.services && Array.isArray(fileContent.services)) {
+        if (fileContent.services &amp;&amp; Array.isArray(fileContent.services)) {
             fileContent.services.forEach(function (service) {
                 var controller = require(mPath.join(basePath, service.controller));
                 $SERVICE.registerService(service.id, service.type, controller);
             });
         }
 
-        if (fileContent.http && fileContent.http.port){
+        if (fileContent.http &amp;&amp; fileContent.http.port){
             $APPLICATION.startHTTP(fileContent.http.port);
         }
 
-        if (fileContent.https && fileContent.https.port && fileContent.https.key && fileContent.https.cert){
+        if (fileContent.https &amp;&amp; fileContent.https.port &amp;&amp; fileContent.https.key &amp;&amp; fileContent.https.cert){
             $APPLICATION.startHTTPS(
                 mPath.join(basePath, fileContent.https.key),
                 mPath.join(basePath, fileContent.https.cert),
@@ -202,7 +197,6 @@ Object.defineProperties(EXPORTOBJECT, {
      * An instance of $APPLICATION
      *
      * @name $APPLICATION
-     * @memberof module:Nodgine
      * @static
      * @type {$APPLICATION}
      **/
@@ -215,7 +209,6 @@ Object.defineProperties(EXPORTOBJECT, {
      * An instance of $ROUTER
      *
      * @name $ROUTER
-     * @memberof module:Nodgine
      * @static
      * @type {$ROUTER}
      **/
@@ -228,7 +221,6 @@ Object.defineProperties(EXPORTOBJECT, {
      * An instance of $LOGGER
      *
      * @name $LOGGER
-     * @memberof module:Nodgine
      * @static
      * @type {$LOGGER}
      **/
@@ -241,7 +233,6 @@ Object.defineProperties(EXPORTOBJECT, {
      * An instance of $SERVICE
      *
      * @name $SERVICE
-     * @memberof module:Nodgine
      * @static
      * @type {$SERVICE}
      **/
@@ -277,7 +268,7 @@ module.exports = EXPORTOBJECT;</code></pre>
 <br clear="both">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.2.2</a> on Sat Sep 06 2014 09:56:15 GMT+0200 (MESZ)
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha9</a> on Fri Oct 17 2014 20:29:06 GMT+0200 (Mitteleuropäische Sommerzeit)
 </footer>
 
 <script> prettyPrint(); </script>

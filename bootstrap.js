@@ -8,7 +8,6 @@
  * The exporting object, which gets revealed
  *
  * @private
- * @memberof module:Nodgine
  * @type {Nodgine}
  **/
 var EXPORTOBJECT = {},
@@ -17,7 +16,6 @@ var EXPORTOBJECT = {},
      * A reference to the fs-module
      *
      * @private
-     * @memberof module:Nodgine
      * @type {fs}
      **/
     mFs = require('fs'),
@@ -25,7 +23,6 @@ var EXPORTOBJECT = {},
      * A reference to the path-module
      *
      * @private
-     * @memberof module:Nodgine
      * @type {path}
      **/
     mPath = require('path');
@@ -35,7 +32,6 @@ var EXPORTOBJECT = {},
  * just like this in your code
  *
  * @method globalize
- * @memberof module:Nodgine
  * @static
  * @return {undefined} Nothing
  **/
@@ -61,7 +57,6 @@ function mGlobalize() {
  * This function loads given json-file, parses and evaluates it
  *
  * @method loadFromFile
- * @memberof module:Nodgine
  * @static
  * @param {string} aFile - Path to file that should be evaluated
  * @return {undefined} Nothing
@@ -175,7 +170,6 @@ Object.defineProperties(EXPORTOBJECT, {
      * An instance of $APPLICATION
      *
      * @name $APPLICATION
-     * @memberof module:Nodgine
      * @static
      * @type {$APPLICATION}
      **/
@@ -188,7 +182,6 @@ Object.defineProperties(EXPORTOBJECT, {
      * An instance of $ROUTER
      *
      * @name $ROUTER
-     * @memberof module:Nodgine
      * @static
      * @type {$ROUTER}
      **/
@@ -201,7 +194,6 @@ Object.defineProperties(EXPORTOBJECT, {
      * An instance of $LOGGER
      *
      * @name $LOGGER
-     * @memberof module:Nodgine
      * @static
      * @type {$LOGGER}
      **/
@@ -214,7 +206,6 @@ Object.defineProperties(EXPORTOBJECT, {
      * An instance of $SERVICE
      *
      * @name $SERVICE
-     * @memberof module:Nodgine
      * @static
      * @type {$SERVICE}
      **/
