@@ -1,8 +1,8 @@
-var assert = require('assert'),
-    $APPLICATION = require('../../src/controller/application.js');
+'use strict';
+var expect = require('expect.js');
 
 describe('test', function () {
     it('should test', function () {
-        assert.equal(true, true);
-    })
+        expect(true).to.be(true);
+    });
 });
