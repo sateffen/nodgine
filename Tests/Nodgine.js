@@ -1,14 +1,15 @@
 /**
  * Unittest for the global nodgine
  */
-
+'use strict';
+/* global $APPLICATION, $LOGGER, $ROUTER, $SERVICE*/
 /**
  * Reference to the router object
  *
  * @private
  * @type {Nodgine}
  **/
-var mNodgine = require('../bootstrap.js'),
+var mNodgine = require('../src/bootstrap.js'),
     mPath = require('path');
 
 /**
@@ -57,7 +58,7 @@ exports.loadFromFile = function(test) {
     var consoleLogData = null;
     console.log = function (message) {
         consoleLogData = message;
-    }
+    };
 
     $LOGGER.log('LOG');
     test.equal(consoleLogData, null, 'console.log should not have been called');
@@ -77,7 +78,7 @@ exports.loadFromFile = function(test) {
             test.done();
         });
     });
-}
+};
 
 module.exports.requireNodgine = function (test) {
     var nodgine;
@@ -89,4 +90,4 @@ module.exports.requireNodgine = function (test) {
     test.equal(typeof nodgine, 'object', '$APPLICATION.requireNodgine: Nodgine should have type "object", is' + (typeof nodgine));
 
     test.done();
-}
+};

@@ -3,7 +3,7 @@
  *
  * This tests only the load function and it's mechanisms, cause the other functions are trivial and hopefuly not buggy or to change
  */
-
+'use strict';
 /**
  * Reference to the path object
  *
@@ -11,13 +11,12 @@
  * @type {path}
  **/
 var mPath = require('path'),
-    $APPLICATION = require('../bootstrap.js').$APPLICATION;
+    $APPLICATION = require('../src/bootstrap.js').$APPLICATION;
 
 /*
 * This Test checks, whether the $APPLICATION.load() function works properly, in conjunction with the addLoadPath function
 */
 module.exports.load = function(test) {
-    'use strict';
     var path = mPath.resolve('./Tests/ApplicationTest/');
     $APPLICATION.addLoadPath(path);
 
@@ -43,7 +42,7 @@ module.exports.runApplication = function (test) {
     });
 
     $APPLICATION.runApplication();
-}
+};
 
 /*
  * This Test checks, whether the $APPLICATION.load() function works properly, in conjunction with the addLoadPath function
@@ -61,4 +60,4 @@ module.exports.stopApplication = function (test) {
     });
 
     $APPLICATION.stopApplication();
-}
+};

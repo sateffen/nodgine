@@ -1,21 +1,19 @@
 /**
  * Unittest for the service object
  */
-
+'use strict';
 /**
  * Reference to the service object
  *
  * @private
  * @type {$SERVICE}
  **/
-var nodgineService = require('../bootstrap.js').$SERVICE;
+var nodgineService = require('../src/bootstrap.js').$SERVICE;
 
 /*
  * Tests the $SERVICE.clearServices function
  */
 exports.clearServices = function(test) {
-    'use strict';
-
     // register two services
     nodgineService.registerService('testid', 'testtype', function(){})
         .registerService('testid2', 'testtype2', function(){});
@@ -38,7 +36,6 @@ exports.clearServices = function(test) {
 * Tests the $SERVICE.registerService function
 */
 exports.registerService = function(test) {
-    'use strict';
     // register to get the serviceRegistered event once
     nodgineService.once('serviceRegistered', function(type, id) {
         test.ok(type === 'testtype', 'The type propagated by the serviceRegistered event should be \'testtype\', got ' + type);
@@ -62,7 +59,6 @@ exports.registerService = function(test) {
 * Tests the $SERVICE.unregisterService function
 */
 exports.unregisterService = function(test) {
-    'use strict';
     // register two services for the test
     nodgineService.registerService('testid', 'testtype', function(){})
         .registerService('testid2', 'testtype2', function(){});
@@ -94,7 +90,6 @@ exports.unregisterService = function(test) {
 * Tests the $SERVICE.getServicesByType function
 */
 exports.getServicesByType = function(test) {
-    'use strict';
     // setup some test services
     nodgineService.registerService('testid', 'test', function(){})
         .registerService('testid2', 'test2', function(){})

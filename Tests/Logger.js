@@ -1,14 +1,14 @@
 /**
  * Unittest for the logger object
  */
-
+'use strict';
 /**
  * Reference to the logger object
  *
  * @private
  * @type {$LOGGER}
  **/
-var mNodgineLogger = require('../bootstrap.js').$LOGGER,
+var mNodgineLogger = require('../src/bootstrap.js').$LOGGER,
     /**
      * Reference to the fs object
      *
@@ -28,7 +28,6 @@ var mNodgineLogger = require('../bootstrap.js').$LOGGER,
  * This test checks, whether the $LOGGER.writeToConsole function works the right way
  */
 exports.writeToConsole = function(test) {
-    'use strict';
     var data = [],
     // save console.log to revert the mock up
         tmpLogFunc = console.log;
@@ -61,7 +60,6 @@ exports.writeToConsole = function(test) {
 *  This test checks, whether the $LOGGER.writeToFile function works the right way
 */
 exports.writeToFile = function(test) {
-    'use strict';
     // setup the logfile to use
     var filePath = mPath.resolve('test.log');
     mNodgineLogger.setLogFile(filePath);
@@ -111,7 +109,6 @@ exports.error = function (test) {
 };
 
 exports.setMinimumLogLevel = function (test) {
-    'use strict';
     var data = [],
     // save console.log to revert the mock up
         tmpLogFunc = console.log;

@@ -1,14 +1,14 @@
 /**
  * Unittest for the router object
  */
-
+'use strict';
 /**
  * Reference to the router object
  *
  * @private
  * @type {$ROUTER}
  **/
-var mNodgineRouter = require('../bootstrap.js').$ROUTER,
+var mNodgineRouter = require('../src/bootstrap.js').$ROUTER,
 
     /**
      * Simple webserver for the tests
@@ -22,7 +22,6 @@ var mNodgineRouter = require('../bootstrap.js').$ROUTER,
 * Tests the $ROUTER.getEncoding function by getting the default value
 */
 exports.getEncoding = function(test) {
-    'use strict';
     test.equal(mNodgineRouter.getEncoding(), 'utf8', 'The default value of getEncoding should be \'utf8\', not ' + mNodgineRouter.getEncoding());
     test.done();
 };
@@ -31,8 +30,6 @@ exports.getEncoding = function(test) {
 * Tests the $ROUTER.setEncoding function
 */
 exports.setEncoding = function(test) {
-    'use strict';
-
     // sets encoding to ascii
     mNodgineRouter.setEncoding('ascii');
     test.equal(mNodgineRouter.getEncoding(), 'ascii', 'The encoding should be \'ascii\', but was ' + mNodgineRouter.getEncoding());
@@ -60,7 +57,6 @@ exports.setEncoding = function(test) {
 * Tests the $ROUTER.getDefaultRoute function by getting the default route, which is unset
 */
 exports.getDefaultRoute = function(test) {
-    'use strict';
     test.equal(mNodgineRouter.getDefaultRoute(), null, 'The default-route wasn\'t set, so it should be the default value \'null\'');
     test.done();
 };
@@ -69,7 +65,6 @@ exports.getDefaultRoute = function(test) {
 * Tests the $ROUTER.setDefaultRoute function
 */
 exports.setDefaultRoute = function(test) {
-    'use strict';
     // setup some test default routes
     var tFunc1 = function(){return 0;},
         tFunc2 = function(){return 1;};
@@ -86,7 +81,6 @@ exports.setDefaultRoute = function(test) {
 * Tests the $ROUTER.getRoute function by setting up a default test-route and receives it
 */
 exports.getRoute = function(test) {
-    'use strict';
     // setup a test function
     var tFunc = function(){};
     // adds the test function as route
@@ -102,7 +96,6 @@ exports.getRoute = function(test) {
 * Tests the $ROUTER.addRoute function by setting up a default test-route and receives it
 */
 exports.addRoute = function(test) {
-    'use strict';
     // adds two testroutes
     mNodgineRouter.addRoute('/testAddRoute', function(){});
     mNodgineRouter.addRoute('/testAddRoute2', function(){});
@@ -118,7 +111,6 @@ exports.addRoute = function(test) {
 * Tests the $ROUTER.clearRoutes function by setting up a default test-route and receives it
 */
 exports.clearRoutes = function(test) {
-    'use strict';
     // setup two testroutes
     mNodgineRouter.addRoute('/testclearRoutes', function(){});
     mNodgineRouter.addRoute('/testclearRoutes2', function(){});
@@ -134,14 +126,15 @@ exports.clearRoutes = function(test) {
  * Tests the $ROUTER.route function by setting up a default test-route and receives it
  */
 exports.route = function(test) {
-    'use strict';
     // setup first testfunction
     var tFunc1 = function(request, response) {
+        request.test = 'noJSHint';
         response.writeHead(200);
         response.end('success');
     },
     // setup second testfunction
     tFunc2 = function(request, response, args) {
+        request.test = 'noJSHint';
         response.writeHead(200);
         response.end(args.id);
     },
@@ -212,6 +205,7 @@ exports.route = function(test) {
 
     // setup default route
     mNodgineRouter.setDefaultRoute(function(request,response) {
+        request.test = 'noJSHint';
         response.writeHead(200);
         response.end('default');
     });
