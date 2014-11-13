@@ -16,5 +16,14 @@
 	"unused": "strict",
 	"strict": true,
     "sub": true,
-    "node": true
+    "node": true,
+    "globals"   : {
+        /* MOCHA */
+        "describe"   : false,
+        "it"         : false,
+        "before"     : false,
+        "beforeEach" : false,
+        "after"      : false,
+        "afterEach"  : false
+    }
 }
