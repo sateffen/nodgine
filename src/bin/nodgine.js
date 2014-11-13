@@ -34,7 +34,7 @@ if (mArgs[0] && mPath.extname(mArgs[0]) === '.json') {
         // load it
         mNodgine.loadFromFile(mPath.resolve(process.cwd(), mArgs[0]));
         // start the application
-        mNodgine.$APPLICATION.runApplication()
+        mNodgine.$APPLICATION.runApplication();
         // and tell the user the success
         console.log('Load successful');
     }
