@@ -1,9 +1,7 @@
-
+'use strict';
 var mStream = require('stream');
 
 module.exports = function(aResponse) {
-    'use strict';
-
     // TODO: Comment
 
     var mPostProcessorCallback,
