@@ -3,7 +3,8 @@
  *
  * @module Nodgine
  **/
-
+'use strict';
+/* global $LOGGER */
 /**
  * The exporting object, which gets revealed
  *
@@ -36,21 +37,10 @@ var EXPORTOBJECT = {},
  * @return {undefined} Nothing
  **/
 function mGlobalize() {
-    'use strict';
-    Object.defineProperties(GLOBAL, {
-        '$APPLICATION': {
-            value   : require('./controller/application.js')
-        },
-        '$ROUTER': {
-            value   : require('./controller/router.js')
-        },
-        '$LOGGER': {
-            value   : require('./controller/logger.js')
-        },
-        '$SERVICE': {
-            value   : require('./controller/service.js')
-        }
-    });
+    global.$APPLICATION = require('./controller/application.js');
+    global.$ROUTER = require('./controller/router.js');
+    global.$LOGGER = require('./controller/logger.js');
+    global.$SERVICE = require('./controller/service.js');
 }
 
 /**
@@ -62,7 +52,6 @@ function mGlobalize() {
  * @return {undefined} Nothing
  **/
 function mLoadFromFile(aFile) {
-    'use strict';
     if (typeof aFile !== 'string') {
         throw 'Nodgine.loadFromFile: First param needs to be string, got ' + typeof aFile;
     }
