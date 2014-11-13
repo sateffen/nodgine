@@ -7,10 +7,8 @@ module.exports = function(grunt) {
         copy: {
             dist: {
                 files: [
-                    {expand: true, src: ['Controller/*'], dest: 'dist/', filter: 'isFile'},
-                    {expand: true, src: ['Lib/**/*'],     dest: 'dist/'},
+                    {expand: true, src: ['src/**/*'],     dest: 'dist/'},
                     {expand: true, src: ['package.json'], dest: 'dist/'},
-                    {expand: true, src: ['bootstrap.js'], dest: 'dist/'},
                     {expand: true, src: ['LICENSE'],      dest: 'dist/'},
                     {expand: true, src: ['README.md'],    dest: 'dist/'}
                 ]
