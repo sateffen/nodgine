@@ -66,8 +66,6 @@ exports.loadFromFile = function(test) {
     test.ok(consoleLogData.match(/WARN/), 'The console.log log should contain WARN');
 
     console.log = originalConsoleLog;
-    $LOGGER.setMinimumLogLevel($LOGGER.logLevelEnum['ALL']);
-
 
     http.get(options, function(res) {
         var data = '';
