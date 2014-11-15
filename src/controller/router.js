@@ -3,7 +3,7 @@
  *
  * @module $ROUTER
  **/
-
+'use strict';
 /**
  * The exporting object, which gets revealed
  *
@@ -96,7 +96,6 @@ var EXPORTOBJECT = {},
  * @return {undefined} Nothing
  **/
 function mObjectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
-    'use strict';
     // if the service method is available, call it
     if (typeof aCallbackObject.service === 'function') {
         aCallbackObject.service(aRequest, aResponse, aArgs);
@@ -134,7 +133,6 @@ function mObjectToCallbackWrapper(aCallbackObject, aRequest, aResponse, aArgs) {
  * @return {$ROUTER} The instance itself
  */
 function mClearRoutes() {
-    'use strict';
     // delete routes
     mRoutes = [];
     return EXPORTOBJECT;
@@ -149,7 +147,6 @@ function mClearRoutes() {
  * @return {$ROUTER} The instance itself
  */
 function mSetDefaultRoute(aController) {
-    'use strict';
     if (typeof aController === 'function') {
         mDefaultController = aController;
     }
@@ -167,7 +164,6 @@ function mSetDefaultRoute(aController) {
  * @return {function|null}
  */
 function mGetDefaultRoute() {
-    'use strict';
     return mDefaultController;
 }
 
@@ -182,14 +178,13 @@ function mGetDefaultRoute() {
  * inspired by expressjs (https://github.com/visionmedia/express/blob/master/lib/utils.js) pathRegexp
  */
 function mPathToRoute(aPath, aSensitive) {
-    'use strict';
     // allocate some memory for the return object
     var tmpObj = {path: aPath, keys: [], requestCounter: 0};
     // do some magic
     aPath = aPath
         .concat('/?')
         .replace(/\/\(/g, '(?:/')
-        .replace(/(\/)?(\.)?:(\w+)(?:(\(.*?\)))?(\?)?(\*)?/g, function(_, slash, format, key, capture, optional, star){
+        .replace(/(\/)?(\.)?:(\w+)(?:(\(.*?\)))?(\?)?(\*)?/g, function(_, slash, format, key, capture, optional, star) {
             tmpObj.keys.push({name: key, optional: !!optional});
             slash = slash || '';
             return '' +
@@ -224,7 +219,6 @@ function mPathToRoute(aPath, aSensitive) {
  * @return {$ROUTER} The instance itself
  */
 function mAddRoute(aPath, aCallback, aCaseSensitive) {
-    'use strict';
     // preprocess arguments
     aCaseSensitive = !!aCaseSensitive;
     if (typeof aPath !== 'string') {
@@ -262,7 +256,6 @@ function mAddRoute(aPath, aCallback, aCaseSensitive) {
  * @return {$ROUTER} The instance itself
  **/
 function mAddPreProcessor(aPreProcessor) {
-    'use strict';
     if (typeof aPreProcessor !== 'function') {
         throw '$ROUTER.addPreProcessor: First param aPreProcessor needs to be a function, got ' + (typeof aPreProcessor);
     }
@@ -280,7 +273,6 @@ function mAddPreProcessor(aPreProcessor) {
  * @return {$ROUTER} The instance itself
  **/
 function mAddPostProcessor(aPostProcessor) {
-    'use strict';
     if (typeof aPostProcessor !== 'function') {
         throw '$ROUTER.addPreProcessor: First param aPreProcessor needs to be a function, got ' + (typeof aPostProcessor);
     }
@@ -298,7 +290,6 @@ function mAddPostProcessor(aPostProcessor) {
  * @return {object|null}
  */
 function mGetRoute(aPath) {
-    'use strict';
     // preprocess arguments
     if (typeof aPath !== 'string') {
         throw '$ROUTER.getRoute: First param aPath needs to be a string, got ' + (typeof aPath);
@@ -327,7 +318,6 @@ function mGetRoute(aPath) {
  * @return {undefined} Nothing
  */
 function mSetEncoding(aEncoding, aCheckEncoding) {
-    'use strict';
     // preprocess arguments
     if (typeof aCheckEncoding !== 'boolean') {
         aCheckEncoding = aCheckEncoding || true;
@@ -355,7 +345,6 @@ function mSetEncoding(aEncoding, aCheckEncoding) {
  * @return {string}
  */
 function mGetEncoding() {
-    'use strict';
     return mRequestEncoding;
 }
 
@@ -370,7 +359,6 @@ function mGetEncoding() {
  * @param {function} aCallback
  **/
 function mExecutePreProcessors(aRequest, aResponse, aArgs, aCallback) {
-    'use strict';
     // setup a counter, how many callbacks have been called
     var counter = 0;
 
@@ -416,7 +404,6 @@ function mExecutePreProcessors(aRequest, aResponse, aArgs, aCallback) {
  * @param {object} aArgs
  **/
 function mExecutePostProcessors(aRequest, aResponse, aArgs) {
-    'use strict';
     // setup a postprocessor counter
     var counter = 0;
 
@@ -453,7 +440,6 @@ function mExecutePostProcessors(aRequest, aResponse, aArgs) {
  * @param {response} aResponse - An nodejs response
  */
 function mRoute(aRequest, aResponse) {
-    'use strict';
     // setup some memory
     var postData = [];
 
@@ -534,7 +520,6 @@ function mRoute(aRequest, aResponse) {
  * @returns {Number}
  **/
 function mSortRoutes(aFirst, aSecond) {
-    'use strict';
     // sort descend
     return aSecond.requestCounter - aFirst.requestCounter;
 }
@@ -545,8 +530,6 @@ function mSortRoutes(aFirst, aSecond) {
  * @private
  **/
 function mOptimizeRoutes() {
-    'use strict';
-
     // sort descending
     mRoutes.sort(mSortRoutes);
 
@@ -565,8 +548,6 @@ function mOptimizeRoutes() {
  * @return {$ROUTER} The instance itself
  **/
 function mSetOptimizeInterval(aIntervalTime) {
-    'use strict';
-
     // reset current interval
     clearInterval(mOptimizeIntervalReference);
 

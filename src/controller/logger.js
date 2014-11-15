@@ -3,7 +3,7 @@
  *
  * @module $LOGGER
  **/
-
+'use strict';
 /**
  * The exporting object, which gets revealed
  *
@@ -85,7 +85,6 @@ var EXPORTOBJECT = {},
  * @return {string} readable timestamp of current time
  */
 function mGetDateString() {
-    'use strict';
     // generate a current date
     var d = new Date();
     // return a date string, looking like (dd.mm.yyy HH:MM:SS)
@@ -111,8 +110,6 @@ function mGetMessageString(aState, aMessage) {
  * @return {$LOGGER} The instance itself
  */
 function mEnterLog(aState, aCritical, aMessage) {
-    'use strict';
-
     // if loglevel is unknown, or lower than minimum log-level, ignore this message
     if (!mLogLevelEnum[aState] || mLogLevelEnum[aState] < mMinimumLogLevel) {
         return EXPORTOBJECT;
@@ -156,7 +153,6 @@ function mEnterLog(aState, aCritical, aMessage) {
  * @return {$LOGGER} The instance itself
  */
 function mSetLogFile(aFilename) {
-    'use strict';
     mLogFile = aFilename;
     return EXPORTOBJECT;
 }
@@ -170,7 +166,6 @@ function mSetLogFile(aFilename) {
  * @return {$LOGGER} The instance itself
  */
 function mWriteToFile(aOption) {
-    'use strict';
     mToFile = !!(aOption);
     return EXPORTOBJECT;
 }
@@ -184,7 +179,6 @@ function mWriteToFile(aOption) {
  * @return {$LOGGER} The instance itself
  */
 function mWriteToConsole(aOption) {
-    'use strict';
     mToConsole = !!(aOption);
     return EXPORTOBJECT;
 }

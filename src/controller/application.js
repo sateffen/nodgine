@@ -3,7 +3,7 @@
  *
  * @module $APPLICATION
  **/
-
+'use strict';
 /**
  * The exporting object, which gets revealed
  *
@@ -81,10 +81,9 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
  *      $APPLICATION.startHTTP('127.0.0.1:7777'); // starts http-server reachable from 127.0.0.1:7777
  **/
 function mStartHTTP(aInterface) {
-    'use strict';
     var port, hostname;
     if (typeof aInterface === 'number') {
-        port = aInterface
+        port = aInterface;
     }
     else if (typeof aInterface === 'string') {
         var parts = aInterface.split(':');
@@ -121,12 +120,11 @@ function mStartHTTP(aInterface) {
  * @return {$APPLICATION} The instance itself
  **/
 function mStartHTTPS(aKey, aCert, aInterface, aOptions) {
-    'use strict';
     // check port
     var port, hostname;
     aOptions = aOptions || {};
     if (typeof aInterface === 'number') {
-        port = aInterface
+        port = aInterface;
     }
     else if (typeof aInterface === 'string') {
         var parts = aInterface.split(':');
@@ -169,7 +167,6 @@ function mStartHTTPS(aKey, aCert, aInterface, aOptions) {
  * @return {$APPLICATION} The instance itself
  **/
 function mStopHTTP() {
-    'use strict';
     if (mServer.http) {
         mServer.http.close();
     }
@@ -184,7 +181,6 @@ function mStopHTTP() {
  * @return {$APPLICATION} The instance itself
  **/
 function mStopHTTPS() {
-    'use strict';
     if (mServer.https) {
         mServer.https.close();
     }
@@ -199,7 +195,6 @@ function mStopHTTPS() {
  * @return {$APPLICATION} The instance itself
  **/
 function mRunApplication() {
-    'use strict';
     EXPORTOBJECT.emit('startApplication');
     return EXPORTOBJECT;
 }
@@ -212,7 +207,6 @@ function mRunApplication() {
  * @return {$APPLICATION} The instance itself
  **/
 function mStopApplication() {
-    'use strict';
     EXPORTOBJECT.emit('stopApplication');
     return EXPORTOBJECT;
 }
@@ -225,7 +219,6 @@ function mStopApplication() {
  * @return {Array} a multi-dimensional array with all paths to all found javascript files
  **/
 function mGetAllJSFiles(aBasePath) {
-    'use strict';
     // first, read the basedir
     var files = mFs.readdirSync(aBasePath);
     // than filter the basedir for directorys
@@ -260,7 +253,6 @@ function mGetAllJSFiles(aBasePath) {
  * @return {$APPLICATION} The instance itself
  **/
 function mAddLoadPath(aPath) {
-    'use strict';
     // first of all: resolve the path to an absolute path
     aPath = mPath.resolve(aPath);
     // search for all JS files in this path, recursivly
@@ -298,7 +290,6 @@ function mAddLoadPath(aPath) {
  * @return {function|object|null} The result of the require()
  **/
 function mLoad(aClassName) {
-    'use strict';
     // if class exists
     if (mClasses[aClassName]) {
         // it's required
@@ -316,7 +307,6 @@ function mLoad(aClassName) {
  * @return {httpServer|null}
  **/
 function mGetHttpServer() {
-    'use strict';
     return mServer.http;
 }
 
@@ -328,7 +318,6 @@ function mGetHttpServer() {
  * @return {httpsServer|null}
  **/
 function mGetHttpsServer() {
-    'use strict';
     return mServer.https;
 }
 

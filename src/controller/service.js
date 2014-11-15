@@ -3,7 +3,7 @@
  *
  * @module $SERVICE
  **/
-
+'use strict';
 /**
  * The exporting object, which gets revealed
  *
@@ -32,7 +32,6 @@ var EXPORTOBJECT = new (require('events').EventEmitter)(),
  * @return {$SERVICE} The instance itself
  */
 function mClearServices() {
-    'use strict';
     mRegisteredServices = {};
     EXPORTOBJECT.emit('servicesCleared');
     return EXPORTOBJECT;
@@ -48,7 +47,6 @@ function mClearServices() {
  *      {type: string, controller: function|object, id: number}
  */
 function mGetServicesByType(aType) {
-    'use strict';
     // preprocess argument
     if (typeof aType !== 'string') {
         throw '$SERVICE.getServicesByType: First param aType needs to be a string, got ' + (typeof aType);
@@ -76,7 +74,6 @@ function mGetServicesByType(aType) {
  * @return {function|object|undefined}
  */
 function mGetServiceById(aId) {
-    'use strict';
     if (typeof aId === 'string' && mRegisteredServices[aId]) {
         return mRegisteredServices[aId].controller;
     }
@@ -99,7 +96,6 @@ function mGetServiceById(aId) {
  * @return {$SERVICE} The instance itself
  */
 function mRegisterService(aId, aType, aController) {
-    'use strict';
     // verify input
     if (typeof aId !== 'string') {
         throw '$SERVICE.registerService: First param aId needs to be a string, got ' + (typeof aId);
@@ -141,7 +137,6 @@ function mRegisterService(aId, aType, aController) {
  * @return {$SERVICE} This instance itself
  */
 function mUnregisterService(aId) {
-    'use strict';
     if (typeof aId === 'string' && mRegisteredServices[aId]) {
         EXPORTOBJECT.emit('serviceUnregistered', mRegisteredServices[aId].type, aId);
         // set the service to null, so the id can be used by another service, and the memory will get freed

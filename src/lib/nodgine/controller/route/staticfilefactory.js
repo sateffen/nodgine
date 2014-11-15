@@ -1,4 +1,4 @@
-
+'use strict';
 var mPath = require('path'),
     mFs = require('fs');
 
@@ -36,14 +36,12 @@ function mGetContentTypeHeader(aFileName) {
 }
 
 function mStaticFileController(aPath, aRequest, aResponse, aArgs) {
-    'use strict';
     var stream = mFs.createReadStream(aPath);
     aResponse.writeHead(200, mGetContentTypeHeader(aPath));
     aResponse.pipe(stream);
 }
 
 function mStaticDirectoryController(aPath, aRequest, aResponse, aArgs) {
-    'use strict';
     if (aArgs['*']) {
         var requestedFile = mPath.normalize(aArgs['*'].replace('..', '.'));
         requestedFile = mPath.join(aPath, requestedFile);
@@ -87,7 +85,6 @@ function mStaticDirectoryController(aPath, aRequest, aResponse, aArgs) {
 }
 
 module.exports = function (aPath) {
-    'use strict';
     aPath = mPath.resolve(aPath);
 
     var stats = mFs.lstatSync(aPath);

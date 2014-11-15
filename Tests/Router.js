@@ -128,13 +128,11 @@ exports.clearRoutes = function(test) {
 exports.route = function(test) {
     // setup first testfunction
     var tFunc1 = function(request, response) {
-        request.test = 'noJSHint';
         response.writeHead(200);
         response.end('success');
     },
     // setup second testfunction
     tFunc2 = function(request, response, args) {
-        request.test = 'noJSHint';
         response.writeHead(200);
         response.end(args.id);
     },

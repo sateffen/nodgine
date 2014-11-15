@@ -1,7 +1,5 @@
-
+'use strict';
 module.exports = function(aRequest, aResponse, aArgs, aCallback) {
-    'use strict';
-
     var cookies = (aRequest.cookie) ? aRequest.cookie.split(';') : [],
         tmp = null;
     // now: do the cookie dance

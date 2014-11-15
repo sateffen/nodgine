@@ -13,7 +13,7 @@
 	"nonbsp": true,
 	"quotmark": "single",
 	"undef": true,
-	"unused": "strict",
+	"unused": "true",
 	"strict": true,
     "sub": true,
     "node": true,
