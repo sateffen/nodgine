@@ -1,0 +1,40 @@
+{
+    "basepath": "./",
+    "globalize": true,
+    "loadpaths": [
+        "./"
+    ],
+    "routes": [
+        {
+            "route": "/nodginetestroute",
+            "controller": "TestRouteController.js"
+        }
+    ],
+    "services": [
+        {
+            "id": "testId",
+            "type": "testType",
+            "controller": "TestService.js"
+        }
+    ],
+    "preprocessors": [
+        "TestPreProcessor.js"
+    ],
+    "postprocessors": [
+        "TestPostProcessor.js"
+    ],
+    "http": {
+        "port": 1235
+    },
+    "https": {
+        "key": "../httpsfiles/localhost.key",
+        "cert": "../httpsfiles/localhost.cert",
+        "port": 1236
+    },
+    "logger": {
+        "writeToFile": false,
+        "writeToConsole": true,
+        "minimumLogLevel": "WARNING",
+        "logFile": "test.log"
+    }
+}
