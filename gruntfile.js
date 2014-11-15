@@ -26,7 +26,8 @@ module.exports = function(grunt) {
                 options: {
                     reporter: 'spec',
                     captureFile: 'test/results/tests.txt',
-                    require: 'test/coverage/blanket'
+                    require: 'test/coverage/blanket',
+                    clearRequireCache: true
                 },
                 src: ['./test/tests/**/*.js']
             },
