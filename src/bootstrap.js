@@ -81,34 +81,34 @@ function mLoadFromFile(aFile) {
 
         if (fileContent.loadpaths && Array.isArray(fileContent.loadpaths)) {
             fileContent.loadpaths.forEach(function (path) {
-                $APPLICATION.addLoadPath(mPath.join(basePath, path));
+                $APPLICATION.addLoadPath(mPath.resolve(basePath, path));
             });
         }
 
         if (fileContent.services && Array.isArray(fileContent.services)) {
             fileContent.services.forEach(function (service) {
-                var controller = require(mPath.join(basePath, service.controller));
+                var controller = require(mPath.resolve(basePath, service.controller));
                 $SERVICE.registerService(service.id, service.type, controller);
             });
         }
 
         if (fileContent.routes && Array.isArray(fileContent.routes)) {
             fileContent.routes.forEach(function (route) {
-                var controller = require(mPath.join(basePath, route.controller));
+                var controller = require(mPath.resolve(basePath, route.controller));
                 $ROUTER.addRoute(route.route, controller, !!route.caseSensetive);
             });
         }
 
         if (fileContent.preprocessors && Array.isArray(fileContent.preprocessors)) {
             fileContent.preprocessors.forEach(function (processor) {
-                var controller = require(mPath.join(basePath, processor));
+                var controller = require(mPath.resolve(basePath, processor));
                 $ROUTER.addPreProcessor(controller);
             });
         }
 
         if (fileContent.postprocessors && Array.isArray(fileContent.postprocessors)) {
             fileContent.postprocessors.forEach(function (processor) {
-                var controller = require(mPath.join(basePath, processor));
+                var controller = require(mPath.resolve(basePath, processor));
                 $ROUTER.addPostProcessor(controller);
             });
         }
@@ -119,8 +119,8 @@ function mLoadFromFile(aFile) {
 
         if (fileContent.https && fileContent.https.port && fileContent.https.key && fileContent.https.cert){
             $APPLICATION.startHTTPS(
-                mPath.join(basePath, fileContent.https.key),
-                mPath.join(basePath, fileContent.https.cert),
+                mPath.resolve(basePath, fileContent.https.key),
+                mPath.resolve(basePath, fileContent.https.cert),
                 fileContent.https.port,
                 fileContent.https.options);
         }
