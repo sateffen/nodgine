@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         mochaTest: {
             test: {
                 options: {
-                    reporter: 'spec',
+                    reporter: 'progress',
                     captureFile: 'test/results/tests.txt',
                     require: 'test/coverage/blanket',
                     clearRequireCache: true
