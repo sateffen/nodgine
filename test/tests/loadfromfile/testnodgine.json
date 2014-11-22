@@ -7,21 +7,21 @@
     "routes": [
         {
             "route": "/nodginetestroute",
-            "controller": "TestRouteController.js"
+            "controller": "testroutecontroller.js"
         }
     ],
     "services": [
         {
             "id": "testId",
             "type": "testType",
-            "controller": "TestService.js"
+            "controller": "testservice.js"
         }
     ],
     "preprocessors": [
-        "TestPreProcessor.js"
+        "testpreprocessor.js"
     ],
     "postprocessors": [
-        "TestPostProcessor.js"
+        "testpostprocessor.js"
     ],
     "http": {
         "port": 1235
