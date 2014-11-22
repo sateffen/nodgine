@@ -79,8 +79,8 @@ describe('Requiring the nodgine should deliver a working object', function () {
         global.$SERVICE = undefined;
 
         after(function () {
-            nodgine.stopHTTP();
-            nodgine.stopHTTPS();
+            nodgine.$APPLICATION.stopHTTP();
+            nodgine.$APPLICATION.stopHTTPS();
         });
 
         it('should not throw an error loading the file', function () {
