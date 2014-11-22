@@ -111,7 +111,7 @@ describe('Requiring the nodgine should deliver a working object', function () {
             expect(service).to.be.an('object');
         });
 
-        it('should have set up a reachable http server', function () {
+        it('should have set up a reachable http server', function (done) {
             var http = require('http'),
                 options = {
                     host: 'localhost',
@@ -126,17 +126,19 @@ describe('Requiring the nodgine should deliver a working object', function () {
                 res.on('end', function() {
                     expect(res.statusCode).to.equal(200);
                     expect(data).to.equal('presuccesspost');
+                    done();
                 });
             });
         });
 
-        it('should have set up a reachable https server', function () {
-            var http = require('http'),
+        it('should have set up a reachable https server', function (done) {
+            var http = require('https'),
                 options = {
                     host: 'localhost',
                     port: 1236,
                     path: '/nodginetestroute',
-                    method: 'GET'
+                    method: 'GET',
+                    rejectUnauthorized: false
                 };
 
             http.get(options, function(res) {
@@ -145,6 +147,7 @@ describe('Requiring the nodgine should deliver a working object', function () {
                 res.on('end', function() {
                     expect(res.statusCode).to.equal(200);
                     expect(data).to.equal('presuccesspost');
+                    done();
                 });
             });
         });
