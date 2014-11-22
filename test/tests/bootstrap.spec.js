@@ -78,6 +78,11 @@ describe('Requiring the nodgine should deliver a working object', function () {
         global.$ROUTER = undefined;
         global.$SERVICE = undefined;
 
+        after(function () {
+            nodgine.stopHTTP();
+            nodgine.stopHTTPS();
+        });
+
         it('should not throw an error loading the file', function () {
             function load() {
                 nodgine.loadFromFile(mPath.resolve(__dirname, './loadfromfile/testnodgine.json'));
