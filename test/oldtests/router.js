@@ -8,7 +8,7 @@
  * @private
  * @type {$ROUTER}
  **/
-var mNodgineRouter = require('../src/bootstrap.js').$ROUTER,
+var mNodgineRouter = require('../../src/bootstrap.js').$ROUTER,
 
     /**
      * Simple webserver for the tests
@@ -159,7 +159,7 @@ exports.route = function(test) {
     mNodgineRouter.addRoute('/testroute', tFunc1);
     mNodgineRouter.addRoute('/tataroute/:id', tFunc2);
     mNodgineRouter.addRoute('/testobject', tObject);
-    
+
     // do request to double path
     var options = {
             host: 'localhost',
@@ -176,7 +176,7 @@ exports.route = function(test) {
             done();
         });
     });
-    
+
     //do a successful request to object
     options.path = '/testobject';
     http.get(options, function(res) {
@@ -188,7 +188,7 @@ exports.route = function(test) {
             done();
         });
     });
-    
+
     // do request to single path
     options.path = '/tataroute/test';
     http.get(options, function(res) {
@@ -207,7 +207,7 @@ exports.route = function(test) {
         response.writeHead(200);
         response.end('default');
     });
-    
+
     // do request to default route
     options.path = '/';
     http.get(options, function(res) {
@@ -219,7 +219,7 @@ exports.route = function(test) {
             done();
         });
     });
-    
+
     // do request to default route
     options.path = '/mugglefugg';
     http.get(options, function(res) {
@@ -231,7 +231,7 @@ exports.route = function(test) {
             done();
         });
     });
-    
+
     //do a not successful request to object
     options.path = '/testobject';
     options.method = 'POST';

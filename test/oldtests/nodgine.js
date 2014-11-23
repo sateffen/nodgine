@@ -9,7 +9,7 @@
  * @private
  * @type {Nodgine}
  **/
-var mNodgine = require('../src/bootstrap.js'),
+var mNodgine = require('../../src/bootstrap.js'),
     mPath = require('path');
 
 /**
@@ -36,7 +36,7 @@ exports.globalize = function(test) {
 };
 
 exports.loadFromFile = function(test) {
-    mNodgine.loadFromFile(mPath.join(__dirname, './NodgineTest/TestNodgine.json'));
+    mNodgine.loadFromFile(mPath.join(__dirname, './nodginetest/testnodgine.json'));
 
     test.strictEqual($APPLICATION, mNodgine.$APPLICATION, 'The $APPLICATION object should be global.');
     test.strictEqual($LOGGER,      mNodgine.$LOGGER,      'The $LOGGER object should be global.');
@@ -81,7 +81,7 @@ exports.loadFromFile = function(test) {
 module.exports.requireNodgine = function (test) {
     var nodgine;
     test.doesNotThrow(function () {
-        nodgine = require('../');
+        nodgine = require('../../');
     }, '$APPLICATION.requireNodgine: Nodgine could not be required');
 
     test.notEqual(nodgine, undefined, '$APPLICATION.requireNodgine: Nodgine should not be undefined');

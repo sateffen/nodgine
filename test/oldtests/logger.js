@@ -8,7 +8,7 @@
  * @private
  * @type {$LOGGER}
  **/
-var mNodgineLogger = require('../src/bootstrap.js').$LOGGER,
+var mNodgineLogger = require('../../src/bootstrap.js').$LOGGER,
     /**
      * Reference to the fs object
      *
@@ -61,7 +61,7 @@ exports.writeToConsole = function(test) {
 */
 exports.writeToFile = function(test) {
     // setup the logfile to use
-    var filePath = mPath.resolve('test.log');
+    var filePath = mPath.resolve('./test.log');
     mNodgineLogger.setLogFile(filePath);
     // configure logger to use not file nor console
     mNodgineLogger.writeToFile(false);

@@ -8,7 +8,7 @@
  * @private
  * @type {$SERVICE}
  **/
-var nodgineService = require('../src/bootstrap.js').$SERVICE;
+var nodgineService = require('../../src/bootstrap.js').$SERVICE;
 
 /*
  * Tests the $SERVICE.clearServices function

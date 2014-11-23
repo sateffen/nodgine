@@ -19,7 +19,7 @@ module.exports = function(grunt) {
             doc: ['docs/']
         },
         nodeunit: {
-            all: ['Tests/*.js']
+            all: ['./test/oldtests/*.js']
         },
         mochaTest: {
             test: {
