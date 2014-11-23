@@ -17,11 +17,11 @@ var mPath = require('path'),
 * This Test checks, whether the $APPLICATION.load() function works properly, in conjunction with the addLoadPath function
 */
 module.exports.load = function(test) {
-    var path = mPath.resolve('./tests/applicationtest/');
+    var path = mPath.resolve(__dirname, './applicationtest/');
     $APPLICATION.addLoadPath(path);
 
     // test whether the loaded object and the directly required object is the same
-    test.equal($APPLICATION.load('TestObject')(), require('./applicationtest/testobject.js')(), '$APPLICATION.load: ' +
+    test.equal($APPLICATION.load('testobject')(), require('./applicationtest/testobject.js')(), '$APPLICATION.load: ' +
         'Required and loaded object should be the same');
     test.done();
 };
