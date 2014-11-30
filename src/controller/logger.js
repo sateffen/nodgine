@@ -116,7 +116,7 @@ function mEnterLog(aState, aCritical, aMessage) {
     }
 
     // convert message to string, if it's not a string
-    if (typeof aMessage!== 'string') {
+    if (typeof aMessage !== 'string') {
         aMessage = mUtil.inspect(aMessage);
     }
 
