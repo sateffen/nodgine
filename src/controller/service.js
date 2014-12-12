@@ -43,7 +43,7 @@ function mClearServices() {
  * @method getServicesByType
  * @static
  * @param {string} aType - Name of the searched type (case-sensitive!)
- * @return {Array} An array containing all matched services.
+ * @return {array} An array containing all matched services.
  */
 function mGetServicesByType(aType) {
     // preprocess argument
@@ -69,13 +69,19 @@ function mGetServicesByType(aType) {
  *
  * @method getServiceById
  * @static
- * @param {number} aId The id of the service to retrieve (case-sensitive!)
+ * @param {string} aId The id of the service to retrieve (case-sensitive!)
  * @return {function|object|undefined}
  */
 function mGetServiceById(aId) {
-    if (typeof aId === 'string' && mRegisteredServices[aId]) {
+    // preprocess argument
+    if (typeof aId !== 'string') {
+        throw '$SERVICE.getServiceById: First param aType needs to be a string, got ' + (typeof aType);
+    }
+
+    if (mRegisteredServices[aId]) {
         return mRegisteredServices[aId].controller;
     }
+
     return undefined;
 }
 
