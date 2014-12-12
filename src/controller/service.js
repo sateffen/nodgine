@@ -43,8 +43,7 @@ function mClearServices() {
  * @method getServicesByType
  * @static
  * @param {string} aType - Name of the searched type
- * @return {Array} An array containing all matched services as object. The object looks like:
- *      {type: string, controller: function|object, id: number}
+ * @return {Array} An array containing all matched services.
  */
 function mGetServicesByType(aType) {
     // preprocess argument
@@ -57,7 +56,7 @@ function mGetServicesByType(aType) {
     // search for every entry with given type
     for (var i in mRegisteredServices) {
         if (mRegisteredServices.hasOwnProperty(i) && mRegisteredServices[i].type === aType) {
-            returnArray.push(mRegisteredServices[i]);
+            returnArray.push(mRegisteredServices[i].controller);
         }
     }
 
