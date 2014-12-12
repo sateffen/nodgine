@@ -1,5 +1,5 @@
 'use strict';
-/* global $APPLICATION, $SERVICE, $ROUTER, $SERVICE*/
+/* global $APPLICATION, $SERVICE, $ROUTER */
 var expect = require('chai').expect,
     mPath = require('path');
 
