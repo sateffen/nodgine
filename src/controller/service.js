@@ -91,7 +91,7 @@ function mGetServiceById(aId) {
  * @static
  * @param {string} aId
  * @param {string} aType
- * @param {function} aController
+ * @param {function|object} aController
  * @return {$SERVICE} The instance itself
  */
 function mRegisterService(aId, aType, aController) {
@@ -102,8 +102,9 @@ function mRegisterService(aId, aType, aController) {
     if (typeof aType !== 'string') {
         throw '$SERVICE.registerService: Second param aType needs to be a string, got ' + (typeof aType);
     }
-    else if (typeof aController !== 'function' && typeof aController !== 'object') {
-        throw '$SERVICE.registerService: Third param aController needs to be a function or object, got ' + (typeof aController);
+    else if ((typeof aController !== 'function' && typeof aController !== 'object') || aController === null || Array.isArray(aController)) {
+        throw '$SERVICE.registerService: Third param aController needs to be a function or object,' +
+              'and not an array of null, got ' + (typeof aController);
     }
     if (mRegisteredServices[aId]) {
         throw '$SERVICE.registerService: Service with id ' + aId + ' does already exist';
