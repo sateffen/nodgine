@@ -42,7 +42,7 @@ function mClearServices() {
  *
  * @method getServicesByType
  * @static
- * @param {string} aType - Name of the searched type
+ * @param {string} aType - Name of the searched type (case-sensitive!)
  * @return {Array} An array containing all matched services.
  */
 function mGetServicesByType(aType) {
@@ -50,7 +50,7 @@ function mGetServicesByType(aType) {
     if (typeof aType !== 'string') {
         throw '$SERVICE.getServicesByType: First param aType needs to be a string, got ' + (typeof aType);
     }
-    aType = aType.toLowerCase();
+
     // allocate some memory
     var returnArray = [];
     // search for every entry with given type
@@ -69,7 +69,7 @@ function mGetServicesByType(aType) {
  *
  * @method getServiceById
  * @static
- * @param {number} aId
+ * @param {number} aId The id of the service to retrieve (case-sensitive!)
  * @return {function|object|undefined}
  */
 function mGetServiceById(aId) {
@@ -112,7 +112,7 @@ function mRegisterService(aId, aType, aController) {
     // register service
     mRegisteredServices[aId] = {
         id: aId,
-        type: aType.toLowerCase(),
+        type: aType,
         controller: aController
     };
 
