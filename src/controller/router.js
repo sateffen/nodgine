@@ -225,9 +225,10 @@ function mAddRoute(aPath, aCallback, aCaseSensitive) {
     if (typeof aPath !== 'string') {
         throw '$ROUTER.addRoute: First param aPath needs to be a string, got ' + (typeof aPath);
     }
-    if (typeof aCallback !== 'function' && typeof aCallback !== 'object' || aCallback === null) {
-        throw '$ROUTER.addRoute: Second param aCallback needs to be a function, got ' + (typeof aCallback);
+    if (typeof aCallback !== 'function' && typeof aCallback !== 'object' || aCallback === null || Array.isArray(aCallback)) {
+        throw '$ROUTER.addRoute: Second param aCallback needs to be a function or object (not array), got ' + (typeof aCallback);
     }
+
     aPath = (aPath[0] === '/') ? aPath : '/' + aPath;
 
     // let some magic happen and save it
