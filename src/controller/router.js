@@ -139,11 +139,12 @@ function mClearRoutes() {
 }
 
 /**
- * Sets the default route controller for all not routeable requests
+ * Sets the default route controller for all not routeable requests. This has to be a function,
+ * that handles all requests and request methods, that are not routable.
  *
  * @method setDefaultRoute
  * @static
- * @param {function|object} aController
+ * @param {function} aController
  * @return {$ROUTER} The instance itself
  */
 function mSetDefaultRoute(aController) {
@@ -224,7 +225,7 @@ function mAddRoute(aPath, aCallback, aCaseSensitive) {
     if (typeof aPath !== 'string') {
         throw '$ROUTER.addRoute: First param aPath needs to be a string, got ' + (typeof aPath);
     }
-    if (typeof aCallback !== 'function' && typeof aCallback !== 'object') {
+    if (typeof aCallback !== 'function' && typeof aCallback !== 'object' || aCallback === null) {
         throw '$ROUTER.addRoute: Second param aCallback needs to be a function, got ' + (typeof aCallback);
     }
     aPath = (aPath[0] === '/') ? aPath : '/' + aPath;
