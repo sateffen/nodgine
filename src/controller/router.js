@@ -185,14 +185,14 @@ function mPathToRoute(aPath, aSensitive) {
     aPath = aPath
         .concat('/?')
         .replace(/\/\(/g, '(?:/')
-        .replace(/(\/)?(\.)?:(\w+)(?:(\(.*?\)))?(\?)?(\*)?/g, function(_, slash, format, key, capture, optional, star) {
+        .replace(/(\/)?:(\w+)(?:(\(.*?\)))?(\?)?(\*)?/g, function(_, slash, key, capture, optional, star) {
             tmpObj.keys.push({name: key, optional: !!optional});
             slash = slash || '';
             return '' +
                 (optional ? '' : slash) +
                 '(?:' +
                 (optional ? slash : '') +
-                (format || '') + (capture || (format && '([^/.]+?)' || '([^/]+?)')) + ')' +
+                (capture || '([^/]+?)') + ')' +
                 (optional || '') +
                 (star ? '(/*)?' : '');
         })
