@@ -24,11 +24,13 @@
         "testpostprocessor.js"
     ],
     "http": {
+        "interface": "127.0.0.1:1235",
         "port": 1235
     },
     "https": {
         "key": "../httpsfiles/localhost.key",
         "cert": "../httpsfiles/localhost.cert",
+        "interface": "127.0.0.1:1236",
         "port": 1236
     },
     "logger": {

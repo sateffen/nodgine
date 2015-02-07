@@ -113,16 +113,30 @@ function mLoadFromFile(aFile) {
             });
         }
 
-        if (fileContent.http && fileContent.http.port){
-            $APPLICATION.startHTTP(fileContent.http.port);
+        if (fileContent.http){
+            if (fileContent.http.interface) {
+                $APPLICATION.startHTTP(fileContent.http.interface);
+            }
+            else if (fileContent.http.port) {
+                $APPLICATION.startHTTP(fileContent.http.port);
+            }
         }
 
-        if (fileContent.https && fileContent.https.port && fileContent.https.key && fileContent.https.cert){
-            $APPLICATION.startHTTPS(
-                mPath.resolve(basePath, fileContent.https.key),
-                mPath.resolve(basePath, fileContent.https.cert),
-                fileContent.https.port,
-                fileContent.https.options);
+        if (fileContent.https && fileContent.https.key && fileContent.https.cert){
+            if (fileContent.https.interface) {
+                $APPLICATION.startHTTPS(
+                    mPath.resolve(basePath, fileContent.https.key),
+                    mPath.resolve(basePath, fileContent.https.cert),
+                    fileContent.https.interface,
+                    fileContent.https.options);
+            }
+            else if (fileContent.https.port) {
+                $APPLICATION.startHTTPS(
+                    mPath.resolve(basePath, fileContent.https.key),
+                    mPath.resolve(basePath, fileContent.https.cert),
+                    fileContent.https.port,
+                    fileContent.https.options);
+            }
         }
 
         if (fileContent.logger) {
