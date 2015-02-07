@@ -215,6 +215,7 @@ function mStopApplication() {
  * Emit a start event to the application
  *
  * @private
+ * @deprecated
  * @param {string} aBasePath - Path in which the javascript files should be searched for
  * @return {Array} a multi-dimensional array with all paths to all found javascript files
  **/
@@ -249,6 +250,7 @@ function mGetAllJSFiles(aBasePath) {
  *
  * @method addLoadPath
  * @static
+ * @deprecated
  * @param {string} aPath - Path, where to search for new javascript classes (Hint: Best is an absolute path)
  * @return {$APPLICATION} The instance itself
  **/
@@ -286,6 +288,7 @@ function mAddLoadPath(aPath) {
  *
  * @method load
  * @static
+ * @deprecated
  * @param {string} aClassName - The class-name, for which the function should search
  * @return {function|object|null} The result of the require()
  **/
