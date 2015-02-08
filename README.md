@@ -20,7 +20,7 @@ fast as possible, too.
 ## Documentation ##
 
 Currently there are two ways of getting your information. In the repository there is a `/doc` folder, containing an automatically
-generated YUIDoc documentation.
+generated JSDoc documentation.
 
 Additionally you'll find all further information in the [wiki](https://github.com/sateffen/nodgine/wiki). There are how-tos, concept
 explanations and everything you need to know, to work with the nodgine.
@@ -31,7 +31,8 @@ If you don't find the information you're looking for, or you don't get how to re
 ## Testing ##
 
 For the most parts of the application I'm using unittests to automatically find bugs and ensure functionality. To do so
-I'm using [nodeunit](https://github.com/caolan/nodeunit).  There is a simple grunt-task to start the tests:
+I'm using [mocha](https://github.com/pghalliday/grunt-mocha-test) and [chai](https://github.com/chaijs/chai). There is a
+simple grunt-task to start the tests:
 
     grunt test
 
