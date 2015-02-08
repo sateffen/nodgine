@@ -1,6 +1,6 @@
 {
     "name" : "nodgine",
-    "version" : "0.3.0",
+    "version" : "0.4.0",
     "description" : "The nodgine is a small framework for creating fast webservices. The main focuses are speed and easiness.",
     "main" : "./src/bootstrap.js",
     "author" : {
