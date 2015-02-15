@@ -257,12 +257,31 @@ function mAddRoute(aPath, aCallback, aCaseSensitive) {
  * @param {function} aPreProcessor
  * @return {$ROUTER} The instance itself
  **/
-function mAddPreProcessor(aPreProcessor) {
-    if (typeof aPreProcessor !== 'function') {
-        throw '$ROUTER.addPreProcessor: First param aPreProcessor needs to be a function, got ' + (typeof aPreProcessor);
+function mAddPreProcessor(aRoute, aPreProcessor) {
+    if (typeof aRoute === 'function') {
+        mPreProcessors.push({
+            regex: null,
+            processor: aRoute
+        });
+    }
+    else if (typeof aRoute === 'string' && typeof aPreProcessor === 'function') {
+        var routeObject = mPathToRoute(aRoute);
+        mPreProcessors.push({
+            regex: routeObject.regex,
+            path: routeObject.path,
+            keys: routeObject.keys,
+            processor: aPreProcessor
+        });
+    }
+    else {
+        if (aPreProcessor === undefined) {
+            throw '$ROUTER.addPreProcessor: First param needs to be a function, got ' + (typeof aRoute);
+        }
+        else {
+            throw '$ROUTER.addPreProcessor: First param needs to be a string, second a function';
+        }
     }
 
-    mPreProcessors.push(aPreProcessor);
     return EXPORTOBJECT;
 }
 
@@ -274,12 +293,30 @@ function mAddPreProcessor(aPreProcessor) {
  * @param {function} aPostProcessor
  * @return {$ROUTER} The instance itself
  **/
-function mAddPostProcessor(aPostProcessor) {
-    if (typeof aPostProcessor !== 'function') {
-        throw '$ROUTER.addPreProcessor: First param aPreProcessor needs to be a function, got ' + (typeof aPostProcessor);
+function mAddPostProcessor(aRoute, aPostProcessor) {
+    if (typeof aRoute === 'function') {
+        mPostProcessors.push({
+            regex: null,
+            processor: aRoute
+        });
     }
-
-    mPostProcessors.push(aPostProcessor);
+    else if (typeof aRoute === 'string' && typeof aPostProcessor === 'function') {
+        var routeObject = mPathToRoute(aRoute);
+        mPostProcessors.push({
+            regex: routeObject.regex,
+            path: routeObject.path,
+            keys: routeObject.keys,
+            processor: aPostProcessor
+        });
+    }
+    else {
+        if (aPostProcessor === undefined) {
+            throw '$ROUTER.aPostProcessor: First param needs to be a function, got ' + (typeof aRoute);
+        }
+        else {
+            throw '$ROUTER.aPostProcessor: First param needs to be a string, second a function';
+        }
+    }
     return EXPORTOBJECT;
 }
 
@@ -377,10 +414,24 @@ function mExecutePreProcessors(aRequest, aResponse, aArgs, aCallback) {
             if (counter < mPreProcessors.length) {
                 // do the next preprocessor async
                 process.nextTick(function(c) {
-                    mPreProcessors[c](aRequest, aResponse, aArgs, callback);
+                    if (mPreProcessors[c].regex === null) {
+                        mPreProcessors[c].processor(aRequest, aResponse, aArgs, callback);
+                    }
+                    else {
+                        var urlParsed = mUrl.parse(aRequest.url),
+                            path = urlParsed.pathname,
+                            matched = path.match(mPreProcessors[c].regex);
+                        
+                        if (matched !== null) {
+                            mPreProcessors[c].processor(aRequest, aResponse, aArgs, callback);
+                        }
+                        else {
+                            callback();
+                        }
+                    }
                 }.bind(null, counter));
                 // next preprocessor has been started, so count up the counter
-                counter++;
+                ++counter;
             }
             // no preprocessor left
             else {
@@ -415,7 +466,21 @@ function mExecutePostProcessors(aRequest, aResponse, aArgs) {
         if (counter < mPostProcessors.length) {
             // execute the postprocessor async
             process.nextTick(function(c) {
-                mPostProcessors[c](aRequest, aResponse, aArgs, callback);
+                if (mPostProcessors[c].regex === null) {
+                    mPostProcessors[c].processor(aRequest, aResponse, aArgs, callback);
+                }
+                else {
+                    var urlParsed = mUrl.parse(aRequest.url),
+                        path = urlParsed.pathname,
+                        matched = path.match(mPostProcessors[c].regex);
+                    
+                    if (matched !== null) {
+                        mPostProcessors[c].processor(aRequest, aResponse, aArgs, callback);
+                    }
+                    else {
+                        callback();
+                    }
+                }
             }.bind(null, counter));
             // next postprocessor has been started, so count up the counter
             counter++;
