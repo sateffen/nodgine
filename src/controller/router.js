@@ -517,9 +517,9 @@ function mRoute(aRequest, aResponse) {
 
     // request finished, now process it
     aRequest.on('end', function() {
-        var urlParsed   = mUrl.parse(aRequest.url),
-            path        = urlParsed.pathname,
-            tmp, x;
+        var urlParsed = mUrl.parse(aRequest.url),
+            path = urlParsed.pathname,
+            tmp, i;
 
         // region set GPC
         aRequest.post = Buffer.concat(postData);
@@ -532,25 +532,26 @@ function mRoute(aRequest, aResponse) {
         var request = new mRequestObject(aRequest),
             args = {},
             response = new mResponseObject(aResponse),
-            routeToExecute = null;
+            routeToExecute = null,
+            routesLength = mRoutes.length;
 
         // find matching route
-        for (x in mRoutes) {
-            if (mRoutes.hasOwnProperty(x) && typeof mRoutes[x] === 'object') {
+        for (i = 0; i < routesLength; i++) {
+            if (mRoutes.hasOwnProperty(i) && typeof mRoutes[i] === 'object') {
                 // check if it's the right route and store the result (for arguments)
-                tmp = path.match(mRoutes[x].regex);
+                tmp = path.match(mRoutes[i].regex);
                 // if tmp is null, this wasn't the right one
                 if (tmp !== null) {
                     // play some memory
-                    for (var y = 0; y < mRoutes[x].keys.length; y++) {
-                        args[mRoutes[x].keys[y].name] = tmp[y+1];
+                    for (var y = 0; y < mRoutes[i].keys.length; y++) {
+                        args[mRoutes[i].keys[y].name] = tmp[y+1];
                     }
 
                     // increment request counter
-                    mRoutes[x].requestCounter++;
+                    mRoutes[i].requestCounter++;
 
                     // found route, set route
-                    routeToExecute = mRoutes[x].callback;
+                    routeToExecute = mRoutes[i].callback;
 
                     // found what I was searching for, so return
                     break;
