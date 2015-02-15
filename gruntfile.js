@@ -47,6 +47,12 @@ module.exports = function(grunt) {
                     private: false
                 }
             }
+        },
+        jshint: {
+            all: ['gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
+            options: {
+                jshintrc: true
+            }
         }
     });
 
@@ -55,8 +61,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-nodeunit');
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-mocha-test');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
 
     grunt.registerTask('default', ['mochaTest:test', 'clean:dist', 'copy:dist']);
     grunt.registerTask('doc', ['clean:doc', 'jsdoc']);
-    grunt.registerTask('test', ['mochaTest']);
+    grunt.registerTask('test', ['mochaTest', 'jshint']);
 };
