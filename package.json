@@ -27,7 +27,7 @@
     "url": "https://github.com/sateffen/nodgine/issues"
   },
   "bin": {
-    "nodgine": "bin/nodgine.js"
+    "nodgine": "src/bin/nodgine.js"
   },
   "devDependencies": {
     "blanket": "~1.1.6",
