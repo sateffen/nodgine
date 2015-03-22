@@ -2,25 +2,9 @@
 
 The nodgine is a small framework for creating fast webservices. The main focuses are speed and easiness.
 
-# Future #
+# DEPRECATED #
 
-In the past two years I've developed the nodgine as far as it is today, but all this time has left its scars.
-Originally I've created the nodgine as my first nodejs project, to learn about dos and don'ts, and since then I've
-learned quite a lot.
-
-A lot of my decisions were not that good, so I'll start the nodgine all over. The next version will be 1.0
-
-The next version will focus on:
-
-* Smaller structure: The current version of the nodgine trys to solve all problems at once. This is not good.
-The future version of the nodgine will get reduced to a smaller, even more specific version. Things that are cool,
-but optional will get outsourced to their own projects.
-* Better abstraction: The current nodgine tries to reuse as much as possible from nodejs, so there are no missing
-features. This is not a good way, because I can't guarantee for stability, in every situation. I'll try to abstract
-the API even better for a future save version.
-* Testdriven development: When I started the nodgine, I didn't know about tests, testcoverage or continuous integration.
-Because of this the nodgine is not developed with testability in mind, so the currently implemented tests are not as
-good as they could be. The next version of the nodgine will get developed in a test driven way.
+The nodgine is deprecated, you should not use it anymore. I'll replace the nodgine with some other, smaller, more specialized helpers to create your own webservers with node.
 
 # Installation #
 
