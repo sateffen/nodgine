@@ -4,7 +4,9 @@ The nodgine is a small framework for creating fast webservices. The main focuses
 
 # DEPRECATED #
 
-The nodgine is deprecated, you should not use it anymore. I'll replace the nodgine with some other, smaller, more specialized helpers to create your own webservers with node.
+The nodgine is deprecated, you should not use it anymore. Maybe, I don't think so, I'll rewrite the main idea,
+but there are ExpressJS and Restify, both are doing a great job, so I don't think, that there is the need for
+another framework like this.
 
 # Installation #
 
