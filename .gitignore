@@ -3,4 +3,4 @@ node_modules
 test/results
 .*
 !.gitignore
-!.jshintrc
+!.eslintrc

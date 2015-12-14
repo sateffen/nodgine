@@ -1,15 +1,13 @@
 {
   "name": "nodgine",
-  "version": "0.4.0",
+  "version": "1.0.0-dev",
   "description": "The nodgine is a small framework for creating fast webservices. The main focuses are speed and easiness.",
   "main": "./src/bootstrap.js",
   "author": {
-    "name": "sateffen",
+    "name": "Steffen Wendt",
     "email": "sateffen@gmail.com"
   },
-  "license": {
-    "type": "MIT"
-  },
+  "license": "MIT",
   "readmeFilename": "README.md",
   "keywords": [
     "rest",
@@ -26,19 +24,14 @@
   "bugs": {
     "url": "https://github.com/sateffen/nodgine/issues"
   },
-  "bin": {
-    "nodgine": "src/bin/nodgine.js"
-  },
   "devDependencies": {
-    "blanket": "~1.1.6",
-    "chai": "~1.10.0",
-    "chai-spies": "~0.5.1",
-    "grunt": "~0.4.0",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-copy": "~0.5.0",
-    "grunt-contrib-jshint": "^0.11.0",
-    "grunt-contrib-nodeunit": "~0.4.1",
-    "grunt-jsdoc": "beta",
-    "grunt-mocha-test": "~0.12.2"
+    "grunt": "~0.4.5",
+    "grunt-contrib-clean": "~0.7.0",
+    "grunt-eslint": "~17.3.1",
+    "grunt-mocha-test": "~0.12.7",
+    "mocha": "~2.3.4",
+    "chai": "~3.4.1",
+    "chai-spies": "~0.7.1",
+    "blanket": "~1.2.1"
   }
 }

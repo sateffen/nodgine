@@ -1,32 +1,20 @@
-module.exports = function(grunt) {
-    'use strict';
 
-    // Project configuration.
+'use strict';
+module.exports = function (grunt) {
     grunt.initConfig({
-        pkg: grunt.file.readJSON('package.json'),
-        copy: {
-            dist: {
-                files: [
-                    {expand: true, src: ['src/**/*'],     dest: 'dist/'},
-                    {expand: true, src: ['package.json'], dest: 'dist/'},
-                    {expand: true, src: ['LICENSE'],      dest: 'dist/'},
-                    {expand: true, src: ['README.md'],    dest: 'dist/'}
-                ]
-            }
-        },
         clean: {
-            dist: ['dist/'],
-            doc: ['docs/']
-        },
-        nodeunit: {
-            all: ['./test/oldtests/*.js']
+            test: ['test/results']
         },
         mochaTest: {
-            test: {
+            default: {
                 options: {
-                    reporter: 'progress',
-                    captureFile: 'test/results/tests.txt',
-                    require: 'test/coverage/blanket'
+                    reporter: 'spec',
+                    captureFile: 'test/results/result.txt',
+                    require: [
+                        'test/setup/blanket',
+                        'test/setup/chai',
+                        'test/setup/chaispies'
+                    ]
                 },
                 src: ['./test/tests/**/*.js']
             },
@@ -36,34 +24,20 @@ module.exports = function(grunt) {
                     quiet: true,
                     captureFile: 'test/results/coverage.html'
                 },
-                src: ['./test/tests/**/*.js']
+                src: ['test/tests/**/*.js']
             }
         },
-        jsdoc : {
-            dist : {
-                src: ['src/**/*.js'],
-                options: {
-                    destination: 'docs',
-                    private: false
-                }
-            }
-        },
-        jshint: {
-            all: ['gruntfile.js', 'src/**/*.js', 'test/**/*.js'],
+        eslint: {
             options: {
-                jshintrc: true
-            }
+                configFile: '.eslintrc'
+            },
+            target: ['./src/**/*.js', './test/**/*.js']
         }
     });
 
-    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-nodeunit');
-    grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-mocha-test');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-eslint');
 
-    grunt.registerTask('default', ['mochaTest:test', 'clean:dist', 'copy:dist']);
-    grunt.registerTask('doc', ['clean:doc', 'jsdoc']);
-    grunt.registerTask('test', ['mochaTest', 'jshint']);
+    grunt.registerTask('test', ['clean:test', 'eslint', 'mochaTest']);
 };
