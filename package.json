@@ -1,37 +1,40 @@
 {
-  "name": "nodgine",
-  "version": "1.0.0-dev",
-  "description": "The nodgine is a small framework for creating fast webservices. The main focuses are speed and easiness.",
-  "main": "./src/bootstrap.js",
-  "author": {
-    "name": "Steffen Wendt",
-    "email": "sateffen@gmail.com"
-  },
-  "license": "MIT",
-  "readmeFilename": "README.md",
-  "keywords": [
-    "rest",
-    "restful",
-    "webserver",
-    "webservice",
-    "router",
-    "api"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sateffen/nodgine.git"
-  },
-  "bugs": {
-    "url": "https://github.com/sateffen/nodgine/issues"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-contrib-clean": "~0.7.0",
-    "grunt-eslint": "~17.3.1",
-    "grunt-mocha-test": "~0.12.7",
-    "mocha": "~2.3.4",
-    "chai": "~3.4.1",
-    "chai-spies": "~0.7.1",
-    "blanket": "~1.2.1"
-  }
+    "name": "nodgine",
+    "version": "1.0.0-dev",
+    "description": "The nodgine is a small framework for creating fast webservices. The main focuses are speed and easiness.",
+    "main": "./src/nodgine.js",
+    "author": {
+        "name": "Steffen Wendt",
+        "email": "sateffen@gmail.com"
+    },
+    "license": "MIT",
+    "readmeFilename": "README.md",
+    "keywords": [
+        "rest",
+        "restful",
+        "webserver",
+        "webservice",
+        "router",
+        "api"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/sateffen/nodgine.git"
+    },
+    "bugs": {
+        "url": "https://github.com/sateffen/nodgine/issues"
+    },
+    "dependencies": {
+        "path-to-regexp": "~1.2.1"
+    },
+    "devDependencies": {
+        "chai": "~3.4.1",
+        "chai-spies": "~0.7.1",
+        "grunt": "~0.4.5",
+        "grunt-contrib-clean": "~0.7.0",
+        "grunt-eslint": "~17.3.1",
+        "grunt-mocha-test": "~0.12.7",
+        "istanbul": "~0.4.1",
+        "mocha": "~2.3.4"
+    }
 }

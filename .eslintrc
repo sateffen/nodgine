@@ -3,9 +3,10 @@
         "browser": false,
         "node": true,
         "amd": false,
-        "es6": false
+        "es6": true
     },
     "globals": {
+        "Buffer": true,
     	/* mocha */
         "describe": true,
         "it": true,
@@ -47,7 +48,7 @@
         "valid-jsdoc": 0,
         "valid-typeof": 2,
         /* best practice */
-        "accessor-pairs": [2, {getWithoutSet: false, setWithoutGet: false}],
+        "accessor-pairs": [2, {"getWithoutSet": false, "setWithoutGet": false}],
         "block-scoped-var": 2,
         "complexity": [1, 10],
         "consistent-return": [2],
@@ -138,7 +139,7 @@
         "semi-spacing": [2, {"before": false, "after": true}],
         "no-spaced-func": 2,
         "no-ternary": 0,
-        "no-trailing-spaces": [2, {skipBlankLines: true}],
+        "no-trailing-spaces": [2, {"skipBlankLines": true}],
         "no-underscore-dangle": 0,
         "no-unneeded-ternary": 2,
         "no-extra-parens": [2, "all"],
