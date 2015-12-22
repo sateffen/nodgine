@@ -68,6 +68,7 @@ class Response {
         if (this._isFlushed) {
             throw new Error('Cannot flush a response twice');
         }
+        
         this._isFlushed = true;
         
         this._originalResponse.writeHead(this._statusCode, this._headerHash);

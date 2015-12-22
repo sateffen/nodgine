@@ -11,7 +11,7 @@ class Wrapper {
 
     runWhenRouteMatches(aRoute, aRequest, aResponse) {
         let match = aRoute.match(this._routePattern);
-
+        
         if (match !== null) {
             return this.run(match, aRequest, aResponse);
         }

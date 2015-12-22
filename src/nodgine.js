@@ -22,12 +22,12 @@ class Nodgine {
             throw new TypeError('Unmatched signature. Prease use(controller<function>)');
         }
         
-        this.missingRouteController = aController;
+        this._missingRouteController = aController;
         
         return this;
     }
 
-    addMiddleWare(aRoute, aMiddleware) {
+    addMiddleware(aRoute, aMiddleware) {
         let route = aRoute;
         let middleware = aMiddleware;
 
