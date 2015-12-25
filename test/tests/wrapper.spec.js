@@ -164,4 +164,11 @@ describe('Wrapper', () => {
                 done();
             });
     });
+    
+    it('should return the _routePattern calling getPattern()', () => {
+        let route = '/' + Math.random().toString(26).slice(2);
+        let instance = new Wrapper(route, () => { });
+        
+        expect(instance.getPattern()).to.equal(instance._routePattern);
+    });
 });

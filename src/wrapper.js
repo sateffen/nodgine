@@ -9,6 +9,10 @@ class Wrapper {
         this._callback = aCallback;
     }
 
+    getPattern() {
+        return this._routePattern;
+    }
+
     runWhenRouteMatches(aRoute, aRequest, aResponse) {
         let match = aRoute.match(this._routePattern);
         
@@ -27,7 +31,7 @@ class Wrapper {
             for (let i = 0, len = this._routeKeys.length; i < len; i++) {
                 paramsHash[this._routeKeys[i].name] = aMatchResult[i + 1];
             }
-
+            
             let returnPromise = this._callback(aRequest, aResponse, paramsHash);
 
             if (returnPromise instanceof Promise) {

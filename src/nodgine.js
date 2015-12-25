@@ -1,3 +1,4 @@
+/* global Buffer */
 'use strict';
 
 const libUrl = require('url');
@@ -21,9 +22,9 @@ class Nodgine {
         if (typeof aController !== 'function') {
             throw new TypeError('Unmatched signature. Prease use(controller<function>)');
         }
-        
+
         this._missingRouteController = aController;
-        
+
         return this;
     }
 
@@ -47,7 +48,7 @@ class Nodgine {
 
     addController(aRoute, aController) {
         let controller = utils.isObject(aController) ? utils.wrapServeletToFunction(aController) : aController;
-        
+
         if (typeof aRoute !== 'string' || typeof controller !== 'function') {
             throw new TypeError('Unmatched signature. Please use (route<string>, controller<function>) or (route<string>, controller<object>)');
         }
@@ -55,6 +56,32 @@ class Nodgine {
         this._controller.push(new Wrapper(aRoute, controller));
 
         return this;
+    }
+
+    _runMiddleware(aParsedUrlPath, aRequest, aResponse) {
+        let promisePointer = Promise.resolve();
+        let middleWareList = this._middleware;
+
+        for (let i = 0, len = middleWareList.length; i < len; i++) {
+            promisePointer = promisePointer.then(
+                middleWareList[i].runWhenRouteMatches
+                    .bind(middleWareList[i], aParsedUrlPath, aRequest, aResponse)
+                );
+        }
+
+        return promisePointer;
+    }
+
+    _runController(aParsedUrlPath, aRequest, aResponse) {
+        let controllerList = this._controller;
+
+        for (let i = 0, len = controllerList.length; i < len; i++) {
+            let matchResult = aParsedUrlPath.match(controllerList[i].getPattern());
+
+            if (matchResult !== null) {
+                return controllerList[i].run(matchResult, aRequest, aResponse);
+            }
+        }
     }
 
     getRouter() {
@@ -72,32 +99,10 @@ class Nodgine {
 
                 Promise.resolve()
                     .then(() => {
-                        return new Promise((aResolve, aReject) => {
-                            let promisePointer = Promise.resolve();
-                            let middleWareList = this._middleware;
-
-                            for (let i = 0, len = middleWareList.length; i < len; i++) {
-                                promisePointer = promisePointer.then(
-                                    middleWareList[i].runWhenRouteMatches
-                                        .bind(middleWareList[i], parsedUrl.pathname, requestObject, responseObject)
-                                    );
-                            }
-
-                            promisePointer
-                                .then(aResolve)
-                                .catch(aReject);
-                        });
+                        this._runMiddleware(parsedUrl.pathname, requestObject, responseObject);
                     })
                     .then(() => {
-                        let controllerList = this._controller;
-
-                        for (let i = 0, len = controllerList.length; i < len; i++) {
-                            let matchResult = parsedUrl.pathname.match(controllerList[i].pattern);
-
-                            if (matchResult !== null) {
-                                return controllerList[i].run(matchResult, requestObject, responseObject);
-                            }
-                        }
+                        this._runController(parsedUrl.pathname, requestObject, responseObject);
                     })
                     .then(() => {
                         responseObject.flush();
@@ -110,8 +115,6 @@ class Nodgine {
                             aResponse.write('Internal Server Error');
                             aResponse.end();
                         }
-
-                        return aError;
                     });
             });
         };
