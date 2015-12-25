@@ -1,8 +1,12 @@
-/* global describe,expect,it,beforeEach */
+/* global describe,expect,it,beforeEach,Buffer */
 'use strict';
 
 const Nodgine = require('../../src/nodgine');
 const Wrapper = require('../../src/wrapper');
+const Request = require('../../src/request');
+const Response = require('../../src/response');
+const chai = require('chai');
+const libEvents = require('events');
 
 describe('Nodgine', () => {
     let instance;
@@ -260,6 +264,171 @@ describe('Nodgine', () => {
             })
             .catch(() => {
                 expect('This should not happen').to.equal(true);
+                done();
+            });
+    });
+
+    it('should register event handler for data and end events on the request while executing the router', () => {
+        let router = instance.getRouter();
+        let request = new libEvents.EventEmitter();
+        let response = {};
+
+        router(request, response);
+
+        expect(request.listeners('data')).to.have.length(1);
+        expect(request.listeners('end')).to.have.length(1);
+    });
+
+    it('should call _runMiddleware and _runController with the correct parameters while executing the router', (done) => {
+        let router = instance.getRouter();
+        let executionList = [];
+        let runMiddlewareWith = [];
+        let runControllerWith = [];
+        let requestMock = new libEvents.EventEmitter();
+        let responseMock = {
+            __wroteHead: false,
+            __wroteData: false,
+            __endedStream: false,
+            writeHead: () => {
+                responseMock.__wroteHead = true;
+            },
+            write: () => {
+                responseMock.__wroteData = true;
+            },
+            end: () => {
+                responseMock.__endedStream = true;
+            }
+        };
+
+        requestMock.url = '/ok';
+
+        instance._runMiddleware = chai.spy(function () {
+            executionList.push(instance._runMiddleware);
+            runMiddlewareWith = Array.prototype.slice.call(arguments);
+        });
+        instance._runController = chai.spy(function () {
+            executionList.push(instance._runController);
+            runControllerWith = Array.prototype.slice.call(arguments);
+        });
+
+        router(requestMock, responseMock);
+
+        requestMock.emit('data', new Buffer('Hello'));
+        requestMock.emit('data', new Buffer(' '));
+        requestMock.emit('data', new Buffer('World'));
+        let endCallback = requestMock.listeners('end')[0];
+
+        endCallback()
+            .then(() => {
+                expect(instance._runMiddleware).to.have.been.called();
+                expect(instance._runController).to.have.been.called();
+
+                expect(executionList[0]).to.equal(instance._runMiddleware);
+                expect(executionList[1]).to.equal(instance._runController);
+
+                expect(responseMock.__wroteHead).to.equal(true);
+                expect(responseMock.__wroteData).to.equal(true);
+                expect(responseMock.__endedStream).to.equal(true);
+
+                expect(runMiddlewareWith[0]).to.equal('/ok');
+                expect(runMiddlewareWith[1]).to.be.an.instanceof(Request);
+                expect(runMiddlewareWith[2]).to.be.an.instanceof(Response);
+
+                expect(runControllerWith[0]).to.equal('/ok');
+                expect(runControllerWith[1]).to.be.an.instanceof(Request);
+                expect(runControllerWith[2]).to.be.an.instanceof(Response);
+
+                expect(runMiddlewareWith[1].getBody().toString()).to.equal('Hello World');
+
+                done();
+            })
+            .catch(() => {
+                expect('this not to happen').to.equal(true);
+                done();
+            });
+    });
+
+    it('should send statuscode 500 if any part of the server has an error', (done) => {
+        let router = instance.getRouter();
+        let requestMock = new libEvents.EventEmitter();
+        let responseMock = {
+            __statusCode: 0,
+            __endedStream: false,
+            writeHead: (aStatusCode) => {
+                responseMock.__statusCode = aStatusCode;
+            },
+            write: () => { },
+            end: () => {
+                responseMock.__endedStream = true;
+            }
+        };
+
+        requestMock.url = '/ok';
+
+        instance._runMiddleware = chai.spy(() => {
+            throw Error();
+        });
+        instance._runController = chai.spy();
+
+        router(requestMock, responseMock);
+
+        let endCallback = requestMock.listeners('end')[0];
+
+        endCallback()
+            .then(() => {
+                expect('this not to happen').to.equal(true);
+
+                done();
+            })
+            .catch(() => {
+                expect(responseMock.__statusCode).to.equal(500);
+                expect(responseMock.__endedStream).to.equal(true);
+
+                done();
+            });
+    });
+
+    it('should do nothing if the request was already finished', (done) => {
+        let router = instance.getRouter();
+        let requestMock = new libEvents.EventEmitter();
+        let responseMock = {
+            __wroteHead: false,
+            __wroteData: false,
+            __endedStream: false,
+            writeHead: () => {
+                responseMock.__wroteHead = true;
+            },
+            write: () => {
+                responseMock.__wroteData = true;
+            },
+            end: () => {
+                responseMock.__endedStream = true;
+            },
+            finished: true
+        };
+
+        requestMock.url = '/ok';
+
+        instance._runMiddleware = chai.spy(() => {
+            throw Error();
+        });
+        instance._runController = chai.spy();
+
+        router(requestMock, responseMock);
+
+        let endCallback = requestMock.listeners('end')[0];
+
+        endCallback()
+            .then(() => {
+                expect('this not to happen').to.equal(true);
+
+                done();
+            })
+            .catch(() => {
+                expect(responseMock.__wroteHead).to.equal(false);
+                expect(responseMock.__wroteData).to.equal(false);
+                expect(responseMock.__endedStream).to.equal(false);
+
                 done();
             });
     });
