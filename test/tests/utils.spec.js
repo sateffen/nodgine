@@ -6,8 +6,11 @@ const chai = require('chai');
 
 function mockFactory(aMethod, aNoCallback) {
     let mock = {
-        servelet: {
-            ['do' + aMethod]: aNoCallback ? undefined : chai.spy()
+        servelet: aNoCallback ? {} : {
+            doGet: chai.spy(),
+            doPost: chai.spy(),
+            doPut: chai.spy(),
+            doDelete: chai.spy()
         },
         request: {
             getMethod: chai.spy(() => {
