@@ -195,24 +195,30 @@ describe('Nodgine', () => {
 
         instance._runController('/ok', request, response);
 
-        console.log(calledCorrectControllerWith);
-
         expect(calledWrongController).to.equal(false);
         expect(calledCorrectController).to.equal(true);
+
         expect(calledCorrectControllerWith).to.have.length(3);
         expect(calledCorrectControllerWith[0]).to.equal(request);
         expect(calledCorrectControllerWith[1]).to.equal(response);
         expect(calledCorrectControllerWith[2]).to.be.an('object');
         expect(Object.keys(calledCorrectControllerWith[2])).to.have.length(0);
     });
-    
-    it('should run all fitting middleware', () => {
+
+    it('should _runMiddleware return a promise', () => {
+        instance.addMiddleware(() => { });
+        let result = instance._runMiddleware('/ok', {}, {});
+
+        expect(result).to.be.an.instanceof(Promise);
+    });
+
+    it('should run all fitting middleware', (done) => {
         let calledCorrectMiddleware1 = false;
         let calledCorrectMiddleware2 = false;
         let calledWrongMiddleware = false;
         let calledCorrectMiddlewareWith1 = [];
         let calledCorrectMiddlewareWith2 = [];
-        
+
         let request = {
             isRequest: true
         };
@@ -231,23 +237,30 @@ describe('Nodgine', () => {
             calledCorrectMiddleware2 = true;
             calledCorrectMiddlewareWith2 = Array.prototype.slice.call(arguments);
         });
-        
-        instance._runMiddleware('/ok', request, response);
-        
-        expect(calledWrongMiddleware).to.equal(false);
-        expect(calledCorrectMiddleware1).to.equal(true);
-        expect(calledCorrectMiddleware2).to.equal(true);
 
-        expect(calledCorrectMiddlewareWith1).to.have.length(3);
-        expect(calledCorrectMiddlewareWith1[0]).to.equal(request);
-        expect(calledCorrectMiddlewareWith1[1]).to.equal(response);
-        expect(calledCorrectMiddlewareWith1[2]).to.be.an('object');
-        expect(Object.keys(calledCorrectMiddlewareWith1[2])).to.have.length(0);
-        
-        expect(calledCorrectMiddlewareWith2).to.have.length(3);
-        expect(calledCorrectMiddlewareWith2[0]).to.equal(request);
-        expect(calledCorrectMiddlewareWith2[1]).to.equal(response);
-        expect(calledCorrectMiddlewareWith2[2]).to.be.an('object');
-        expect(Object.keys(calledCorrectMiddlewareWith2[2])).to.have.length(0);
+        let runPromise = instance._runMiddleware('/ok', request, response);
+
+        runPromise
+            .then(() => {
+                expect(calledWrongMiddleware).to.equal(false);
+                expect(calledCorrectMiddleware1).to.equal(true);
+                expect(calledCorrectMiddleware2).to.equal(true);
+
+                expect(calledCorrectMiddlewareWith1).to.have.length(3);
+                expect(calledCorrectMiddlewareWith1[0]).to.equal(request);
+                expect(calledCorrectMiddlewareWith1[1]).to.equal(response);
+                expect(calledCorrectMiddlewareWith1[2]).to.be.an('object');
+                expect(Object.keys(calledCorrectMiddlewareWith1[2])).to.have.length(0);
+
+                expect(calledCorrectMiddlewareWith2).to.have.length(3);
+                expect(calledCorrectMiddlewareWith2[0]).to.equal(request);
+                expect(calledCorrectMiddlewareWith2[1]).to.equal(response);
+
+                done();
+            })
+            .catch(() => {
+                expect('This should not happen').to.equal(true);
+                done();
+            });
     });
 });
