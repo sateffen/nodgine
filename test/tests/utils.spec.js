@@ -5,14 +5,13 @@ const utils = require('../../src/utils');
 const chai = require('chai');
 
 function mockFactory(aMethod, aNoCallback) {
-    let method = aMethod.toLowerCase();
     let mock = {
         servelet: {
-            ['do' + method[0].toUpperCase() + method.slice(1)]: aNoCallback ? undefined : chai.spy()
+            ['do' + aMethod]: aNoCallback ? undefined : chai.spy()
         },
         request: {
             getMethod: chai.spy(() => {
-                return method;
+                return aMethod.toLowerCase();
             })
         },
         response: {
@@ -74,16 +73,15 @@ describe('Utils', () => {
         expect(mock.response.write).to.have.been.called.with('Not Found');
     });
     
-    ['get', 'post', 'put', 'delete'].forEach((aMethod) => {
+    ['Get', 'Post', 'Put', 'Delete'].forEach((aMethod) => {
         it('should call the correct servelet method for calling method ' + aMethod, () => {
             let mock = mockFactory(aMethod);
             let result = utils.wrapServeletToFunction(mock.servelet);
-            let methodToCall = Object.keys(mock.servelet)[0];
             
             result(mock.request, mock.response, mock.params);
         
-            expect(mock.servelet[methodToCall]).to.have.been.called();
-            expect(mock.servelet[methodToCall]).to.have.been.called.with(mock.request, mock.response, mock.params);
+            expect(mock.servelet['do' + aMethod]).to.have.been.called();
+            expect(mock.servelet['do' + aMethod]).to.have.been.called.with(mock.request, mock.response, mock.params);
         });
     });
 });
