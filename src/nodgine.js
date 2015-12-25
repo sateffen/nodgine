@@ -97,7 +97,7 @@ class Nodgine {
                 let requestObject = new Request(aRequest, Buffer.concat(requestBody), parsedUrl);
                 let responseObject = new Response(aResponse);
 
-                Promise.resolve()
+                return Promise.resolve()
                     .then(() => {
                         this._runMiddleware(parsedUrl.pathname, requestObject, responseObject);
                     })
@@ -108,13 +108,13 @@ class Nodgine {
                         responseObject.flush();
                     })
                     .catch((aError) => {
-                        console.error(aError.message, aError.stack);
-
                         if (!aResponse.finished) {
                             aResponse.writeHead(500);
                             aResponse.write('Internal Server Error');
                             aResponse.end();
                         }
+                        
+                        throw aError;
                     });
             });
         };
