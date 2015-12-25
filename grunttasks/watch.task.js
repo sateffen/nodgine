@@ -2,7 +2,7 @@
 module.exports = function (grunt) {
     grunt.config('watch', {
         test: {
-            files: ['src/**/*.js', '/test/tests/**/*.js'],
+            files: ['src/**/*.js', 'test/tests/**/*.js'],
             tasks: ['mochaTest:run'],
             options: {
                 interrupt: true,
