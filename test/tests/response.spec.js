@@ -171,7 +171,7 @@ describe('Response', () => {
 
         expect(mock.__statusCode).to.equal(404);
         expect(Object.keys(mock.__header)).to.have.length(1);
-        expect(mock.__header.Rammus).to.equal('Ok!');
+        expect(mock.__header.rammus).to.equal('Ok!');
         expect(mock.__hasEnded).to.equal(true);
     });
 

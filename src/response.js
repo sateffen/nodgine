@@ -113,7 +113,7 @@ class Response {
             throw new TypeError('Unmatched signature. Please call with (string, string)');
         }
         
-        this._headerHash[aHeader] = aValue;
+        this._headerHash[aHeader.toLowerCase()] = aValue;
         
         return this;
     }
@@ -125,7 +125,7 @@ class Response {
      * @return {String|undefined} The header value or undefined
      */
     getHeader(aHeader) {
-        return this._headerHash[aHeader];
+        return this._headerHash[typeof aHeader === 'string' ? aHeader.toLowerCase() : ''];
     }
     
     /**
@@ -135,7 +135,7 @@ class Response {
      * @return {Boolean} Whether the header is set or not
      */
     hasHeader(aHeader) {
-        return typeof this._headerHash[aHeader] === 'string';
+        return typeof this._headerHash[typeof aHeader === 'string' ? aHeader.toLowerCase() : ''] === 'string';
     }
     
     /**
@@ -148,7 +148,7 @@ class Response {
         // do not use "delete", because this is a "hot object" for the time being.
         // with delete we could create a "slow zone", so simply ignore it, for node
         // it's the same either way
-        this._headerHash[aHeader] = undefined;
+        this._headerHash[typeof aHeader === 'string' ? aHeader.toLowerCase() : ''] = undefined;
         
         return this;
     }
