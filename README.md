@@ -15,6 +15,11 @@ All in all this is just another version of tools like restify or express.
 yet 100%, and some end to end tests need to be written. Additionally I want to finalize
 the API, and write some documentation, but it's on the road.
 
+## Dependencies ##
+
+An important note to the dependencies: To use the nodgine you have to use nodejs 4.0 or
+newer! This library uses ES6 syntax and Promises, so any older version is not supported.
+
 ## Why does it exist? ##
 
 At first I wanted to join coding for restify, but restify has a messy code setup (just
