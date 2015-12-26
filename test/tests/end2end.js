@@ -43,7 +43,7 @@ describe('End to end functionallity', () => {
                 aResponse.write('async');
                 process.nextTick(() => {
                     aResolve();
-                })
+                });
             });
         });
 
