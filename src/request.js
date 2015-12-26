@@ -107,7 +107,7 @@ class Request {
      *
      * @return {String} The path for current request
      * @example
-     * So for the url http://user:pass@example.com/test it would return "/test" 
+     * So for the url http://user:pass@example.com/test it would return "/test"
      */
     getRequestPath() {
         return this._parsedUrl.pathname;

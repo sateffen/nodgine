@@ -8,7 +8,7 @@ class Response {
     /**
      * Constructor for the reponse class
      *
-     * @param {NodeResponse} aResponse The original response object from 
+     * @param {NodeResponse} aResponse The original response object from
      */
     constructor(aResponse) {
         /**
@@ -35,7 +35,7 @@ class Response {
         this._headerHash = {};
         /**
          * The statuscode to send
-         * 
+         *
          * @private
          * @member {Number}
          * @default 200
@@ -52,7 +52,7 @@ class Response {
     
     /**
      * Sets the status code for this response. This is chainable
-     * 
+     *
      * @param {Number} aStatusCode The statuscode to set
      * @return this
      */
@@ -102,7 +102,7 @@ class Response {
     
     /**
      * Sets the header
-     * 
+     *
      * @throws {TypeError} If the given params have the wrong types
      * @param {String} aHeader The header name
      * @param {String} aValue The value for the header
