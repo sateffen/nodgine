@@ -181,10 +181,10 @@ class Nodgine {
 
                 return Promise.resolve()
                     .then(() => {
-                        this._runMiddleware(parsedUrl.pathname, requestObject, responseObject);
+                        return this._runMiddleware(parsedUrl.pathname, requestObject, responseObject);
                     })
                     .then(() => {
-                        this._runController(parsedUrl.pathname, requestObject, responseObject);
+                        return this._runController(parsedUrl.pathname, requestObject, responseObject);
                     })
                     .then(() => {
                         responseObject.flush();
