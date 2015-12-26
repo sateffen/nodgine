@@ -2,7 +2,7 @@
 'use strict';
 
 const Wrapper = require('../../src/wrapper');
-const chai = require('chai');
+const libChai = require('chai');
 
 describe('Wrapper', () => {
     it('should construct a new object calling it with new', () => {
@@ -13,10 +13,10 @@ describe('Wrapper', () => {
     });
 
     it('should not call the run function if given route matches not the constructor parameter', () => {
-        let callback = chai.spy();
+        let callback = libChai.spy();
         let instance = new Wrapper('/ok', callback);
 
-        instance.run = chai.spy();
+        instance.run = libChai.spy();
         instance.runWhenRouteMatches('/wrong', {}, {});
 
         expect(instance.run).to.not.have.been.called();
@@ -24,12 +24,12 @@ describe('Wrapper', () => {
     });
 
     it('should call the run function if given route matches the constructor parameter', () => {
-        let callback = chai.spy();
+        let callback = libChai.spy();
         let instance = new Wrapper('/ok', callback);
         let request = {};
         let response = {};
 
-        instance.run = chai.spy();
+        instance.run = libChai.spy();
         instance.runWhenRouteMatches('/ok', request, response);
 
         expect(instance.run).to.have.been.called.once();
@@ -46,7 +46,7 @@ describe('Wrapper', () => {
     });
 
     it('should run the callback with correct parameters if the run method is invoked', () => {
-        let callback = chai.spy();
+        let callback = libChai.spy();
         let instance = new Wrapper('/ok', callback);
         let request = {};
         let response = {};
@@ -64,7 +64,7 @@ describe('Wrapper', () => {
     });
     
     it('should run the callback with correct parameters in the params hash', () => {
-        let callback = chai.spy();
+        let callback = libChai.spy();
         let instance = new Wrapper('/ok/:var1/:other', callback);
         let request = {};
         let response = {};
@@ -84,7 +84,7 @@ describe('Wrapper', () => {
     });
 
     it('should return a promise calling the run function', () => {
-        let callback = chai.spy();
+        let callback = libChai.spy();
         let instance = new Wrapper('/ok', callback);
         let request = {};
         let response = {};

@@ -2,26 +2,26 @@
 'use strict';
 
 const utils = require('../../src/utils');
-const chai = require('chai');
+const libChai = require('chai');
 
 function mockFactory(aMethod, aNoCallback) {
     let mock = {
         servelet: aNoCallback ? {} : {
-            doGet: chai.spy(),
-            doPost: chai.spy(),
-            doPut: chai.spy(),
-            doDelete: chai.spy()
+            doGet: libChai.spy(),
+            doPost: libChai.spy(),
+            doPut: libChai.spy(),
+            doDelete: libChai.spy()
         },
         request: {
-            getMethod: chai.spy(() => {
+            getMethod: libChai.spy(() => {
                 return aMethod.toLowerCase();
             })
         },
         response: {
-            write: chai.spy(() => {
+            write: libChai.spy(() => {
                 return mock.response;
             }),
-            setStatusCode: chai.spy(() => {
+            setStatusCode: libChai.spy(() => {
                 return mock.response;
             })
         },

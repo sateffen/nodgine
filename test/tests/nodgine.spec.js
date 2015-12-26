@@ -5,7 +5,7 @@ const Nodgine = require('../../src/nodgine');
 const Wrapper = require('../../src/wrapper');
 const Request = require('../../src/request');
 const Response = require('../../src/response');
-const chai = require('chai');
+const libChai = require('chai');
 const libEvents = require('events');
 
 describe('Nodgine', () => {
@@ -302,11 +302,11 @@ describe('Nodgine', () => {
 
         requestMock.url = '/ok';
 
-        instance._runMiddleware = chai.spy(function () {
+        instance._runMiddleware = libChai.spy(function () {
             executionList.push(instance._runMiddleware);
             runMiddlewareWith = Array.prototype.slice.call(arguments);
         });
-        instance._runController = chai.spy(function () {
+        instance._runController = libChai.spy(function () {
             executionList.push(instance._runController);
             runControllerWith = Array.prototype.slice.call(arguments);
         });
@@ -365,10 +365,10 @@ describe('Nodgine', () => {
 
         requestMock.url = '/ok';
 
-        instance._runMiddleware = chai.spy(() => {
+        instance._runMiddleware = libChai.spy(() => {
             throw Error();
         });
-        instance._runController = chai.spy();
+        instance._runController = libChai.spy();
 
         router(requestMock, responseMock);
 
@@ -409,10 +409,10 @@ describe('Nodgine', () => {
 
         requestMock.url = '/ok';
 
-        instance._runMiddleware = chai.spy(() => {
+        instance._runMiddleware = libChai.spy(() => {
             throw Error();
         });
-        instance._runController = chai.spy();
+        instance._runController = libChai.spy();
 
         router(requestMock, responseMock);
 
