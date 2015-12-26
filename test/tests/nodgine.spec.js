@@ -209,6 +209,26 @@ describe('Nodgine', () => {
         expect(Object.keys(calledCorrectControllerWith[2])).to.have.length(0);
     });
 
+    it('should run the _missingRouteController if no other controller was found', () => {
+        let callbackWasCalled = false;
+        let callbackWasCalledWith = [];
+        let request = {};
+        let response = {};
+
+        function callback() {
+            callbackWasCalled = true;
+            callbackWasCalledWith = Array.prototype.slice.call(arguments);
+        }
+
+        instance.setMissingRouteController(callback);
+        instance._runController('/does/not/exist', request, response);
+        
+        expect(callbackWasCalled).to.equal(true);
+        expect(callbackWasCalledWith).to.have.length(2);
+        expect(callbackWasCalledWith[0]).to.equal(request);
+        expect(callbackWasCalledWith[1]).to.equal(response);
+    });
+
     it('should _runMiddleware return a promise', () => {
         instance.addMiddleware(() => { });
         let result = instance._runMiddleware('/ok', {}, {});

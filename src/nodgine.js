@@ -158,6 +158,9 @@ class Nodgine {
                 return controllerList[i].run(matchResult, aRequest, aResponse);
             }
         }
+        
+        // if this is reached, no controller was found
+        return this._missingRouteController(aRequest, aResponse);
     }
 
     /**
