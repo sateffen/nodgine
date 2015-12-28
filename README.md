@@ -11,34 +11,33 @@ Addidionally request and response objects are wrapped, so the handling is much s
 
 All in all this is just another version of tools like restify or express.
 
-**WARNING**: This is a dev version, not yet available on NPM. The test coverage is not
-yet 100%, and some end to end tests need to be written. Additionally I want to finalize
-the API, and write some documentation, but it's on the road.
+**WARNING**: This is a dev version, not yet available on NPM. The documentation is missing,
+and I want to do an additional code review to check, whether it's alright.
 
 ## Dependencies ##
 
 An important note to the dependencies: To use the nodgine you have to use nodejs 4.0 or
-newer! This library uses ES6 syntax and Promises, so any older version is not supported.
+newer! This library uses ES6 syntax like classes and Promises, so any older version is
+not supported, nor tested.
 
 ## Why does it exist? ##
 
-At first I wanted to join coding for restify, but restify has a messy code setup (just
-MY opinion). Express has a big company and great developers itself, but it's a little..
-too much. I don't need all that stuff.
+At first I wanted to join coding for restify, but restify has a messy code (just MY opinion).
+Express has a big company and great developers itself, but it's a little.. too much. I don't
+need all that stuff.
 
 So I wrote the nodgine, a little, very basic router system, that solves the ONE problem
 I wanted to solve. Nothing else.
 
-## What's about pre version 1.0 ##
+## I need xyz ##
 
-Pre version 1.0 I've tried to create a application server thing, that was so... How should
-I say... The ideas were great, but the combination sucked as hell. Together with my lack of
-tests and so on, no way.
-
-Nodgine 1.0 and every following release follows the unix way of solving problems: Solve one
-problem, but do it well.
+You're missing something? [Let me know](https://github.com/sateffen/nodgine/issues)!
 
 ## Documentation ##
 
-Currently there is no documentation, yet. In future I'll write some documentation in the */docs*
-folder.
+For documentation please refer to the [docs](https://github.com/sateffen/nodgine/tree/master/docs)
+folder in the repository. If you miss something, please [let me know](https://github.com/sateffen/nodgine/issues).
+
+**WARNING**: The documentation is not yet complete. If you want to know something specific
+before the documentation is ready, just open an [issue](https://github.com/sateffen/nodgine/issues)
+and ask.
