@@ -105,7 +105,7 @@ class Nodgine {
      * nodgineInstance.addController('/user/:userid', () => {});
      */
     addController(aRoute, aController) {
-        let controller = utils.isObject(aController) ? utils.wrapServeletToFunction(aController) : aController;
+        let controller = utils.isObject(aController) ? utils.wrapServeletToFunction(aController, this) : aController;
 
         if (typeof aRoute !== 'string' || typeof controller !== 'function') {
             throw new TypeError('Unmatched signature. Please use (route<string>, controller<function>) or (route<string>, controller<object>)');

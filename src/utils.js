@@ -20,9 +20,10 @@ class Utils {
      *
      * @static
      * @param {Object} aServelet The servelet to wrap
+     * @param {Object} aNodgineInstance The nodgine instance with the missing route controller to use
      * @return {Function} A controller function
      */
-    static wrapServeletToFunction(aServelet) {
+    static wrapServeletToFunction(aServelet, aNodgineInstance) {
         return (aRequest, aResponse, aParamsHash) => {
             let methodName = aRequest.getMethod().toLowerCase();
 
@@ -32,9 +33,7 @@ class Utils {
                 aServelet[methodName](aRequest, aResponse, aParamsHash);
             }
             else {
-                aResponse
-                    .setStatusCode(404)
-                    .write('Not Found');
+                aNodgineInstance._missingRouteController(aRequest, aResponse);
             }
         };
     }

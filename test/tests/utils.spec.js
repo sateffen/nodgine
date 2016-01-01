@@ -25,7 +25,10 @@ function mockFactory(aMethod, aNoCallback) {
                 return mock.response;
             })
         },
-        params: {}
+        params: {},
+        nodgine: {
+            _missingRouteController: libChai.spy()
+        }
     };
 
     return mock;
@@ -44,20 +47,20 @@ describe('Utils', () => {
     });
 
     it('should return a function calling wrapServeletToFunction', () => {
-        let result = utils.wrapServeletToFunction({});
+        let result = utils.wrapServeletToFunction({}, {});
 
         expect(typeof result).to.equal('function');
     });
 
     it('should return a function expecting three parameters calling wrapServeletToFunction', () => {
-        let result = utils.wrapServeletToFunction({});
+        let result = utils.wrapServeletToFunction({}, {});
 
         expect(result).to.have.length(3);
     });
 
     it('should request the method from the request object in wrapper function for servelet', () => {
         let mock = mockFactory('get', true);
-        let result = utils.wrapServeletToFunction(mock.servelet);
+        let result = utils.wrapServeletToFunction(mock.servelet, mock.nodgine);
 
         result(mock.request, mock.response, mock.params);
 
@@ -66,20 +69,18 @@ describe('Utils', () => {
 
     it('should end respond with 404 when no matching handler is there in wrapper function for servelet', () => {
         let mock = mockFactory('get', true);
-        let result = utils.wrapServeletToFunction(mock.servelet);
+        let result = utils.wrapServeletToFunction(mock.servelet, mock.nodgine);
 
         result(mock.request, mock.response, mock.params);
 
-        expect(mock.response.setStatusCode).to.have.been.called();
-        expect(mock.response.write).to.have.been.called();
-        expect(mock.response.setStatusCode).to.have.been.called.with(404);
-        expect(mock.response.write).to.have.been.called.with('Not Found');
+        expect(mock.nodgine._missingRouteController).to.have.been.called();
+        expect(mock.nodgine._missingRouteController).to.have.been.called.with(mock.request, mock.response);
     });
     
     ['Get', 'Post', 'Put', 'Delete'].forEach((aMethod) => {
         it('should call the correct servelet method for calling method ' + aMethod, () => {
             let mock = mockFactory(aMethod);
-            let result = utils.wrapServeletToFunction(mock.servelet);
+            let result = utils.wrapServeletToFunction(mock.servelet, mock.nodgine);
             
             result(mock.request, mock.response, mock.params);
         
