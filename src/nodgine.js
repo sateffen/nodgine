@@ -199,7 +199,9 @@ class Nodgine {
                             aResponse.end();
                         }
 
-                        throw aError;
+                        if (aError instanceof Error) {
+                            throw aError;
+                        }
                     });
             });
         };
