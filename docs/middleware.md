@@ -35,7 +35,7 @@ you simply return a promise:
 
     function (request, response) {
         return new Promise((resolve, reject) => {
-            window.setTimeout(resolve, 1000);
+            global.setTimeout(resolve, 1000);
         });
     }
     
