@@ -39,7 +39,7 @@ a class to write your controller.
 
 I'll admit, the Promises are not the most useful thing, because they catch every error and don't
 help debugging. But there is at least a little help, you can read about
-[here](https://nodejs.org/dist/latest-v4.x/docs/api/process.html#process_event_unhandledrejection)
+[HERE](https://nodejs.org/dist/latest-v4.x/docs/api/process.html#process_event_unhandledrejection)
 
 So basicly this:
 
@@ -49,3 +49,5 @@ So basicly this:
 	});
 
 Will help you finding rejections, that are not handled. This way you should catch up with problems.
+
+If something goes wrong the user will get a statuscode 500. Every request gets finished.
