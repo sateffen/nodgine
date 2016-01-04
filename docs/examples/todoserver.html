@@ -1,0 +1,106 @@
+<html>
+
+<head>
+    <style>
+        .left {
+            float: left;
+            width: 95%;
+        }
+        
+        .right {
+            float: right;
+            width: 5%;
+        }
+        
+        #list {
+            max-width: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mainframe">
+        <div>
+            <div>Add new todo</div>
+            <input data-bind="value: newNoteText" />
+            <button data-bind="click: addFn">Add new note</button>
+        </div>
+        <div data-bind="foreach: todoList" id="list">
+            <div>
+                <span class="left" data-bind="text: text"></span>
+                <span class="right" data-bind="click: $parent.deleteFn.bind(null, id)">X</span>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-min.js"></script>
+    <script>
+        function loadAll(callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/api/todo');
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    callback(JSON.parse(xhr.responseText));
+                }
+            }
+            xhr.send();
+        }
+        
+        function remove(id, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('DELETE', '/api/todo/' + id);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    callback();
+                }
+            }
+            xhr.send();
+        }
+        
+        function add(id, text, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', '/api/todo/' + id);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    callback();
+                }
+            }
+            xhr.send(text);
+        }
+        
+        window.addEventListener('load', function () {
+            var viewModel = {
+                todoList: ko.observableArray(),
+                deleteFn: function (id) {
+                    remove(id, function () {
+                        var tmp = viewModel.todoList();
+                        viewModel.todoList(tmp.filter(function (item) {
+                            return item.id !== id;
+                        }));
+                    });
+                },
+                addFn: function () {
+                    var id = (new Date()).valueOf()
+                    
+                    add(id, viewModel.newNoteText(), function () {
+                        viewModel.todoList.push({id: id, text: viewModel.newNoteText()});
+                        viewModel.newNoteText('');
+                    });
+                },
+                newNoteText: ko.observable('')
+            };
+            
+            // do initial loading
+            loadAll(function (data) {
+                viewModel.todoList(Object.keys(data).map(function (key) {
+                    return {id: key, text: data[key]};
+                }));
+            });
+            
+            // and apply bindings
+            ko.applyBindings(viewModel, document.getElementById('mainframe'));
+        });
+    </script>
+</body>
+
+</html>
