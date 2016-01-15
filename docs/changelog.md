@@ -1,5 +1,9 @@
 # Changelog #
 
+## Version 1.0.1 ##
+
+* Corrected some documentation issues
+
 ## Version 1.0.0 ##
 
 * Complete new API
