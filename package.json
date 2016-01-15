@@ -1,6 +1,6 @@
 {
   "name": "nodgine",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The nodgine is a small framework for creating fast webservices. The main focuses are speed and easiness.",
   "main": "./src/nodgine.js",
   "engines": {
@@ -39,7 +39,7 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-eslint": "~17.3.1",
     "grunt-mocha-test": "~0.12.7",
-    "istanbul": "~0.4.1",
+    "istanbul": "~0.4.2",
     "mocha": "~2.3.4"
   }
 }
