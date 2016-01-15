@@ -22,11 +22,7 @@ the actual data and render the view for the visitor.
 No, you can't. The reason is, that I think the form of middelware used in systems like
 express is not the best approach. I thought a lot about this decission, because now you'll
 think about using another library for this job, and it's up to you, but I think middleware
-should get its own third parameter.
-
-The third parameter represents details from the url that was filtered for this specific
-middleware. I know, that I could achive both, but I don't like the overhead to copy someone
-else.
+should get its own route params for the single route, that it got matched for.
 
 ## What is a servelet ##
 
@@ -50,4 +46,4 @@ So basicly this:
 
 Will help you finding rejections, that are not handled. This way you should catch up with problems.
 
-If something goes wrong the user will get a statuscode 500. Every request gets finished.
+If something goes wrong the user will get a statuscode 500. This is generated automatically.

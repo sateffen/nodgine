@@ -59,4 +59,4 @@ and start the cleanup. The error will be rethrown, so you can catch this with
 will be executed. The cleanup handler will check if the request was fully handled already, and the
 response was finished. If the response is not yet finished, the response will get finished with statuscode
 500. So, you have to finish the request by yourself BEFORE you stop the execution. To do so, simply reject
-the promise after you've called `response.flush()`. If the response was finished, cleanup will do nothing.
+the promise after you've called `response.flush()`.
