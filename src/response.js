@@ -8,16 +8,16 @@ class Response {
     /**
      * Constructor for the reponse class
      *
-     * @param {NodeResponse} aResponse The original response object from
+     * @param {Object} aParamsObject A params object that contains all request related params
      */
-    constructor(aResponse) {
+    constructor(aParamsObject) {
         /**
          * A pointer to the original response object
          *
          * @private
          * @member {NodeHttpResponse}
          */
-        this._originalResponse = aResponse;
+        this._originalResponse = aParamsObject.response;
         
         /**
          * A ordered list of buffers that got written

@@ -179,8 +179,14 @@ class Nodgine {
 
             aRequest.on('end', () => {
                 const parsedUrl = libUrl.parse(aRequest.url, true);
-                const requestObject = new Request(aRequest, Buffer.concat(requestBody), parsedUrl);
-                const responseObject = new Response(aResponse);
+                const paramsObject = {
+                    parsedUrl: parsedUrl,
+                    requestBody: Buffer.concat(requestBody),
+                    request: aRequest,
+                    response: aResponse
+                };
+                const requestObject = new Request(paramsObject);
+                const responseObject = new Response(paramsObject);
 
                 return Promise.resolve()
                     .then(() => {

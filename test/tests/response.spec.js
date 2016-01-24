@@ -24,7 +24,12 @@ describe('Response', () => {
                 mock.__hasEnded = true;
             }
         };
-        instance = new Response(mock);
+        instance = new Response({
+            request: {},
+            requestBody: new Buffer('I am a buffer'),
+            parsedUrl: {},
+            response: mock
+        });
     });
 
     it('should be of instance Response', () => {

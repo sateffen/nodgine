@@ -9,18 +9,16 @@ class Request {
      * This gets the parsed result for the url object, because we want to reuse the same object
      * And save every cycle
      *
-     * @param {NodeHttpRequest} aRequest The original request object to wrap
-     * @param {Buffer} A buffer containing the received body data
-     * @param {NodeParsedUrlObject} An object that was the result of using require('url').parse(originalRequest.url)
+     * @param {Object} aParamsObject A params object that contains all request related params
      */
-    constructor(aRequest, aRequestBody, aParsedUrl) {
+    constructor(aParamsObject) {
         /**
          * A pointer to the original request object
          *
          * @private
          * @member {NodeHttpRequest}
          */
-        this._originalRequest = aRequest;
+        this._originalRequest = aParamsObject.request;
         
         /**
          * A pointer to the parsed url object result
@@ -28,7 +26,7 @@ class Request {
          * @private
          * @member {NodeParsedUrlObject}
          */
-        this._parsedUrl = aParsedUrl;
+        this._parsedUrl = aParamsObject.parsedUrl;
         
         /**
          * The body buffer
@@ -36,7 +34,7 @@ class Request {
          * @private
          * @member {Buffer}
          */
-        this._requestBody = aRequestBody;
+        this._requestBody = aParamsObject.requestBody;
     }
     
     /**

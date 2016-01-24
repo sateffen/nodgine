@@ -26,7 +26,12 @@ describe('Request', () => {
             requestBody: new Buffer('It is only fun if they run')
         };
 
-        instance = new Request(mock.request, mock.requestBody, mock.parsedUrl);
+        instance = new Request({
+            request: mock.request,
+            requestBody: mock.requestBody,
+            parsedUrl: mock.parsedUrl,
+            response: {}
+        });
     });
 
     it('should be an instance of Request', () => {
