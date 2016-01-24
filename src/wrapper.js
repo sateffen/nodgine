@@ -54,7 +54,7 @@ class Wrapper {
      * @return {Promise} A promise that gets resolved after everything is done
      */
     runWhenRouteMatches(aRoute, aRequest, aResponse) {
-        let match = aRoute.match(this._routePattern);
+        const match = aRoute.match(this._routePattern);
 
         if (match !== null) {
             return this.run(match, aRequest, aResponse);

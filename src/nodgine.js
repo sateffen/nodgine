@@ -105,7 +105,7 @@ class Nodgine {
      * nodgineInstance.addController('/user/:userid', () => {});
      */
     addController(aRoute, aController) {
-        let controller = utils.isObject(aController) ? utils.wrapServeletToFunction(aController, this) : aController;
+        const controller = utils.isObject(aController) ? utils.wrapServeletToFunction(aController, this) : aController;
 
         if (typeof aRoute !== 'string' || typeof controller !== 'function') {
             throw new TypeError('Unmatched signature. Please use (route<string>, controller<function>) or (route<string>, controller<object>)');
@@ -126,9 +126,9 @@ class Nodgine {
      * @return {Promise} A promise that gets resolved after every middleware was called
      */
     _runMiddleware(aParsedUrlPath, aRequest, aResponse) {
+        const middleWareList = this._middleware;
         let promisePointer = Promise.resolve();
-        let middleWareList = this._middleware;
-
+        
         for (let i = 0, len = middleWareList.length; i < len; i++) {
             promisePointer = promisePointer.then(
                 middleWareList[i].runWhenRouteMatches
@@ -149,10 +149,10 @@ class Nodgine {
      * @return {Promise} A promise that gets resolved after the controller was finished
      */
     _runController(aParsedUrlPath, aRequest, aResponse) {
-        let controllerList = this._controller;
+        const controllerList = this._controller;
 
         for (let i = 0, len = controllerList.length; i < len; i++) {
-            let matchResult = aParsedUrlPath.match(controllerList[i].getPattern());
+            const matchResult = aParsedUrlPath.match(controllerList[i].getPattern());
 
             if (matchResult !== null) {
                 return controllerList[i].run(matchResult, aRequest, aResponse);
@@ -171,16 +171,16 @@ class Nodgine {
      */
     getRouter() {
         return (aRequest, aResponse) => {
-            let requestBody = [];
+            const requestBody = [];
 
             aRequest.on('data', (aChunk) => {
                 requestBody.push(aChunk);
             });
 
             aRequest.on('end', () => {
-                let parsedUrl = libUrl.parse(aRequest.url, true);
-                let requestObject = new Request(aRequest, Buffer.concat(requestBody), parsedUrl);
-                let responseObject = new Response(aResponse);
+                const parsedUrl = libUrl.parse(aRequest.url, true);
+                const requestObject = new Request(aRequest, Buffer.concat(requestBody), parsedUrl);
+                const responseObject = new Response(aResponse);
 
                 return Promise.resolve()
                     .then(() => {
