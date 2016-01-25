@@ -13,8 +13,26 @@ const utils = require('./utils');
 class Nodgine {
     /**
      * Contructor for class Nodgine, sets up _middleware, _controller and _missingRouteController
+     *
+     * @param {Object} [aParams] An object containing special params for this nodgine instance
+     * @param {Constructor} [aParams.requestClass] A constructor for a request class
+     * @param {Constructor} [aParams.responseClass] A constructor for a response class
      */
-    constructor() {
+    constructor(aParams) {
+        /**
+         * The request class constructor
+         *
+         * @private
+         * @member {Constructor}
+         */
+        this._requestClass = Request;
+        /**
+         * The response class constructor
+         *
+         * @private
+         * @member {Constructor}
+         */
+        this._responseClass = Response;
         /**
          * A list of all registered middleware
          *
@@ -42,6 +60,18 @@ class Nodgine {
                 .setStatusCode(404)
                 .write('Not Found');
         };
+        
+        // if there are params provided as object
+        if (aParams && typeof aParams === 'object') {
+            // check if the params conrain a request class
+            if (typeof aParams.requestClass === 'function') {
+                this._requestClass = aParams.requestClass;
+            }
+            // and check if the params contain a response class
+            if (typeof aParams.responseClass === 'function') {
+                this._responseClass = aParams.responseClass;
+            }
+        }
     }
 
     /**
@@ -185,8 +215,8 @@ class Nodgine {
                     request: aRequest,
                     response: aResponse
                 };
-                const requestObject = new Request(paramsObject);
-                const responseObject = new Response(paramsObject);
+                const requestObject = new this._requestClass(paramsObject);
+                const responseObject = new this._responseClass(paramsObject);
 
                 return Promise.resolve()
                     .then(() => {
