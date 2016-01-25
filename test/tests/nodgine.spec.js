@@ -37,8 +37,8 @@ describe('Nodgine', () => {
     it('should initialize the response class with the provided params constructor');
     
     [0, 1, 3.14, -2.7, 'test', true, false, [], {}, undefined, null].forEach((aValue) => {
-        it('should not initialize the request class is the parameter is of type ' + aValue.toString());
-        it('should not initialize the response class is the parameter is of type ' + aValue.toString());
+        it('should not initialize the request class is the parameter is of type ' + toString.call(aValue));
+        it('should not initialize the response class is the parameter is of type ' + toString.call(aValue));
     });
 
     it('should initialize the missing route controller with a function that sends 404 Not Found to the client', () => {
