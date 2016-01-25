@@ -9,4 +9,5 @@ module.exports = function (grunt) {
 
     // and register main tasks
     grunt.registerTask('test', ['clean:test', 'eslint', 'coveredMocha']);
+    grunt.registerTask('dryTest', ['eslint', 'dryCoveredMocha']);
 };

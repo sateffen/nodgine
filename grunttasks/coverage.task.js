@@ -14,18 +14,24 @@ module.exports = function (grunt) {
         istanbul.hook.hookRequire(matcher, instrumenter.instrumentSync.bind(instrumenter));
     });
 
-    grunt.registerTask('stopCoverageCollection', function () {
+    grunt.registerTask('stopCoverageCollection', function (aReporter) {
         istanbul.hook.unhookRequire();
         var targetDirectory = path.resolve(__dirname, '../test/results');
         var collector = new istanbul.Collector();
+        var reporterOptions = undefined;
+        var reporter = aReporter || 'text';
 
         collector.add(global.__coverage__);
 
         // and finally generate the report
-        istanbul.Report
-            .create('lcov', {
+        if (aReporter.substr(0, 4) !== 'text') {
+            reporterOptions = {
                 dir: targetDirectory
-            })
+            };
+        }
+        
+        istanbul.Report
+            .create(reporter, reporterOptions)
         // but do it sync (second param)
             .writeReport(collector, true);
     });

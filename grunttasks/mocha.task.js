@@ -13,10 +13,21 @@ module.exports = function (grunt) {
                 ]
             },
             src: ['./test/tests/**/*.js']
+        },
+        runDry: {
+            options: {
+                reporter: 'spec',
+                require: [
+                    'test/setup/chai',
+                    'test/setup/chaispies'
+                ]
+            },
+            src: ['./test/tests/**/*.js']
         }
     });
 
-    grunt.registerTask('coveredMocha', ['startCoverageCollection', 'mochaTest', 'stopCoverageCollection']);
+    grunt.registerTask('coveredMocha', ['startCoverageCollection', 'mochaTest:run', 'stopCoverageCollection:lcov']);
+    grunt.registerTask('dryCoveredMocha', ['startCoverageCollection', 'mochaTest:runDry', 'stopCoverageCollection:text']);
 
     grunt.loadNpmTasks('grunt-mocha-test');
 };
