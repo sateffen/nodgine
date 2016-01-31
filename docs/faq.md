@@ -47,3 +47,40 @@ So basicly this:
 Will help you finding rejections, that are not handled. This way you should catch up with problems.
 
 If something goes wrong the user will get a statuscode 500. This is generated automatically.
+
+## Replace request or response object with own ones ##
+
+You can replace the request and response objects that are passed down to the middleware and controller.
+
+This is pretty simple, but you have to know some facts about this:
+
+* Every request gets ONE request and response instance. All middleware and controller share this
+instance for the complete request.
+* Every response class have to have a *flush* method. The reason is simple: Flush gets called by the
+nodgine to tell the response that it's finished. You have to have a flush method, even if it's empty.
+The reason it's named flush is to prevent collisions with streams or so, just something that tells
+the idea, but won't collide.
+* Request and response constructors get the same parameters. See below.
+
+To replace request or response you have to use the option passed to the nodgine:
+
+    const instance = new Nodgine({
+        requestClass: MyRequestClass,
+        responseClass: MyResponseClass
+    });
+
+You can overwrite both, or just one of them, it's up to you.
+
+As constructor parameter you'll get an object looking like:
+
+    const paramsObject = {
+        parsedUrl// the result of nodejs require('url').parse(request.url)
+        requestBody // The request body buffer
+        request // the original nodejs require('http').HttpRequest object
+        response // the original nodejs require('http').HttpResponse object 
+    };
+
+Both, request and response, will get the same parameters. The reason for this
+is simple: The response might interact with the headers of the request object,
+or anything else, it's up to you. This way you should be able to do everything
+you want.

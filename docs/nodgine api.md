@@ -9,13 +9,13 @@ and response objects, please refer to the other documents.
 If you miss any details, feel free to help me and open an [issue](https://github.com/sateffen/nodgine/issues)
 
 * Nodgine
-    * constructor()
+    * constructor([options])
     * addMiddleware([applingRoute], middleware) -> Nodgine
     * addController(route, controller/servelet) -> Nodgine
     * setMissingRouteController(controller) -> Nodgine
     * getRouter() -> Function
 
-## constructor() ##
+## constructor([options]) ##
 
 The Nodgine is a class, that you have to instanciate. The constructor doesn't require any
 special parameters, so you can simply call:
@@ -25,6 +25,20 @@ special parameters, so you can simply call:
 
 Then you can use this instance to add middleware or controller to it, and bind the router
 to an http server.
+
+You can instanciate the nodgine with some options as well. This options are all optional,
+you don't need them to use the nodgine.
+
+As options parameter you have to pass an object, which can have two params: requestClass
+and responseClass. With this you can replace the nodgine internal request and response
+classes, so you can add your own logic to them. Here all options:
+
+    const options = {
+        requestClass: MyRequestConstructor, // The class constructor for the request
+        responseClass: MyResponseConstructor // The class constructor for the response
+    };
+
+For details to the classes see faq.md .
 
 ## addMiddleware([applingRoute], middleware) -> Nodgine ##
 
