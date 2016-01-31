@@ -4,7 +4,7 @@ module.exports = function (grunt) {
         options: {
             configFile: '.eslintrc'
         },
-        target: ['./src/**/*.js', './test/**/*.js']
+        target: ['./src/**/*.js', './test/**/*.js', '!./test/results/**/*.js']
     });
     
     grunt.loadNpmTasks('grunt-eslint');
