@@ -25,14 +25,14 @@ class Nodgine {
          * @private
          * @member {Constructor}
          */
-        this._requestClass = Request;
+        this._requestClass = aParams && typeof aParams.requestClass === 'function' ? aParams.requestClass : Request;
         /**
          * The response class constructor
          *
          * @private
          * @member {Constructor}
          */
-        this._responseClass = Response;
+        this._responseClass = aParams && typeof aParams.responseClass === 'function' ? aParams.responseClass : Response;
         /**
          * A list of all registered middleware
          *

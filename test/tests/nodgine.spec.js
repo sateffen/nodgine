@@ -30,15 +30,61 @@ describe('Nodgine', () => {
     it('should initialize the missing route controller with an function', () => {
         expect(instance._missingRouteController).to.be.an('function');
     });
-    
-    it('should initialize the request class pointer with the correct default value');
-    it('should initialize the response class pointer with the correct default value');
-    it('should initialize the request class with the provided params constructor');
-    it('should initialize the response class with the provided params constructor');
-    
+
+    it('should initialize the request class pointer with the correct default value', () => {
+        expect(instance._requestClass).to.equal(Request);
+    });
+
+    it('should initialize the response class pointer with the correct default value', () => {
+        expect(instance._responseClass).to.equal(Response);
+    });
+
+    it('should initialize the request class with the provided params constructor', () => {
+        class testRequest { }
+        const testInstance = new Nodgine({
+            requestClass: testRequest
+        });
+
+        expect(testInstance._requestClass).to.equal(testRequest);
+    });
+
+    it('should initialize the response class with the provided params constructor', () => {
+        class testResponse { }
+        const testInstance = new Nodgine({
+            responseClass: testResponse
+        });
+
+        expect(testInstance._responseClass).to.equal(testResponse);
+    });
+
+    it('should initialize the request and response class correctly if bothi is provided as constructor params', () => {
+        class testRequest { }
+        class testResponse { }
+        const testInstance = new Nodgine({
+            requestClass: testRequest,
+            responseClass: testResponse
+        });
+
+        expect(testInstance._requestClass).to.equal(testRequest);
+        expect(testInstance._responseClass).to.equal(testResponse);
+    });
+
     [0, 1, 3.14, -2.7, 'test', true, false, [], {}, undefined, null].forEach((aValue) => {
-        it('should not initialize the request class is the parameter is of type ' + toString.call(aValue));
-        it('should not initialize the response class is the parameter is of type ' + toString.call(aValue));
+        it('should not initialize the request class is the parameter is of type ' + toString.call(aValue), () => {
+            const testInstance = new Nodgine({
+                requestClass: aValue
+            });
+            
+            expect(testInstance._requestClass).not.to.equal(aValue);
+        });
+        
+        it('should not initialize the response class is the parameter is of type ' + toString.call(aValue), () => {
+            const testInstance = new Nodgine({
+                responseClass: aValue
+            });
+            
+            expect(testInstance._responseClass).not.to.equal(aValue);
+        });
     });
 
     it('should initialize the missing route controller with a function that sends 404 Not Found to the client', () => {
@@ -232,7 +278,7 @@ describe('Nodgine', () => {
 
         instance.setMissingRouteController(callback);
         instance._runController('/does/not/exist', request, response);
-        
+
         expect(callbackWasCalled).to.equal(true);
         expect(callbackWasCalledWith).to.have.length(2);
         expect(callbackWasCalledWith[0]).to.equal(request);
