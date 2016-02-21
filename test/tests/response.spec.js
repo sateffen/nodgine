@@ -4,8 +4,8 @@
 const Response = require('../../src/response');
 
 describe('Response', () => {
-    let instance;
-    let mock;
+    let instance = null;
+    let mock = null;
 
     beforeEach(() => {
         mock = {
@@ -48,13 +48,11 @@ describe('Response', () => {
         expect(instance._statusCode).to.equal(500);
     });
 
-    [3.14, -2.7, 'test', true, false, () => { }, {}, [], null, undefined].forEach((aValue) => {
+    [3.14, -2.7, 'test', true, false, () => { }, {}, [], null, undefined].forEach((aValue) => { // eslint-disable-line
         it('should throw an error calling setStatusCode with non integer param type ' + toString.call(aValue), () => {
-            function setStatusCode() {
+            expect(() => {
                 instance.setStatusCode(aValue);
-            }
-
-            expect(setStatusCode).to.throw(TypeError);
+            }).to.throw(TypeError);
         });
     });
 
@@ -71,8 +69,8 @@ describe('Response', () => {
     });
 
     it('should save the written chunks as buffers in the private variable calling write', () => {
-        let bufferToWrite1 = new Buffer('I am a unittest');
-        let bufferToWrite2 = new Buffer('I am a second unittest');
+        const bufferToWrite1 = new Buffer('I am a unittest');
+        const bufferToWrite2 = new Buffer('I am a second unittest');
 
         instance.write(bufferToWrite1);
         instance.write(bufferToWrite2);
@@ -85,8 +83,8 @@ describe('Response', () => {
     });
 
     it('should convert strings to buffers and write them to the private variable calling write', () => {
-        let stringToWrite1 = 'I am a unittest';
-        let stringToWrite2 = 'I am another unittest';
+        const stringToWrite1 = 'I am a unittest';
+        const stringToWrite2 = 'I am another unittest';
 
         instance.write(stringToWrite1);
         instance.write(stringToWrite2);
@@ -98,13 +96,11 @@ describe('Response', () => {
         expect(instance._sendBufferList[1].toString()).to.equal(stringToWrite2);
     });
 
-    [3.14, -2.7, 0, 1, true, false, () => { }, {}, [], null, undefined].forEach((aValue) => {
+    [3.14, -2.7, 0, 1, true, false, () => { }, {}, [], null, undefined].forEach((aValue) => { // eslint-disable-line
         it('should throw an error calling write with param of type ' + toString.call(aValue), () => {
-            function write() {
+            expect(() => {
                 instance.write(aValue);
-            }
-
-            expect(write).to.throw(TypeError);
+            }).to.throw(TypeError);
         });
     });
 
@@ -119,29 +115,23 @@ describe('Response', () => {
         expect(instance._headerHash['my-super-header']).to.equal('has-a-super-value');
     });
 
-    [3.14, -2.7, 0, 1, true, false, () => { }, {}, [], null, undefined].forEach((aValue) => {
+    [3.14, -2.7, 0, 1, true, false, () => { }, {}, [], null, undefined].forEach((aValue) => { // eslint-disable-line
         it('should throw an error calling setHeader with first param as type ' + toString.call(aValue), () => {
-            function setHeader() {
+            expect(() => {
                 instance.setHeader(aValue, 'has-a-super-value');
-            }
-
-            expect(setHeader).to.throw(TypeError);
+            }).to.throw(TypeError);
         });
 
         it('should throw an error calling setHeader with second param as type ' + toString.call(aValue), () => {
-            function setHeader() {
+            expect(() => {
                 instance.setHeader('my-super-header', aValue);
-            }
-
-            expect(setHeader).to.throw(TypeError);
+            }).to.throw(TypeError);
         });
 
         it('should throw an error calling setHeader with both params as type ' + toString.call(aValue), () => {
-            function setHeader() {
+            expect(() => {
                 instance.setHeader(aValue, aValue);
-            }
-
-            expect(setHeader).to.throw(TypeError);
+            }).to.throw(TypeError);
         });
     });
 
@@ -181,11 +171,9 @@ describe('Response', () => {
     });
 
     it('should throw an error calling flush twice', () => {
-        function flush() {
+        expect(() => {
             instance.flush();
             instance.flush();
-        }
-
-        expect(flush).to.throw(Error);
+        }).to.throw(Error);
     });
 });

@@ -6,15 +6,17 @@ const libChai = require('chai');
 
 describe('Wrapper', () => {
     it('should construct a new object calling it with new', () => {
-        let instance = new Wrapper('/', () => { });
+        const instance = new Wrapper('/', () => {
+            // silence
+        });
 
         expect(instance instanceof Wrapper).to.equal(true);
         expect(toString.call(instance)).to.equal('[object Object]');
     });
 
     it('should not call the run function if given route matches not the constructor parameter', () => {
-        let callback = libChai.spy();
-        let instance = new Wrapper('/ok', callback);
+        const callback = libChai.spy();
+        const instance = new Wrapper('/ok', callback);
 
         instance.run = libChai.spy();
         instance.runWhenRouteMatches('/wrong', {}, {});
@@ -24,10 +26,10 @@ describe('Wrapper', () => {
     });
 
     it('should call the run function if given route matches the constructor parameter', () => {
-        let callback = libChai.spy();
-        let instance = new Wrapper('/ok', callback);
-        let request = {};
-        let response = {};
+        const callback = libChai.spy();
+        const instance = new Wrapper('/ok', callback);
+        const request = {};
+        const response = {};
 
         instance.run = libChai.spy();
         instance.runWhenRouteMatches('/ok', request, response);
@@ -35,7 +37,7 @@ describe('Wrapper', () => {
         expect(instance.run).to.have.been.called.once();
         expect(callback).to.not.have.been.called();
 
-        let callDescription = instance.run.__spy.calls[0];
+        const callDescription = instance.run.__spy.calls[0];
 
         expect(typeof callDescription[0]).to.equal('object');
         expect(Array.isArray(callDescription[0])).to.equal(true);
@@ -46,16 +48,16 @@ describe('Wrapper', () => {
     });
 
     it('should run the callback with correct parameters if the run method is invoked', () => {
-        let callback = libChai.spy();
-        let instance = new Wrapper('/ok', callback);
-        let request = {};
-        let response = {};
+        const callback = libChai.spy();
+        const instance = new Wrapper('/ok', callback);
+        const request = {};
+        const response = {};
 
         instance.run(['/ok'], request, response);
 
         expect(callback).to.have.been.called.once();
 
-        let callDescription = callback.__spy.calls[0];
+        const callDescription = callback.__spy.calls[0];
 
         expect(callDescription[0]).to.equal(request);
         expect(callDescription[1]).to.equal(response);
@@ -64,16 +66,16 @@ describe('Wrapper', () => {
     });
     
     it('should run the callback with correct parameters in the params hash', () => {
-        let callback = libChai.spy();
-        let instance = new Wrapper('/ok/:var1/:other', callback);
-        let request = {};
-        let response = {};
+        const callback = libChai.spy();
+        const instance = new Wrapper('/ok/:var1/:other', callback);
+        const request = {};
+        const response = {};
 
         instance.run(['/ok', 'test1', '2tset'], request, response);
 
         expect(callback).to.have.been.called.once();
 
-        let callDescription = callback.__spy.calls[0];
+        const callDescription = callback.__spy.calls[0];
 
         expect(callDescription[0]).to.equal(request);
         expect(callDescription[1]).to.equal(response);
@@ -84,21 +86,21 @@ describe('Wrapper', () => {
     });
 
     it('should return a promise calling the run function', () => {
-        let callback = libChai.spy();
-        let instance = new Wrapper('/ok', callback);
-        let request = {};
-        let response = {};
-        let result = instance.run(['/ok'], request, response);
+        const callback = libChai.spy();
+        const instance = new Wrapper('/ok', callback);
+        const request = {};
+        const response = {};
+        const result = instance.run(['/ok'], request, response);
 
         expect(result).to.be.an.instanceof(Promise);
     });
 
     it('should reject the promise if the callback returns false', (done) => {
-        let instance = new Wrapper('/ok', () => {
+        const instance = new Wrapper('/ok', () => {
             return false;
         });
-        let request = {};
-        let response = {};
+        const request = {};
+        const response = {};
 
         instance.run(['/ok'], request, response)
             .then(() => {
@@ -112,11 +114,11 @@ describe('Wrapper', () => {
     });
 
     it('should resolve if the callback returns nothing', (done) => {
-        let instance = new Wrapper('/ok', () => {
+        const instance = new Wrapper('/ok', () => {
             return;
         });
-        let request = {};
-        let response = {};
+        const request = {};
+        const response = {};
 
         instance.run(['/ok'], request, response)
             .then(() => {
@@ -130,11 +132,11 @@ describe('Wrapper', () => {
     });
 
     it('should reject if the callback returns a rejected promise', (done) => {
-        let instance = new Wrapper('/ok', () => {
+        const instance = new Wrapper('/ok', () => {
             return Promise.reject();
         });
-        let request = {};
-        let response = {};
+        const request = {};
+        const response = {};
 
         instance.run(['/ok'], request, response)
             .then(() => {
@@ -148,11 +150,11 @@ describe('Wrapper', () => {
     });
 
     it('should resolve if the callback returns a resolved promise', (done) => {
-        let instance = new Wrapper('/ok', () => {
+        const instance = new Wrapper('/ok', () => {
             return Promise.resolve();
         });
-        let request = {};
-        let response = {};
+        const request = {};
+        const response = {};
 
         instance.run(['/ok'], request, response)
             .then(() => {
@@ -166,8 +168,10 @@ describe('Wrapper', () => {
     });
     
     it('should return the _routePattern calling getPattern()', () => {
-        let route = '/' + Math.random().toString(26).slice(2);
-        let instance = new Wrapper(route, () => { });
+        const route = '/' + Math.random().toString(26).slice(2);
+        const instance = new Wrapper(route, () => {
+            // silence
+        });
         
         expect(instance.getPattern()).to.equal(instance._routePattern);
     });

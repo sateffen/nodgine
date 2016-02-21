@@ -4,8 +4,8 @@
 const Request = require('../../src/request');
 
 describe('Request', () => {
-    let instance;
-    let mock;
+    let instance = null;
+    let mock = null;
 
     beforeEach(() => {
         mock = {
@@ -43,14 +43,14 @@ describe('Request', () => {
     });
 
     it('should return the body buffer calling getBody', () => {
-        let body = instance.getBody();
+        const body = instance.getBody();
 
         expect(body).to.be.an.instanceof(Buffer);
         expect(body.toString()).to.equal(mock.requestBody.toString());
     });
 
     it('should return a hash containing all headers calling getAllHeaders', () => {
-        let allHeaders = instance.getAllHeaders();
+        const allHeaders = instance.getAllHeaders();
 
         expect(Object.keys(allHeaders)).to.have.length(Object.keys(mock.request.headers).length);
         Object.keys(mock.request.headers).forEach((aKey) => {
@@ -62,13 +62,11 @@ describe('Request', () => {
         expect(instance.getHeader('testHeader')).to.equal(mock.request.headers.testheader);
     });
 
-    [0, 1, 3.14, -2.7, true, false, () => { }, {}, [], null, undefined].forEach((aValue) => {
+    [0, 1, 3.14, -2.7, true, false, () => { }, {}, [], null, undefined].forEach((aValue) => { // eslint-disable-line
         it('should throw an error calling getHeader with first param of type ' + toString.call(aValue), () => {
-            function getHeader() {
+            expect(() => {
                 instance.getHeader(aValue);
-            }
-            
-            expect(getHeader).to.throw(TypeError);
+            }).to.throw(TypeError);
         });
     });
 
@@ -85,7 +83,7 @@ describe('Request', () => {
     });
 
     it('should return a correct querystring object calling getQueryStringObject', () => {
-        let queryStringObject = instance.getQueryStringObject();
+        const queryStringObject = instance.getQueryStringObject();
 
         expect(Object.keys(queryStringObject)).to.have.length(Object.keys(mock.parsedUrl.query).length);
         Object.keys(mock.parsedUrl.query).forEach((aKey) => {

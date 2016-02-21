@@ -4,8 +4,15 @@
 const utils = require('../../src/utils');
 const libChai = require('chai');
 
+/**
+ * Creates a mock object
+ * 
+ * @param {string} aMethod
+ * @param {boolean}aNoCallback
+ * @return {Object} The mock
+ */
 function mockFactory(aMethod, aNoCallback) {
-    let mock = {
+    const mock = {
         servelet: aNoCallback ? {} : {
             doGet: libChai.spy(),
             doPost: libChai.spy(),
@@ -40,27 +47,27 @@ describe('Utils', () => {
         expect(utils.isObject(Object.create(null))).to.equal(true);
     });
 
-    [0, 1, 3.14, -2.7, 'Test', true, false, [], () => { }, undefined, null].forEach((aValue) => {
+    [0, 1, 3.14, -2.7, 'Test', true, false, [], () => { }, undefined, null].forEach((aValue) => { // eslint-disable-line
         it('should return false calling isObject with ' + toString.call(aValue), () => {
             expect(utils.isObject(aValue)).to.equal(false);
         });
     });
 
     it('should return a function calling wrapServeletToFunction', () => {
-        let result = utils.wrapServeletToFunction({}, {});
+        const result = utils.wrapServeletToFunction({}, {});
 
         expect(typeof result).to.equal('function');
     });
 
     it('should return a function expecting three parameters calling wrapServeletToFunction', () => {
-        let result = utils.wrapServeletToFunction({}, {});
+        const result = utils.wrapServeletToFunction({}, {});
 
         expect(result).to.have.length(3);
     });
 
     it('should request the method from the request object in wrapper function for servelet', () => {
-        let mock = mockFactory('get', true);
-        let result = utils.wrapServeletToFunction(mock.servelet, mock.nodgine);
+        const mock = mockFactory('get', true);
+        const result = utils.wrapServeletToFunction(mock.servelet, mock.nodgine);
 
         result(mock.request, mock.response, mock.params);
 
@@ -68,8 +75,8 @@ describe('Utils', () => {
     });
 
     it('should end respond with 404 when no matching handler is there in wrapper function for servelet', () => {
-        let mock = mockFactory('get', true);
-        let result = utils.wrapServeletToFunction(mock.servelet, mock.nodgine);
+        const mock = mockFactory('get', true);
+        const result = utils.wrapServeletToFunction(mock.servelet, mock.nodgine);
 
         result(mock.request, mock.response, mock.params);
 
@@ -79,8 +86,8 @@ describe('Utils', () => {
     
     ['Get', 'Post', 'Put', 'Delete'].forEach((aMethod) => {
         it('should call the correct servelet method for calling method ' + aMethod, () => {
-            let mock = mockFactory(aMethod);
-            let result = utils.wrapServeletToFunction(mock.servelet, mock.nodgine);
+            const mock = mockFactory(aMethod);
+            const result = utils.wrapServeletToFunction(mock.servelet, mock.nodgine);
             
             result(mock.request, mock.response, mock.params);
         

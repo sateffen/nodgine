@@ -53,6 +53,8 @@ class Nodgine {
          *
          * @private
          * @member {Function}
+         * @param {Object} aRequest
+         * @param {Object} aResponse
          */
         this._missingRouteController = (aRequest, aResponse) => {
             // simply write statuscode 404, controller not found
@@ -79,7 +81,7 @@ class Nodgine {
      *
      * @throws {TypeError} If called with anything different than a function
      * @param {Function} aController The controller to use if no other fits
-     * @return this
+     * @return {this} The instance itself
      */
     setMissingRouteController(aController) {
         if (typeof aController !== 'function') {
@@ -97,7 +99,7 @@ class Nodgine {
      * @throws {TypeError} If called with a wrong signature
      * @param {String} [aRoute=/*] The route the middleware applies to (optional)
      * @param {Function} aMiddleware The middleware to add
-     * @return this
+     * @return {this} The instance itself
      * @example
      * // applies only if the passed mattern matches
      * nodgineInstance.addMiddleware('/api/*', () => {});
@@ -130,7 +132,7 @@ class Nodgine {
      * @throws {TypeError} If the call signature is not matched
      * @param {String} aRoute The route this controller applies for
      * @param {Function} aController The controller function itself
-     * @return this
+     * @return {this} The instance itself
      * @example
      * nodgineInstance.addController('/user/:userid', () => {});
      */
@@ -159,7 +161,7 @@ class Nodgine {
         const middleWareList = this._middleware;
         let promisePointer = Promise.resolve();
         
-        for (let i = 0, len = middleWareList.length; i < len; i++) {
+        for (let i = 0, len = middleWareList.length;i < len;i++) {
             promisePointer = promisePointer.then(
                 middleWareList[i].runWhenRouteMatches
                     .bind(middleWareList[i], aParsedUrlPath, aRequest, aResponse)
@@ -181,7 +183,7 @@ class Nodgine {
     _runController(aParsedUrlPath, aRequest, aResponse) {
         const controllerList = this._controller;
 
-        for (let i = 0, len = controllerList.length; i < len; i++) {
+        for (let i = 0, len = controllerList.length;i < len;i++) {
             const matchResult = aParsedUrlPath.match(controllerList[i].getPattern());
 
             if (matchResult !== null) {
@@ -210,7 +212,7 @@ class Nodgine {
             aRequest.on('end', () => {
                 const parsedUrl = libUrl.parse(aRequest.url, true);
                 const paramsObject = {
-                    parsedUrl: parsedUrl,
+                    parsedUrl,
                     requestBody: Buffer.concat(requestBody),
                     request: aRequest,
                     response: aResponse

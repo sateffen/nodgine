@@ -54,7 +54,7 @@ class Response {
      * Sets the status code for this response. This is chainable
      *
      * @param {Number} aStatusCode The statuscode to set
-     * @return this
+     * @return {this} The instance itself
      */
     setStatusCode(aStatusCode) {
         if (typeof aStatusCode !== 'number' || aStatusCode % 1 !== 0) {
@@ -80,7 +80,7 @@ class Response {
      *
      * @throws {TypeError} If the param has wrong type (not string of buffer)
      * @param {Buffer|String} aData A buffer or string that should get written to the response
-     * @return this
+     * @return {this} The instance itself
      */
     write(aData) {
         let data = aData;
@@ -106,7 +106,7 @@ class Response {
      * @throws {TypeError} If the given params have the wrong types
      * @param {String} aHeader The header name
      * @param {String} aValue The value for the header
-     * @return this
+     * @return {this} The instance itself
      */
     setHeader(aHeader, aValue) {
         if (typeof aHeader !== 'string' || typeof aValue !== 'string') {
@@ -142,7 +142,7 @@ class Response {
      * Removes given header from the header list
      *
      * @param {String} aHeader The header to remove
-     * @return this
+     * @return {this} The instance itself
      */
     removeHeader(aHeader) {
         // do not use "delete", because this is a "hot object" for the time being.
@@ -159,7 +159,7 @@ class Response {
      * After flushing the response the first time, this will throw an error
      *
      * @throws {Error} If flushed twice
-     * @return this
+     * @return {this} The instance itself
      */
     flush() {
         if (this._isFlushed) {

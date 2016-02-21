@@ -49,7 +49,7 @@ class Request {
     /**
      * Returns the request body
      *
-     * @return {Buffer}
+     * @return {Buffer} The request body buffer
      */
     getBody() {
         return this._requestBody;
@@ -58,7 +58,7 @@ class Request {
     /**
      * Returns an object containing all header received
      *
-     * @return {Object}
+     * @return {Object} The header hash
      */
     getAllHeaders() {
         return this._originalRequest.headers;

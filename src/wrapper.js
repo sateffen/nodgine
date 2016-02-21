@@ -59,9 +59,8 @@ class Wrapper {
         if (match !== null) {
             return this.run(match, aRequest, aResponse);
         }
-        else {
-            return Promise.resolve();
-        }
+        
+        return Promise.resolve();
     }
 
     /**
@@ -74,13 +73,13 @@ class Wrapper {
      */
     run(aMatchResult, aRequest, aResponse) {
         return new Promise((aResolve, aReject) => {
-            let paramsHash = {};
+            const paramsHash = {};
 
-            for (let i = 0, len = this._routeKeys.length; i < len; i++) {
+            for (let i = 0, len = this._routeKeys.length;i < len;i++) {
                 paramsHash[this._routeKeys[i].name] = aMatchResult[i + 1];
             }
 
-            let returnPromise = this._callback(aRequest, aResponse, paramsHash);
+            const returnPromise = this._callback(aRequest, aResponse, paramsHash);
 
             if (returnPromise instanceof Promise) {
                 returnPromise

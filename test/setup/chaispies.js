@@ -1,6 +1,6 @@
 'use strict';
 
-var chai = require('chai');
-var chaiSpies = require('chai-spies');
+const chai = require('chai');
+const chaiSpies = require('chai-spies');
 
 chai.use(chaiSpies);

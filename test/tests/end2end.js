@@ -5,8 +5,8 @@ const Nodgine = require('../../src/nodgine');
 const libHttp = require('http');
 
 describe('End to end functionallity', () => {
-    let httpServer;
-    let instance;
+    let httpServer = null;
+    let instance = null;
 
     before(() => {
         instance = new Nodgine();
@@ -51,14 +51,14 @@ describe('End to end functionallity', () => {
     });
 
     it('should answer correct requesting http://localhost:8765/test/mugglefugg', (done) => {
-        let options = {
+        const options = {
             hostname: '127.0.0.1',
             port: 8765,
             path: '/test/End2EndTestsAreSoCool',
             method: 'POST'
         };
-        let request = libHttp.request(options, (aResponse) => {
-            let receivedData = [];
+        const request = libHttp.request(options, (aResponse) => {
+            const receivedData = [];
             
             aResponse.on('data', (aChunk) => {
                 receivedData.push(aChunk);
@@ -82,14 +82,14 @@ describe('End to end functionallity', () => {
     });
     
     it('should answer correct requesting http://localhost:8765/other', (done) => {
-        let options = {
+        const options = {
             hostname: '127.0.0.1',
             port: 8765,
             path: '/other',
             method: 'GET'
         };
-        let request = libHttp.request(options, (aResponse) => {
-            let receivedData = [];
+        const request = libHttp.request(options, (aResponse) => {
+            const receivedData = [];
             
             aResponse.on('data', (aChunk) => {
                 receivedData.push(aChunk);
@@ -113,14 +113,14 @@ describe('End to end functionallity', () => {
     });
     
     it('should answer correct requesting http://localhost:8765/async', (done) => {
-        let options = {
+        const options = {
             hostname: '127.0.0.1',
             port: 8765,
             path: '/async',
             method: 'GET'
         };
-        let request = libHttp.request(options, (aResponse) => {
-            let receivedData = [];
+        const request = libHttp.request(options, (aResponse) => {
+            const receivedData = [];
             
             aResponse.on('data', (aChunk) => {
                 receivedData.push(aChunk);
@@ -144,14 +144,14 @@ describe('End to end functionallity', () => {
     });
     
     it('should answer with 404 requesting http://localhost:8765/does/not/exist', (done) => {
-        let options = {
+        const options = {
             hostname: '127.0.0.1',
             port: 8765,
             path: '/does/not/exist',
             method: 'GET'
         };
-        let request = libHttp.request(options, (aResponse) => {
-            let receivedData = [];
+        const request = libHttp.request(options, (aResponse) => {
+            const receivedData = [];
             
             aResponse.on('data', (aChunk) => {
                 receivedData.push(aChunk);

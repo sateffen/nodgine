@@ -9,7 +9,7 @@ const libChai = require('chai');
 const libEvents = require('events');
 
 describe('Nodgine', () => {
-    let instance;
+    let instance = null;
 
     beforeEach(() => {
         instance = new Nodgine();
@@ -88,8 +88,8 @@ describe('Nodgine', () => {
     });
 
     it('should initialize the missing route controller with a function that sends 404 Not Found to the client', () => {
-        let request = {};
-        let response = {
+        const request = {};
+        const response = {
             writtenString: undefined,
             statusCode: 0,
             write: (aBuffer) => {
@@ -102,24 +102,22 @@ describe('Nodgine', () => {
             }
         };
 
-        function callMissingRouteController() {
+        expect(() => {
             instance._missingRouteController(request, response);
-        }
-
-        expect(callMissingRouteController).not.to.throw();
+        }).not.to.throw();
         expect(response.statusCode).to.equal(404);
         expect(response.writtenString).to.be.an('string');
         expect(response.writtenString.toString()).to.equal('Not Found');
     });
 
     it('should add a middleware wrapper to the private list calling addMiddleware', () => {
-        function callback() { }
-        let route = '/test/it';
+        function callback() { } // eslint-disable-line
+        const route = '/test/it';
 
         instance.addMiddleware(route, callback);
 
         expect(instance._middleware).to.have.length(1);
-        let wrapper = instance._middleware[0];
+        const wrapper = instance._middleware[0];
 
         expect(wrapper).to.be.an.instanceof(Wrapper);
         expect(wrapper._callback).to.equal(callback);
@@ -127,12 +125,12 @@ describe('Nodgine', () => {
     });
 
     it('should add a middleware wrapper to the private list calling addMiddleware with only a callback', () => {
-        function callback() { }
+        function callback() { } // eslint-disable-line
 
         instance.addMiddleware(callback);
 
         expect(instance._middleware).to.have.length(1);
-        let wrapper = instance._middleware[0];
+        const wrapper = instance._middleware[0];
 
         expect(wrapper).to.be.an.instanceof(Wrapper);
         expect(wrapper._callback).to.equal(callback);
@@ -140,70 +138,60 @@ describe('Nodgine', () => {
     });
 
     it('should set the private variable to given callback calling setMissingRouteController', () => {
-        function callback() { }
-
+        function callback() { } // eslint-disable-line
+        
         instance.setMissingRouteController(callback);
         expect(instance._missingRouteController).to.equal(callback);
     });
 
     [0, 1, 3.14, -2.7, 'test', true, false, [], {}, undefined, null].forEach((aValue) => {
         it('should throw an error calling setMissingRouteController with param type ' + toString.call(aValue), () => {
-            function setMissingRouteController() {
+            expect(() => {
                 instance.setMissingRouteController(aValue);
-            }
-
-            expect(setMissingRouteController).to.throw(TypeError);
+            }).to.throw(TypeError);
         });
     });
 
     [0, 1, 3.14, -2.7, true, false, [], {}, undefined, null].forEach((aValue) => {
         it('should throw an error calling addMiddlware with first param type ' + toString.call(aValue), () => {
-            function addMiddleware() {
-                instance.addMiddleware(aValue, () => { });
-            }
-
-            expect(addMiddleware).to.throw(TypeError);
+            expect(() => {
+                instance.addMiddleware(aValue, () => { }); // eslint-disable-line
+            }).to.throw(TypeError);
         });
     });
 
-    [0, 1, 3.14, -2.7, true, false, () => { }, [], {}, undefined, null].forEach((aValue) => {
+    [0, 1, 3.14, -2.7, true, false, () => { }, [], {}, undefined, null].forEach((aValue) => { // eslint-disable-line
         it('should throw an error calling addController with first param type ' + toString.call(aValue), () => {
-            function addController() {
-                instance.addController(aValue, () => { });
-            }
-
-            expect(addController).to.throw(TypeError);
+            expect(() => {
+                instance.addController(aValue, () => { }); // eslint-disable-line
+            }).to.throw(TypeError); 
         });
     });
 
     [0, 1, 3.14, -2.7, 'test', true, false, [], {}, undefined, null].forEach((aValue) => {
         it('should throw an error calling addMiddlware with second param type ' + toString.call(aValue), () => {
-            function addMiddleware() {
+            expect(() => {
                 instance.addMiddleware('/*', aValue);
-            }
-
-            expect(addMiddleware).to.throw(TypeError);
+            }).to.throw(TypeError);
         });
     });
 
     [0, 1, 3.14, -2.7, 'test', true, false, [], undefined, null].forEach((aValue) => {
         it('should throw an error calling addController with second param type ' + toString.call(aValue), () => {
-            function addController() {
+            expect(() => {
                 instance.addController('/*', aValue);
-            }
-
-            expect(addController).to.throw(TypeError);
+            }).to.throw(TypeError);
         });
     });
 
     it('should add a controller wrapper to the private list calling addController', () => {
-        function callback() { }
-        let route = '/test/it';
+        function callback() { } // eslint-disable-line
+        const route = '/test/it';
 
         instance.addController(route, callback);
 
         expect(instance._controller).to.have.length(1);
-        let wrapper = instance._controller[0];
+        const wrapper = instance._controller[0];
 
         expect(wrapper).to.be.an.instanceof(Wrapper);
         expect(wrapper._callback).to.equal(callback);
@@ -211,13 +199,13 @@ describe('Nodgine', () => {
     });
 
     it('should add a controller wrapper to the private list calling addController with an object', () => {
-        let servelet = {};
-        let route = '/test/it';
+        const servelet = {};
+        const route = '/test/it';
 
         instance.addController(route, servelet);
 
         expect(instance._controller).to.have.length(1);
-        let wrapper = instance._controller[0];
+        const wrapper = instance._controller[0];
 
         expect(wrapper).to.be.an.instanceof(Wrapper);
         expect(wrapper._callback).to.be.an('function');
@@ -228,7 +216,7 @@ describe('Nodgine', () => {
     });
 
     it('should return a routing function expecting two arguments calling getRouter', () => {
-        let router = instance.getRouter();
+        const router = instance.getRouter();
 
         expect(router).to.have.length(2);
     });
@@ -238,10 +226,10 @@ describe('Nodgine', () => {
         let calledWrongController = false;
         let calledCorrectControllerWith = [];
 
-        let request = {
+        const request = {
             isRequest: true
         };
-        let response = {
+        const response = {
             isResponse: true
         };
 
@@ -268,10 +256,10 @@ describe('Nodgine', () => {
     it('should run the _missingRouteController if no other controller was found', () => {
         let callbackWasCalled = false;
         let callbackWasCalledWith = [];
-        let request = {};
-        let response = {};
+        const request = {};
+        const response = {};
 
-        function callback() {
+        function callback() { // eslint-disable-line
             callbackWasCalled = true;
             callbackWasCalledWith = Array.prototype.slice.call(arguments);
         }
@@ -286,8 +274,8 @@ describe('Nodgine', () => {
     });
 
     it('should _runMiddleware return a promise', () => {
-        instance.addMiddleware(() => { });
-        let result = instance._runMiddleware('/ok', {}, {});
+        instance.addMiddleware(() => { }); // eslint-disable-line
+        const result = instance._runMiddleware('/ok', {}, {});
 
         expect(result).to.be.an.instanceof(Promise);
     });
@@ -299,10 +287,10 @@ describe('Nodgine', () => {
         let calledCorrectMiddlewareWith1 = [];
         let calledCorrectMiddlewareWith2 = [];
 
-        let request = {
+        const request = {
             isRequest: true
         };
-        let response = {
+        const response = {
             isResponse: true
         };
 
@@ -318,7 +306,7 @@ describe('Nodgine', () => {
             calledCorrectMiddlewareWith2 = Array.prototype.slice.call(arguments);
         });
 
-        let runPromise = instance._runMiddleware('/ok', request, response);
+        const runPromise = instance._runMiddleware('/ok', request, response);
 
         runPromise
             .then(() => {
@@ -345,9 +333,9 @@ describe('Nodgine', () => {
     });
 
     it('should register event handler for data and end events on the request while executing the router', () => {
-        let router = instance.getRouter();
-        let request = new libEvents.EventEmitter();
-        let response = {};
+        const router = instance.getRouter();
+        const request = new libEvents.EventEmitter();
+        const response = {};
 
         router(request, response);
 
@@ -356,12 +344,12 @@ describe('Nodgine', () => {
     });
 
     it('should call _runMiddleware and _runController with the correct parameters while executing the router', (done) => {
-        let router = instance.getRouter();
-        let executionList = [];
         let runMiddlewareWith = [];
         let runControllerWith = [];
-        let requestMock = new libEvents.EventEmitter();
-        let responseMock = {
+        const router = instance.getRouter();
+        const executionList = [];
+        const requestMock = new libEvents.EventEmitter();
+        const responseMock = {
             __wroteHead: false,
             __wroteData: false,
             __endedStream: false,
@@ -392,7 +380,7 @@ describe('Nodgine', () => {
         requestMock.emit('data', new Buffer('Hello'));
         requestMock.emit('data', new Buffer(' '));
         requestMock.emit('data', new Buffer('World'));
-        let endCallback = requestMock.listeners('end')[0];
+        const endCallback = requestMock.listeners('end')[0];
 
         endCallback()
             .then(() => {
@@ -425,15 +413,15 @@ describe('Nodgine', () => {
     });
 
     it('should send statuscode 500 if any part of the server has an error', (done) => {
-        let router = instance.getRouter();
-        let requestMock = new libEvents.EventEmitter();
-        let responseMock = {
+        const router = instance.getRouter();
+        const requestMock = new libEvents.EventEmitter();
+        const responseMock = {
             __statusCode: 0,
             __endedStream: false,
             writeHead: (aStatusCode) => {
                 responseMock.__statusCode = aStatusCode;
             },
-            write: () => { },
+            write: () => { }, // eslint-disable-line
             end: () => {
                 responseMock.__endedStream = true;
             }
@@ -448,7 +436,7 @@ describe('Nodgine', () => {
 
         router(requestMock, responseMock);
 
-        let endCallback = requestMock.listeners('end')[0];
+        const endCallback = requestMock.listeners('end')[0];
 
         endCallback()
             .then(() => {
@@ -465,9 +453,9 @@ describe('Nodgine', () => {
     });
 
     it('should do nothing if the request was already finished', (done) => {
-        let router = instance.getRouter();
-        let requestMock = new libEvents.EventEmitter();
-        let responseMock = {
+        const router = instance.getRouter();
+        const requestMock = new libEvents.EventEmitter();
+        const responseMock = {
             __wroteHead: false,
             __wroteData: false,
             __endedStream: false,
@@ -492,7 +480,7 @@ describe('Nodgine', () => {
 
         router(requestMock, responseMock);
 
-        let endCallback = requestMock.listeners('end')[0];
+        const endCallback = requestMock.listeners('end')[0];
 
         endCallback()
             .then(() => {

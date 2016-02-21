@@ -9,7 +9,7 @@ class Utils {
      *
      * @static
      * @param {Any} aValue The value to test
-     * @return {Boolean}
+     * @return {Boolean} Whether it's an object or not
      */
     static isObject(aValue) {
         return toString.call(aValue) === '[object Object]';
