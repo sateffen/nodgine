@@ -1,5 +1,13 @@
 # Changelog #
 
+## Version 1.1.0 ##
+
+* Made the request and response classes customizable
+* Updated ESLint to version 2
+* Set up new ESLint ruleset
+* Refactored code to fullfil new ESLint rules
+* Some under the hood cleanup and dependency updates
+
 ## Version 1.0.1 ##
 
 * Corrected some documentation issues
