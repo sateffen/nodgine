@@ -59,7 +59,7 @@ class Wrapper {
         if (match !== null) {
             return this.run(match, aRequest, aResponse);
         }
-        
+
         return Promise.resolve();
     }
 
@@ -75,7 +75,7 @@ class Wrapper {
         return new Promise((aResolve, aReject) => {
             const paramsHash = {};
 
-            for (let i = 0, len = this._routeKeys.length;i < len;i++) {
+            for (let i = 0, len = this._routeKeys.length; i < len; i++) {
                 paramsHash[this._routeKeys[i].name] = aMatchResult[i + 1];
             }
 

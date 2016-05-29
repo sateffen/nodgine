@@ -19,7 +19,7 @@ class Request {
          * @member {NodeHttpRequest}
          */
         this._originalRequest = aParamsObject.request;
-        
+
         /**
          * A pointer to the parsed url object result
          *
@@ -27,7 +27,7 @@ class Request {
          * @member {NodeParsedUrlObject}
          */
         this._parsedUrl = aParamsObject.parsedUrl;
-        
+
         /**
          * The body buffer
          *
@@ -36,7 +36,7 @@ class Request {
          */
         this._requestBody = aParamsObject.requestBody;
     }
-    
+
     /**
      * Returns the method of this object
      *
@@ -45,7 +45,7 @@ class Request {
     getMethod() {
         return this._originalRequest.method;
     }
-    
+
     /**
      * Returns the request body
      *
@@ -54,7 +54,7 @@ class Request {
     getBody() {
         return this._requestBody;
     }
-    
+
     /**
      * Returns an object containing all header received
      *
@@ -63,7 +63,7 @@ class Request {
     getAllHeaders() {
         return this._originalRequest.headers;
     }
-    
+
     /**
      * Returns the value for given header
      *
@@ -74,10 +74,10 @@ class Request {
         if (typeof aHeaderName !== 'string') {
             throw new TypeError('Unmatched signature. Please call with (headername<string>)');
         }
-        
+
         return this._originalRequest.headers[aHeaderName.toLowerCase()];
     }
-    
+
     /**
      * Gets the http authentication part of the current request
      *
@@ -88,7 +88,7 @@ class Request {
     getAuthentication() {
         return this._parsedUrl.auth;
     }
-    
+
     /**
      * Returns the protocol of current request
      *
@@ -99,7 +99,7 @@ class Request {
     getProtocol() {
         return this._parsedUrl.protocol;
     }
-    
+
     /**
      * Returns the request path of current request
      *
@@ -110,7 +110,7 @@ class Request {
     getRequestPath() {
         return this._parsedUrl.pathname;
     }
-    
+
     /**
      * Returns an object telling the query string for the current request
      *

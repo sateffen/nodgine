@@ -2,6 +2,7 @@
 'use strict';
 
 const EventEmitter = require('events');
+const stream = require('stream');
 
 /**
  * The response wrapper class
@@ -29,6 +30,23 @@ class Response extends EventEmitter {
          * @member {Array.<Buffer>}
          */
         this._sendBufferList = [];
+
+        /**
+         * The length of all collected buffers. Is used for better performance on concat
+         *
+         * @private
+         * @member {Number}
+         */
+        this._sendBufferListLength = 0;
+
+        /**
+         * A stream to send to the receiver
+         *
+         * @private
+         * @member {ReadableStream}
+         */
+        this._streamToPipe = null;
+
         /**
          * A hash of headers, that should be send
          *
@@ -36,6 +54,7 @@ class Response extends EventEmitter {
          * @member {Object}
          */
         this._headerHash = {};
+        
         /**
          * The statuscode to send
          *
@@ -44,6 +63,7 @@ class Response extends EventEmitter {
          * @default 200
          */
         this._statusCode = 200;
+
         /**
          * A flag telling whether the request was already flushed or not
          *
@@ -61,6 +81,7 @@ class Response extends EventEmitter {
         this._originalResponse.on('close', () => {
             this.emit('close', this);
         });
+
         /**
          * Finish event. See [HERE](https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_event_finish)
          *
@@ -107,6 +128,11 @@ class Response extends EventEmitter {
     write(aData) {
         let data = aData;
 
+        // make sure no stream is registered        
+        if (this._streamToPipe !== null) {
+            throw new Error('Can not write data when piping data');
+        }
+
         // if the data is a stream, convert it to a buffer
         if (typeof data === 'string') {
             data = new Buffer(data);
@@ -118,6 +144,32 @@ class Response extends EventEmitter {
         }
 
         this._sendBufferList.push(data);
+        this._sendBufferListLength += data.length;
+
+        return this;
+    }
+
+    /**
+     * Sets given stream as stream to pipe
+     *
+     * @param {ReadableStream} aStream The readable stream to pipe
+     * @return {this} The instance itself
+     */
+    pipe(aStream) {
+        if (this._sendBufferList.length > 0) {
+            throw new Error('Can not pipe a stream when writing data');
+        }
+
+        if (this._streamToPipe !== null) {
+            throw new Error('There is already a stream set');
+        }
+
+        if (aStream instanceof stream.Readable) {
+            this._streamToPipe = aStream;
+        }
+        else {
+            throw new TypeError('Unmatched signature. Please call with readable stream');
+        }
 
         return this;
     }
@@ -191,8 +243,14 @@ class Response extends EventEmitter {
         this._isFlushed = true;
 
         this._originalResponse.writeHead(this._statusCode, this._headerHash);
-        this._originalResponse.write(Buffer.concat(this._sendBufferList));
-        this._originalResponse.end();
+
+        if (this._streamToPipe !== null) {
+            this._originalResponse.pipe(this._streamToPipe);
+        }
+        else {
+            this._originalResponse.write(Buffer.concat(this._sendBufferList, this._sendBufferListLength));
+            this._originalResponse.end();
+        }
 
         return this;
     }

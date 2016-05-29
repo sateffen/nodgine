@@ -62,9 +62,9 @@ class Nodgine {
                 .setStatusCode(404)
                 .write('Not Found');
         };
-        
+
         // if there are params provided as object
-        if (aParams && typeof aParams === 'object') {
+        if (utils.isObject(aParams)) {
             // check if the params conrain a request class
             if (typeof aParams.requestClass === 'function') {
                 this._requestClass = aParams.requestClass;
@@ -160,12 +160,12 @@ class Nodgine {
     _runMiddleware(aParsedUrlPath, aRequest, aResponse) {
         const middleWareList = this._middleware;
         let promisePointer = Promise.resolve();
-        
-        for (let i = 0, len = middleWareList.length;i < len;i++) {
+
+        for (let i = 0, len = middleWareList.length; i < len; i++) { // eslint-ignore-line
             promisePointer = promisePointer.then(
                 middleWareList[i].runWhenRouteMatches
                     .bind(middleWareList[i], aParsedUrlPath, aRequest, aResponse)
-                );
+            );
         }
 
         return promisePointer;
@@ -183,14 +183,14 @@ class Nodgine {
     _runController(aParsedUrlPath, aRequest, aResponse) {
         const controllerList = this._controller;
 
-        for (let i = 0, len = controllerList.length;i < len;i++) {
+        for (let i = 0, len = controllerList.length; i < len; i++) {
             const matchResult = aParsedUrlPath.match(controllerList[i].getPattern());
 
             if (matchResult !== null) {
                 return controllerList[i].run(matchResult, aRequest, aResponse);
             }
         }
-        
+
         // if this is reached, no controller was found
         return this._missingRouteController(aRequest, aResponse);
     }
