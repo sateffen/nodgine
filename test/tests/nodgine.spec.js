@@ -335,10 +335,7 @@ describe('Nodgine', () => {
 
                 done();
             })
-            .catch(() => {
-                expect('This should not happen').to.equal(true);
-                done();
-            });
+            .catch(done);
     });
 
     it('should register event handler for data and end events on the request while executing the router', () => {
@@ -417,10 +414,7 @@ describe('Nodgine', () => {
 
                 done();
             })
-            .catch(() => {
-                expect('this not to happen').to.equal(true);
-                done();
-            });
+            .catch(done);
     });
 
     it('should send statuscode 500 if any part of the server has an error', (done) => {
