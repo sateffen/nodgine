@@ -6,6 +6,7 @@
 * Added *close* and *finish* events to response class
 * Restructured documentation
 * Added *pipe* method to response class
+* Raised output performance
 
 ## Version 1.1.0 ##
 

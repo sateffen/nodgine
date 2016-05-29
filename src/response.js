@@ -54,7 +54,7 @@ class Response extends EventEmitter {
          * @member {Object}
          */
         this._headerHash = {};
-        
+
         /**
          * The statuscode to send
          *
@@ -248,7 +248,13 @@ class Response extends EventEmitter {
             this._streamToPipe.pipe(this._originalResponse);
         }
         else {
-            this._originalResponse.write(Buffer.concat(this._sendBufferList, this._sendBufferListLength));
+            const bufferToWrite = this._sendBufferList.length === 1 ?
+                this._sendBufferList[0] :
+                this._sendBufferList.length > 1 ?
+                    Buffer.concat(this._sendBufferList, this._sendBufferListLength) :
+                    new Buffer(0);
+
+            this._originalResponse.write(bufferToWrite);
             this._originalResponse.end();
         }
 
