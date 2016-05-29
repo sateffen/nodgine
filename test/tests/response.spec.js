@@ -33,7 +33,7 @@ describe('Response', () => {
             },
             off: (aName, aHandler) => {
                 if (Array.isArray(mock.__registeredEvents[aName])) {
-                    mock.__registeredEvents[aName].splice(mock.___registeredEvents[aName].indexOf(aHandler), 1);
+                    mock.__registeredEvents[aName].splice(mock.__registeredEvents[aName].indexOf(aHandler), 1);
                 }
             }
         };
@@ -51,6 +51,36 @@ describe('Response', () => {
 
     it('should initialize the private variable for status code with 200', () => {
         expect(instance._statusCode).to.equal(200);
+    });
+
+    it('should register a handler to the close event of the response object', () => {
+        expect(mock.__registeredEvents.close).to.have.length(1);
+    });
+
+    it('should register a handler to the finish event of the response object', () => {
+        expect(mock.__registeredEvents.finish).to.have.length(1);
+    });
+
+    it('should reemit the close event', () => {
+        let data = null;
+        function callback(aData) { // eslint-ignore-line
+            data = aData;
+        }
+        instance.on('close', callback);
+
+        mock.__registeredEvents.close[0]();
+        expect(data).to.equal(instance);
+    });
+    
+    it('should reemit the finish event', () => {
+        let data = null;
+        function callback(aData) { // eslint-ignore-line
+            data = aData;
+        }
+        instance.on('finish', callback);
+
+        mock.__registeredEvents.finish[0]();
+        expect(data).to.equal(instance);
     });
 
     it('should set the statuscode to the private variable calling setStatusCode', () => {
