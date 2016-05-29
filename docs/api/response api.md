@@ -11,6 +11,7 @@ about it.
     * setStatusCode(statusCode) -> Response
     * getStatusCode() -> Number
     * write(data:buffer|string) -> Response
+    * pipe(stream:ReadableStream) -> Response
     * setHeader(name:string, value:string) -> Response
     * getHeader(name:string) -> String | undefined
     * hasHeader(name:string) -> Boolean
@@ -38,7 +39,18 @@ Returns the currently active statuscode
 Writes given buffer or string to the reponse buffer. This gets added to the end of the
 current buffer.
 
+**WARNING**: If you already piped a stream, this throws an error
+
 This is chainable.
+
+## pipe(stream:ReadableStream) -> Response ##
+
+Sets given stream to pipe to the user. The stream will be stored, but not activated (set in flow mode),
+untill the data get flushed. When flushed, the stream is passed to the original response stream.
+
+**WARNING**: You can only pipe one stream. Every following stream will throw an error
+
+**WARNING**: You can't set a stream to pipe if any data got written with the write method.
 
 ## setHeader(name:string, value:string) -> Response ##
 
