@@ -15,13 +15,9 @@ describe('Response', () => {
             __writtenBuffers: [],
             __hasEnded: false,
             __registeredEvents: {},
-            __pipeData: null,
             writeHead: (aStatusCode, aHeader) => {
                 mock.__statusCode = aStatusCode;
                 mock.__header = aHeader;
-            },
-            pipe: (aStream) => {
-                mock.__pipeData = aStream;
             },
             write: (aBuffer) => {
                 mock.__writtenBuffers.push(aBuffer);
@@ -261,11 +257,14 @@ describe('Response', () => {
 
     it('should pipe the stream in flush if there is a stream', () => {
         const readableStream = new stream.Readable();
+        let pipeData = null;
+        readableStream.pipe = (aData) => {
+            pipeData = aData;
+        };
 
         instance.pipe(readableStream);
         instance.flush();
-
-        expect(mock.__pipeData).to.equal(readableStream);
+        expect(pipeData).to.equal(instance._originalResponse);
     });
 
     it('should throw an error if there is already a stream set', () => {

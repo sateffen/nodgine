@@ -245,7 +245,7 @@ class Response extends EventEmitter {
         this._originalResponse.writeHead(this._statusCode, this._headerHash);
 
         if (this._streamToPipe !== null) {
-            this._originalResponse.pipe(this._streamToPipe);
+            this._streamToPipe.pipe(this._originalResponse);
         }
         else {
             this._originalResponse.write(Buffer.concat(this._sendBufferList, this._sendBufferListLength));
