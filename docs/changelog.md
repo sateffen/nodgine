@@ -5,6 +5,7 @@
 * Updated dependency *path-to-regexp* to version *~1.5.0*
 * Added *close* and *finish* events to response class
 * Restructured documentation
+* Added *pipe* method to response class
 
 ## Version 1.1.0 ##
 
