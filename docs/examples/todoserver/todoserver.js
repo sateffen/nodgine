@@ -8,8 +8,8 @@ const Nodgine = require('../../');
 const libHttp = require('http');
 const libFs = require('fs');
 
-let instance = new Nodgine();
-let server = libHttp.createServer(instance.getRouter());
+const instance = new Nodgine();
+const server = libHttp.createServer(instance.getRouter());
 const toDoHash = {};
 
 // now we have the same setup like in the helloworld.js example. Now we have to
@@ -31,15 +31,13 @@ instance.addController('/api/todo/:id?', {
                 .setStatusCode(200)
                 .write(JSON.stringify(toDoHash));
         }
+        else if (toDoHash[params.id]) {
+            response
+                .setStatusCode(200)
+                .write(JSON.stringify(toDoHash[params.id]));
+        }
         else {
-            if (toDoHash[params.id]) {
-                response
-                    .setStatusCode(200)
-                    .write(JSON.stringify(toDoHash[params.id]));
-            }
-            else {
-                response.setStatusCode(404);
-            }
+            response.setStatusCode(404);
         }
     },
     doPost: (request, response, params) => {
@@ -66,10 +64,12 @@ instance.addController('/api/todo/:id?', {
 // cached, it is read every time, so there might be a short lock, but this is just an
 // example for an async controller. Imagine a database here.
 instance.addController('/', (request, response) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
         libFs.readFile(__dirname + '/todoserver.html', (err, content) => {
-            if (err) throw err;
-            
+            if (err) {
+                throw err;
+            }
+
             response
                 .setStatusCode(200)
                 .setHeader('content-type', 'text/html')

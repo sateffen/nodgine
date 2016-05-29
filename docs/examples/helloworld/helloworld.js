@@ -9,11 +9,11 @@ const libHttp = require('http');
 
 // then create an instance of the nodgine. I don't have any good idea for a name,
 // so I'll name it instance
-let instance = new Nodgine();
+const instance = new Nodgine();
 // then I create a server, where I'll pass the router of the instance. You can receive
 // it by calling instance.getRouter(). This will return a routing function for the
 // http server.
-let server = libHttp.createServer(instance.getRouter());
+const server = libHttp.createServer(instance.getRouter());
 
 // then we add a controller to the instance
 instance.addController('/*', (request, response) => {
