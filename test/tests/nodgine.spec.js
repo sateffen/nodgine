@@ -8,6 +8,9 @@ const Response = require('../../src/response');
 const libChai = require('chai');
 const libEvents = require('events');
 
+/**
+ * Just a helper noop function
+ */
 function noop() {
     // silence
 }
