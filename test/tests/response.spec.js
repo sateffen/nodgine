@@ -2,6 +2,7 @@
 'use strict';
 
 const Response = require('../../src/response');
+const stream = require('stream');
 
 describe('Response', () => {
     let instance = null;
@@ -14,9 +15,13 @@ describe('Response', () => {
             __writtenBuffers: [],
             __hasEnded: false,
             __registeredEvents: {},
+            __pipeData: null,
             writeHead: (aStatusCode, aHeader) => {
                 mock.__statusCode = aStatusCode;
                 mock.__header = aHeader;
+            },
+            pipe: (aStream) => {
+                mock.__pipeData = aStream;
             },
             write: (aBuffer) => {
                 mock.__writtenBuffers.push(aBuffer);
@@ -63,21 +68,19 @@ describe('Response', () => {
 
     it('should reemit the close event', () => {
         let data = null;
-        function callback(aData) { // eslint-ignore-line
+        instance.on('close', (aData) => {
             data = aData;
-        }
-        instance.on('close', callback);
+        });
 
         mock.__registeredEvents.close[0]();
         expect(data).to.equal(instance);
     });
-    
+
     it('should reemit the finish event', () => {
         let data = null;
-        function callback(aData) { // eslint-ignore-line
+        instance.on('finish', (aData) => {
             data = aData;
-        }
-        instance.on('finish', callback);
+        });
 
         mock.__registeredEvents.finish[0]();
         expect(data).to.equal(instance);
@@ -218,5 +221,58 @@ describe('Response', () => {
             instance.flush();
             instance.flush();
         }).to.throw(Error);
+    });
+
+    [3.14, -2.7, 0, 1, true, false, 'test', () => { }, {}, [], null, undefined].forEach((aValue) => { // eslint-disable-line
+        it('should throw an error calling the pipe method with parameter with type ' + toString.call(aValue), () => {
+            expect(() => {
+                instance.pipe(aValue);
+            }).to.throw();
+        });
+    });
+
+    it('should initialize with no readable stream set', () => {
+        expect(instance._streamToPipe).to.equal(null);
+    });
+
+    it('should save the stream without writing it to the response directly', () => {
+        const readableStream = new stream.Readable();
+
+        instance.pipe(readableStream);
+
+        expect(instance._streamToPipe).to.equal(readableStream);
+    });
+
+    it('should throw an error writing data to the buffer if a stream is set', () => {
+        instance.pipe(new stream.Readable());
+
+        expect(() => {
+            instance.write('NOOOOO');
+        }).to.throw();
+    });
+
+    it('should throw an error if data is already written to the buffer setting a stream', () => {
+        instance.write('No stream allowed');
+
+        expect(() => {
+            instance.pipe(new stream.Readable());
+        }).to.throw();
+    });
+
+    it('should pipe the stream in flush if there is a stream', () => {
+        const readableStream = new stream.Readable();
+
+        instance.pipe(readableStream);
+        instance.flush();
+
+        expect(mock.__pipeData).to.equal(readableStream);
+    });
+
+    it('should throw an error if there is already a stream set', () => {
+        instance.pipe(new stream.Readable());
+
+        expect(() => {
+            instance.pipe(new stream.Readable());
+        }).to.throw();
     });
 });
