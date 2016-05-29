@@ -13,6 +13,7 @@ describe('Response', () => {
             __header: undefined,
             __writtenBuffers: [],
             __hasEnded: false,
+            __registeredEvents: {},
             writeHead: (aStatusCode, aHeader) => {
                 mock.__statusCode = aStatusCode;
                 mock.__header = aHeader;
@@ -22,6 +23,18 @@ describe('Response', () => {
             },
             end: () => {
                 mock.__hasEnded = true;
+            },
+            on: (aName, aHandler) => {
+                if (!Array.isArray(mock.__registeredEvents[aName])) {
+                    mock.__registeredEvents[aName] = [];
+                }
+
+                mock.__registeredEvents[aName].push(aHandler);
+            },
+            off: (aName, aHandler) => {
+                if (Array.isArray(mock.__registeredEvents[aName])) {
+                    mock.__registeredEvents[aName].splice(mock.___registeredEvents[aName].indexOf(aHandler), 1);
+                }
             }
         };
         instance = new Response({

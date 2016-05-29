@@ -8,6 +8,10 @@ const Response = require('../../src/response');
 const libChai = require('chai');
 const libEvents = require('events');
 
+function noop() {
+    // silence
+}
+
 describe('Nodgine', () => {
     let instance = null;
 
@@ -99,7 +103,9 @@ describe('Nodgine', () => {
             setStatusCode: (aStatusCode) => {
                 response.statusCode = aStatusCode;
                 return response;
-            }
+            },
+            on: noop,
+            off: noop
         };
 
         expect(() => {
@@ -185,7 +191,7 @@ describe('Nodgine', () => {
     });
 
     it('should add a controller wrapper to the private list calling addController', () => {
-        function callback() { } // eslint-disable-line
+        const callback = noop;
         const route = '/test/it';
 
         instance.addController(route, callback);
@@ -274,7 +280,7 @@ describe('Nodgine', () => {
     });
 
     it('should _runMiddleware return a promise', () => {
-        instance.addMiddleware(() => { }); // eslint-disable-line
+        instance.addMiddleware(noop);
         const result = instance._runMiddleware('/ok', {}, {});
 
         expect(result).to.be.an.instanceof(Promise);
@@ -361,7 +367,9 @@ describe('Nodgine', () => {
             },
             end: () => {
                 responseMock.__endedStream = true;
-            }
+            },
+            on: noop,
+            off: noop
         };
 
         requestMock.url = '/ok';
@@ -424,7 +432,9 @@ describe('Nodgine', () => {
             write: () => { }, // eslint-disable-line
             end: () => {
                 responseMock.__endedStream = true;
-            }
+            },
+            on: noop,
+            off: noop
         };
 
         requestMock.url = '/ok';
@@ -468,7 +478,9 @@ describe('Nodgine', () => {
             end: () => {
                 responseMock.__endedStream = true;
             },
-            finished: true
+            finished: true,
+            on: noop,
+            off: noop
         };
 
         requestMock.url = '/ok';

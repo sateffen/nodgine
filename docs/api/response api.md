@@ -5,7 +5,7 @@ simplify the interaction with the response object, by providing some simple func
 set exactly what you need. If you miss something [let me know](https://github.com/sateffen/nodgine/issues)
 about it.
 
-Important: This response is NO stream, it's a Buffer.
+**Important**: This response is NO stream, it's a Buffer.
 
 * Response
     * setStatusCode(statusCode) -> Response
@@ -16,6 +16,12 @@ Important: This response is NO stream, it's a Buffer.
     * hasHeader(name:string) -> Boolean
     * removeHeader(name:string) -> Response
     * flush() -> Response
+    * on(name:string, handler:function) -> undefined
+    * off(name:string, handler:function) -> undefined
+    * once(name:string, handler:function) -> undefined
+* Events
+    * close(Response)
+    * finish(Response)
 
 ## setStatusCode(statusCode) -> Response ##
 
@@ -62,3 +68,25 @@ This method flushes the buffer and finishes the request. This can only be called
 **WARNING**: Usually you don't have to call this function. The nodgine execution queue will
 call this. If you call it before, and do not finish the execution queue by yourself, an error
 will occure.
+
+## on(name:string, handler:function) -> undefined ##
+
+Adds an event handler for given event name.
+
+## off(name:string, handler:function) -> undefined ##
+
+Removes an event handler for given event name.
+
+## once(name:string, handler:function) -> undefined ##
+
+Adds an event handler for given event name, that gets executed only once.
+
+## Event: close ##
+
+Rethrows the close event of the original response element. See
+[HERE](https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_event_close_1)
+
+## Event: finish ##
+
+Rethrows the finish event of the original response element. See
+[HERE](https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_event_finish)

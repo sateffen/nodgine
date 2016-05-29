@@ -1,16 +1,19 @@
 /* global Buffer */
 'use strict';
 
+const EventEmitter = require('events');
+
 /**
  * The response wrapper class
  */
-class Response {
+class Response extends EventEmitter {
     /**
      * Constructor for the reponse class
      *
      * @param {Object} aParamsObject A params object that contains all request related params
      */
     constructor(aParamsObject) {
+        super();
         /**
          * A pointer to the original response object
          *
@@ -18,7 +21,7 @@ class Response {
          * @member {NodeHttpResponse}
          */
         this._originalResponse = aParamsObject.response;
-        
+
         /**
          * A ordered list of buffers that got written
          *
@@ -48,8 +51,27 @@ class Response {
          * @member {Boolean}
          */
         this._isFlushed = false;
+
+        /**
+         * Close event. See [HERE](https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_event_close_1)
+         *
+         * @event close
+         * @type {Response} The instance itself
+         */
+        this._originalResponse.on('close', () => {
+            this.emit('close', this);
+        });
+        /**
+         * Finish event. See [HERE](https://nodejs.org/dist/latest-v6.x/docs/api/http.html#http_event_finish)
+         *
+         * @event finish
+         * @type {Response} The instance itself
+         */
+        this._originalResponse.on('finish', () => {
+            this.emit('finish', this);
+        });
     }
-    
+
     /**
      * Sets the status code for this response. This is chainable
      *
@@ -60,12 +82,12 @@ class Response {
         if (typeof aStatusCode !== 'number' || aStatusCode % 1 !== 0) {
             throw new TypeError('Unmatched signature. Please call with (statuscode<integer>)');
         }
-        
+
         this._statusCode = aStatusCode;
-        
+
         return this;
     }
-    
+
     /**
      * A getter for the status code
      *
@@ -74,7 +96,7 @@ class Response {
     getStatusCode() {
         return this._statusCode;
     }
-    
+
     /**
      * Writes given data to the internal buffer
      *
@@ -84,22 +106,22 @@ class Response {
      */
     write(aData) {
         let data = aData;
-        
+
         // if the data is a stream, convert it to a buffer
         if (typeof data === 'string') {
             data = new Buffer(data);
         }
-        
+
         // if the written data is no stream, throw an typeerror
         if (!Buffer.isBuffer(data)) {
             throw new TypeError('Unmatched signature. Please call with (data<string>) or (data<Buffer>)');
         }
-        
+
         this._sendBufferList.push(data);
-        
+
         return this;
     }
-    
+
     /**
      * Sets the header
      *
@@ -112,12 +134,12 @@ class Response {
         if (typeof aHeader !== 'string' || typeof aValue !== 'string') {
             throw new TypeError('Unmatched signature. Please call with (string, string)');
         }
-        
+
         this._headerHash[aHeader.toLowerCase()] = aValue;
-        
+
         return this;
     }
-    
+
     /**
      * Getter for given header
      *
@@ -127,7 +149,7 @@ class Response {
     getHeader(aHeader) {
         return this._headerHash[typeof aHeader === 'string' ? aHeader.toLowerCase() : ''];
     }
-    
+
     /**
      * Whether the specified header was set
      *
@@ -137,7 +159,7 @@ class Response {
     hasHeader(aHeader) {
         return typeof this._headerHash[typeof aHeader === 'string' ? aHeader.toLowerCase() : ''] === 'string';
     }
-    
+
     /**
      * Removes given header from the header list
      *
@@ -149,10 +171,10 @@ class Response {
         // with delete we could create a "slow zone", so simply ignore it, for node
         // it's the same either way
         this._headerHash[typeof aHeader === 'string' ? aHeader.toLowerCase() : ''] = undefined;
-        
+
         return this;
     }
-    
+
     /**
      * Sends the data buffered in this object to the original response object and
      * ends the stream.
@@ -165,13 +187,13 @@ class Response {
         if (this._isFlushed) {
             throw new Error('Cannot flush a response twice');
         }
-        
+
         this._isFlushed = true;
-        
+
         this._originalResponse.writeHead(this._statusCode, this._headerHash);
         this._originalResponse.write(Buffer.concat(this._sendBufferList));
         this._originalResponse.end();
-        
+
         return this;
     }
 }
