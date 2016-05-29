@@ -1,5 +1,11 @@
 # Changelog #
 
+## Version 1.2.0 ##
+
+* Updated dependency *path-to-regexp* to version *~1.5.0*
+* Added *close* and *finish* events to response class
+* Restructured documentation
+
 ## Version 1.1.0 ##
 
 * Made the request and response classes customizable
