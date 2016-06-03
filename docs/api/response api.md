@@ -5,7 +5,8 @@ simplify the interaction with the response object, by providing some simple func
 set exactly what you need. If you miss something [let me know](https://github.com/sateffen/nodgine/issues)
 about it.
 
-**Important**: This response is NO stream, it's a Buffer.
+**Important**: This response is NO stream, it's a Buffer. So you can **not** say `fileStream.pipe(response)`,
+but you can say `response.pipe(fileStream)`, see the pipe method.
 
 * Response
     * setStatusCode(statusCode) -> Response
