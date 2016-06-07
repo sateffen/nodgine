@@ -21,8 +21,7 @@ the actual data and render the view for the visitor.
 
 No, you can't. The reason is, that I think the form of middelware used in systems like
 express is not the best approach. I thought a lot about this decission, because now you'll
-think about using another library for this job, and it's up to you, but I think middleware
-should get its own route params for the single route, that it got matched for.
+think about using another library for this job, and it's up to you.
 
 ## What is a servelet ##
 
@@ -84,3 +83,14 @@ Both, request and response, will get the same parameters. The reason for this
 is simple: The response might interact with the headers of the request object,
 or anything else, it's up to you. This way you should be able to do everything
 you want.
+
+## Tested node versions ##
+
+To make sure, that the nodgine works with every environment, I use [Codeship](https://codeship.com)
+to execute my unit- and integrationtests against the following node versions:
+
+4.0, 4.1, 4.2, 4.3, 4.4, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 5.10,
+6.0, 6.1 and 6.2
+
+As you might notice, this is every available node version since 4.0, and this
+list will grow with each new version in the future.

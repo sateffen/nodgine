@@ -15,9 +15,9 @@ All in all this is just another version of tools like restify or express.
 
 ## Dependencies ##
 
-An important note to the dependencies: To use the nodgine you *have to* use nodejs 4.0 or
-newer! This library uses ES6 syntax like classes and Promises, so any older version is
-not supported, nor tested.
+An important note to the dependencies: To use the nodgine you **have to** use nodejs 4.0 or
+higher! This library uses ES6 syntax like Classes and Promises, so any older version is
+not supported, nor tested. To see the tested versions see the faq.
 
 ## Why does it exist? ##
 
