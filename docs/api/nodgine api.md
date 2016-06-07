@@ -21,7 +21,7 @@ The Nodgine is a class, that you have to instanciate. The constructor doesn't re
 special parameters, so you can simply call:
 
     const Nodgine = require('nodgine');
-    let instance = new Nodgine();
+    const instance = new Nodgine();
 
 Then you can use this instance to add middleware or controller to it, and bind the router
 to an http server.
@@ -70,7 +70,7 @@ call
 
     const Nodgine = require('nodgine');
     const http = require('http');
-    let instance = new Nodgine();
+    const instance = new Nodgine();
     
     instance.add...
     
