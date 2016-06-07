@@ -3,7 +3,7 @@
 
 // first you have to load the nodgine. Usually you'll call require('nodgine'),
 // but here I'll refer to the module itself, so the example works
-const Nodgine = require('../../');
+const Nodgine = require('../../../');
 // and load the http lib from node. If you want to use https, just load https
 const libHttp = require('http');
 

@@ -4,7 +4,7 @@
 
 // so we start of like in the helloworld example. If you didn't check it
 // and you've got a question about this, please refer to helloworld.js
-const Nodgine = require('../../');
+const Nodgine = require('../../../');
 const libHttp = require('http');
 const libFs = require('fs');
 
@@ -64,20 +64,12 @@ instance.addController('/api/todo/:id?', {
 // cached, it is read every time, so there might be a short lock, but this is just an
 // example for an async controller. Imagine a database here.
 instance.addController('/', (request, response) => {
-    return new Promise((resolve) => {
-        libFs.readFile(__dirname + '/todoserver.html', (err, content) => {
-            if (err) {
-                throw err;
-            }
+    const fileStream = libFs.createReadStream(__dirname + '/todoserver.html');
 
-            response
-                .setStatusCode(200)
-                .setHeader('content-type', 'text/html')
-                .write(content);
-
-            resolve();
-        });
-    });
+    response
+        .setStatusCode(200)
+        .setHeader('content-type', 'text/html')
+        .pipe(fileStream);
 });
 
 // then start the actual server
