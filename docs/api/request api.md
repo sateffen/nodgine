@@ -24,7 +24,7 @@ Returns the method that was used for this request, for example *get*, *post*, *p
 Returns the body of this request as buffer. If you need the body as string you can call
 `getBody().toString()`.
 
-By default this is not a string, because the client sends a buffer, and not every upload
+By default, this is not a string, because the client sends a buffer, and not every upload
 body has a meaningful string representation.
 
 ## getAllHeaders() -> Object ##
@@ -40,7 +40,7 @@ Returns an object containing all headers and their values, for example
 
 ## getHeader(headerName:string) -> String | undefined ##
 
-This function returns the value of the given headername. The headername is not case sensitive.
+This function returns the value of the given headername. The headername is not case-sensitive.
 
 ## getAuthentication() -> String | null ##
 

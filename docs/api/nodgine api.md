@@ -24,9 +24,9 @@ special parameters, so you can simply call:
     const instance = new Nodgine();
 
 Then you can use this instance to add middleware or controller to it, and bind the router
-to an http server.
+to a http server.
 
-You can instanciate the nodgine with some options as well. This options are all optional,
+You can instanciate the nodgine with some options as well. The options are all optional,
 you don't need them to use the nodgine.
 
 As options parameter you have to pass an object, which can have two params: requestClass
@@ -65,7 +65,7 @@ This method is chainable.
 
 ## getRouter() -> Function ##
 
-This method returns a function that can be used as router for an http server. You can simply
+This method returns a function that can be used as router for a http server. You can simply
 call
 
     const Nodgine = require('nodgine');

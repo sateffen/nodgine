@@ -37,7 +37,7 @@ Returns the currently active statuscode
 
 ## write(data:buffer|string) -> Response ##
 
-Writes given buffer or string to the reponse buffer. This gets added to the end of the
+Writes given buffer or string to the reponse buffer. The data gets added to the end of the
 current buffer.
 
 **WARNING**: If you already piped a stream, this throws an error
@@ -47,7 +47,7 @@ This is chainable.
 ## pipe(stream:ReadableStream) -> Response ##
 
 Sets given stream to pipe to the user. The stream will be stored, but not activated (set in flow mode),
-untill the data get flushed. When flushed, the stream is passed to the original response stream.
+until the data get flushed. When flushed, the stream is passed to the original response stream.
 
 **WARNING**: You can only pipe one stream. Every following stream will throw an error
 
@@ -61,7 +61,7 @@ This is chainable.
 
 ## getHeader(name:string) -> String | undefined ##
 
-Returns the set value for given headername. If the header is not set this will return
+Returns the set value for given headername. If the header is not set, this will return
 undefined.
 
 ## hasHeader(name:string) -> Boolean ##
@@ -80,7 +80,7 @@ This method flushes the buffer and finishes the request. This can only be called
 
 **WARNING**: Usually you don't have to call this function. The nodgine execution queue will
 call this. If you call it before, and do not finish the execution queue by yourself, an error
-will occure.
+will occur.
 
 ## on(name:string, handler:function) -> undefined ##
 

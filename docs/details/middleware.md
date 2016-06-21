@@ -1,25 +1,25 @@
 # Middleware #
 
-Middleware is basicly the same as in express and restify, so middleware is actually a
+Middleware is basically the same as in express and restify, so middleware is actually a
 "pass through" for each request. Think about it just like a proxy. Every request will
-get passed through every middleware, that you've configured, and and afterwards passed
+get passed through every middleware, that you've configured, and afterwards passed
 to the controller.
 
-Because a middleware gets called by every request it should be just a small piece of logic.
+Because a middleware gets called by every request, it should be just a small piece of logic.
 Some examples for middleware are body-parsers, cookie-parsers, authentication filters, and
 so on.
 
 ## Middleware structure ##
 
-Basically middleware is a function, nothing more, but nothing less. So this is how basicly
+Basically middleware is a function, nothing more, but nothing less. So this is how basically
 every middleware looks like:
 
     function (request, response) {
         // middleware code
     }
 
-If you register the middleware to a specific route with variables, you'll receive this variables
-as third parameter, just like a controller::
+If you register the middleware to a specific route with variables, you'll receive these variables
+as third parameter, just like a controller:
 
     nodgineInstance.addMiddleware('/api/users/:id', function (request, response, params) {
         // work with params.id
@@ -49,9 +49,9 @@ The first way is rejecting the returned promise. This is the best way to stop th
 should prefer this way.
 
 The second way is to return `false` from your middleware. This will automatically create a rejected
-promise. This way helps to write simple, synchron abort functions.
+promise. This way helps to write simple, synchronous abort functions.
 
-The third, but not best way is to throw an error. By throwing an error the chain will stop as well,
+The third, but not the best way is to throw an error. By throwing an error the chain will stop as well,
 and start the cleanup. The error will be rethrown, so you can catch this with
 `process.on('unhandledRejection', () => {})`.
 

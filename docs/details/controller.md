@@ -18,8 +18,8 @@ flow when to flush.
 
 ## Async controller ##
 
-The basic version of a controller, that doesn't return anything, is synchron, so
-the response gets flushed directly afterwards.
+The basic version of a controller, that doesn't return anything, is synchronous,
+so the response gets flushed directly afterwards.
 
 If your work has to be executed async, there is a simple solution: Just return a
 promise. By returning a promise you can tell the flow, when to take the next step.

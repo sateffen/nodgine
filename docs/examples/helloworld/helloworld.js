@@ -22,7 +22,7 @@ instance.addController('/*', (request, response) => {
         .setStatusCode(200)
         .write('Hello World');
     // you do not need to flush the response, flushing is done automatically
-    // we don't return a promise, so this controller is handled as synchron request
+    // we don't return a promise, so this controller is handled as synchronous request
 });
 
 // finally call listen
