@@ -198,7 +198,6 @@ class Nodgine {
     /**
      * Returns a function that can be used handler for the http/https server
      *
-     * @private
      * @return {Function} A route handler
      */
     getRouter() {
