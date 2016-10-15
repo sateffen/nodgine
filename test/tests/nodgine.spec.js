@@ -475,7 +475,7 @@ describe('Nodgine', () => {
             end: () => {
                 responseMock.__endedStream = true;
             },
-            finished: true,
+            headersSent: true,
             on: noop,
             off: noop
         };

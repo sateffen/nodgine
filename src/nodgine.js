@@ -231,7 +231,7 @@ class Nodgine {
                         responseObject.flush();
                     })
                     .catch((aError) => {
-                        if (!aResponse.finished) {
+                        if (!aResponse.headersSent) {
                             aResponse.writeHead(500);
                             aResponse.write('Internal Server Error');
                             aResponse.end();
