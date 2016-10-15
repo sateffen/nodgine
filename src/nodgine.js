@@ -198,7 +198,6 @@ class Nodgine {
     /**
      * Returns a function that can be used handler for the http/https server
      *
-     * @private
      * @return {Function} A route handler
      */
     getRouter() {
@@ -231,7 +230,7 @@ class Nodgine {
                         responseObject.flush();
                     })
                     .catch((aError) => {
-                        if (!aResponse.finished) {
+                        if (!aResponse.headersSent) {
                             aResponse.writeHead(500);
                             aResponse.write('Internal Server Error');
                             aResponse.end();

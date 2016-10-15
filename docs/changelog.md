@@ -1,5 +1,10 @@
 # Changelog #
 
+## Version 1.2.1 ##
+
+* Fixed a bug where ending the handling of a request early and
+providing a stream results in statuscode 500
+
 ## Version 1.2.0 ##
 
 * Updated dependency *path-to-regexp* to version *~1.5.3*
