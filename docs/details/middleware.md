@@ -41,9 +41,9 @@ you simply return a promise:
     
 if you resolve the promise, the chain will go on, if you reject the promise, the chain will stop.
 
-## Stoping the execution chain ##
+## Stopping the execution chain ##
 
-There are multiple ways of stoping the execution chain.
+There are multiple ways of stopping the execution chain.
 
 The first way is rejecting the returned promise. This is the best way to stop the execution. You
 should prefer this way.

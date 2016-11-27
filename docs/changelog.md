@@ -1,5 +1,10 @@
 # Changelog #
 
+## Version 1.2.2 ##
+
+* Corrected some mistakes in documentation
+* Updated dependency *path-to-regexp* to *~1.7.0*
+
 ## Version 1.2.1 ##
 
 * Fixed a bug where ending the handling of a request early and

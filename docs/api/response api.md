@@ -37,7 +37,7 @@ Returns the currently active statuscode
 
 ## write(data:buffer|string) -> Response ##
 
-Writes given buffer or string to the reponse buffer. The data gets added to the end of the
+Writes given buffer or string to the response buffer. The data gets added to the end of the
 current buffer.
 
 **WARNING**: If you already piped a stream, this throws an error

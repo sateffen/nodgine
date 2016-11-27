@@ -7,7 +7,7 @@ Middleware is basically the same as in express and restify, so middleware is act
 get passed through every middleware, that you've configured, and afterwards passed
 to the controller.
 
-Because a middleware gets called by every request, it should be just a small piece of logic.
+Because a middleware gets called for every request, it should be just a small piece of code.
 Some examples for middleware are body-parsers, cookie-parsers, authentication filters, and
 so on.
 
@@ -34,14 +34,14 @@ write your controller.
 
 I'll admit, the Promises are not the most useful thing, because they catch every error and don't
 help to debug. But there is at least a little help, you can read about
-[HERE](https://nodejs.org/dist/latest-v4.x/docs/api/process.html#process_event_unhandledrejection)
+[here](https://nodejs.org/dist/latest-v4.x/docs/api/process.html#process_event_unhandledrejection)
 
 So basically this:
 
-	process.on('unhandledRejection', (e) => {
-		console.log(e.message, e.stack);
-		process.exit(1);
-	});
+    process.on('unhandledRejection', (e) => {
+        console.log(e.message, e.stack);
+        process.exit(1);
+    });
 
 Will help you to find rejections, that are not handled. This way you should catch up with problems.
 
@@ -90,7 +90,7 @@ To make sure, that the nodgine works with every environment, I use [Codeship](ht
 to execute my unit- and integrationtests against the following node versions:
 
 4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 5.10,
-5.11, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7 and 6.8
+5.11, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.0, 7.1 and 7.2
 
 As you might notice, this is every available node version since 4.0, and this
 list will grow with each new version in the future.

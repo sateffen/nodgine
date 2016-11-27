@@ -3,7 +3,7 @@
 This is the main class, that you'll interact with. There are only four important
 methods.
 
-For details about servelets, controllerfunctions, missingRouteController, request
+For details about servelets, controller-functions, missingRouteController, request
 and response objects, please refer to the other documents.
 
 If you miss any details, feel free to help me and open an [issue](https://github.com/sateffen/nodgine/issues)
@@ -17,7 +17,7 @@ If you miss any details, feel free to help me and open an [issue](https://github
 
 ## constructor([options]) ##
 
-The Nodgine is a class, that you have to instanciate. The constructor doesn't require any
+The Nodgine is a class, that you have to instantiate. The constructor doesn't require any
 special parameters, so you can simply call:
 
     const Nodgine = require('nodgine');
@@ -26,7 +26,7 @@ special parameters, so you can simply call:
 Then you can use this instance to add middleware or controller to it, and bind the router
 to a http server.
 
-You can instanciate the nodgine with some options as well. The options are all optional,
+You can instantiate the nodgine with some options as well. The options are all optional,
 you don't need them to use the nodgine.
 
 As options parameter you have to pass an object, which can have two params: requestClass
