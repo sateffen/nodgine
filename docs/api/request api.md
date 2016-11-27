@@ -17,7 +17,7 @@ about it.
 
 ## getMethod() -> String ##
 
-Returns the method that was used for this request, for example *get*, *post*, *put*, ...
+Returns the method that was used for this request, for example *GET*, *POST*, *PUT*, ...
 
 ## getBody() -> Buffer ##
 
