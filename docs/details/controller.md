@@ -11,7 +11,7 @@ So, this is the end of the execution flow. The main flow looks like this:
     Request incomming ==> Middleware chain ==> Controller ==> Response flush
 
 So the controller gets executed after the middleware chain, if the request was
-not stoped by any middleware before.
+not stopped by any middleware before.
 
 Because the response flush happens automatically, the controller has to tell the
 flow when to flush.
