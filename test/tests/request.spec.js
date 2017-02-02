@@ -22,13 +22,11 @@ describe('Request', () => {
                 query: {
                     testQuery: 'another yep'
                 }
-            },
-            requestBody: new Buffer('It is only fun if they run')
+            }
         };
 
         instance = new Request({
             request: mock.request,
-            requestBody: mock.requestBody,
             parsedUrl: mock.parsedUrl,
             response: {}
         });
@@ -42,11 +40,10 @@ describe('Request', () => {
         expect(instance.getMethod()).to.equal(mock.request.method);
     });
 
-    it('should return the body buffer calling getBody', () => {
-        const body = instance.getBody();
+    it('should return the body stream calling getBodyStream', () => {
+        const bodyStream = instance.getBodyStream();
 
-        expect(body).to.be.an.instanceof(Buffer);
-        expect(body.toString()).to.equal(mock.requestBody.toString());
+        expect(bodyStream).to.equal(mock.request);
     });
 
     it('should return a hash containing all headers calling getAllHeaders', () => {

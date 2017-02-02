@@ -43,12 +43,27 @@ instance.addController('/api/todo/:id?', {
     doPost: (request, response, params) => {
         if (params.id === undefined) {
             response.setStatusCode(404);
+            return Promise.resolve();
         }
         else {
-            toDoHash[params.id] = request.getBody().toString();
-            response
-                .setStatusCode(200)
-                .write(JSON.stringify(toDoHash[params.id]));
+            return new Promise((aResolve, aReject) => {
+                const bufferList = [];
+                const bodyStream = request.getBodyStream();
+
+                bodyStream.on('data', (aData) => {
+                    bufferList.push(aData);
+                });
+
+                bodyStream.on('end', () => {
+                    toDoHash[params.id] = Buffer.concat(bufferList).toString();
+
+                    response
+                        .setStatusCode(200)
+                        .write(JSON.stringify(toDoHash[params.id]));
+                });
+
+                bodyStream.on('error', aReject);
+            });
         }
     },
     doDelete: (request, response, params) => {

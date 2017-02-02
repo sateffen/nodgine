@@ -27,14 +27,6 @@ class Request {
          * @member {NodeParsedUrlObject}
          */
         this._parsedUrl = aParamsObject.parsedUrl;
-
-        /**
-         * The body buffer
-         *
-         * @private
-         * @member {Buffer}
-         */
-        this._requestBody = aParamsObject.requestBody;
     }
 
     /**
@@ -49,10 +41,10 @@ class Request {
     /**
      * Returns the request body
      *
-     * @return {Buffer} The request body buffer
+     * @return {ReadableStream} The request body stream
      */
-    getBody() {
-        return this._requestBody;
+    getBodyStream() {
+        return this._originalRequest;
     }
 
     /**

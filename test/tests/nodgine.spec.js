@@ -81,15 +81,15 @@ describe('Nodgine', () => {
             const testInstance = new Nodgine({
                 requestClass: aValue
             });
-            
+
             expect(testInstance._requestClass).not.to.equal(aValue);
         });
-        
+
         it('should not initialize the response class is the parameter is of type ' + toString.call(aValue), () => {
             const testInstance = new Nodgine({
                 responseClass: aValue
             });
-            
+
             expect(testInstance._responseClass).not.to.equal(aValue);
         });
     });
@@ -148,7 +148,7 @@ describe('Nodgine', () => {
 
     it('should set the private variable to given callback calling setMissingRouteController', () => {
         function callback() { } // eslint-disable-line
-        
+
         instance.setMissingRouteController(callback);
         expect(instance._missingRouteController).to.equal(callback);
     });
@@ -173,7 +173,7 @@ describe('Nodgine', () => {
         it('should throw an error calling addController with first param type ' + toString.call(aValue), () => {
             expect(() => {
                 instance.addController(aValue, () => { }); // eslint-disable-line
-            }).to.throw(TypeError); 
+            }).to.throw(TypeError);
         });
     });
 
@@ -338,18 +338,7 @@ describe('Nodgine', () => {
             .catch(done);
     });
 
-    it('should register event handler for data and end events on the request while executing the router', () => {
-        const router = instance.getRouter();
-        const request = new libEvents.EventEmitter();
-        const response = {};
-
-        router(request, response);
-
-        expect(request.listeners('data')).to.have.length(1);
-        expect(request.listeners('end')).to.have.length(1);
-    });
-
-    it('should call _runMiddleware and _runController with the correct parameters while executing the router', (done) => {
+    it('should call the wrapper in _runMiddleware and _runController with the correct parameters while executing the router', (done) => {
         let runMiddlewareWith = [];
         let runControllerWith = [];
         const router = instance.getRouter();
@@ -374,6 +363,7 @@ describe('Nodgine', () => {
 
         requestMock.url = '/ok';
 
+        // add middleware and controller wrapper to the internals
         instance._runMiddleware = libChai.spy(function () {
             executionList.push(instance._runMiddleware);
             runMiddlewareWith = Array.prototype.slice.call(arguments);
@@ -383,14 +373,7 @@ describe('Nodgine', () => {
             runControllerWith = Array.prototype.slice.call(arguments);
         });
 
-        router(requestMock, responseMock);
-
-        requestMock.emit('data', new Buffer('Hello'));
-        requestMock.emit('data', new Buffer(' '));
-        requestMock.emit('data', new Buffer('World'));
-        const endCallback = requestMock.listeners('end')[0];
-
-        endCallback()
+        router(requestMock, responseMock)
             .then(() => {
                 expect(instance._runMiddleware).to.have.been.called();
                 expect(instance._runController).to.have.been.called();
@@ -402,6 +385,7 @@ describe('Nodgine', () => {
                 expect(responseMock.__wroteData).to.equal(true);
                 expect(responseMock.__endedStream).to.equal(true);
 
+                // check the calls to the wrappers (not the actual middleware and controller)
                 expect(runMiddlewareWith[0]).to.equal('/ok');
                 expect(runMiddlewareWith[1]).to.be.an.instanceof(Request);
                 expect(runMiddlewareWith[2]).to.be.an.instanceof(Response);
@@ -409,8 +393,6 @@ describe('Nodgine', () => {
                 expect(runControllerWith[0]).to.equal('/ok');
                 expect(runControllerWith[1]).to.be.an.instanceof(Request);
                 expect(runControllerWith[2]).to.be.an.instanceof(Response);
-
-                expect(runMiddlewareWith[1].getBody().toString()).to.equal('Hello World');
 
                 done();
             })
@@ -441,11 +423,7 @@ describe('Nodgine', () => {
         });
         instance._runController = libChai.spy();
 
-        router(requestMock, responseMock);
-
-        const endCallback = requestMock.listeners('end')[0];
-
-        endCallback()
+        router(requestMock, responseMock)
             .then(() => {
                 expect('this not to happen').to.equal(true);
 
@@ -487,11 +465,7 @@ describe('Nodgine', () => {
         });
         instance._runController = libChai.spy();
 
-        router(requestMock, responseMock);
-
-        const endCallback = requestMock.listeners('end')[0];
-
-        endCallback()
+        router(requestMock, responseMock)
             .then(() => {
                 expect('this not to happen').to.equal(true);
 
