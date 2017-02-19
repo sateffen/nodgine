@@ -40,7 +40,6 @@ describe('Response', () => {
         };
         instance = new Response({
             request: {},
-            requestBody: new Buffer('I am a buffer'),
             parsedUrl: {},
             response: mock
         });

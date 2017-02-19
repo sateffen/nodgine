@@ -202,45 +202,36 @@ class Nodgine {
      */
     getRouter() {
         return (aRequest, aResponse) => {
-            const requestBody = [];
+            const parsedUrl = libUrl.parse(aRequest.url, true);
+            const paramsObject = {
+                parsedUrl,
+                request: aRequest,
+                response: aResponse
+            };
+            const requestObject = new this._requestClass(paramsObject);
+            const responseObject = new this._responseClass(paramsObject);
 
-            aRequest.on('data', (aChunk) => {
-                requestBody.push(aChunk);
-            });
+            return Promise.resolve()
+                .then(() => {
+                    return this._runMiddleware(parsedUrl.pathname, requestObject, responseObject);
+                })
+                .then(() => {
+                    return this._runController(parsedUrl.pathname, requestObject, responseObject);
+                })
+                .then(() => {
+                    responseObject.flush();
+                })
+                .catch((aError) => {
+                    if (!aResponse.headersSent) {
+                        aResponse.writeHead(500);
+                        aResponse.write('Internal Server Error');
+                        aResponse.end();
+                    }
 
-            aRequest.on('end', () => {
-                const parsedUrl = libUrl.parse(aRequest.url, true);
-                const paramsObject = {
-                    parsedUrl,
-                    requestBody: Buffer.concat(requestBody),
-                    request: aRequest,
-                    response: aResponse
-                };
-                const requestObject = new this._requestClass(paramsObject);
-                const responseObject = new this._responseClass(paramsObject);
-
-                return Promise.resolve()
-                    .then(() => {
-                        return this._runMiddleware(parsedUrl.pathname, requestObject, responseObject);
-                    })
-                    .then(() => {
-                        return this._runController(parsedUrl.pathname, requestObject, responseObject);
-                    })
-                    .then(() => {
-                        responseObject.flush();
-                    })
-                    .catch((aError) => {
-                        if (!aResponse.headersSent) {
-                            aResponse.writeHead(500);
-                            aResponse.write('Internal Server Error');
-                            aResponse.end();
-                        }
-
-                        if (aError instanceof Error) {
-                            throw aError;
-                        }
-                    });
-            });
+                    if (aError instanceof Error) {
+                        throw aError;
+                    }
+                });
         };
     }
 }

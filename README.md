@@ -36,3 +36,7 @@ You're missing something? [Let me know](https://github.com/sateffen/nodgine/issu
 
 For documentation please refer to the [docs](https://github.com/sateffen/nodgine/tree/master/docs)
 folder in the repository. If you miss something, please [let me know](https://github.com/sateffen/nodgine/issues).
+
+## Changelog ##
+
+See [here](https://github.com/sateffen/nodgine/blob/master/docs/changelog.md)

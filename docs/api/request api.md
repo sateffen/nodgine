@@ -7,7 +7,7 @@ about it.
 
 * Request
     * getMethod() -> String
-    * getBody() -> Buffer
+    * getBodyStream() -> ReadableStream
     * getAllHeaders() -> Object
     * getHeader(headerName) -> String | undefined
     * getAuthentication() -> String | undefined
@@ -19,13 +19,16 @@ about it.
 
 Returns the method that was used for this request, for example *GET*, *POST*, *PUT*, ...
 
-## getBody() -> Buffer ##
+## getBodyStream() -> ReadableStream ##
 
-Returns the body of this request as buffer. If you need the body as string you can call
-`getBody().toString()`.
+Returns the body of this request as readable stream. You can use it with libs like [co-body](https://github.com/cojs/co-body)
+like:
 
-By default, this is not a string, because the client sends a buffer, and not every upload
-body has a meaningful string representation.
+```
+const parse = require('co-body');
+...
+parse(request.getBodyStream()).then(...)
+```
 
 ## getAllHeaders() -> Object ##
 

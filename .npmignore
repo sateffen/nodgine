@@ -1,0 +1,14 @@
+# patterns
+.*
+
+# folders
+node_modules/
+test/
+grunttasks/
+docs/
+
+# files
+.eslintrc
+.gitignore
+gruntfile.js
+yarn.lock

@@ -1,5 +1,10 @@
 # Changelog #
 
+## Version 2.0.0 ##
+
+* Replaced *Request.getBody* with *Request.getBodyStream*
+* Optimized the npm bundle
+
 ## Version 1.2.2 ##
 
 * Corrected some mistakes in documentation
