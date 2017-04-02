@@ -74,7 +74,6 @@ As constructor parameter you'll get an object looking like:
 
     const paramsObject = {
         parsedUrl// the result of nodejs require('url').parse(request.url)
-        requestBody // The request body buffer
         request // the original nodejs require('http').HttpRequest object
         response // the original nodejs require('http').HttpResponse object 
     };
