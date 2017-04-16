@@ -1,10 +1,10 @@
-# Controller #
+# Controller
 
 A controller is the real handler function, that should work as the main endpoint
 controller. Each controller gets connected to a route pattern. If a request with
 a matching route comes in, the corresponding controller gets called.
 
-## The execution flow ##
+## The execution flow
 
 So, this is the end of the execution flow. The main flow looks like this:
 
@@ -16,7 +16,7 @@ not stopped by any middleware before.
 Because the response flush happens automatically, the controller has to tell the
 flow when to flush.
 
-## Async controller ##
+## Async controller
 
 The basic version of a controller, that doesn't return anything, is synchronous,
 so the response gets flushed directly afterwards.
@@ -32,7 +32,7 @@ So your controller looks like this:
         });    
     }
 
-## Using route params ##
+## Using route params
 
 A lot of requests will have a dynamic part. You have to tell the dynamic part in the
 route matcher, so the system will extract the information and give it to you. Because

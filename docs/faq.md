@@ -1,53 +1,50 @@
-# FAQ #
+# FAQ
 
-## What is middleware ##
+## What is middleware
 
-Middleware is basically the same as in express and restify, so middleware is actually a
-"pass through" for each request. Think about it just like a proxy. Every request will
-get passed through every middleware, that you've configured, and afterwards passed
-to the controller.
+Middleware is basically the same as in *express* and *restify*, so it's basically a
+"pass through function" for each request. Think about it just like a proxy. Each
+request will get passed through each middleware, that you've configured, and afterwards
+passed to the controller.
 
 Because a middleware gets called for every request, it should be just a small piece of code.
 Some examples for middleware are body-parsers, cookie-parsers, authentication filters, and
 so on.
 
-## What is a controller ##
+## What is a controller
 
-A controller is the function, that actually handles the request. This controller will get
-the request after the middleware has worked with it. In the controller you should collect
-the actual data and render the view for the visitor.
+A controller is the function, that actually handles the request. The controller will get
+the request after the middleware finished its work. The controller actually produces the
+output for the current request, like a rendered view or the result of a database call.
 
-## Can I use middleware of other systems? ##
+## Can I use middleware of other systems?
 
-No, you can't. The reason is, that I think the form of middelware used in systems like
-express is not the best approach. I thought a lot about this decision, because now you'll
-think about using another library for this job, and it's up to you.
+No, you can't.
 
-## What is a servelet ##
+## What is a servelet
 
-This is actually something I borrowed from java. I've never done a lot of java, but I **heard**
+A servelet is something I borrowed from java. I've never done a lot of java, but I **heard**
 about servelets, basically classes, that contain a different method for each method a request
 could have. Because I like the idea, I've adopted this concept. You can use such a class to
-write your controller.
+write your controller. For details see *details/servelet.md*.
 
-## How to get when something went wrong ##
+## How to get when something went wrong
 
-I'll admit, the Promises are not the most useful thing, because they catch every error and don't
-help to debug. But there is at least a little help, you can read about
-[here](https://nodejs.org/dist/latest-v4.x/docs/api/process.html#process_event_unhandledrejection)
+Promises have an annojing problem: They swallow errors. The nodgine will catch each unhandled
+rejection in the created promise chain, and finish the request based on the current status. If
+the request is not completed yet, the statuscode is set to 500 without an answer.
 
-So basically this:
+If the rejection reason is of instance *Error*, it'll rethrow that error, so you can handle it
+with [here](https://nodejs.org/dist/latest-v4.x/docs/api/process.html#process_event_unhandledrejection)
+
+So to get the actual error, you have to use code like:
 
     process.on('unhandledRejection', (e) => {
         console.log(e.message, e.stack);
         process.exit(1);
     });
 
-Will help you to find rejections, that are not handled. This way you should catch up with problems.
-
-If something goes wrong, the user will get a statuscode 500. This is generated automatically.
-
-## Replace request or response object with own ones ##
+## Replace request or response object with own ones
 
 You can replace the request and response objects that are passed down to the middleware and controller.
 
@@ -68,7 +65,7 @@ To replace request or response you have to use the option passed to the nodgine:
         responseClass: MyResponseClass
     });
 
-You can overwrite both, or just one of them, it's up to you.
+You can override both, or just one of them, it's up to you.
 
 As constructor parameter you'll get an object looking like:
 
@@ -83,7 +80,7 @@ is simple: The response might interact with the headers of the request object,
 or anything else, it's up to you. This way you should be able to do everything
 you want.
 
-## Tested node versions ##
+## Tested node versions
 
 To make sure, that the nodgine works with every environment, I use [Codeship](https://codeship.com)
 to execute my unit- and integrationtests against the following node versions:

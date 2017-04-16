@@ -1,4 +1,4 @@
-# Middleware #
+# Middleware
 
 Middleware is basically the same as in express and restify, so middleware is actually a
 "pass through" for each request. Think about it just like a proxy. Every request will
@@ -9,7 +9,7 @@ Because a middleware gets called by every request, it should be just a small pie
 Some examples for middleware are body-parsers, cookie-parsers, authentication filters, and
 so on.
 
-## Middleware structure ##
+## Middleware structure
 
 Basically middleware is a function, nothing more, but nothing less. So this is how basically
 every middleware looks like:
@@ -28,7 +28,7 @@ as third parameter, just like a controller:
 All middeware has to look like this. There is no option of using servelets as middelware currently.
 This is an idea for the future, but not now.
 
-## Async middleware ##
+## Async middleware
 
 If your middleware is async, you have to tell the nodgine to stop executing the chain. To do so,
 you simply return a promise:
@@ -41,7 +41,7 @@ you simply return a promise:
     
 if you resolve the promise, the chain will go on, if you reject the promise, the chain will stop.
 
-## Stopping the execution chain ##
+## Stopping the execution chain
 
 There are multiple ways of stopping the execution chain.
 
