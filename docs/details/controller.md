@@ -26,11 +26,13 @@ promise. By returning a promise you can tell the flow, when to take the next ste
 
 So your controller looks like this:
 
-    function (request, response) {
-        return new Promise((resolve, reject) => {
-            global.setTimeout(resolve, 1000);
-        });    
-    }
+```js
+function (request, response) {
+    return new Promise((resolve, reject) => {
+        global.setTimeout(resolve, 1000);
+    });    
+}
+```
 
 ## Using route params
 
@@ -44,14 +46,18 @@ access the named variables in the third parameter of a controller.
 
 So, you can use this signature for a controller:
 
-    nodgineInstance.addController('/api/user/:id', function (request, response, routeParams) {
-        // work with routeParams.id
-    });
+```js
+nodgineInstance.addController('/api/user/:id', function (request, response, routeParams) {
+    // work with routeParams.id
+});
+```
 
 You can use optional parameters as well:
 
-    nodgineInstance.addController('/api/user/:id/:action?', function (request, response, routeParams) {
-        // work with routeParams.id and routeParams.action
-    });
+```js
+nodgineInstance.addController('/api/user/:id/:action?', function (request, response, routeParams) {
+    // work with routeParams.id and routeParams.action
+});
+```
 
 But routeParams.action might be undefined.

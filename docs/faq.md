@@ -39,10 +39,12 @@ with [here](https://nodejs.org/dist/latest-v4.x/docs/api/process.html#process_ev
 
 So to get the actual error, you have to use code like:
 
-    process.on('unhandledRejection', (e) => {
-        console.log(e.message, e.stack);
-        process.exit(1);
-    });
+```js
+process.on('unhandledRejection', (e) => {
+    console.log(e.message, e.stack);
+    process.exit(1);
+});
+```
 
 ## Replace request or response object with own ones
 
@@ -60,20 +62,24 @@ the idea, but won't collide.
 
 To replace request or response you have to use the option passed to the nodgine:
 
-    const instance = new Nodgine({
-        requestClass: MyRequestClass,
-        responseClass: MyResponseClass
-    });
+```js
+const instance = new Nodgine({
+    requestClass: MyRequestClass,
+    responseClass: MyResponseClass
+});
+```
 
 You can override both, or just one of them, it's up to you.
 
 As constructor parameter you'll get an object looking like:
 
-    const paramsObject = {
-        parsedUrl// the result of nodejs require('url').parse(request.url)
-        request // the original nodejs require('http').HttpRequest object
-        response // the original nodejs require('http').HttpResponse object 
-    };
+```js
+const paramsObject = {
+    parsedUrl// the result of nodejs require('url').parse(request.url)
+    request // the original nodejs require('http').HttpRequest object
+    response // the original nodejs require('http').HttpResponse object 
+};
+```
 
 Both, request and response, will get the same parameters. The reason for this
 is simple: The response might interact with the headers of the request object,

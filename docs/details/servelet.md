@@ -7,14 +7,16 @@ A servelet is basically an object that acts as controller with a method for each
 method. Each method works as an independent controller function. So a servelet looks
 like this:
 
-    {
-        doGet: (request, response) => {
-            // handle get
-        },
-        doPost: (request, response) => {
-            // handle post
-        }
+```js
+{
+    doGet: (request, response) => {
+        // handle get
+    },
+    doPost: (request, response) => {
+        // handle post
     }
+}
+```
 
 You can simply match any request method, by putting a `do` before it, starting the
 method with a capital letter.

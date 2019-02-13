@@ -14,16 +14,20 @@ so on.
 Basically middleware is a function, nothing more, but nothing less. So this is how basically
 every middleware looks like:
 
-    function (request, response) {
-        // middleware code
-    }
+```js
+function (request, response) {
+    // middleware code
+}
+```
 
 If you register the middleware to a specific route with variables, you'll receive these variables
 as third parameter, just like a controller:
 
-    nodgineInstance.addMiddleware('/api/users/:id', function (request, response, params) {
-        // work with params.id
-    });
+```js
+nodgineInstance.addMiddleware('/api/users/:id', function (request, response, params) {
+    // work with params.id
+});
+```
 
 All middeware has to look like this. There is no option of using servelets as middelware currently.
 This is an idea for the future, but not now.
@@ -33,11 +37,13 @@ This is an idea for the future, but not now.
 If your middleware is async, you have to tell the nodgine to stop executing the chain. To do so,
 you simply return a promise:
 
-    function (request, response) {
-        return new Promise((resolve, reject) => {
-            global.setTimeout(resolve, 1000);
-        });
-    }
+```js
+function (request, response) {
+    return new Promise((resolve, reject) => {
+        global.setTimeout(resolve, 1000);
+    });
+}
+```
     
 if you resolve the promise, the chain will go on, if you reject the promise, the chain will stop.
 

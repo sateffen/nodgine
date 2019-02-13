@@ -24,9 +24,9 @@ Returns the method that was used for this request, for example *GET*, *POST*, *P
 Returns the body of this request as readable stream. You can use it with libs like [co-body](https://github.com/cojs/co-body)
 like:
 
-```
+```js
 const parse = require('co-body');
-...
+// ...
 parse(request.getBodyStream()).then(...)
 ```
 
@@ -34,12 +34,14 @@ parse(request.getBodyStream()).then(...)
 
 Returns an object containing all headers and their values, for example
 
-    {
-        "accept-encoding": "gzip, deflate",
-        "accept-language": "de,en-US;q=0.8,en;q=0.6",
-        "cache-control": "no-cache",
-        ...
-    }
+```js
+{
+    "accept-encoding": "gzip, deflate",
+    "accept-language": "de,en-US;q=0.8,en;q=0.6",
+    "cache-control": "no-cache",
+    // ...
+}
+```
 
 ## getHeader(headerName:string) -> String | undefined ##
 

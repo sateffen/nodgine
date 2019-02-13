@@ -20,8 +20,10 @@ If you miss any details, feel free to help me and open an [issue](https://github
 The Nodgine is a class, that you have to instantiate. The constructor doesn't require any
 special parameters, so you can simply call:
 
-    const Nodgine = require('nodgine');
-    const instance = new Nodgine();
+```js
+const Nodgine = require('nodgine');
+const instance = new Nodgine();
+```
 
 Then you can use this instance to add middleware or controller to it, and bind the router
 to a http server.
@@ -33,10 +35,12 @@ As options parameter you have to pass an object, which can have two params: requ
 and responseClass. With this you can replace the nodgine internal request and response
 classes, so you can add your own logic to them. Here all options:
 
-    const options = {
-        requestClass: MyRequestConstructor, // The class constructor for the request
-        responseClass: MyResponseConstructor // The class constructor for the response
-    };
+```js
+const options = {
+    requestClass: MyRequestConstructor, // The class constructor for the request
+    responseClass: MyResponseConstructor // The class constructor for the response
+};
+```
 
 For details to the classes see faq.md .
 
@@ -68,13 +72,15 @@ This method is chainable.
 This method returns a function that can be used as router for a http server. You can simply
 call
 
-    const Nodgine = require('nodgine');
-    const http = require('http');
-    const instance = new Nodgine();
-    
-    instance.add...
-    
-    http.createServer(instance.getRouter()).listen(80);
+```js
+const Nodgine = require('nodgine');
+const http = require('http');
+const instance = new Nodgine();
+
+instance.add...
+
+http.createServer(instance.getRouter()).listen(80);
+```
 
 The returned function expects to get called with two params, the first is the node request,
 the second is the node response.
