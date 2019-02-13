@@ -5,3 +5,4 @@ test/results
 !.gitignore
 !.eslintrc
 !.npmignore
+!.travis.yml
