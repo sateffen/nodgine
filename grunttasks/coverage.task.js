@@ -1,38 +1,37 @@
 'use strict';
-module.exports = function (grunt) {
-    var path = require('path');
-    var istanbul = require('istanbul');
+module.exports = function(grunt) {
+    const path = require('path');
+    const istanbul = require('istanbul');
 
-    grunt.registerTask('startCoverageCollection', '', function () {
-        var srcDir = path.resolve(__dirname, '../src');
-        var instrumenter = new istanbul.Instrumenter();
-
-        function matcher(aFileName) {
+    grunt.registerTask('startCoverageCollection', '', function() {
+        const srcDir = path.resolve(__dirname, '../src');
+        const instrumenter = new istanbul.Instrumenter();
+        const matcher = (aFileName) => {
             return path.resolve(aFileName).indexOf(srcDir) > -1;
-        }
+        };
 
         istanbul.hook.hookRequire(matcher, instrumenter.instrumentSync.bind(instrumenter));
     });
 
-    grunt.registerTask('stopCoverageCollection', function (aReporter) {
+    grunt.registerTask('stopCoverageCollection', function(aReporter) {
         istanbul.hook.unhookRequire();
-        var targetDirectory = path.resolve(__dirname, '../test/results');
-        var collector = new istanbul.Collector();
-        var reporterOptions = undefined;
-        var reporter = aReporter || 'text';
+        const targetDirectory = path.resolve(__dirname, '../test/results');
+        const collector = new istanbul.Collector();
+        const reporter = aReporter || 'text';
+        let reporterOptions = undefined;
 
         collector.add(global.__coverage__);
 
         // and finally generate the report
         if (aReporter.substr(0, 4) !== 'text') {
             reporterOptions = {
-                dir: targetDirectory
+                dir: targetDirectory,
             };
         }
-        
+
         istanbul.Report
             .create(reporter, reporterOptions)
         // but do it sync (second param)
             .writeReport(collector, true);
     });
-}
+};

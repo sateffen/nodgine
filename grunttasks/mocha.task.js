@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     require('./coverage.task.js')(grunt);
 
     grunt.config('mochaTest', {
@@ -9,21 +9,21 @@ module.exports = function (grunt) {
                 captureFile: 'test/results/result.txt',
                 require: [
                     'test/setup/chai',
-                    'test/setup/chaispies'
-                ]
+                    'test/setup/chaispies',
+                ],
             },
-            src: ['./test/tests/**/*.js']
+            src: ['./test/tests/**/*.js'],
         },
         runDry: {
             options: {
                 reporter: 'spec',
                 require: [
                     'test/setup/chai',
-                    'test/setup/chaispies'
-                ]
+                    'test/setup/chaispies',
+                ],
             },
-            src: ['./test/tests/**/*.js']
-        }
+            src: ['./test/tests/**/*.js'],
+        },
     });
 
     grunt.registerTask('coveredMocha', ['startCoverageCollection', 'mochaTest:run', 'stopCoverageCollection:lcov']);

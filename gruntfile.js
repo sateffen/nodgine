@@ -1,5 +1,5 @@
 'use strict';
-module.exports = function (grunt) {
+module.exports = function(grunt) {
     // load all task configurations
     require('./grunttasks/clean.task.js')(grunt);
     require('./grunttasks/eslint.task.js')(grunt);
