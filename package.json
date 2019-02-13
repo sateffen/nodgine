@@ -1,16 +1,12 @@
 {
   "name": "nodgine",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "The nodgine is a small framework for creating fast webservices. The main focuses are speed and easiness.",
   "main": "./src/nodgine.js",
   "engines": {
     "node": ">=4.0.0"
   },
   "engineStrict": true,
-  "author": {
-    "name": "sateffen",
-    "email": "sateffen@gmail.com"
-  },
   "license": "MIT",
   "readmeFilename": "README.md",
   "keywords": [
@@ -29,17 +25,24 @@
     "url": "https://github.com/sateffen/nodgine/issues"
   },
   "dependencies": {
-    "path-to-regexp": "~1.7.0"
+    "path-to-regexp": "~3.0.0"
   },
   "devDependencies": {
     "chai": "~3.5.0",
-    "chai-spies": "~0.7.1",
-    "grunt": "~1.0.1",
-    "grunt-contrib-clean": "~1.0.0",
-    "grunt-contrib-watch": "~1.0.0",
-    "grunt-eslint": "~19.0.0",
-    "grunt-mocha-test": "~0.13.2",
+    "chai-spies": "~1.0.0",
+    "eslint": "~5.13.0",
+    "eslint-config-google": "~0.12.0",
+    "grunt": "~1.0.3",
+    "grunt-cli": "~1.3.2",
+    "grunt-contrib-clean": "~2.0.0",
+    "grunt-contrib-watch": "~1.1.0",
+    "grunt-eslint": "~21.0.0",
+    "grunt-mocha-test": "~0.13.3",
     "istanbul": "~0.4.5",
-    "mocha": "~3.2.0"
+    "mocha": "~5.2.0"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "dryTest": "grunt dryTest"
   }
 }

@@ -64,7 +64,7 @@ describe('Wrapper', () => {
         expect(typeof callDescription[2]).to.equal('object');
         expect(Object.keys(callDescription[2])).to.have.length(0);
     });
-    
+
     it('should run the callback with correct parameters in the params hash', () => {
         const callback = libChai.spy();
         const instance = new Wrapper('/ok/:var1/:other', callback);
@@ -166,13 +166,13 @@ describe('Wrapper', () => {
                 done();
             });
     });
-    
+
     it('should return the _routePattern calling getPattern()', () => {
         const route = '/' + Math.random().toString(26).slice(2);
         const instance = new Wrapper(route, () => {
             // silence
         });
-        
+
         expect(instance.getPattern()).to.equal(instance._routePattern);
     });
 });

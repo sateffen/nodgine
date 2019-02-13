@@ -37,13 +37,13 @@ describe('End to end functionallity', () => {
                 aResponse
                     .setStatusCode(201)
                     .write('PosT');
-            }
+            },
         });
 
         instance.addController('/other', (aRequest, aResponse) => {
             aResponse.write('other');
         });
-        
+
         instance.addController('/file', (aRequest, aResponse) => {
             aResponse.pipe(libFs.createReadStream(targetFile));
         });
@@ -65,7 +65,7 @@ describe('End to end functionallity', () => {
             hostname: '127.0.0.1',
             port: 8765,
             path: '/test/End2EndTestsAreSoCool',
-            method: 'POST'
+            method: 'POST',
         };
         const request = libHttp.request(options, (aResponse) => {
             const receivedData = [];
@@ -96,7 +96,7 @@ describe('End to end functionallity', () => {
             hostname: '127.0.0.1',
             port: 8765,
             path: '/other',
-            method: 'GET'
+            method: 'GET',
         };
         const request = libHttp.request(options, (aResponse) => {
             const receivedData = [];
@@ -127,7 +127,7 @@ describe('End to end functionallity', () => {
             hostname: '127.0.0.1',
             port: 8765,
             path: '/async',
-            method: 'GET'
+            method: 'GET',
         };
         const request = libHttp.request(options, (aResponse) => {
             const receivedData = [];
@@ -158,7 +158,7 @@ describe('End to end functionallity', () => {
             hostname: '127.0.0.1',
             port: 8765,
             path: '/does/not/exist',
-            method: 'GET'
+            method: 'GET',
         };
         const request = libHttp.request(options, (aResponse) => {
             const receivedData = [];
@@ -189,7 +189,7 @@ describe('End to end functionallity', () => {
             hostname: '127.0.0.1',
             port: 8765,
             path: '/file',
-            method: 'GET'
+            method: 'GET',
         };
         const request = libHttp.request(options, (aResponse) => {
             const receivedData = [];
@@ -205,7 +205,7 @@ describe('End to end functionallity', () => {
                 // here we expect istest completly lowercase, because nodejs makes everything lowercase
                 expect(aResponse.headers.istest).to.equal('yes');
                 expect(Buffer.concat(receivedData, length).compare(libFs.readFileSync(targetFile))).to.equal(0);
-                
+
                 done();
             });
         });

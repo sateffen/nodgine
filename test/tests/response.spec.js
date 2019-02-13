@@ -36,12 +36,12 @@ describe('Response', () => {
                 if (Array.isArray(mock.__registeredEvents[aName])) {
                     mock.__registeredEvents[aName].splice(mock.__registeredEvents[aName].indexOf(aHandler), 1);
                 }
-            }
+            },
         };
         instance = new Response({
             request: {},
             parsedUrl: {},
-            response: mock
+            response: mock,
         });
     });
 

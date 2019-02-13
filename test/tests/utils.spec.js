@@ -6,7 +6,7 @@ const libChai = require('chai');
 
 /**
  * Creates a mock object
- * 
+ *
  * @param {string} aMethod
  * @param {boolean}aNoCallback
  * @return {Object} The mock
@@ -17,12 +17,12 @@ function mockFactory(aMethod, aNoCallback) {
             doGet: libChai.spy(),
             doPost: libChai.spy(),
             doPut: libChai.spy(),
-            doDelete: libChai.spy()
+            doDelete: libChai.spy(),
         },
         request: {
             getMethod: libChai.spy(() => {
                 return aMethod.toLowerCase();
-            })
+            }),
         },
         response: {
             write: libChai.spy(() => {
@@ -30,12 +30,12 @@ function mockFactory(aMethod, aNoCallback) {
             }),
             setStatusCode: libChai.spy(() => {
                 return mock.response;
-            })
+            }),
         },
         params: {},
         nodgine: {
-            _missingRouteController: libChai.spy()
-        }
+            _missingRouteController: libChai.spy(),
+        },
     };
 
     return mock;
@@ -83,14 +83,14 @@ describe('Utils', () => {
         expect(mock.nodgine._missingRouteController).to.have.been.called();
         expect(mock.nodgine._missingRouteController).to.have.been.called.with(mock.request, mock.response);
     });
-    
+
     ['Get', 'Post', 'Put', 'Delete'].forEach((aMethod) => {
         it('should call the correct servelet method for calling method ' + aMethod, () => {
             const mock = mockFactory(aMethod);
             const result = utils.wrapServeletToFunction(mock.servelet, mock.nodgine);
-            
+
             result(mock.request, mock.response, mock.params);
-        
+
             expect(mock.servelet['do' + aMethod]).to.have.been.called();
             expect(mock.servelet['do' + aMethod]).to.have.been.called.with(mock.request, mock.response, mock.params);
         });

@@ -128,7 +128,7 @@ class Response extends EventEmitter {
     write(aData) {
         let data = aData;
 
-        // make sure no stream is registered        
+        // make sure no stream is registered
         if (this._streamToPipe !== null) {
             throw new Error('Can not write data when piping data');
         }

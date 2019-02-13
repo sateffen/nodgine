@@ -1,4 +1,3 @@
-/* global Buffer */
 'use strict';
 
 const libUrl = require('url');
@@ -206,7 +205,7 @@ class Nodgine {
             const paramsObject = {
                 parsedUrl,
                 request: aRequest,
-                response: aResponse
+                response: aResponse,
             };
             const requestObject = new this._requestClass(paramsObject);
             const responseObject = new this._responseClass(paramsObject);

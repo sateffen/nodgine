@@ -12,4 +12,4 @@ install:
 - yarn
 
 script:
-- grunt dryTest
+- yarn run dryTest

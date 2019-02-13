@@ -1,4 +1,4 @@
-/* global describe,expect,it,beforeEach,Buffer */
+/* global describe,expect,it,beforeEach */
 'use strict';
 
 const Request = require('../../src/request');
@@ -11,24 +11,24 @@ describe('Request', () => {
         mock = {
             request: {
                 headers: {
-                    testheader: 'yep'
+                    testheader: 'yep',
                 },
-                method: 'GET'
+                method: 'GET',
             },
             parsedUrl: {
                 auth: 'userand:password',
                 protocol: 'maybeHttp',
                 pathname: '/I/am/a/path',
                 query: {
-                    testQuery: 'another yep'
-                }
-            }
+                    testQuery: 'another yep',
+                },
+            },
         };
 
         instance = new Request({
             request: mock.request,
             parsedUrl: mock.parsedUrl,
-            response: {}
+            response: {},
         });
     });
 

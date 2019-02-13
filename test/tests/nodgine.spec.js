@@ -1,4 +1,4 @@
-/* global describe,expect,it,beforeEach,Buffer */
+/* global describe,expect,it,beforeEach */
 'use strict';
 
 const Nodgine = require('../../src/nodgine');
@@ -47,29 +47,41 @@ describe('Nodgine', () => {
     });
 
     it('should initialize the request class with the provided params constructor', () => {
+        /**
+         * Just a test-class
+         */
         class testRequest { }
         const testInstance = new Nodgine({
-            requestClass: testRequest
+            requestClass: testRequest,
         });
 
         expect(testInstance._requestClass).to.equal(testRequest);
     });
 
     it('should initialize the response class with the provided params constructor', () => {
+        /**
+         * Just a test-class
+         */
         class testResponse { }
         const testInstance = new Nodgine({
-            responseClass: testResponse
+            responseClass: testResponse,
         });
 
         expect(testInstance._responseClass).to.equal(testResponse);
     });
 
     it('should initialize the request and response class correctly if bothi is provided as constructor params', () => {
+        /**
+         * Just a test-class
+         */
         class testRequest { }
+        /**
+         * Just a test-class
+         */
         class testResponse { }
         const testInstance = new Nodgine({
             requestClass: testRequest,
-            responseClass: testResponse
+            responseClass: testResponse,
         });
 
         expect(testInstance._requestClass).to.equal(testRequest);
@@ -79,7 +91,7 @@ describe('Nodgine', () => {
     [0, 1, 3.14, -2.7, 'test', true, false, [], {}, undefined, null].forEach((aValue) => {
         it('should not initialize the request class is the parameter is of type ' + toString.call(aValue), () => {
             const testInstance = new Nodgine({
-                requestClass: aValue
+                requestClass: aValue,
             });
 
             expect(testInstance._requestClass).not.to.equal(aValue);
@@ -87,7 +99,7 @@ describe('Nodgine', () => {
 
         it('should not initialize the response class is the parameter is of type ' + toString.call(aValue), () => {
             const testInstance = new Nodgine({
-                responseClass: aValue
+                responseClass: aValue,
             });
 
             expect(testInstance._responseClass).not.to.equal(aValue);
@@ -108,7 +120,7 @@ describe('Nodgine', () => {
                 return response;
             },
             on: noop,
-            off: noop
+            off: noop,
         };
 
         expect(() => {
@@ -236,16 +248,16 @@ describe('Nodgine', () => {
         let calledCorrectControllerWith = [];
 
         const request = {
-            isRequest: true
+            isRequest: true,
         };
         const response = {
-            isResponse: true
+            isResponse: true,
         };
 
         instance.addController('/wrong', () => {
             calledWrongController = true;
         });
-        instance.addController('/ok', function () {
+        instance.addController('/ok', function() {
             calledCorrectController = true;
             calledCorrectControllerWith = Array.prototype.slice.call(arguments);
         });
@@ -297,20 +309,20 @@ describe('Nodgine', () => {
         let calledCorrectMiddlewareWith2 = [];
 
         const request = {
-            isRequest: true
+            isRequest: true,
         };
         const response = {
-            isResponse: true
+            isResponse: true,
         };
 
         instance.addMiddleware('/wrong', () => {
             calledWrongMiddleware = true;
         });
-        instance.addMiddleware('/ok', function () {
+        instance.addMiddleware('/ok', function() {
             calledCorrectMiddleware1 = true;
             calledCorrectMiddlewareWith1 = Array.prototype.slice.call(arguments);
         });
-        instance.addMiddleware(function () {
+        instance.addMiddleware(function() {
             calledCorrectMiddleware2 = true;
             calledCorrectMiddlewareWith2 = Array.prototype.slice.call(arguments);
         });
@@ -358,17 +370,17 @@ describe('Nodgine', () => {
                 responseMock.__endedStream = true;
             },
             on: noop,
-            off: noop
+            off: noop,
         };
 
         requestMock.url = '/ok';
 
         // add middleware and controller wrapper to the internals
-        instance._runMiddleware = libChai.spy(function () {
+        instance._runMiddleware = libChai.spy(function() {
             executionList.push(instance._runMiddleware);
             runMiddlewareWith = Array.prototype.slice.call(arguments);
         });
-        instance._runController = libChai.spy(function () {
+        instance._runController = libChai.spy(function() {
             executionList.push(instance._runController);
             runControllerWith = Array.prototype.slice.call(arguments);
         });
@@ -413,7 +425,7 @@ describe('Nodgine', () => {
                 responseMock.__endedStream = true;
             },
             on: noop,
-            off: noop
+            off: noop,
         };
 
         requestMock.url = '/ok';
@@ -455,7 +467,7 @@ describe('Nodgine', () => {
             },
             headersSent: true,
             on: noop,
-            off: noop
+            off: noop,
         };
 
         requestMock.url = '/ok';
