@@ -79,14 +79,3 @@ Both, request and response, will get the same parameters. The reason for this
 is simple: The response might interact with the headers of the request object,
 or anything else, it's up to you. This way you should be able to do everything
 you want.
-
-## Tested node versions
-
-To make sure, that the nodgine works with every environment, I use [Codeship](https://codeship.com)
-to execute my unit- and integrationtests against the following node versions:
-
-4.0, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 5.10,
-5.11, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 6.7, 6.8, 6.9, 7.0, 7.1, 7.2, 7.3, 7.4 and 7.5
-
-As you might notice, this is every available node version since 4.0, and this
-list will grow with each new version in the future.
