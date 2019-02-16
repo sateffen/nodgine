@@ -10,5 +10,6 @@ docs/
 # files
 .eslintrc
 .gitignore
+.travis.yml
 gruntfile.js
 yarn.lock
